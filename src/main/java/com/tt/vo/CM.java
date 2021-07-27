@@ -12,12 +12,12 @@ import java.util.Date;
 public class CM {
     
     private int no;             // 메시지번호
-    private String userId;      // 유저_아이디
+    private int userNo;         // 유저_번호
     private int crNo;           // 채팅방_번호
     private String contents;    // 채팅메세지
     private Date createdTime;   // 송신시간
-    private boolean opt;        // 채팅옵션
-    private boolean check;      // 확인여부
+    private String opt;         // 채팅옵션
+    private String check;       // 확인여부
 
     public CM() {}
 }

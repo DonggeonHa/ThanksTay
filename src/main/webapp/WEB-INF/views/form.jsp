@@ -10,7 +10,6 @@
 </head>
 <body>
 <c:set var="menu" value="register"></c:set>
-<%@ include file="common/nav.jsp" %>
 <div class="container my-3">
 	<main>
 		<div class="row mb-3">

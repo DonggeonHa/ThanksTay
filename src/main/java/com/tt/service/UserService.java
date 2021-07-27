@@ -1,7 +1,5 @@
 package com.tt.service;
 
-import java.util.Map;
-
 import com.tt.vo.User;
 
 public interface UserService {
@@ -19,10 +17,4 @@ public interface UserService {
      */
     void login(String id, String password);
 
-    /**
-     * 지정된 아이디로 사용자의 상세정보를 제공하는 서비스
-     * @param id 사용자 아이디
-     * @return 사용자에 대한 상세정보가 포함된 Map객체
-     */
-    Map<String, Object> getUserDetail(String id);
 }

@@ -12,12 +12,12 @@ import java.util.Date;
 public class Book {
 
     private int no;                 // 예약번호
-    private String userId;          // 유저_아이디
+    private int userNo;             // 유저_번호
     private int lodgingNo;          // 숙소_번호
     private Date checkIn;           // 체크인 날짜
     private Date checkOut;          // 체크아웃 날짜
     private int date;               // 숙박일수
-    private boolean status;         // 예약상태
+    private String status;          // 예약상태
     private int guest;              // 예약인원
     private int totalLodgingFee;    // 총 숙박료
     private int totalCleaningFee;   // 총 청소비

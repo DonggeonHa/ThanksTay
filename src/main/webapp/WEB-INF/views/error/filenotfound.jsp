@@ -10,7 +10,6 @@
 <title>샘플 애플리케이션</title>
 </head>
 <body>
-<%@ include file="../common/nav.jsp" %>
 <div class="container my-3">
 	<main>
 		<div class="row mb-3">

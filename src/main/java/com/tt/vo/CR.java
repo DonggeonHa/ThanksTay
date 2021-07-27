@@ -12,7 +12,7 @@ import java.util.Date;
 public class CR {
     
     private int no;             // 채팅방번호
-    private String userId;      // 유저_아이디
+    private int userNo;         // 유저_번호
     private String host;        // 호스트
     private String admin;       // 관리자
     private Date createdDate;   // 생성일

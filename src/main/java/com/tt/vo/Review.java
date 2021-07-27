@@ -4,17 +4,21 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
+
 @ToString
 @Getter
 @Setter
 public class Review {
 
     private int no;             // 리뷰번호
-    private String userId;      // 유저_아이디
+    private int userNo;         // 유저_번호
     private int lodgingNo;      // 숙소_번호
     private int bookNo;         // 예약_번호
-    private String time;        // 등록시간
+    private Date createdDate;   // 등록일
+    private Date updatedDate;   // 수정일
     private String comment;     // 리뷰내용
+    private String updatedYN;   // 수정여부
     private int stars;          // 별점
     private int cleanness;      // 청결도
     private int communication;  // 의사소통

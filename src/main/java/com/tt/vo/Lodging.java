@@ -10,8 +10,8 @@ import lombok.ToString;
 public class Lodging {
 
     private int no;                 // 숙소번호
-    private String userId;          // 호스트_아이디
-    private String lodgingType;     // 숙소_타입
+    private int userNo;             // 유저_번호
+    private int lodgingTypeCode;     // 숙소_타입코드
     private String city;            // 주소 시군구
     private String postNo;          // 주소 우편번호
     private String address;         // 주소 상세주소
@@ -33,7 +33,7 @@ public class Lodging {
     private double accuracy;        // 정확성
     private double location;        // 위치(리뷰)
     private double value;           // 가격대비 만족도
-    private boolean status;         // 숙소상태
+    private String status;          // 숙소상태
 
     public Lodging() {}
 }

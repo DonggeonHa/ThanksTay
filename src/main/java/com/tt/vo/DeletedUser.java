@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class User {
+public class DeletedUser {
 
     private int no;                 // 유저번호
     private String id;              // 아이디
@@ -23,9 +23,8 @@ public class User {
     private String info;            // 소개
     private String status;          // 호스트 여부
     private String admin;           // 관리자 여부
-    private String deleted;         // 탈퇴 여부
-    private Date createdDate;       // 생성일
+    private Date deletedDate;       // 탈퇴일
     private Date updatedDate;       // 수정일
 
-    public User() {}
+    public DeletedUser() {}
 }

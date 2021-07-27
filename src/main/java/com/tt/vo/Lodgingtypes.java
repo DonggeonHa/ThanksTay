@@ -9,7 +9,8 @@ import lombok.ToString;
 @ToString
 public class Lodgingtypes {
     
-    private String type;    // 숙소타입
+    private int typeCode;    // 숙소타입 코드
+    private String name;     // 숙소타입 이름
     
     public Lodgingtypes() {}
 }
