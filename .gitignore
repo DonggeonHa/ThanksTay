@@ -5,6 +5,7 @@
 target/*
 META-INF/*
 Servers/
+.classpath
 
 ### Eclipse ###
 .metadata
