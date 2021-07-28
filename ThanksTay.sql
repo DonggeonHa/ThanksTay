@@ -10,6 +10,7 @@ DROP TABLE TT_Payment CASCADE CONSTRAINTS;
 DROP TABLE TT_Review CASCADE CONSTRAINTS;
 DROP TABLE TT_Book CASCADE CONSTRAINTS;
 DROP TABLE TT_CM CASCADE CONSTRAINTS;
+DROP TABLE TT_Common_code CASCADE CONSTRAINTS;
 DROP TABLE TT_CR CASCADE CONSTRAINTS;
 DROP TABLE TT_Deleted_User CASCADE CONSTRAINTS;
 DROP TABLE TT_LodgingImg CASCADE CONSTRAINTS;
@@ -20,7 +21,20 @@ DROP TABLE TT_Lodgingtypes CASCADE CONSTRAINTS;
 DROP TABLE TT_Wishlist CASCADE CONSTRAINTS;
 DROP TABLE TT_User CASCADE CONSTRAINTS;
 
+/* Drop Sequence */
 
+DROP SEQUENCE USER_SEQ;
+DROP SEQUENCE CR_SEQ;
+DROP SEQUENCE CM_SEQ;
+DROP SEQUENCE BOOK_SEQ;
+DROP SEQUENCE REVIEW_SEQ;
+DROP SEQUENCE WISHLIST_SEQ;
+DROP SEQUENCE TR_SEQ;
+DROP SEQUENCE PAYMENT_SEQ;
+DROP SEQUENCE LODGING_SEQ;
+DROP SEQUENCE TRANSACTIONHISTORY_SEQ;
+DROP SEQUENCE PRICE_SEQ;
+DROP SEQUENCE LODGINGIMG_SEQ;
 
 
 /* Create Tables */
@@ -29,7 +43,7 @@ DROP TABLE TT_User CASCADE CONSTRAINTS;
 CREATE TABLE TT_Amenity
 (
 	-- 편의시설코드
-	amenity_code number NOT NULL,
+	amenity_code char(8) NOT NULL,
 	-- 편의시설 이름
 	amenity_name varchar2(255) NOT NULL,
 	PRIMARY KEY (amenity_code)
@@ -40,7 +54,7 @@ CREATE TABLE TT_Amenity
 CREATE TABLE TT_Amenitylist
 (
 	-- 편의시설코드
-	amenity_code number NOT NULL,
+	amenity_code char(8) NOT NULL,
 	-- 숙소번호
 	lodging_no number NOT NULL,
 	CONSTRAINT AmenitylistUnique UNIQUE (amenity_code, lodging_no)
@@ -51,7 +65,7 @@ CREATE TABLE TT_Amenitylist
 CREATE TABLE TT_banklist
 (
 	-- 은행코드
-	banklist_code number NOT NULL,
+	banklist_code char(5) NOT NULL,
 	-- 은행이름
 	banklist_name varchar2(255) NOT NULL,
 	PRIMARY KEY (banklist_code)
@@ -74,7 +88,7 @@ CREATE TABLE TT_Book
 	-- 숙박일수
 	book_date number NOT NULL,
 	-- 예약상태
-	book_status char(1) DEFAULT 'N',
+	book_status char(5) DEFAULT 'N',
 	-- 예약인원
 	book_guest number NOT NULL,
 	-- 총 숙박료
@@ -105,6 +119,25 @@ CREATE TABLE TT_CM
 	-- 확인여부
 	cm_check char(1) DEFAULT 'N',
 	PRIMARY KEY (cm_no)
+);
+
+
+-- 공통코드
+CREATE TABLE TT_Common_code
+(
+	-- 공통코드
+	commonCode char(8) NOT NULL,
+	-- 상위공통코드
+	parentCode char(5),
+	-- 공통코드명
+	codeContent varchar2(255),
+	-- 우선순위
+	priority number,
+	-- 등록일시
+	createdDate date DEFAULT sysdate,
+	-- 수정일시
+	updatedDate date,
+	PRIMARY KEY (commonCode)
 );
 
 
@@ -168,7 +201,7 @@ CREATE TABLE TT_Lodging
 	-- 유저번호
 	user_no number NOT NULL,
 	-- 숙소타입코드
-	lodging_type_code number NOT NULL,
+	lodging_type_code char(5) NOT NULL,
 	-- 주소_시군구
 	lodging_city varchar2(255) NOT NULL,
 	-- 주소_우편번호
@@ -212,7 +245,7 @@ CREATE TABLE TT_Lodging
 	-- 가격대비 만족도
 	lodging_value number DEFAULT 0,
 	-- 숙소상태
-	lodging_status char(1) DEFAULT 'Y',
+	lodging_status char(5) DEFAULT 'Y',
 	PRIMARY KEY (lodging_no)
 );
 
@@ -234,7 +267,7 @@ CREATE TABLE TT_LodgingImg
 CREATE TABLE TT_Lodgingtypes
 (
 	-- 숙소타입코드
-	lodging_type_code number NOT NULL,
+	lodging_type_code char(5) NOT NULL,
 	-- 숙소타입 이름
 	lodging_type_name varchar2(255) NOT NULL,
 	PRIMARY KEY (lodging_type_code)
@@ -251,7 +284,7 @@ CREATE TABLE TT_Payment
 	-- 결제일시
 	payment_date date DEFAULT sysdate,
 	-- 결제수단
-	payment_method varchar2(255) NOT NULL,
+	payment_method char(5) NOT NULL,
 	PRIMARY KEY (payment_no)
 );
 
@@ -263,14 +296,14 @@ CREATE TABLE TT_Price
 	price_no number NOT NULL,
 	-- 숙소번호
 	lodging_no number NOT NULL,
-	-- 시작일
-	price_start_date date NOT NULL,
-	-- 종료일
-	price_end_date date NOT NULL,
 	-- 숙박료
 	price_lodging_fee number NOT NULL,
 	-- 청소비
 	price_cleanning_fee number DEFAULT 0,
+	-- 영업일
+	price_open_date date,
+	-- 예약가능여부
+	price_isBooked char(1) DEFAULT 'Y',
 	PRIMARY KEY (price_no)
 );
 
@@ -337,7 +370,7 @@ CREATE TABLE TT_Transaction_Registration
 	-- 유저번호
 	user_no number NOT NULL,
 	-- 은행리스트_코드
-	banklist_code number NOT NULL,
+	banklist_code char(5) NOT NULL,
 	-- 대금등록 이름
 	TR_name varchar2(255) NOT NULL,
 	-- 대금등록 이메일
@@ -556,4 +589,17 @@ ALTER TABLE TT_Wish_zzim
 ;
 
 
+/* Create Sequence */
+CREATE SEQUENCE USER_SEQ NOCACHE;
+CREATE SEQUENCE CR_SEQ NOCACHE;
+CREATE SEQUENCE CM_SEQ NOCACHE;
+CREATE SEQUENCE BOOK_SEQ NOCACHE;
+CREATE SEQUENCE REVIEW_SEQ NOCACHE;
+CREATE SEQUENCE WISHLIST_SEQ NOCACHE;
+CREATE SEQUENCE TR_SEQ NOCACHE;
+CREATE SEQUENCE PAYMENT_SEQ NOCACHE;
+CREATE SEQUENCE LODGING_SEQ NOCACHE;
+CREATE SEQUENCE TRANSACTIONHISTORY_SEQ NOCACHE;
+CREATE SEQUENCE PRICE_SEQ NOCACHE;
+CREATE SEQUENCE LODGINGIMG_SEQ NOCACHE;
 
