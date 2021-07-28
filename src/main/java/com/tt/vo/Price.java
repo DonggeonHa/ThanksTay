@@ -13,10 +13,10 @@ public class Price {
     
     private int no;             // 요금번호
     private int lodgingNo;      // 숙소_번호
-    private Date startDate;     // 시작일
-    private Date endDate;       // 종료일
+    private Date openDate;      // 영업일
     private int lodgingFee;     // 숙박료
     private int cleanningFee;   // 청소비
+    private String isBooked;    // 예약가능여부
     
     public Price() {}
 }
