@@ -8,10 +8,10 @@ import lombok.ToString;
 @ToString
 @Getter
 public class Wishlist {
-    
-    private int userNo;              // 유저_번호
-    private int wishlistNo;          // 찜목록번호
-    private String wishlistName;     // 찜목록이름
+
+    private int no;                 // 찜목록번호
+    private int userNo;             // 유저_번호
+    private String name;            // 찜목록이름
     
     public Wishlist() {}
 }

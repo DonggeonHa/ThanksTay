@@ -1,6 +1,6 @@
-package com.tt.service;
+package com.tt.User;
 
-import com.tt.vo.User;
+import com.tt.User.User;
 
 public interface UserService {
 

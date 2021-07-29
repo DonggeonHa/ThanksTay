@@ -6,7 +6,7 @@
 -->
 <mapper namespace="com.sample.dao.UserDao">
 
-    <select id="getUserById" parameterType="string" resultType="com.tt.vo.User">
+    <select id="getUserById" parameterType="string" resultType="com.tt.User.User">
         SELECT
             *
         FROM
@@ -15,7 +15,7 @@
             user_id = #{value}
     </select>
 
-    <select id="getUserByEmail" parameterType="string" resultType="com.tt.vo.User">
+    <select id="getUserByEmail" parameterType="string" resultType="com.tt.User.User">
         SELECT
             *
         FROM
@@ -24,7 +24,7 @@
             user_email = #{value}
     </select>
 
-    <insert id="insertUser" parameterType="com.tt.vo.User">
+    <insert id="insertUser" parameterType="com.tt.User.User">
         INSERT INTO sample_users
         (user_id, user_password, user_name, user_email, user_phone)
         VALUES

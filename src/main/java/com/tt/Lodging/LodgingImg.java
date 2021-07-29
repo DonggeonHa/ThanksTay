@@ -1,4 +1,4 @@
-package com.tt.vo;
+package com.tt.Lodging;
 
 import lombok.Getter;
 import lombok.Setter;

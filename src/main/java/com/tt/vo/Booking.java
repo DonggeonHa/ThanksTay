@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Book {
+public class Booking {
 
     private int no;                 // 예약번호
     private int userNo;             // 유저_번호
@@ -23,5 +23,5 @@ public class Book {
     private int totalCleaningFee;   // 총 청소비
     private int amount;             // 총액
 
-    public Book() {}
+    public Booking() {}
 }

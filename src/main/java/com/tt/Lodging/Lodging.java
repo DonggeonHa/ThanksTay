@@ -1,4 +1,4 @@
-package com.tt.vo;
+package com.tt.Lodging;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +11,10 @@ public class Lodging {
 
     private int no;                 // 숙소번호
     private int userNo;             // 유저_번호
-    private int lodgingTypeCode;     // 숙소_타입코드
     private String city;            // 주소 시군구
     private String postNo;          // 주소 우편번호
     private String address;         // 주소 상세주소
+    private String addressRest;     // 주소 나머지주소
     private String description;     // 숙소설명
     private boolean immApproval;    // 즉시승인여부
     private int maxGuest;           // 최대 인원수
@@ -34,6 +34,7 @@ public class Lodging {
     private double location;        // 위치(리뷰)
     private double value;           // 가격대비 만족도
     private String status;          // 숙소상태
+    private String lodgingTypeCode; // 숙소_타입코드
 
     public Lodging() {}
 }

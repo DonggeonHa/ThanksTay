@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
-import com.tt.service.UserService;
-import com.tt.vo.User;
+import com.tt.User.UserService;
+import com.tt.User.User;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
 

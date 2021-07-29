@@ -21,8 +21,8 @@ public class DeletedUser {
     private String checkEmail;      // 이메일 확인
     private String name;            // 이름
     private String info;            // 소개
-    private String status;          // 호스트 여부
-    private String admin;           // 관리자 여부
+    private String isHost;          // 호스트 여부
+    private String isAdmin;           // 관리자 여부
     private Date deletedDate;       // 탈퇴일
     private Date updatedDate;       // 수정일
 

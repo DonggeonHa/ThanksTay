@@ -11,10 +11,10 @@ import java.util.Date;
 @ToString
 public class Payment {
     
-    private int no;         // 결제번호
-    private int bookNo;     // 예약_번호
-    private Date date;      // 결제일시
-    private String method;  // 결제수단
+    private int no;                 // 결제번호
+    private int bookingNo;          // 예약_번호
+    private Date createdDate;       // 결제일시
+    private String method;          // 결제수단
 
     public Payment() {}
 }

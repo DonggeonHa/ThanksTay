@@ -342,7 +342,7 @@ CREATE TABLE Thxtay_Transaction_Register
 	-- 유저번호
 	user_no number NOT NULL,
 	-- 은행코드
-	bank_code char(7) NOT NULL,
+	TR_bank_code char(7) NOT NULL,
 	-- 대금등록 이름
 	TR_name varchar2(255) NOT NULL,
 	-- 대금등록 이메일

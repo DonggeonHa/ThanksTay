@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class CM {
+public class ChattingMessage {
     
     private int no;             // 메시지번호
     private int userNo;         // 유저_번호
@@ -19,5 +19,5 @@ public class CM {
     private String opt;         // 채팅옵션
     private String check;       // 확인여부
 
-    public CM() {}
+    public ChattingMessage() {}
 }

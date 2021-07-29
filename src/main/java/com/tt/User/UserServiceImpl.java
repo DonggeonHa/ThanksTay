@@ -1,6 +1,5 @@
-package com.tt.service;
+package com.tt.User;
 
-import com.tt.dao.UserDao;
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
 import com.tt.web.utils.SessionUtils;
@@ -8,8 +7,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.tt.vo.User;
 
 @Service
 @Transactional

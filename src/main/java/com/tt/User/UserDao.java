@@ -1,6 +1,4 @@
-package com.tt.dao;
-
-import com.tt.vo.User;
+package com.tt.User;
 
 public interface UserDao {
 

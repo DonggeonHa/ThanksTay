@@ -1,4 +1,4 @@
-package com.tt.vo;
+package com.tt.User;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +21,8 @@ public class User {
     private String checkEmail;      // 이메일 확인
     private String name;            // 이름
     private String info;            // 소개
-    private String status;          // 호스트 여부
-    private String admin;           // 관리자 여부
+    private String isHost;          // 호스트 여부
+    private String isAdmin;           // 관리자 여부
     private String deleted;         // 탈퇴 여부
     private Date createdDate;       // 생성일
     private Date updatedDate;       // 수정일

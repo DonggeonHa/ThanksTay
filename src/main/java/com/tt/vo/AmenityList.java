@@ -7,10 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Amenitylist {
+public class AmenityList {
     
-    private int amenityCode;    // 편의시설_코드
+    private int code;           // 편의시설 코드
     private int lodgingNo;      // 숙소_번호
     
-    public Amenitylist() {}
+    public AmenityList() {}
 }
