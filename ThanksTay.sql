@@ -14,7 +14,7 @@ DROP TABLE Thxtay_Lodging_Img CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_Price CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_Wish_Zzim CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_Lodging CASCADE CONSTRAINTS;
-DROP TABLE Thxtay_Transaction_Registration CASCADE CONSTRAINTS;
+DROP TABLE Thxtay_Transaction_Register CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_Wishlist CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_User CASCADE CONSTRAINTS;
 
@@ -32,6 +32,7 @@ DROP SEQUENCE LODGING_SEQ;
 DROP SEQUENCE TRANSACTIONHISTORY_SEQ;
 DROP SEQUENCE PRICE_SEQ;
 DROP SEQUENCE LODGINGIMG_SEQ;
+
 
 
 /* Create Tables */
@@ -266,11 +267,11 @@ CREATE TABLE Thxtay_Price
 	-- 숙박료
 	price_lodging_fee number NOT NULL,
 	-- 청소비
-	price_cleanning_fee number DEFAULT 0,
+	price_cleaning_fee number DEFAULT 0,
 	-- 영업일
 	price_open_date date,
 	-- 예약가능여부
-	price_isBooked char(1) DEFAULT 'Y',
+	price_isBooked char(1) DEFAULT 'N',
 	-- 수정일
 	price_updated_date date,
 	-- 등록일
@@ -334,7 +335,7 @@ CREATE TABLE Thxtay_Transaction_History
 
 
 -- 대금등록
-CREATE TABLE Thxtay_Transaction_Registration
+CREATE TABLE Thxtay_Transaction_Register
 (
 	-- 대금등록 번호
 	TR_no number NOT NULL,
@@ -524,7 +525,7 @@ ALTER TABLE Thxtay_Review
 ;
 
 
-ALTER TABLE Thxtay_Transaction_Registration
+ALTER TABLE Thxtay_Transaction_Register
 	ADD FOREIGN KEY (user_no)
 	REFERENCES Thxtay_User (user_no)
 ;
@@ -541,7 +542,9 @@ ALTER TABLE Thxtay_Wish_Zzim
 	REFERENCES Thxtay_Wishlist (wishlist_no)
 ;
 
+
 /* Create Sequence */
+
 CREATE SEQUENCE USER_SEQ NOCACHE;
 CREATE SEQUENCE CR_SEQ NOCACHE;
 CREATE SEQUENCE CM_SEQ NOCACHE;
@@ -554,3 +557,6 @@ CREATE SEQUENCE LODGING_SEQ NOCACHE;
 CREATE SEQUENCE TRANSACTIONHISTORY_SEQ NOCACHE;
 CREATE SEQUENCE PRICE_SEQ NOCACHE;
 CREATE SEQUENCE LODGINGIMG_SEQ NOCACHE;
+
+
+
