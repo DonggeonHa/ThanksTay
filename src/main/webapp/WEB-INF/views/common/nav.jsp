@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="navbar-brand">
 			<div class="">
-				<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555;" href="/spring-mvc/home">Thxtay</a>
+				<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555;" href="/home">Thxtay</a>
 			</div>
 		<!-- 이 부분이 airbnb에는 button으로 구현되어 있는 듯 하다: 아래와 엮어서 form으로 묶여있음 -->
 		<!-- <ul class="nav justify-content-center">

@@ -10,7 +10,7 @@
     </definition>
 
     <definition name="Mypage/NoTiles/*" extends="Empty">
-        <put-attribute name="content" value="/WEB-INF/views/Mypage/NoTiles/{1}.jsp" />
+        <put-attribute name="content" value="" />
     </definition>
 
 
@@ -18,7 +18,7 @@
     <definition name="Main" template="/WEB-INF/tiles/layouts.jsp">
    <!-- <put-attribute name="css" value="/WEB-INF/tiles/css.jsp" />
         <put-attribute name="js" value="/WEB-INF/tiles/js.jsp" /> -->
-        <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/common/nav.jsp" />
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
     </definition>
@@ -26,4 +26,5 @@
     <definition name="*" extends="Main">
         <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
     </definition>
+
 </tiles-definitions>

@@ -39,7 +39,6 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-
 	<!-- 
 		commons-dbcp2 라이브러리를 이용한 커넥션풀을 스프링의 빈으로 등록시킨다.
 	 -->
@@ -80,6 +79,4 @@
 	<mybatis-spring:scan base-package="com.tt.Common"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.tt.Host"		annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.tt.Lodging"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
-
-
 </beans>
