@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-	 http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
 
@@ -68,37 +69,20 @@
 		컨트롤러를 실행하지 않고 바로, location에서 지정한 경로에서 해당 자원을 찾아서 내려보낸다. 
 	 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
-	<!-- 
-		com.sample.web.controller 패키지의 클래스들을 자동으로 스프링 컨테이너의 빈으로 등록시킨다.
-		주로 @Controller, @RestController 어노테이션이 지정되어 있는 컨트롤러 클래스가 스프링의 빈으로 자동 등록된다.
-	 -->
-	<context:component-scan base-package="com.tt.Common">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-	</context:component-scan>
 
-	<context:component-scan base-package="com.tt.User">
-			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-	</context:component-scan>
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/spring/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
 
-	<context:component-scan base-package="com.tt.Host">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-	</context:component-scan>
-
-	<context:component-scan base-package="com.tt.Admin">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-	</context:component-scan>
-
-	<context:component-scan base-package="com.tt.Lodging">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-	</context:component-scan>
-
-
+	<!-- tilesViewResolver를 이용하여 화면을 표시한다. -->
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
 	<!-- 
 		JSP 기반의 웹 애플리케이션인 경우 ViewResolver 설정하기
 			* InternalResourceViewResolver를 기본 뷰리졸브로 등록한다.
@@ -123,13 +107,42 @@
 				* DispatcherServlet은 전달받은 뷰객체(RedirectView 혹은 JstlView)의 render()를 실행함
 					RedirectView인 경우 클라이언트에게 재요청 URL이 응답으로 전달됨
 					JstlView인 경우 지정된 JSP페이지로 내부이동해서 JSP를 실행함 -> HTML 컨텐츠가 응답으로 전달됨
-						
 	 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
+		<property name="order"  value="2" />
 	</bean>
+
+	<!--
+		com.sample.web.controller 패키지의 클래스들을 자동으로 스프링 컨테이너의 빈으로 등록시킨다.
+		주로 @Controller, @RestController 어노테이션이 지정되어 있는 컨트롤러 클래스가 스프링의 빈으로 자동 등록된다.
+	 -->
+	<context:component-scan base-package="com.tt.Common">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+
+	<context:component-scan base-package="com.tt.User">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+
+	<context:component-scan base-package="com.tt.Host">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+
+	<context:component-scan base-package="com.tt.Admin">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+
+	<context:component-scan base-package="com.tt.Lodging">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
 </beans>
 
 
