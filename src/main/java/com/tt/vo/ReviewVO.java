@@ -9,7 +9,7 @@ import java.util.Date;
 @ToString
 @Getter
 @Setter
-public class Review {
+public class ReviewVO {
 
     private int no;             // 리뷰번호
     private int userNo;         // 유저_번호
@@ -27,5 +27,5 @@ public class Review {
     private int location;       // 위치(리뷰)
     private int value;          // 가격대비 만족도
 
-    public Review() {}
+    public ReviewVO() {}
 }

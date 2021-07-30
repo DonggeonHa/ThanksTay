@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Lodging {
+public class LodgingVO {
 
     private int no;                 // 숙소번호
     private int userNo;             // 유저_번호
@@ -36,5 +36,5 @@ public class Lodging {
     private String status;          // 숙소상태
     private String lodgingTypeCode; // 숙소_타입코드
 
-    public Lodging() {}
+    public LodgingVO() {}
 }

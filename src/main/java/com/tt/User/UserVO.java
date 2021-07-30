@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class User {
+public class UserVO {
 
     private int no;                 // 유저번호
     private String id;              // 아이디
@@ -27,5 +27,5 @@ public class User {
     private Date createdDate;       // 생성일
     private Date updatedDate;       // 수정일
 
-    public User() {}
+    public UserVO() {}
 }

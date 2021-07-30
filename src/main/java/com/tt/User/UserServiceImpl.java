@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired UserDao userDao;
 	
 	@Override
-	public void registerUser(User user) {
-		User savedUser = userDao.getUserById(user.getId());
+	public void registerUser(UserVO user) {
+		UserVO savedUser = userDao.getUserById(user.getId());
 		if (savedUser != null) {
 			throw new UserRegisterException("아이디 중복", "["+user.getId()+"]는 이미 사용중인 아이디입니다.");
 		}
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void login(String userId, String userPassword) {
-		User user = userDao.getUserById(userId);
+		UserVO user = userDao.getUserById(userId);
 		if (user == null) {
 			throw new LoginException("아이디/비밀번호 오류", "아이디 혹은 비밀번호가 유효하지 않습니다.");
 		}

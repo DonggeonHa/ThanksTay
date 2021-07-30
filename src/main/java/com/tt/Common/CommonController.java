@@ -1,4 +1,4 @@
-package com.tt.web.controller;
+package com.tt.Common;
 
 import org.springframework.stereotype.Controller;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
 import com.tt.User.UserService;
-import com.tt.User.User;
+import com.tt.User.UserVO;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
 
@@ -24,7 +24,7 @@ import com.tt.web.utils.SessionUtils;
  * 		- <context:component-scan /> 태그를 xml에 설정했을 때 자동으로 스프링 컨테이너의 빈으로 등록된다.
  */
 @Controller
-public class HomeController {
+public class CommonController {
 
 	@Autowired UserService userService;
 
@@ -152,7 +152,7 @@ public class HomeController {
 	@PostMapping("/register")
 	public String register(UserRegisterForm userRegisterForm) {
 		// User객체를 생성하고, UserRegisterForm의 값을 User객체로 복사한다.
-		User user = new User();
+		UserVO user = new UserVO();
 		BeanUtils.copyProperties(userRegisterForm, user);
 
 		// UserService의 registerUser(user)를 호출해서 업무로직을 수행한다.

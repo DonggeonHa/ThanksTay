@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class TransactionRegister {
+public class TransactionRegisterVO {
 
     private int no;                 // 대금등록 번호
     private int userNo;             // 유저_번호
@@ -16,5 +16,5 @@ public class TransactionRegister {
     private String email;           // 대금등록 이메일
     private String account;         // 대금등록 계좌
 
-    public TransactionRegister() {}
+    public TransactionRegisterVO() {}
 }

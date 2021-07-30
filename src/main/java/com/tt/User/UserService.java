@@ -1,14 +1,12 @@
 package com.tt.User;
 
-import com.tt.User.User;
-
 public interface UserService {
 
 	/**
      * 지정된 사용자정보로 회원가입을 수행하는 서비스
      * @param user 사용자정보
      */
-    void registerUser(User user);
+    void registerUser(UserVO user);
 
     /**
      * 지정된 아이디와 비밀번호로 사용자인증을 수행하는 서비스

@@ -9,7 +9,7 @@ import java.util.Date;
 @ToString
 @Setter
 @Getter
-public class ChattingRoom {
+public class ChattingRoomVO {
     
     private int no;             // 채팅방번호
     private int userNo;         // 유저_번호
@@ -17,5 +17,5 @@ public class ChattingRoom {
     private String admin;       // 관리자
     private Date createdDate;   // 생성일
 
-    public ChattingRoom() {}
+    public ChattingRoomVO() {}
 }

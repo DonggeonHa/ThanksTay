@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Price {
+public class PriceVO {
     
     private int no;             // 요금번호
     private int lodgingNo;      // 숙소_번호
@@ -20,5 +20,5 @@ public class Price {
     private Date updatedDate;   // 수정일
     private Date createdDate;   // 등록일
     
-    public Price() {}
+    public PriceVO() {}
 }

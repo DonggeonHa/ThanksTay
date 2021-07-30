@@ -9,7 +9,7 @@ import java.util.Date;
 @ToString
 @Setter
 @Getter
-public class TransactionHistory {
+public class TransactionHistoryVO {
     
     private int no;             // 대금수령내역번호
     private int priceNo;        // 요금_번호
@@ -17,5 +17,5 @@ public class TransactionHistory {
     private int lodgingNo;      // 숙소_번호
     private Date createdDate;   // 정산일
     
-    public TransactionHistory() {}
+    public TransactionHistoryVO() {}
 }

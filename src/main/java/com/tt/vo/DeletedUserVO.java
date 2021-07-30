@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class DeletedUser {
+public class DeletedUserVO {
 
     private int no;                 // 유저번호
     private String id;              // 아이디
@@ -26,5 +26,5 @@ public class DeletedUser {
     private Date deletedDate;       // 탈퇴일
     private Date updatedDate;       // 수정일
 
-    public DeletedUser() {}
+    public DeletedUserVO() {}
 }

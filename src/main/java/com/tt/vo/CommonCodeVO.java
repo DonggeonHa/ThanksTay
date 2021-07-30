@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class CommonCode {
+public class CommonCodeVO {
     
     private String commonCode;      // 공통코드
     private String parentCode;      // 상위 공통코드
