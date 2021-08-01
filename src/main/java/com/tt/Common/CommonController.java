@@ -36,7 +36,7 @@ public class CommonController {
 	@ExceptionHandler(LoginException.class)
 	public String handleLoginException(LoginException ex, Model model) {
 		model.addAttribute("error", ex);
-		return "loginform";
+		return "loginForm";
 	}
 
 	/*
@@ -163,7 +163,7 @@ public class CommonController {
 
 	@GetMapping("/login")
 	public String loginform() {
-		return "loginform";
+		return "loginForm";
 	}
 
 	@PostMapping("/login")
