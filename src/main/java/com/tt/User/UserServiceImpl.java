@@ -51,4 +51,12 @@ public class UserServiceImpl implements UserService {
 		SessionUtils.addAttribute("LOGINED_USER", user);
 	}
 
+	@Override
+	public void getUserByEmail(String email) {
+		UserVO user = userDao.getUserByEmail(email);
+		if (user == null) {
+
+		}
+
+	}
 }

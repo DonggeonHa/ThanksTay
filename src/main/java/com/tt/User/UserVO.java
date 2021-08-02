@@ -22,7 +22,7 @@ public class UserVO {
     private String name;            // 이름
     private String info;            // 소개
     private String isHost;          // 호스트 여부
-    private String isAdmin;           // 관리자 여부
+    private String isAdmin;         // 관리자 여부
     private String deleted;         // 탈퇴 여부
     private Date createdDate;       // 생성일
     private Date updatedDate;       // 수정일
