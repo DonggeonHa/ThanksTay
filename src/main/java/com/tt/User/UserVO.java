@@ -18,7 +18,7 @@ public class UserVO {
     private Date date;              // 생년월일
     private String phone;           // 전화번호
     private String picture;         // 프로필사진
-    private String checkEmail;      // 이메일 확인
+    private String emailCheck;      // 이메일 확인
     private String name;            // 이름
     private String info;            // 소개
     private String isHost;          // 호스트 여부

@@ -19,6 +19,6 @@ public interface UserService {
      * 지정된 사용자이메일로 데이터베이스에서 사용자정보를 조회해서 반환한다
      * @param email 사용자 이메일
      */
-    void getUserByEmail(String email);
+    boolean getUserByEmail(String email);
 
 }

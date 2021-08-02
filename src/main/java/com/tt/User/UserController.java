@@ -79,6 +79,23 @@ public class UserController {
 		return "redirect:home";
 	}
 
+	@PostMapping("/profileImg")
+	public String profileImg(String picture) {
+
+		return "redirect:home";
+	}
+
+	@PostMapping("/emailCheck")
+	public boolean emailCheck(@RequestParam("email") String userEmail) {
+		Boolean test = userService.getUserByEmail(userEmail);
+
+		if (test == false) {
+			return false;
+		}
+
+		return true;
+	}
+
 	@GetMapping("/login")
 	public String loginform() {
 		return "loginForm";

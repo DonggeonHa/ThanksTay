@@ -26,13 +26,15 @@
             </div>
             <div class="modal-body container mt-3">
                 <h3 class="pb-3"><strong>Thxty에 오신 것을 환영합니다.</strong></h3>
-                <div class="form-floating my-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">이메일</label>
-                </div>
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-danger btn-lg" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">계속</button>
-                </div>
+                <form id="emailCheck" method="post" action="emailCheck" novalidate="novalidate">
+                    <div class="form-floating my-3">
+                        <input type="email" class="form-control" id="loginEmail" name="email">
+                        <label for="loginEmail">이메일</label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger btn-lg" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal" id="continue">계속</button>
+                    </div>
+                </form>
                 <hr>
                 <div class="d-grid gap-2">
                   <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">페이스북으로 로그인하기</button>
@@ -219,18 +221,70 @@
                 <div class="text-center">
                     <p>얼굴이 보이는 이미지를 선택하세요. 호스트는 예약이 확정된 후에만 사진을 볼 수 있습니다.</p>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="" focusable="false" style="display: block; height: 185px; width: 185px; fill: rgb(221, 221, 221);">
-                        <path d="m16 1c8.2842712 0 15 6.71572875 15 15 0 8.2842712-6.7157288 15-15 15-8.28427125 0-15-6.7157288-15-15 0-8.28427125 6.71572875-15 15-15zm0 8c-2.7614237 0-5 2.2385763-5 5 0 2.0143973 1.2022141 3.7998876 2.9996346 4.5835001l.0003231 2.0984999-.1499943.0278452c-2.8326474.5613112-5.31897338 2.2230336-6.93575953 4.5872979 2.34343054 2.291067 5.54974273 3.7028569 9.08579613 3.7028569 3.5355506 0 6.7414538-1.4113884 9.0850203-3.701476-1.6141801-2.3628535-4.0978119-4.0247647-6.929184-4.5867938l-.1558786-.0287302.001228-2.0991413c1.7288399-.7547474 2.9066959-2.4357565 2.9936498-4.355479l.0051645-.2283797c0-2.7614237-2.2385763-5-5-5zm0-6c-7.17970175 0-13 5.82029825-13 13 0 2.9045768.95257276 5.5866683 2.56235849 7.7509147 1.42074739-1.9134907 3.33951478-3.4002416 5.53860831-4.2955956l.3480332-.1363191-.0229565-.0189706c-1.43704227-1.2411241-2.34462949-3.045583-2.42083359-5.0285539l-.00520991-.2714755c0-3.8659932 3.1340068-7 7-7s7 3.1340068 7 7c0 1.9941317-.8415062 3.8279876-2.224566 5.1193683l-.225434.2006317.0447787.0163138c2.3268368.8792152 4.3570558 2.4138611 5.8430586 4.4127726 1.6098837-2.1632453 2.5621627-4.8449575 2.5621627-7.7490864 0-7.17970175-5.8202983-13-13-13z"></path>
-                    </svg>
-                </div>
-                <div class="d-grid gap-2 py-2">
-                    <button type="file" class="btn btn-dark btn-lg">사진 업로드하기</button>
-                </div>
-                <div class="text-center">
-                    <p>나중에 할게요.</p>
-                </div>
+                <form id="profileImg-register" method="post" action="profileImg" novalidate="novalidate">
+                    <div class="d-flex justify-content-center">
+                        <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px;" id="preview-image" />
+                    </div>
+                    <div class="d-grid gap-2 py-2">
+                        <button type="button" class="btn btn-dark btn-lg" id="btn-upload">사진 업로드하기</button>
+                        <input type="file" id="input-image" style="display: none;"/>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;" id="complete">완료</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $('#emailCheck').submit(function () {
+            var email = $.trim($('#loginEmail').val());
+            if (!email) {
+                alert("이메일은 필수 입력값 입니다.")
+                $('#loginEmail').focus();
+                $('#continue').innerHTML
+
+                return false;
+            }
+
+            return true;
+        })
+
+        // 버튼을 클릭하면
+        $('#btn-upload').click(function (e) {
+            e.preventDefault();
+            // input file 타입이 실행됨
+            $('#input-image').click();
+        })
+
+        $('#profileImg-register').submit(function () {
+
+        })
+    })
+
+    function readImage(input) {
+        // input 태그에 파일이 있는 경우
+        if(input.files && input.files[0]) {
+            // FileReader 인스턴스 생성
+            const reader = new FileReader();
+
+            // 이미지가 로드가 된 경우
+            reader.onload = e => {
+                const  previewImage = document.getElementById("preview-image")
+                previewImage.src = e.target.result;
+            }
+
+            // reader가 이미지 읽도록 하기
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // input file에 change 이벤트 부여
+    const inputImage = document.getElementById('input-image');
+    inputImage.addEventListener("change", e => {
+        readImage(e.target);
+    })
+</script>

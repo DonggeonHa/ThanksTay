@@ -52,11 +52,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void getUserByEmail(String email) {
+	public boolean getUserByEmail(String email) {
 		UserVO user = userDao.getUserByEmail(email);
 		if (user == null) {
-
+			return false;
 		}
 
+		return true;
 	}
 }

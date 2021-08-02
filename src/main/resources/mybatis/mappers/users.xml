@@ -4,22 +4,50 @@
 <!-- 
 	com.sample.dao.UserDao 매퍼인터에시으세 대한 매퍼파일(SQL이 정의된 파일) 정의
 -->
-<mapper namespace="com.sample.dao.UserDao">
+<mapper namespace="com.tt.User.UserDao">
 
     <select id="getUserById" parameterType="string" resultType="com.tt.User.UserVO">
         SELECT
-            *
+            user_no             as no,
+            user_id             as id,
+            user_password       as password,
+            user_email          as email,
+            user_date           as date,
+            user_phone          as phone,
+            user_picture        as picture,
+            user_email_check    as emailCheck,
+            user_name           as name,
+            user_info           as info,
+            user_inhost         as inHost,
+            user_inadmin        as inAdmin,
+            user_deleted        as deleted
+            user_created_date   as createdDate,
+            user_updated_date   as updatedDate
         FROM
-            sample_users
+            thxtay_user
         WHERE
             user_id = #{value}
     </select>
 
     <select id="getUserByEmail" parameterType="string" resultType="com.tt.User.UserVO">
         SELECT
-            *
+            user_no             as no,
+            user_id             as id,
+            user_password       as password,
+            user_email          as email,
+            user_date           as date,
+            user_phone          as phone,
+            user_picture        as picture,
+            user_email_check    as emailCheck,
+            user_name           as name,
+            user_info           as info,
+            user_inhost         as inHost,
+            user_inadmin        as inAdmin,
+            user_deleted        as deleted
+            user_created_date   as createdDate,
+            user_updated_date   as updatedDate
         FROM
-            sample_users
+            thxtay_user
         WHERE
             user_email = #{value}
     </select>
