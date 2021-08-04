@@ -15,7 +15,7 @@ public class UserVO {
     private String id;              // 아이디
     private String password;        // 비밀번호
     private String email;           // 이메일
-    private Date date;              // 생년월일
+    private String birth;           // 생년월일
     private String phone;           // 전화번호
     private String picture;         // 프로필사진
     private String emailCheck;      // 이메일 확인

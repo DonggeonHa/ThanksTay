@@ -140,14 +140,12 @@ CREATE TABLE Thxtay_Deleted_User
 (
 	-- 유저번호
 	user_no number NOT NULL,
-	-- 아이디
-	user_id varchar2(255) NOT NULL,
 	-- 비밀번호
 	user_password char(64),
 	-- 이메일
 	user_email varchar2(255) NOT NULL UNIQUE,
 	-- 생년월일
-	user_date varchar2(255) NOT NULL,
+	user_birth date NOT NULL,
 	-- 전화번호
 	user_phone varchar2(255) NOT NULL UNIQUE,
 	-- 프로필사진
@@ -358,14 +356,12 @@ CREATE TABLE Thxtay_User
 (
 	-- 유저번호
 	user_no number NOT NULL,
-	-- 아이디
-	user_id varchar2(255) NOT NULL UNIQUE,
 	-- 비밀번호
 	user_password char(64),
 	-- 이메일
 	user_email varchar2(255) NOT NULL UNIQUE,
 	-- 생년월일
-	user_date varchar2(255) NOT NULL,
+	user_birth date NOT NULL,
 	-- 전화번호
 	user_phone varchar2(255) NOT NULL UNIQUE,
 	-- 프로필사진
@@ -377,7 +373,7 @@ CREATE TABLE Thxtay_User
 	-- 소개
 	user_info varchar2(4000),
 	-- 호스트여부
-	user_isHost char(1) DEFAULT '1',
+	user_isHost char(1) DEFAULT 'N',
 	-- 관리자여부
 	user_isAdmin char(1) DEFAULT 'N',
 	-- 탈퇴여부

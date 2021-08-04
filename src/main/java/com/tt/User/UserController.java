@@ -8,10 +8,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * @Controller
@@ -68,7 +68,9 @@ public class UserController {
 	 */
 
 	@PostMapping("/register")
-	public String register(UserRegisterForm userRegisterForm) {
+	@ResponseBody
+	public Map<String, Object> register(UserRegisterForm userRegisterForm) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
 		// User객체를 생성하고, UserRegisterForm의 값을 User객체로 복사한다.
 		UserVO user = new UserVO();
 		BeanUtils.copyProperties(userRegisterForm, user);
@@ -76,7 +78,8 @@ public class UserController {
 		// UserService의 registerUser(user)를 호출해서 업무로직을 수행한다.
 		userService.registerUser(user);
 
-		return "redirect:home";
+		retVal.put("res", "OK");
+		return retVal;
 	}
 
 	@PostMapping("/profileImg")
@@ -85,15 +88,21 @@ public class UserController {
 		return "redirect:home";
 	}
 
-	@PostMapping("/emailCheck")
-	public boolean emailCheck(@RequestParam("email") String userEmail) {
-		Boolean test = userService.getUserByEmail(userEmail);
+	@GetMapping("/emailCheck")
+	@ResponseBody
+	public Map<String, Object> emailCheck(@RequestParam("email") String userEmail) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
 
-		if (test == false) {
-			return false;
+		int res = userService.getUserByEmail(userEmail);
+		System.out.println("res 값은 :" + res);
+		if (res == 1) {
+			retVal.put("res", "OK");
+
+		} else if (res == 0) {
+			retVal.put("res", "FAIL");
 		}
 
-		return true;
+		return retVal;
 	}
 
 	@GetMapping("/login")
@@ -101,10 +110,10 @@ public class UserController {
 		return "loginForm";
 	}
 
-	@PostMapping("/login")
-	public String login(@RequestParam("email") String userEmail) {
+	@PostMapping("/login2")
+	public String login(@RequestParam("email") String userEmail, @RequestParam("password") String userPassword) {
 
-		userService.getUserByEmail(userEmail);
+		userService.login(userEmail, userPassword);
 
 		// 로그인 전 페이지로 되돌아가기
 		String returnPath = (String) SessionUtils.getAttribute("returnPath");
@@ -113,7 +122,7 @@ public class UserController {
 			return "redirect:" + returnPath;
 		}
 
-		return "redirect:home";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/logout")

@@ -26,15 +26,13 @@
             </div>
             <div class="modal-body container mt-3">
                 <h3 class="pb-3"><strong>Thxty에 오신 것을 환영합니다.</strong></h3>
-                <form id="emailCheck" method="post" action="emailCheck" novalidate="novalidate">
-                    <div class="form-floating my-3">
-                        <input type="email" class="form-control" id="loginEmail" name="email">
-                        <label for="loginEmail">이메일</label>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-danger btn-lg" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal" id="continue">계속</button>
-                    </div>
-                </form>
+                <div class="form-floating my-3">
+                    <input type="email" class="form-control" id="loginEmail" name="email">
+                    <label for="loginEmail">이메일</label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-danger btn-lg" id="btn-emailCheck">계속</button>
+                </div>
                 <hr>
                 <div class="d-grid gap-2">
                   <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">페이스북으로 로그인하기</button>
@@ -63,11 +61,11 @@
             </div>
             <div class="modal-body">
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="******">
-                    <label for="floatingPassword">비밀번호</label>
+                    <input type="password" class="form-control" id="password" placeholder="******" name="password">
+                    <label for="password">비밀번호</label>
                 </div>
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-danger btn-lg" data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal" style="font-size: 1.1em;">로그인</button>
+                    <button type="button" class="btn btn-danger btn-lg" style="font-size: 1.1em;" id="btn-login">로그인</button>
                 </div>
 
                 <div class="pt-3">
@@ -98,17 +96,17 @@
             </div>
             <div class="modal-body">
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingLastName" placeholder="이름(예:길동)">
-                    <label for="floatingLastName">이름(예:길동)</label>
+                    <input type="text" class="form-control" id="LastName" placeholder="이름(예:길동)">
+                    <label for="LastName">이름(예:길동)</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="floatingFirstName" placeholder="이름(예:홍)">
-                    <label for="floatingFirstName">성(예:홍)</label>
+                    <input type="text" class="form-control" id="FirstName" placeholder="이름(예:홍)">
+                    <label for="FirstName">성(예:홍)</label>
                     <p style="color: gray; font-size: small" class="pt-1">정부 발급 신분증에 표시된 이름과 일치하는지 확인하세요.</p>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="RegisterDate" placeholder="2012.12.12">
-                    <label for="RegisterDate">생년월일</label>
+                    <input type="date" class="form-control" id="RegisterBirth" placeholder="2012.12.12">
+                    <label for="RegisterBirth">생년월일</label>
                     <p style="color: gray; font-size: small" class="pt-1">만 18세 이상의 성인만 회원으로 가입할 수 있습니다.</p>
                 </div>
 
@@ -133,7 +131,7 @@
                     </p>
                 </div>
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-danger btn-lg" data-bs-target="#registerModal2" data-bs-toggle="modal" data-bs-dismiss="modal">동의 및 계속하기</button>
+                    <button type="button" class="btn btn-danger btn-lg" id="btn-register">동의 및 계속하기</button>
                 </div>
             </div>
         </div>
@@ -240,15 +238,143 @@
 
 <script>
     $(function () {
-        $('#emailCheck').submit(function () {
-            var email = $.trim($('#loginEmail').val());
-            if (!email) {
-                alert("이메일은 필수 입력값 입니다.")
+        var emailModal = new bootstrap.Modal(document.getElementById("loginRegisterModal"));
+        var passwordModal = new bootstrap.Modal(document.getElementById("loginModal"));
+        var registerModal = new bootstrap.Modal(document.getElementById("registerModal"));
+        var registerModal2 = new bootstrap.Modal(document.getElementById("registerModal2"));
+
+        function CheckEmail(str) {
+            var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+            if (!reg_email.test(str)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        $('#btn-emailCheck').click(function () {
+            var checkEmail = $.trim($('#loginEmail').val());
+            if (!checkEmail) {
+                alertify.alert("이메일은 필수 입력값 입니다.")
                 $('#loginEmail').focus();
-                $('#continue').innerHTML
+
+                return false;
+            } else {
+                if(!CheckEmail(checkEmail)) {
+                    alertify.alert("이메일 형식이 잘못되었습니다.");
+                    $('#loginEmail').focus();
+
+                    return false;
+                }
+            }
+
+            $('#RegisterEmail').val(checkEmail);
+
+            $.ajax({
+                url:"/emailCheck",
+                dataType: 'json',
+                data:{email: checkEmail},
+                success:function (retVal) {
+                    if (retVal.res === "OK") {
+                        passwordModal.show();
+                    } else if(retVal.res === "FAIL") {
+                        registerModal.show();
+                    }
+                    emailModal.hide();
+                },
+                error : function () {
+                    alert('ajax통신 실패!!!!');
+                }
+            })
+
+            return true;
+        })
+
+        $('#btn-login').click(function () {
+            var email = $.trim($('#loginEmail').val());
+            var password = $.trim($('#password').val());
+
+            if (!password) {
+                alertify.alert("비밀번호를 입력해주세요.")
+                $('#password').focus();
 
                 return false;
             }
+
+            $.ajax({
+                url:"/login2",
+                dataType: 'json',
+                method: 'post',
+                data:{email: email, password: password},
+                success:function () {
+                    alertify.alert("로그인 성공");
+                },
+                error : function () {
+                    alertify.alert('ajax통신 실패!!!!');
+                }
+            })
+
+            return true;
+        })
+
+        $('#btn-register').click(function () {
+            var lastName = $.trim($('#LastName').val());
+            var firstName = $.trim($('#FirstName').val());
+            var name = firstName + lastName;
+            var birth = $.trim($('#RegisterBirth').val());
+            var email = $.trim($('#RegisterEmail').val());
+            var password = $.trim($('#RegisterPassword').val());
+
+            if (!lastName) {
+                alertify.alert("이름을 입력해주세요.")
+                $('#lastName').focus();
+
+                return false;
+            }
+
+            if (!firstName) {
+                alertify.alert("성을 입력해주세요.")
+                $('#FirstName').focus();
+
+                return false;
+            }
+
+            if (!birth) {
+                alertify.alert("생년월일을 입력해주세요.")
+                $('#RegisterBirth').focus();
+
+                return false;
+            }
+
+            if (!password) {
+                alertify.alert("성을 입력해주세요.")
+                $('#RegisterPassword').focus();
+
+                return false;
+            }
+
+            $.ajax({
+                url:"/register",
+                dataType: 'json',
+                method: 'post',
+                data:{
+                    name: name,
+                    birth: birth,
+                    email: email,
+                    password: password
+                },
+                success:function (retVal) {
+                    if (retVal.res === "OK") {
+                        alertify.alert('회원가입 성공');
+                        registerModal2.show();
+                    }
+
+                    registerModal.hide();
+                },
+                error : function () {
+                    alertify.alert('ajax통신 실패!!!!');
+                }
+            })
 
             return true;
         })
