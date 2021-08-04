@@ -18,7 +18,7 @@
 		<div>
 			<ul class="nav justify-content-end">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#">호스트 모드로 전환</a></li>
+					aria-current="page" href="hosting">호스트 모드로 전환</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">국제화</a></li>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-bs-toggle="dropdown">로그인시</a>
