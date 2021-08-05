@@ -221,14 +221,14 @@
                 </div>
                 <form id="profileImg-register" method="post" action="profileImg" novalidate="novalidate">
                     <div class="d-flex justify-content-center">
-                        <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px;" id="preview-image" />
+                        <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px;" id="preview-image" name="picture"/>
                     </div>
                     <div class="d-grid gap-2 py-2">
                         <button type="button" class="btn btn-dark btn-lg" id="btn-upload">사진 업로드하기</button>
                         <input type="file" id="input-image" style="display: none;"/>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;" id="complete">완료</button>
+                        <button type="submit" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;" id="btn-complete">완료</button>
                     </div>
                 </form>
             </div>

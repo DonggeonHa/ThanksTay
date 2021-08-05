@@ -130,5 +130,4 @@ public class UserController {
 		SessionUtils.destroySession();
 		return "redirect:home";
 	}
-
 }
