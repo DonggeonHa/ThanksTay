@@ -30,5 +30,5 @@ public class FilteringVO {
 	private String isApproved;		//승인
 	private String isStopped;		//휴업
 
-
+//user_no
 }

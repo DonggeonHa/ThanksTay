@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.tt.Host.filteringDao">
-	<select id="getLodgingsByFiltering" parameterType="int" resultType="com.tt.vo.FilteringVO">
+<mapper namespace="com.tt.Host.FilteringDao">
+	<select id="getLodgingsByFiltering" parameterType="com.tt.vo.FilteringVO" resultType="com.tt.Lodging.LodgingVO">
 		select
 			A.lodging_bedroom bedroom,
 			A.lodging_bathroom bathroom,
@@ -27,9 +27,9 @@
 			C.filtering_isApproved isApproved,
 			C.filtering_isStopped isStopped
 		from 
-			Thxtay_lodging A, Thxtay_user B, Thxtay_filtering C
+			Thxtay_lodging A, select 
 		where A.user_no = B.user_no 
-        and A.user_no = #{value}
+        and B.user_no = #{}
         <if test='bedroom != "0"'>
         	and bedroom like #{bedroom}
         </if>
@@ -61,6 +61,11 @@
         	and parkingLot like #{parkingLot}
         </if>
         <if test='gym != "0"'>
+        
+        
+        
+        
+        
         	and gym like #{gym}
         </if>
         <if test='pool != "0"'>

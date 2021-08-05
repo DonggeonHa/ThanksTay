@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tt.Lodging.LodgingService;
 import com.tt.Lodging.LodgingVO;
 import com.tt.vo.FilteringVO;
 
@@ -41,12 +42,12 @@ public class HostController {
 	@GetMapping(path = {"/host/filtering"})
 	public @ResponseBody ResponseEntity<List<LodgingVO>> doFilteringLodgings(FilteringVO filtering){
 		//filtering.getKitchen();
+		System.out.println("#########################################시작");
 		System.out.println(filtering);
 		logger.info("filter실행");
 		
-		//List<LodgingVO> lodgings = 
-		//return new ResponseEntity<List<LodgingVO>>(, HttpStatus.OK);
-		return null;
+		List<LodgingVO> lodgings = filteringService.getLodgingsByFiltering(filtering);
+		return new ResponseEntity<List<LodgingVO>>(lodgings, HttpStatus.OK);
 	}
 	
 //	@GetMapping("filtering/json")
