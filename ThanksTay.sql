@@ -121,15 +121,9 @@ CREATE TABLE Thxtay_Chatting_Room
 CREATE TABLE Thxtay_Common_Code
 (
 	-- 상위공통코드
-<<<<<<< HEAD
-	parentCode char(7),
-	-- 공통코드
-	commonCode char(10) NOT NULL,
-=======
 	parentCode varchar2(20),
 	-- 공통코드
 	commonCode varchar2(20) NOT NULL,
->>>>>>> dev-hdg
 	-- 공통코드명
 	codeContent varchar2(255),
 	-- 우선순위
@@ -549,11 +543,8 @@ ALTER TABLE Thxtay_Wish_Zzim
 	REFERENCES Thxtay_Wishlist (wishlist_no)
 ;
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> dev-hdg
 /* Create Sequence */
 
 CREATE SEQUENCE USER_SEQ NOCACHE;
@@ -568,3 +559,6 @@ CREATE SEQUENCE LODGING_SEQ NOCACHE;
 CREATE SEQUENCE TRANSACTIONHISTORY_SEQ NOCACHE;
 CREATE SEQUENCE PRICE_SEQ NOCACHE;
 CREATE SEQUENCE LODGINGIMG_SEQ NOCACHE;
+
+
+

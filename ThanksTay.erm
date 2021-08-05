@@ -11,13 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-<<<<<<< HEAD
-	<x>609</x>
-	<y>38</y>
-=======
 	<x>601</x>
 	<y>270</y>
->>>>>>> dev-hdg
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -140,11 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2021-07-20 15:51:58</creation_date>
-<<<<<<< HEAD
-			<updated_date>2021-08-03 22:08:26</updated_date>
-=======
 			<updated_date>2021-08-05 11:33:19</updated_date>
->>>>>>> dev-hdg
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -1973,11 +1964,7 @@
 			<connections>
 				<relation>
 					<id>0</id>
-<<<<<<< HEAD
-					<source>10</source>
-=======
 					<source>14</source>
->>>>>>> dev-hdg
 					<target>0</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2040,11 +2027,7 @@
 				</normal_column>
 				<normal_column>
 					<id>1</id>
-<<<<<<< HEAD
-					<referenced_column>53</referenced_column>
-=======
 					<referenced_column>112</referenced_column>
->>>>>>> dev-hdg
 					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2186,11 +2169,7 @@
 			<columns>
 				<normal_column>
 					<id>3</id>
-<<<<<<< HEAD
-					<referenced_column>77</referenced_column>
-=======
 					<referenced_column>84</referenced_column>
->>>>>>> dev-hdg
 					<relation>1</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2353,11 +2332,7 @@
 				</normal_column>
 				<normal_column>
 					<id>6</id>
-<<<<<<< HEAD
-					<referenced_column>77</referenced_column>
-=======
 					<referenced_column>84</referenced_column>
->>>>>>> dev-hdg
 					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2423,33 +2398,7 @@
 			<connections>
 				<relation>
 					<id>4</id>
-<<<<<<< HEAD
-					<source>13</source>
-					<target>3</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>5</id>
-					<source>10</source>
-=======
 					<source>14</source>
->>>>>>> dev-hdg
 					<target>3</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2512,13 +2461,8 @@
 				</normal_column>
 				<normal_column>
 					<id>8</id>
-<<<<<<< HEAD
-					<referenced_column>53</referenced_column>
-					<relation>5</relation>
-=======
 					<referenced_column>112</referenced_column>
 					<relation>4</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2552,11 +2496,6 @@
 				<normal_column>
 					<word_id>20</word_id>
 					<id>9</id>
-<<<<<<< HEAD
-					<referenced_column>77</referenced_column>
-					<relation>4</relation>
-=======
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3250,15 +3189,9 @@
 			</color>
 			<connections>
 				<relation>
-<<<<<<< HEAD
-					<id>6</id>
-					<source>10</source>
-					<target>5</target>
-=======
 					<id>10</id>
 					<source>13</source>
 					<target>6</target>
->>>>>>> dev-hdg
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
 						<target_xp>-1</target_xp>
@@ -3419,14 +3352,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<id>25</id>
-					<referenced_column>53</referenced_column>
-					<relation>6</relation>
-=======
 					<word_id>61</word_id>
 					<id>28</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3602,11 +3529,6 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 				<relation>
-<<<<<<< HEAD
-					<id>8</id>
-					<source>10</source>
-					<target>6</target>
-=======
 					<id>12</id>
 					<source>13</source>
 					<target>7</target>
@@ -3632,7 +3554,6 @@
 					<id>13</id>
 					<source>14</source>
 					<target>7</target>
->>>>>>> dev-hdg
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
 						<target_xp>-1</target_xp>
@@ -3693,15 +3614,9 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<id>30</id>
-					<referenced_column>53</referenced_column>
-					<relation>8</relation>
-=======
 					<id>33</id>
 					<referenced_column>84</referenced_column>
 					<relation>12</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3866,106 +3781,6 @@
 						<decimal_size>0</decimal_size>
 					</sequence>
 				</normal_column>
-<<<<<<< HEAD
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>7</id>
-			<height>170</height>
-			<width>292</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>1548</x>
-			<y>53</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-				<relation>
-					<id>9</id>
-					<source>9</source>
-					<target>7</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>10</id>
-					<source>8</source>
-					<target>7</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>11</id>
-					<source>13</source>
-					<target>7</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-			</connections>
-			<physical_name>Thxtay_Transaction_History</physical_name>
-			<logical_name>대금수령내역</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
-=======
->>>>>>> dev-hdg
 				<normal_column>
 					<word_id>66</word_id>
 					<id>38</id>
@@ -4033,14 +3848,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<id>38</id>
-					<referenced_column>41</referenced_column>
-					<relation>10</relation>
-=======
 					<word_id>72</word_id>
 					<id>40</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4072,14 +3881,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<id>39</id>
-					<referenced_column>77</referenced_column>
-					<relation>11</relation>
-=======
 					<word_id>65</word_id>
 					<id>41</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4362,15 +4165,9 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<id>46</id>
-					<referenced_column>77</referenced_column>
-					<relation>13</relation>
-=======
 					<id>48</id>
 					<referenced_column>84</referenced_column>
 					<relation>14</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4697,20 +4494,18 @@
 		</table>
 		<table>
 			<id>10</id>
-			<height>359</height>
-			<width>301</width>
+			<height>338</height>
+			<width>292</width>
 				<font_name>맑은 고딕</font_name>
 				<font_size>9</font_size>
-			<x>31</x>
-			<y>372</y>
+			<x>36</x>
+			<y>756</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
 				<b>192</b>
 			</color>
 			<connections>
-<<<<<<< HEAD
-=======
 				<relation>
 					<id>16</id>
 					<source>14</source>
@@ -4733,24 +4528,18 @@
 					<referenced_column>null</referenced_column>
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
->>>>>>> dev-hdg
 			</connections>
-			<physical_name>Thxtay_User</physical_name>
-			<logical_name>유저</logical_name>
+			<physical_name>Thxtay_Deleted_User</physical_name>
+			<logical_name>탈퇴한유저</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
 			<option></option>
 			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>100</word_id>
-					<id>53</id>
-=======
 					<id>56</id>
 					<referenced_column>112</referenced_column>
 					<relation>16</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4759,7 +4548,7 @@
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
+					<foreign_key>true</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 					<unique_key>false</unique_key>
@@ -4782,42 +4571,6 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>91</word_id>
-					<id>54</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>true</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-=======
->>>>>>> dev-hdg
 					<word_id>101</word_id>
 					<id>57</id>
 					<description></description>
@@ -4951,11 +4704,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>106</word_id>
-<<<<<<< HEAD
-					<id>59</id>
-=======
 					<id>61</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5020,13 +4769,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>99</word_id>
-					<id>61</id>
-=======
 					<word_id>98</word_id>
 					<id>63</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5092,18 +4836,14 @@
 				</normal_column>
 				<normal_column>
 					<word_id>97</word_id>
-<<<<<<< HEAD
-					<id>63</id>
-=======
 					<id>65</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
 					<type>character(n)</type>
 					<constraint></constraint>
-					<default_value>1</default_value>
+					<default_value>N</default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -5161,46 +4901,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>84</word_id>
-					<id>65</id>
-=======
 					<word_id>87</word_id>
 					<id>67</id>
->>>>>>> dev-hdg
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value>N</default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>81</word_id>
-					<id>66</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5232,13 +4934,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>108</word_id>
-					<id>67</id>
-=======
 					<word_id>107</word_id>
 					<id>68</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5280,21 +4977,12 @@
 		</table>
 		<table>
 			<id>11</id>
-<<<<<<< HEAD
-			<height>107</height>
-			<width>344</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>1752</x>
-			<y>754</y>
-=======
 			<height>275</height>
 			<width>317</width>
 				<font_name>맑은 고딕</font_name>
 				<font_size>9</font_size>
 			<x>816</x>
 			<y>0</y>
->>>>>>> dev-hdg
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -5302,11 +4990,7 @@
 			</color>
 			<connections>
 				<relation>
-<<<<<<< HEAD
-					<id>14</id>
-=======
 					<id>17</id>
->>>>>>> dev-hdg
 					<source>13</source>
 					<target>11</target>
 						<source_xp>-1</source_xp>
@@ -5327,11 +5011,6 @@
 					<referenced_column>null</referenced_column>
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
-<<<<<<< HEAD
-			</connections>
-			<physical_name>Thxtay_Lodging_Img</physical_name>
-			<logical_name>숙소사진리스트</logical_name>
-=======
 				<relation>
 					<id>18</id>
 					<source>14</source>
@@ -5357,107 +5036,25 @@
 			</connections>
 			<physical_name>Thxtay_Booking</physical_name>
 			<logical_name>예약</logical_name>
->>>>>>> dev-hdg
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
 			<option></option>
 			<columns>
-<<<<<<< HEAD
-				<normal_column>
-					<word_id>22</word_id>
-					<id>68</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>decimal</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<id>69</id>
-					<referenced_column>77</referenced_column>
-					<relation>14</relation>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>decimal</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>23</word_id>
-					<id>70</id>
-=======
 				<normal_column>
 					<word_id>6</word_id>
 					<id>69</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>decimal</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
-<<<<<<< HEAD
-					<primary_key>false</primary_key>
-=======
 					<primary_key>true</primary_key>
->>>>>>> dev-hdg
 					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
@@ -5477,68 +5074,10 @@
 						<decimal_size>0</decimal_size>
 					</sequence>
 				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>12</id>
-			<height>170</height>
-			<width>316</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>444</x>
-			<y>888</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-				<relation>
-					<id>15</id>
-					<source>10</source>
-					<target>12</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-			</connections>
-			<physical_name>Thxtay_Transaction_Register</physical_name>
-			<logical_name>대금등록</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>79</word_id>
-					<id>71</id>
-=======
 					<id>70</id>
 					<referenced_column>112</referenced_column>
 					<relation>18</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5549,11 +5088,7 @@
 					<auto_increment>false</auto_increment>
 					<foreign_key>true</foreign_key>
 					<not_null>true</not_null>
-<<<<<<< HEAD
-					<primary_key>true</primary_key>
-=======
 					<primary_key>false</primary_key>
->>>>>>> dev-hdg
 					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
@@ -5574,15 +5109,9 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<id>72</id>
-					<referenced_column>53</referenced_column>
-					<relation>15</relation>
-=======
 					<id>71</id>
 					<referenced_column>84</referenced_column>
 					<relation>17</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5614,22 +5143,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>76</word_id>
-					<id>73</id>
-=======
 					<word_id>2</word_id>
 					<id>72</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>character(n)</type>
-=======
 					<type>date</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -5656,22 +5176,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>78</word_id>
-					<id>74</id>
-=======
 					<word_id>3</word_id>
 					<id>73</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>date</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -5698,22 +5209,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>77</word_id>
-					<id>75</id>
-=======
 					<word_id>4</word_id>
 					<id>74</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>decimal</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -5740,13 +5242,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>75</word_id>
-					<id>76</id>
-=======
 					<word_id>7</word_id>
 					<id>75</id>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -5777,63 +5274,7 @@
 						<decimal_size>0</decimal_size>
 					</sequence>
 				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>13</id>
-			<height>590</height>
-			<width>344</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>1272</x>
-			<y>513</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-				<relation>
-					<id>16</id>
-					<source>10</source>
-					<target>13</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-			</connections>
-			<physical_name>Thxtay_Lodging</physical_name>
-			<logical_name>숙소</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>40</word_id>
-=======
 					<word_id>5</word_id>
 					<id>76</id>
 					<description></description>
@@ -5868,7 +5309,6 @@
 				</normal_column>
 				<normal_column>
 					<word_id>9</word_id>
->>>>>>> dev-hdg
 					<id>77</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -5880,11 +5320,7 @@
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
-<<<<<<< HEAD
-					<primary_key>true</primary_key>
-=======
 					<primary_key>false</primary_key>
->>>>>>> dev-hdg
 					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
@@ -5905,27 +5341,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-=======
 					<word_id>8</word_id>
->>>>>>> dev-hdg
 					<id>78</id>
-					<referenced_column>53</referenced_column>
-					<relation>16</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
 					<type>decimal</type>
 					<constraint></constraint>
-<<<<<<< HEAD
-					<default_value></default_value>
-=======
 					<default_value>0</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
+					<foreign_key>false</foreign_key>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -5947,28 +5374,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>30</word_id>
-=======
 					<word_id>1</word_id>
->>>>>>> dev-hdg
 					<id>79</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-=======
 					<type>decimal</type>
 					<constraint></constraint>
 					<default_value>0</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -6043,21 +5460,13 @@
 			<option></option>
 			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>41</word_id>
-=======
 					<word_id>55</word_id>
->>>>>>> dev-hdg
 					<id>80</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>decimal</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -6084,10 +5493,6 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>25</word_id>
-=======
->>>>>>> dev-hdg
 					<id>81</id>
 					<referenced_column>69</referenced_column>
 					<relation>19</relation>
@@ -6095,11 +5500,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>decimal</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -6126,21 +5527,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>26</word_id>
-=======
 					<word_id>53</word_id>
->>>>>>> dev-hdg
 					<id>82</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>date</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value>sysdate</default_value>
 					<auto_increment>false</auto_increment>
@@ -6167,30 +5560,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>33</word_id>
-=======
 					<word_id>54</word_id>
->>>>>>> dev-hdg
 					<id>83</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>clob</type>
-=======
 					<type>varchar(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-<<<<<<< HEAD
-					<not_null>false</not_null>
-=======
 					<not_null>true</not_null>
->>>>>>> dev-hdg
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -6265,55 +5646,8 @@
 			<option></option>
 			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>36</word_id>
-=======
 					<word_id>43</word_id>
->>>>>>> dev-hdg
 					<id>84</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value>N</default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-<<<<<<< HEAD
-					<not_null>false</not_null>
-					<primary_key>false</primary_key>
-=======
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
->>>>>>> dev-hdg
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>38</word_id>
-					<id>85</id>
-<<<<<<< HEAD
-=======
-					<referenced_column>112</referenced_column>
-					<relation>20</relation>
->>>>>>> dev-hdg
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -6323,7 +5657,41 @@
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<nocache>false</nocache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<id>85</id>
+					<referenced_column>112</referenced_column>
+					<relation>20</relation>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>decimal</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>true</foreign_key>
+					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -6345,21 +5713,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>35</word_id>
-=======
 					<word_id>31</word_id>
->>>>>>> dev-hdg
 					<id>86</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>clob</type>
-=======
 					<type>varchar(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -6386,11 +5746,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>39</word_id>
-=======
 					<word_id>44</word_id>
->>>>>>> dev-hdg
 					<id>87</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6401,7 +5757,7 @@
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -6423,17 +5779,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>28</word_id>
-=======
 					<word_id>26</word_id>
->>>>>>> dev-hdg
 					<id>88</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>decimal</type>
+					<type>varchar(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -6466,11 +5818,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>decimal</type>
-=======
 					<type>varchar(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -6497,11 +5845,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>44</word_id>
-=======
 					<word_id>34</word_id>
->>>>>>> dev-hdg
 					<id>90</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6534,11 +5878,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>34</word_id>
-=======
 					<word_id>37</word_id>
->>>>>>> dev-hdg
 					<id>91</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6546,11 +5886,7 @@
 					<physical_name></physical_name>
 					<type>character(n)</type>
 					<constraint></constraint>
-<<<<<<< HEAD
-					<default_value></default_value>
-=======
 					<default_value>N</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -6575,11 +5911,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>48</word_id>
-=======
 					<word_id>41</word_id>
->>>>>>> dev-hdg
 					<id>92</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6612,11 +5944,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>43</word_id>
-=======
 					<word_id>36</word_id>
->>>>>>> dev-hdg
 					<id>93</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6682,11 +6010,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>31</word_id>
-=======
 					<word_id>29</word_id>
->>>>>>> dev-hdg
 					<id>95</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6719,11 +6043,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>32</word_id>
-=======
 					<word_id>28</word_id>
->>>>>>> dev-hdg
 					<id>96</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6756,11 +6076,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>29</word_id>
-=======
 					<word_id>47</word_id>
->>>>>>> dev-hdg
 					<id>97</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6768,7 +6084,7 @@
 					<physical_name></physical_name>
 					<type>decimal</type>
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -6793,11 +6109,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>24</word_id>
-=======
 					<word_id>35</word_id>
->>>>>>> dev-hdg
 					<id>98</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6805,7 +6117,7 @@
 					<physical_name></physical_name>
 					<type>decimal</type>
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -6830,11 +6142,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>37</word_id>
-=======
 					<word_id>51</word_id>
->>>>>>> dev-hdg
 					<id>99</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6867,11 +6175,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>47</word_id>
-=======
 					<word_id>46</word_id>
->>>>>>> dev-hdg
 					<id>100</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6910,15 +6214,9 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value>LDG0301</default_value>
-=======
 					<type>decimal</type>
 					<constraint></constraint>
 					<default_value>0</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -6943,21 +6241,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>46</word_id>
-=======
 					<word_id>32</word_id>
->>>>>>> dev-hdg
 					<id>102</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>character(n)</type>
-=======
 					<type>decimal</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value>0</default_value>
 					<auto_increment>false</auto_increment>
@@ -6983,63 +6273,9 @@
 						<decimal_size>0</decimal_size>
 					</sequence>
 				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>14</id>
-			<height>338</height>
-			<width>292</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>36</x>
-			<y>756</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-				<relation>
-					<id>17</id>
-					<source>10</source>
-					<target>14</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-			</connections>
-			<physical_name>Thxtay_Deleted_User</physical_name>
-			<logical_name>탈퇴한유저</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
 				<normal_column>
+					<word_id>33</word_id>
 					<id>103</id>
-					<referenced_column>53</referenced_column>
-					<relation>17</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -7048,9 +6284,9 @@
 					<constraint></constraint>
 					<default_value>0</default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
+					<foreign_key>false</foreign_key>
+					<not_null>false</not_null>
+					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
@@ -7071,60 +6307,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>90</word_id>
-=======
 					<word_id>30</word_id>
->>>>>>> dev-hdg
 					<id>104</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-=======
 					<type>decimal</type>
-					<constraint></constraint>
-					<default_value>0</default_value>
->>>>>>> dev-hdg
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-<<<<<<< HEAD
-					<word_id>102</word_id>
-=======
-					<word_id>25</word_id>
->>>>>>> dev-hdg
-					<id>105</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>character(n)</type>
 					<constraint></constraint>
 					<default_value>0</default_value>
 					<auto_increment>false</auto_increment>
@@ -7151,28 +6340,20 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>87</word_id>
-=======
-					<word_id>40</word_id>
->>>>>>> dev-hdg
-					<id>106</id>
+					<word_id>25</word_id>
+					<id>105</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>decimal</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value>0</default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
-					<unique_key>true</unique_key>
+					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
 					<sequence>
@@ -7192,11 +6373,40 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>82</word_id>
-=======
+					<word_id>40</word_id>
+					<id>106</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>decimal</type>
+					<constraint></constraint>
+					<default_value>0</default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>false</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<nocache>false</nocache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
 					<word_id>50</word_id>
->>>>>>> dev-hdg
 					<id>107</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7229,11 +6439,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>103</word_id>
-=======
 					<word_id>48</word_id>
->>>>>>> dev-hdg
 					<id>108</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7244,9 +6450,9 @@
 					<default_value>LDG0301</default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
-					<unique_key>true</unique_key>
+					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
 					<sequence>
@@ -7266,21 +6472,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>105</word_id>
-=======
 					<word_id>49</word_id>
->>>>>>> dev-hdg
 					<id>109</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>clob</type>
-=======
 					<type>varchar(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -7307,19 +6505,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>89</word_id>
-=======
 					<word_id>38</word_id>
->>>>>>> dev-hdg
 					<id>110</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>character(n)</type>
+					<type>decimal</type>
 					<constraint></constraint>
-					<default_value>N</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -7344,22 +6538,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>98</word_id>
-=======
 					<word_id>39</word_id>
->>>>>>> dev-hdg
 					<id>111</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>varchar(n)</type>
+					<type>decimal</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -7412,17 +6602,13 @@
 			<option></option>
 			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>92</word_id>
-=======
 					<word_id>100</word_id>
->>>>>>> dev-hdg
 					<id>112</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>varchar(n)</type>
+					<type>decimal</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -7449,11 +6635,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>96</word_id>
-=======
 					<word_id>102</word_id>
->>>>>>> dev-hdg
 					<id>113</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7461,11 +6643,7 @@
 					<physical_name></physical_name>
 					<type>character(n)</type>
 					<constraint></constraint>
-<<<<<<< HEAD
-					<default_value>N</default_value>
-=======
 					<default_value></default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -7490,25 +6668,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>95</word_id>
-=======
 					<word_id>89</word_id>
->>>>>>> dev-hdg
 					<id>114</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value>N</default_value>
-=======
 					<type>varchar(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
@@ -7533,11 +6701,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>85</word_id>
-=======
 					<word_id>83</word_id>
->>>>>>> dev-hdg
 					<id>115</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7545,11 +6709,7 @@
 					<physical_name></physical_name>
 					<type>date</type>
 					<constraint></constraint>
-<<<<<<< HEAD
-					<default_value>sysdate</default_value>
-=======
 					<default_value></default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
@@ -7574,21 +6734,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>107</word_id>
-=======
 					<word_id>103</word_id>
->>>>>>> dev-hdg
 					<id>116</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>date</type>
-=======
 					<type>varchar(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -7614,109 +6766,8 @@
 						<decimal_size>0</decimal_size>
 					</sequence>
 				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>15</id>
-			<height>359</height>
-			<width>321</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>732</x>
-			<y>300</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-				<relation>
-					<id>18</id>
-					<source>13</source>
-					<target>15</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>19</id>
-					<source>10</source>
-					<target>15</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>20</id>
-					<source>3</source>
-					<target>15</target>
-						<source_xp>-1</source_xp>
-						<source_yp>-1</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
-						<color>
-							<r>0</r>
-							<g>0</g>
-							<b>0</b>
-						</color>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-			</connections>
-			<physical_name>Thxtay_Review</physical_name>
-			<logical_name>리뷰</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>69</word_id>
-=======
 					<word_id>105</word_id>
->>>>>>> dev-hdg
 					<id>117</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7727,8 +6778,8 @@
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
+					<not_null>false</not_null>
+					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
@@ -7749,69 +6800,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-=======
 					<word_id>90</word_id>
->>>>>>> dev-hdg
 					<id>118</id>
-					<referenced_column>77</referenced_column>
-					<relation>18</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
 					<type>character(n)</type>
 					<constraint></constraint>
-<<<<<<< HEAD
-					<default_value></default_value>
-=======
 					<default_value>N</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-<<<<<<< HEAD
-=======
-					<word_id>99</word_id>
->>>>>>> dev-hdg
-					<id>119</id>
-					<referenced_column>7</referenced_column>
-					<relation>20</relation>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-<<<<<<< HEAD
-					<foreign_key>true</foreign_key>
-=======
 					<foreign_key>false</foreign_key>
->>>>>>> dev-hdg
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -7833,13 +6833,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-=======
-					<word_id>93</word_id>
->>>>>>> dev-hdg
-					<id>120</id>
-					<referenced_column>53</referenced_column>
-					<relation>19</relation>
+					<word_id>99</word_id>
+					<id>119</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -7848,7 +6843,7 @@
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
+					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
@@ -7871,23 +6866,48 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>66</word_id>
-=======
+					<word_id>93</word_id>
+					<id>120</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>varchar(n)</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>false</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<nocache>false</nocache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
 					<word_id>96</word_id>
->>>>>>> dev-hdg
 					<id>121</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>date</type>
+					<type>character(n)</type>
 					<constraint></constraint>
-<<<<<<< HEAD
-					<default_value>sysdate</default_value>
-=======
 					<default_value>N</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -7912,17 +6932,13 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>71</word_id>
-=======
 					<word_id>95</word_id>
->>>>>>> dev-hdg
 					<id>122</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>date</type>
+					<type>character(n)</type>
 					<constraint></constraint>
 					<default_value>N</default_value>
 					<auto_increment>false</auto_increment>
@@ -7949,30 +6965,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>64</word_id>
-=======
 					<word_id>86</word_id>
->>>>>>> dev-hdg
 					<id>123</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>varchar(n)</type>
-=======
 					<type>character(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
 					<default_value>N</default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-<<<<<<< HEAD
-					<not_null>true</not_null>
-=======
 					<not_null>false</not_null>
->>>>>>> dev-hdg
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -7994,25 +6998,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>67</word_id>
-=======
 					<word_id>85</word_id>
->>>>>>> dev-hdg
 					<id>124</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value>N</default_value>
-=======
 					<type>date</type>
 					<constraint></constraint>
 					<default_value>sysdate</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -8037,23 +7031,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>70</word_id>
-=======
 					<word_id>108</word_id>
->>>>>>> dev-hdg
 					<id>125</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>decimal</type>
-=======
 					<type>date</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -8077,10 +7063,6 @@
 						<decimal_size>0</decimal_size>
 					</sequence>
 				</normal_column>
-<<<<<<< HEAD
-				<normal_column>
-					<word_id>63</word_id>
-=======
 			</columns>
 			<indexes>
 			</indexes>
@@ -8114,7 +7096,6 @@
 			<columns>
 				<normal_column>
 					<word_id>52</word_id>
->>>>>>> dev-hdg
 					<id>126</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8122,7 +7103,7 @@
 					<physical_name></physical_name>
 					<type>varchar(n)</type>
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -8147,11 +7128,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>65</word_id>
-=======
 					<word_id>16</word_id>
->>>>>>> dev-hdg
 					<id>127</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8159,16 +7136,11 @@
 					<physical_name></physical_name>
 					<type>varchar(n)</type>
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-<<<<<<< HEAD
-					<not_null>false</not_null>
-					<primary_key>false</primary_key>
-=======
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
->>>>>>> dev-hdg
 					<unique_key>false</unique_key>
 					<character_set></character_set>
 					<collation></collation>
@@ -8189,23 +7161,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>62</word_id>
-=======
 					<word_id>15</word_id>
->>>>>>> dev-hdg
 					<id>128</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>decimal</type>
-=======
 					<type>varchar(n)</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -8230,11 +7194,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>61</word_id>
-=======
 					<word_id>22</word_id>
->>>>>>> dev-hdg
 					<id>129</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8242,7 +7202,7 @@
 					<physical_name></physical_name>
 					<type>decimal</type>
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -8267,25 +7227,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>68</word_id>
-=======
 					<word_id>17</word_id>
->>>>>>> dev-hdg
 					<id>130</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>decimal</type>
-					<constraint></constraint>
-					<default_value>0</default_value>
-=======
 					<type>date</type>
 					<constraint></constraint>
 					<default_value>sysdate</default_value>
->>>>>>> dev-hdg
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
@@ -8310,23 +7260,15 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>72</word_id>
-=======
 					<word_id>82</word_id>
->>>>>>> dev-hdg
 					<id>131</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-<<<<<<< HEAD
-					<type>decimal</type>
-=======
 					<type>date</type>
->>>>>>> dev-hdg
 					<constraint></constraint>
-					<default_value>0</default_value>
+					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>false</not_null>
