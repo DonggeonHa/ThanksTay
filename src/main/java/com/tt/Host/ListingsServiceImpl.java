@@ -13,8 +13,8 @@ public class ListingsServiceImpl implements ListingsService{
 	@Autowired ListingsDao listingsDao;
 	
 	@Override
-	public List<LodgingVO> getMyLodgings(String userId) {
-		return listingsDao.getMyLodgingsByUserId(userId);
+	public List<LodgingVO> getMyLodgings(int userNo) {
+		return listingsDao.getMyLodgingsByUserNo(userNo);
 	}
 	
 }

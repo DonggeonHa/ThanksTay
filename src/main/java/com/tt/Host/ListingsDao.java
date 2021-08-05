@@ -11,5 +11,5 @@ public interface ListingsDao {
 	/*
 	 * 유저아이디로 등록한 모든 숙소를 불러온다.
 	 */
-	List<LodgingVO> getMyLodgingsByUserId(String userId);
+	List<LodgingVO> getMyLodgingsByUserNo(int userNo);
 }
