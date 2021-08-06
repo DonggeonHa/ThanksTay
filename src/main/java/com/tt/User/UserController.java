@@ -94,7 +94,7 @@ public class UserController {
 		Map<String, Object> retVal = new HashMap<String, Object>();
 
 		int res = userService.getUserByEmail(userEmail);
-		System.out.println("res 값은 :" + res);
+
 		if (res == 1) {
 			retVal.put("res", "OK");
 
@@ -111,18 +111,20 @@ public class UserController {
 	}
 
 	@PostMapping("/login2")
-	public String login(@RequestParam("email") String userEmail, @RequestParam("password") String userPassword) {
+	@ResponseBody
+	public Map<String, Object> login(@RequestParam("email") String userEmail, @RequestParam("password") String userPassword) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
 
-		userService.login(userEmail, userPassword);
+		int res = userService.login(userEmail, userPassword);
 
-		// 로그인 전 페이지로 되돌아가기
-		String returnPath = (String) SessionUtils.getAttribute("returnPath");
-		SessionUtils.removeAttribute("returnPath");
-		if (returnPath != null) {
-			return "redirect:" + returnPath;
+		if (res == 1) {
+			retVal.put("res", "OK");
+
+		} else if (res == 0) {
+			retVal.put("res", "FAIL");
 		}
 
-		return "redirect:/home";
+		return retVal;
 	}
 
 	@GetMapping("/logout")

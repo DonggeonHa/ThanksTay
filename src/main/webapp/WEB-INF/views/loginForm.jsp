@@ -37,7 +37,7 @@
                 <div class="d-grid gap-2">
                   <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">페이스북으로 로그인하기</button>
                   <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">구글로 로그인하기</button>
-                  <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">전화번호로 로그인하기</button>
+                  <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">카카오로 로그인하기</button>
                 </div>
             </div>
         </div>
@@ -219,18 +219,16 @@
                 <div class="text-center">
                     <p>얼굴이 보이는 이미지를 선택하세요. 호스트는 예약이 확정된 후에만 사진을 볼 수 있습니다.</p>
                 </div>
-                <form id="profileImg-register" method="post" action="profileImg" novalidate="novalidate">
-                    <div class="d-flex justify-content-center">
-                        <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px;" id="preview-image" name="picture"/>
-                    </div>
-                    <div class="d-grid gap-2 py-2">
-                        <button type="button" class="btn btn-dark btn-lg" id="btn-upload">사진 업로드하기</button>
-                        <input type="file" id="input-image" style="display: none;"/>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;" id="btn-complete">완료</button>
-                    </div>
-                </form>
+                <div class="d-flex justify-content-center">
+                    <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px;" id="preview-image" name="picture"/>
+                </div>
+                <div class="d-grid gap-2 py-2">
+                    <button type="button" class="btn btn-dark btn-lg" id="btn-upload">사진 업로드하기</button>
+                    <input type="file" id="input-image" style="display: none;"/>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;" id="btn-complete">완료</button>
+                </div>
             </div>
         </div>
     </div>
@@ -306,11 +304,18 @@
                 dataType: 'json',
                 method: 'post',
                 data:{email: email, password: password},
-                success:function () {
-                    alertify.alert("로그인 성공");
+                success:function (retVal) {
+                    if (retVal.res === "OK") {
+                        passwordModal.hide();
+                    } else if (retVal.res === "FAIL") {
+                        alertify.alert("비밀번호가 맞지 않습니다.");
+                        $('#password').val("").focus();
+
+                        return false;
+                    }
                 },
-                error : function () {
-                    alertify.alert('ajax통신 실패!!!!');
+                error : function (request, status, error) {
+                    alertify.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             })
 
@@ -386,8 +391,8 @@
             $('#input-image').click();
         })
 
-        $('#profileImg-register').submit(function () {
-
+        $('#btn-complete').click(function() {
+            var img = $.trim($('#preview-image').val());
         })
     })
 
