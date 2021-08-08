@@ -220,7 +220,7 @@
                     <p>얼굴이 보이는 이미지를 선택하세요. 호스트는 예약이 확정된 후에만 사진을 볼 수 있습니다.</p>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px;" id="preview-image" name="picture"/>
+                    <img src="resources/images/defaultProfile.jpg" style="display: block; height: 185px; width: 185px; border-radius: 100px;" id="preview-image"/>
                 </div>
                 <div class="d-grid gap-2 py-2">
                     <button type="button" class="btn btn-dark btn-lg" id="btn-upload">사진 업로드하기</button>
@@ -240,6 +240,7 @@
         var passwordModal = new bootstrap.Modal(document.getElementById("loginModal"));
         var registerModal = new bootstrap.Modal(document.getElementById("registerModal"));
         var registerModal2 = new bootstrap.Modal(document.getElementById("registerModal2"));
+        var profileImgModal = new bootstrap.Modal(document.getElementById("addProfileImg"));
 
         function CheckEmail(str) {
             var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -280,8 +281,8 @@
                     }
                     emailModal.hide();
                 },
-                error : function () {
-                    alert('ajax통신 실패!!!!');
+                error : function (request, status, error) {
+                    alertify.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             })
 
@@ -392,30 +393,58 @@
         })
 
         $('#btn-complete').click(function() {
-            var img = $.trim($('#preview-image').val());
+            var formData = new FormData();
+            formData.append("picture", $("#input-image")[0].files[0]);
+            formData.append("email", $.trim($('#loginEmail').val()));
+
+            jQuery.ajax({
+                url : "/img",
+                type : "POST",
+                enctype: 'multipart/form-data',
+                dataType : 'json',
+                processData : false,
+                contentType : false,
+                data : formData,
+                success:function(retVal) {
+                    if (retVal.res === "OK") {
+                        alertify.alert("성공하였습니다.");
+                        profileImgModal.hide();
+                    }
+                },
+                error: function (jqXHR)
+                {
+                    alertify.alert(jqXHR.responseText);
+                }
+            });
         })
     })
 
-    function readImage(input) {
-        // input 태그에 파일이 있는 경우
-        if(input.files && input.files[0]) {
-            // FileReader 인스턴스 생성
-            const reader = new FileReader();
+    //이미지 미리보기
+    var sel_file;
 
-            // 이미지가 로드가 된 경우
-            reader.onload = e => {
-                const  previewImage = document.getElementById("preview-image")
-                previewImage.src = e.target.result;
+    $(document).ready(function() {
+        $("#input-image").on("change", handleImgFileSelect);
+    });
+
+    function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+
+        filesArr.forEach(function(f) {
+            if (!f.type.match(reg)) {
+                alertify.alert("확장자는 이미지 확장자만 가능합니다.");
+                return false;
             }
 
-            // reader가 이미지 읽도록 하기
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+            sel_file = f;
 
-    // input file에 change 이벤트 부여
-    const inputImage = document.getElementById('input-image');
-    inputImage.addEventListener("change", e => {
-        readImage(e.target);
-    })
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#preview-image").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
 </script>

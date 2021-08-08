@@ -8,6 +8,8 @@ public interface UserService {
      */
     void registerUser(UserVO user);
 
+    void registerProfile(UserVO user);
+
     /**
      * 지정된 이메일과 비밀번호로 사용자인증을 수행하는 서비스
      * @param email 사용자 이메일
@@ -20,5 +22,7 @@ public interface UserService {
      * @param email 사용자 이메일
      */
     int getUserByEmail(String email);
+
+
 
 }

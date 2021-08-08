@@ -24,7 +24,13 @@ public class UserServiceImpl implements UserService {
 		
 		userDao.insertUser(user);
 	}
-	
+
+	@Override
+	public void registerProfile(UserVO user) {
+
+		userDao.updateProfile(user);
+	}
+
 	@Override
 	public int login(String userEmail, String userPassword) {
 		int res = -1;
@@ -50,9 +56,10 @@ public class UserServiceImpl implements UserService {
 		UserVO user = userDao.getUserByEmail(email);
 
 		if (user != null) {
+			if (!"N".equalsIgnoreCase(user.getDeleted())) {
+				throw new LoginException("사용중지된 회원", "탈퇴 혹은 일시정지 처리된 사용자입니다.");
+			}
 			res = 1;	// 이메일이 있다.
-		} else if (!"N".equalsIgnoreCase(user.getDeleted())) {
-			throw new LoginException("사용중지된 회원", "탈퇴 혹은 일시정지 처리된 사용자입니다.");
 		} else {
 			res = 0;	// 이메일이 없다.
 		}
