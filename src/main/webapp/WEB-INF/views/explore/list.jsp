@@ -245,7 +245,7 @@ a {
 //    }
 //	};
 //	places.setMap(map);
-	var position = map.getCenter();
+//	var position = map.getCenter();
 
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -256,9 +256,11 @@ a {
 	
 	
 	var bounds = map.getBounds();
+	var southWest = bounds.getSouthWest().toString();
+//	var northEast = bounds.getnorthEast().toString();
 	var boundsStr = bounds.toString();	//이 값을.... 다시 전달해야 하는데 ajax로 재호출해야하나?
-	$('#bounds').text(boundsStr);
-	$('#bounds2').text(position);
+	$('#bounds').text(southWest);
+	$('#bounds2').text(bounds);
 
 	//
 //	function checkBounds(boundsStr){

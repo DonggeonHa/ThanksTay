@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 
+	com.sample.dao.UserDao 매퍼인터에시으세 대한 매퍼   파일(SQL이 정의된 파일) 정의
+-->
+<mapper namespace="com.tt.Explore.ExploreFilterDao">
+
+    <select id="getLodgingsByFirstFilter" parameterType="com.tt.Explore.FirstFilterVO" resultType="com.tt.Lodging.LodgingVO">
+        select *
+		from (select A.*,
+					(select sum(decode(B.price_isbooked, 'N', 1))
+					 from thxtay_price B
+					 where B.price_open_date &gt;= to_date(#{checkInDate},'YYYY-MM-DD') 
+					 and B.price_open_date &lt; to_date('#{checkOutDate}','YYYY-MM-DD')
+					 and B.lodging_no = A.lodging_no) count
+			  from thxtay_lodging A
+			  <!-- 나중에 선택가능하게 if태그 추가 -->
+			  where A.lodging_max_guest >= #{guests})
+			  <!-- 위경도 조건 추가 / 타입이 Date인데 to_date 필요한지...? test-->
+		where count = (to_date('#{checkOutDate}','YYYY-MM-DD')-to_date('{#checkInDate}','YYYY-MM-DD'));
+    </select>
+
+</mapper>
