@@ -2,9 +2,14 @@ package com.tt.Common;
 
 import org.springframework.stereotype.Controller;
 
+import java.util.Date;
+import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
+import com.tt.Explore.ExploreFilterDao;
+import com.tt.Explore.ExploreFilterService;
+import com.tt.Explore.FirstFilterVO;
+import com.tt.Host.HostMainController;
+import com.tt.Lodging.LodgingVO;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
 import com.tt.web.form.UserRegisterForm;
@@ -25,6 +35,9 @@ import com.tt.web.utils.SessionUtils;
  */
 @Controller
 public class CommonController {
+	private static Logger logger = LogManager.getLogger(CommonController.class);
+	@Autowired ExploreFilterService exploreFilterService;
+	
 	/*
 	 * @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
 	 * 		- 요청URL와 요청핸들러 메소드를 매핑시킨다.
@@ -56,6 +69,38 @@ public class CommonController {
 	public String home() {
 		return "index";	// /WEB-INF/views/home.jsp 경로에서 "/WEB-INF/views/"와 ".jsp"를 제외한 이름
 	}
+	
+	@GetMapping(path = {"/explore/list"})
+	public String Search(String location, Model model) {
+		model.addAttribute("location", location);
+		return "explore/list";
+	}
+	
+//	@GetMapping(path = {"/explore/list"})
+//	public String MakeList(
+			//	@RequestParam(value="lat", required=false) double latitude,
+			//	@RequestParam(value="lng", required=false) double longitude,
+			//	@RequestParam("location") String location,
+			//	@RequestParam("check-in")@DateTimeFormat Date checkIn, 
+			//	@RequestParam("check-out")@DateTimeFormat Date checkOut,
+			//	@RequestParam(value="guests", required=false, defaultValue="2") int guests, 
+		//	Model model) {
+		//	FirstFilterVO firstFilter = new FirstFilterVO(location, checkIn, checkOut, guests);
+		//	List<LodgingVO> lodgings = exploreFilterService.getLodgingsByFirstFilter(firstFilter);
+		
+		//	model.addAttribute("lodgings", lodgings);
+		//	return "explore/list";
+//	}
+	
+//	@GetMapping(path = "/explore")
+//	public String list(Model model) {
+//		List<LodgingVO> lodgings = listingsService.getMyLodgings(userNo);
+//		model.addAttribute("lodgings",lodgings);
+//		String requirements;
+//		System.out.println(requirements);
+//		return "list";
+//	}
+	
 	/*
 	 * 요청핸들러 메소드의 반환값
 	 * 		- String

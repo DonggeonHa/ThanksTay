@@ -43,19 +43,19 @@
 		<span class=semi-title>어디에서나 여행은 살아보는거야!</span>
 		<div class="row">
 			<div class="col-3">
-				<img class="imgbox box-sec4" src="/resources/main_sec4_1.webp"/>
+				<img class="imgbox box-sec4" src="resources/images/mains/main_sec4_1.webp"/>
 				<p>자연생활을 만끽할 수 있는 숙소</p>
 			</div>
 			<div class="col-3">
-				<img class="imgbox box-sec4" src="/resources/main_sec4_2.webp"/>
+				<img class="imgbox box-sec4" src="resources/images/mains/main_sec4_2.webp"/>
 				독특한 공간
 			</div>
 			<div class="col-3">
-				<img class="imgbox box-sec4" src="/resources/main_sec4_3.webp"/>
+				<img class="imgbox box-sec4" src="resources/images/mains/main_sec4_3.webp"/>
 				집 전체
 			</div>
 			<div class="col-3">
-				<img class="imgbox box-sec4" src="/resources/main_sec4_4.webp"/>
+				<img class="imgbox box-sec4" src="resources/images/mains/main_sec4_4.webp"/>
 				반려동물 가능
 			</div>
 		</div>
