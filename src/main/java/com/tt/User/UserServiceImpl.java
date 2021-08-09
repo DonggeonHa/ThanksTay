@@ -58,4 +58,9 @@ public class UserServiceImpl implements UserService {
 
 		return res;
 	}
+
+	@Override
+	public UserVO getUserByNo(int userNo) {
+		return userDao.getUserByNo(userNo);
+	}
 }
