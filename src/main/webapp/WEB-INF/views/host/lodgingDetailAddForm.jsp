@@ -181,6 +181,8 @@ body {
 	margin: 5px;
 	text-align: center;
 }
+
+
 </style>
 
 
@@ -207,29 +209,35 @@ body {
 							</div>
 						</div>
 					</div>
-					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post" action="#">
-							<c:foreach var="lodgingtype" items="${lodgingtypes }">
-								<div class="type-choose-btn-wrapper">
-									<button id="radio-btn" class="type-choose-btn" type="button"
-										role="radio" onclick="btnclick(this)" aria-checked="false">
-										<div class="type-font-pos">
-											<div class="type-font">${lodgingtype.codecontent }</div>
-										</div>
-
-										<div class="type-img-pos">
-											<div class="type-img">
-												<img aria-hidden="true" alt=""
-													src="https://a0.muscache.com/im/pictures/eadbcbdb-d57d-44d9-9a76-665a7a4d1cd7.jpg?im_w=240"
-													data-original-uri="https://a0.muscache.com/im/pictures/eadbcbdb-d57d-44d9-9a76-665a7a4d1cd7.jpg?im_w=240"
-													style="object-fit: cover; vertical-align: bottom; border-radius: 4px;">
-											</div>
-										</div>
-									</button>
-								</div>
-							</c:foreach>
+						<form id="form-register" style="width:50%" method="post" action="register"
+							novalidate="novalidate">
+							<div class="mb-3">
+								<label class="form-label">숙소명</label> <input type="text"
+									class="form-control" style="width:100%" id="user-id" name="id" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">침실수</label> <input type="number"
+									class="form-control" id="user-password" name="password" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">욕실수</label> <input type="number"
+									class="form-control" id="user-password-confirm"
+									name="passwordConfirm" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">1인용 침대</label> <input type="number"
+									class="form-control" id="user-name" name="name" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">2인용 침대</label> <input type="number"
+									class="form-control" id="user-email" name="email" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">숙소 설명</label> <textarea type="text"
+									class="form-control" id="user-phone" name="phone"></textarea>
+							</div>
 						</form>
 					</div>
 
@@ -237,7 +245,7 @@ body {
 						<div class="progress" style="height: 3px;">
 							<div class="progress-bar" role="progressbar" aria-valuenow="40"
 								aria-valuemin="0" aria-valuemax="10"
-								style="width: 25%; background-color: black; height: 2px;">
+								style="width: 50%; background-color: black; height: 2px;">
 							</div>
 						</div>
 						<div class="nextback-box">
@@ -257,11 +265,8 @@ body {
 		</div>
 	</div>
 	<script>
-		$("${lodging-type}").click(function() {
-			$("${lodging-type}").css("border", "10px solid black")
-		});
-
 		function btnClick(param) {
+			$("${lodging-type}").ariaChecked = "false";
 			btnStatus = param.ariaChecked = "false" ? "true" : "false";
 			console.log(btnStatus);
 			if (btnStatus == "true") {
@@ -276,7 +281,9 @@ body {
 		})
 
 		$("#next").click(function() {
-			location.href="/home";
+			$("#next").click(function() {
+				$(".register-form").submit();
+			})
 		})
 	</script>
 </body>

@@ -83,7 +83,7 @@ public class HostMainController {
 	public String lodgingAddForm(UserVO user, Model model ) {
 		UserVO loginedUser = userService.getUserByNo(1);
 
-		logger.info("lodgingAddForm() 실행");
+		logger.info("lodgingTypeAddForm() 실행");
 		String commonCode = hostService.getCommonCodeByContent("숙소타입");
 		List<CommonCodeVO> lodgingTypeCodes = hostService.getCommonCodesByParentCode(commonCode);
 	
@@ -92,6 +92,14 @@ public class HostMainController {
 		
 
 		return "host/lodgingTypeAddForm";
+	}
+	
+	@PostMapping("/lodgingDetailAdd")
+	public String lodgingDetailAddForm(UserVO user, Model model) {
+		logger.info("lodgingDetailAddForm 실행");
+		
+		
+		return "host/lodgingDetailAddForm";
 	}
 
 }
