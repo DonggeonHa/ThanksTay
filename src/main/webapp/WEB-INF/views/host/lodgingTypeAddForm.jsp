@@ -276,7 +276,7 @@ body {
 		})
 
 		$("#next").click(function() {
-			location.href=""
+			location.href="/home";
 		})
 	</script>
 </body>
