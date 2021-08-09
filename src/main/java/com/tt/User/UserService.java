@@ -21,4 +21,10 @@ public interface UserService {
      */
     int getUserByEmail(String email);
 
+    /**
+     * 테스트용 로그인유저 획득 위해 임시 추가함 
+     * @param userNo
+     * @return
+     */
+    UserVO getUserByNo(int userNo);
 }
