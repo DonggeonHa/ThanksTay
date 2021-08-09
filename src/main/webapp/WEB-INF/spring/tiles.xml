@@ -27,5 +27,9 @@
     <definition name="*" extends="Main">
         <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
     </definition>
+    
+    <definition name="explore/*" extends="Main">
+        <put-attribute name="body" value="/WEB-INF/views/explore/{1}.jsp" />
+    </definition>
 
 </tiles-definitions>

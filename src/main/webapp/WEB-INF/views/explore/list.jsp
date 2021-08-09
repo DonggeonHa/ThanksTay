@@ -1,8 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+
 <style type="text/css">
 .option-button{
 	<!--나중에 쳐낼 부분은 쳐내자-->
@@ -111,9 +108,6 @@ a {
 	position: relative;
 }
 </style>
-</head>
-<body>
-<%@ include file="../common/nav2.jsp" %>
 <div class="container-fluid">
 	<div class=row>
 		<div class="col-7" id="left-box">
@@ -228,9 +222,6 @@ a {
 		</div>
 	</div>
 </div>
-<%@ include file="../common/footer.jsp" %>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45232a8f6f95ec00ae6343c8933658fb&libraries=LIBRARY"></script>
 <script type="text/javascript">
 
@@ -293,5 +284,3 @@ a {
 //	lb.getSouthWest().toString(); // "(36, 127)"
 //
 </script>
-</body>
-</html>
