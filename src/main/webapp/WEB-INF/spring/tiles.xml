@@ -31,5 +31,9 @@
     <definition name="explore/*" extends="Main">
         <put-attribute name="body" value="/WEB-INF/views/explore/{1}.jsp" />
     </definition>
+    
+    <definition name="lodging/*" extends="Main">
+        <put-attribute name="body" value="/WEB-INF/views/lodging/{1}.jsp" />
+    </definition>
 
 </tiles-definitions>

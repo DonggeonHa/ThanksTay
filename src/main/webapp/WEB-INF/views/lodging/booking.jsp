@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-<title>숙소 상세페이지</title>
 <style type="text/css">
 	.bg-primary {
  	 background: #bd83ce !important; }
@@ -150,13 +148,6 @@
 	
 	button.switch-month:active {
 	  background-color: transparent; }
-
-
-
-
-
-
-
 
 	.detail-title {
 		font-size: 32px !important;
@@ -856,10 +847,6 @@
 	</main>
 </div>
 <script>
-(function($) {
-
-	"use strict";
-
 	$( document ).ready(function() {
 		function c(passed_month, passed_year, calNum) {
 			var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
@@ -1249,9 +1236,5 @@
 			}
 			return selected;
 		}
-});
-
-})(jQuery);
+	});
 </script>
-</body>
-</html>
