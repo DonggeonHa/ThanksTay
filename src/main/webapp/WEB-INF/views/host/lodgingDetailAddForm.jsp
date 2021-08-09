@@ -62,7 +62,7 @@ body {
 }
 
 .nextback-items {
-	background-color: white;
+	background-color: white; 
 	border-style: none;
 	border-radius: 10px;
 	font-weight: bold;
@@ -111,52 +111,6 @@ body {
 	align-items: center;
 }
 
-.register-form {
-	width: 100%;
-}
-
-.type-choose-btn-wrapper {
-	width: 100%;
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.type-choose-btn-wrapper button:hover {
-	background: tomato;
-}
-
-.type-choose-btn-wrapper {
-	padding-top: 30px;
-}
-
-.type-choose-btn {
-	width: 100%;
-	display: flex;
-	border-radius: 10px;
-	border: 1px solid #d4d4d4;
-}
-
-.type-font-pos {
-	
-}
-
-.type-font {
-	margin: 16px 16px 16px 24px;
-}
-
-.type-img-pos {
-	margin-left: auto;
-}
-
-.type-img {
-	
-}
-
-.type-img img {
-	width: 55px;
-	height: 55px;
-}
 
 .wrapper {
 	background-color: gray;
@@ -180,6 +134,12 @@ body {
 	padding: 5px 10px;
 	margin: 5px;
 	text-align: center;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+   	 -webkit-appearance: none;
+  	  margin: 0;
 }
 
 
@@ -211,32 +171,48 @@ body {
 					</div>
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form id="form-register" style="width:50%" method="post" action="register"
+						<form id="form-register" style="width:50%;" method="post" action="register"
 							novalidate="novalidate">
-							<div class="mb-3">
-								<label class="form-label">숙소명</label> <input type="text"
-									class="form-control" style="width:100%" id="user-id" name="id" />
+							<div class="mb-3" style="text-align:left">
+								<label class="form-label">숙소명</label> 
+								<input type="text" class="form-control" style="width:100%" id="lodging-name" name="name" />
 							</div>
 							<div class="mb-3">
-								<label class="form-label">침실수</label> <input type="number"
-									class="form-control" id="user-password" name="password" />
+								<label class="form-label">침실수</label> 
+								<div class="input-group w-50" style="margin: 0 auto;">
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="minus-button"><i class='fas fa-minus'></i></button>
+									<input type="number" class="form-control form-control-sm" style="border:none; text-align:center" id="lodging-bedroom" name="bedroom" value=0 />
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="plus-button"><i class='fas fa-plus'></i></button>
+								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">욕실수</label> <input type="number"
-									class="form-control" id="user-password-confirm"
-									name="passwordConfirm" />
+								<label class="form-label">욕실수</label> 
+								<div class="input-group w-50" style="margin: 0 auto;">
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="minus-button"><i class='fas fa-minus'></i></button>
+									<input type="number" class="form-control form-control-sm" style="border:none; text-align:center" id="lodging-bathroom" name="bathroom" value=0 />
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="plus-button"><i class='fas fa-plus'></i></button>
+								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">1인용 침대</label> <input type="number"
-									class="form-control" id="user-name" name="name" />
+								<label class="form-label" style="">1인용 침대</label> 
+								<div class="input-group w-50" style="margin: 0 auto;">
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="minus-button"><i class='fas fa-minus'></i></button>
+									<input type="number" class="form-control form-control-sm" style="border:none; text-align:center" id="lodging-singlebed" name="singlebed" value=0 />
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="plus-button"><i class='fas fa-plus'></i></button>
+								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">2인용 침대</label> <input type="number"
-									class="form-control" id="user-email" name="email" />
+								<label class="form-label">2인용 침대</label> 
+								<div class="input-group w-50" style="margin: 0 auto;">
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="minus-button"><i class='fas fa-minus'></i></button>
+									<input type="number" class="form-control form-control-sm" style="border:none; text-align:center" id="lodging-doublebed" name="doublebed" value=0 />
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="plus-button"><i class='fas fa-plus'></i></button>
+								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">숙소 설명</label> <textarea type="text"
-									class="form-control" id="user-phone" name="phone"></textarea>
+								<label class="form-label">숙소 설명</label> 
+								<textarea type="text"
+									class="form-control" style="height:100px;" id="lodging-description" name="description"></textarea>
 							</div>
 						</form>
 					</div>
@@ -275,15 +251,25 @@ body {
 				param.style.border = "1px solid white";
 
 		}
+		
+		//Q1-1. 아이디별로 만들기 싫은데 이런 식으로 하면 될지 
+		var selectorArray = ["#lodging-bedroom","#lodging-bathroom","#lodging-singlebed","#lodging-doublebed"]; //Q1-2 아이디를 배열에 추가해주는 작업은 반드시 필요한지
+		selectorArray.forEach(element => {
+			$(element).prev("#minus-button").click(function(){
+				$(element).val($(element).val()-1);
+			})
+			$(element).next("#plus-button").click(function(){
+				var cnt = $(element).val();	
+				$(element).val(Number(cnt)+1);	//Q2. 함수안에 jQuery 못쓰는지(꼭 변수로?)
+			})	
+		});
 
 		$("#prev").click(function() {
 			history.back();
 		})
 
 		$("#next").click(function() {
-			$("#next").click(function() {
 				$(".register-form").submit();
-			})
 		})
 	</script>
 </body>

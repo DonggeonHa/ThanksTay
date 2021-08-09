@@ -210,11 +210,13 @@ body {
 					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post" action="/lodgingDetailAdd" >
+						<form class="register-form" method="post"
+							action="/lodgingDetailAdd">
 							<c:forEach var="lodgingType" items="${lodgingTypes }">
 								<div class="type-choose-btn-wrapper">
-									<button id="radio-btn" class="type-choose-btn" name="ldgType" 
-									type="button" role="radio" onclick="btnClick(this)" aria-checked="false">
+									<button id="radio-btn" class="type-choose-btn" name="ldgType"
+										type="button" role="radio" onclick="btnClick(this)"
+										aria-checked="false">
 										<div class="type-font-pos">
 											<div class="type-font">${lodgingType.codeContent }</div>
 										</div>
@@ -257,9 +259,8 @@ body {
 		</div>
 	</div>
 	<script>
-
 		function btnClick(param) {
-			$("${lodging-type}").ariaChecked ="false";
+			$("${lodging-type}").ariaChecked = "false";
 			btnStatus = param.ariaChecked = "false" ? "true" : "false";
 			console.log(btnStatus);
 			if (btnStatus == "true") {
