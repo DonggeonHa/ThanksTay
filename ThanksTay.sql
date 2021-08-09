@@ -18,7 +18,6 @@ DROP TABLE Thxtay_Transaction_Register CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_Wishlist CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_User CASCADE CONSTRAINTS;
 
-
 /* Drop Sequence */
 
 DROP SEQUENCE USER_SEQ;
@@ -33,7 +32,6 @@ DROP SEQUENCE LODGING_SEQ;
 DROP SEQUENCE TRANSACTIONHISTORY_SEQ;
 DROP SEQUENCE PRICE_SEQ;
 DROP SEQUENCE LODGINGIMG_SEQ;
-
 
 
 /* Create Tables */
@@ -344,12 +342,20 @@ CREATE TABLE Thxtay_Transaction_Register
 	TR_no number NOT NULL,
 	-- 유저번호
 	user_no number NOT NULL,
-	-- 은행코드
-	TR_bank_code varchar2(20) NOT NULL,
 	-- 대금등록 이름
 	TR_name varchar2(255) NOT NULL,
 	-- 대금등록 이메일
 	TR_email varchar2(255) NOT NULL,
+	-- 대금등록 생년월일
+	TR_birth date NOT NULL,
+	-- 대금등록 전화번호
+	TR_phone varchar2(255) NOT NULL,
+	-- 대금등록 통화
+	TR_currency varchar2(255) NOT NULL,
+	-- 대금등록 결제수단
+	TR_payment varchar2(255) NOT NULL,
+	-- 은행코드
+	TR_bank_code varchar2(20) NOT NULL,
 	-- 대금등록 계좌
 	TR_account varchar2(255) NOT NULL,
 	PRIMARY KEY (TR_no)
@@ -543,8 +549,6 @@ ALTER TABLE Thxtay_Wish_Zzim
 	REFERENCES Thxtay_Wishlist (wishlist_no)
 ;
 
-
-
 /* Create Sequence */
 
 CREATE SEQUENCE USER_SEQ NOCACHE;
@@ -559,6 +563,5 @@ CREATE SEQUENCE LODGING_SEQ NOCACHE;
 CREATE SEQUENCE TRANSACTIONHISTORY_SEQ NOCACHE;
 CREATE SEQUENCE PRICE_SEQ NOCACHE;
 CREATE SEQUENCE LODGINGIMG_SEQ NOCACHE;
-
 
 

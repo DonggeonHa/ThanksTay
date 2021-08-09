@@ -9,9 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /*
  * @Controller
@@ -41,32 +47,6 @@ public class UserController {
 		return "form";
 	}
 
-	/*
-	@PostMapping("/register")
-	public String register(@RequestParam("id") String userId,
-			@RequestParam("password") String userPassword,
-			@RequestParam("passwordConfirm") String userPasswordConfirm,
-			@RequestParam("name") String userName,
-			@RequestParam("email") String userEmail,
-			@RequestParam("phone") String userPhone) {
-		logger.debug("register() 실행됨");
-		logger.info("회원정보를 등록함");
-
-		logger.debug("register() 종료됨");
-		return "redirect:home";
-	}
-
-	@PostMapping("/register")
-	public String register(String id, String password, String passwordConfirm,
-			String name, String email, String phone) {
-		logger.debug("register() 실행됨");
-		logger.info("회원정보를 등록함");
-
-		logger.debug("register() 종료됨");
-		return "redirect:home";
-	}
-	 */
-
 	@PostMapping("/register")
 	@ResponseBody
 	public Map<String, Object> register(UserRegisterForm userRegisterForm) {
@@ -94,7 +74,7 @@ public class UserController {
 		Map<String, Object> retVal = new HashMap<String, Object>();
 
 		int res = userService.getUserByEmail(userEmail);
-		System.out.println("res 값은 :" + res);
+
 		if (res == 1) {
 			retVal.put("res", "OK");
 
@@ -111,23 +91,66 @@ public class UserController {
 	}
 
 	@PostMapping("/login2")
-	public String login(@RequestParam("email") String userEmail, @RequestParam("password") String userPassword) {
+	@ResponseBody
+	public Map<String, Object> login(@RequestParam("email") String userEmail, @RequestParam("password") String userPassword) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
 
-		userService.login(userEmail, userPassword);
+		int res = userService.login(userEmail, userPassword);
 
-		// 로그인 전 페이지로 되돌아가기
-		String returnPath = (String) SessionUtils.getAttribute("returnPath");
-		SessionUtils.removeAttribute("returnPath");
-		if (returnPath != null) {
-			return "redirect:" + returnPath;
+		if (res == 1) {
+			retVal.put("res", "OK");
+
+		} else if (res == 0) {
+			retVal.put("res", "FAIL");
 		}
 
-		return "redirect:/home";
+		return retVal;
 	}
 
 	@GetMapping("/logout")
 	public String logout() {
 		SessionUtils.destroySession();
 		return "redirect:home";
+	}
+
+	@PostMapping("/img")
+	@ResponseBody
+	public Map<String, Object> result(@RequestParam("picture") MultipartFile userPicture, @RequestParam("email") String userEmail) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		UserVO user = new UserVO();
+
+		try {
+			if (userPicture.isEmpty()) {
+				// 이미지가 비어있을 경우
+				user.setPicture("resources/images/defaultProfile.jpg");
+				user.setEmail(userEmail);
+			} else {
+				// 파일 업로드 시작
+				String uploadPath = "C:\\Thxtay\\upload\\";
+				File fileDir = new File(uploadPath);
+				if (!fileDir.exists()) {
+					fileDir.mkdirs();
+				}
+				String originalFileExtension = userPicture.getOriginalFilename().substring(userPicture.getOriginalFilename().lastIndexOf("."));
+				// 중복없이 저장
+				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+
+				if (userPicture.getSize() != 0) {
+					// getSize() 메소드는 파일 용량을 구해줌 / 첨부할 파일이 존재할 때 실행
+					userPicture.transferTo(new File(uploadPath + storedFileName)); // 원하는 위치에 저장해줌
+					user.setPicture(storedFileName);
+					user.setEmail(userEmail);
+				}
+			}
+
+			userService.registerProfile(user);
+
+
+		} catch (Exception e) {
+			System.out.println("파일업로드 실패!"+ e);
+		}
+
+		retVal.put("res", "OK");
+		return retVal;
 	}
 }

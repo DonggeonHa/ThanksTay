@@ -17,6 +17,9 @@ public interface UserDao {
      * @return 사용자정보, null일 수 있음
      */
     UserVO getUserByEmail(String userEmail);
-    
+ 
     UserVO getUserByNo(int userNo);
+
+    void updateProfile(UserVO user);
+
 }

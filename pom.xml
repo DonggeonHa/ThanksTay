@@ -69,14 +69,22 @@
     </repositories>
 
 	<dependencies>
+		<!-- 대용량 파일 처리 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+
 		<!-- 첨부파일 업로드를 지원하는 라이브러리 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
 		<dependency>
-	    <groupId>org.apache.poi</groupId>
+	    	<groupId>org.apache.poi</groupId>
 	  	  	<artifactId>poi</artifactId>
 	   		<version>4.1.2</version>
 		</dependency>
@@ -85,25 +93,29 @@
 	    	<artifactId>poi-ooxml</artifactId>
 	    	<version>4.1.2</version>
 		</dependency>
-		<!-- Tiles 라이브러리들 -->
+	
+		<!-- Tiles 라이브러리들 1 -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-jsp</artifactId>
 		    <version>${org.apache.tiles-version}</version>
 		</dependency>
-		
+
+		<!-- Tiles 라이브러리들 2 -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-core</artifactId>
 		    <version>${org.apache.tiles-version}</version>
 		</dependency>
-		
+
+		<!-- Tiles 라이브러리들 3 -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-servlet</artifactId>
 		    <version>${org.apache.tiles-version}</version>
 		</dependency>
-		
+
+		<!-- Tiles 라이브러리들 4 -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-extras</artifactId>

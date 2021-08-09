@@ -58,4 +58,13 @@
         VALUES
         (user_seq.nextval, #{password}, #{name}, #{email}, TO_DATE(#{birth},'YYYY-MM-DD'))
     </insert>
+
+    <update id="updateProfile" parameterType="com.tt.User.UserVO">
+        UPDATE
+            thxtay_user
+        SET
+            user_picture = #{picture}
+        WHERE
+            user_email = #{email}
+    </update>
 </mapper>
