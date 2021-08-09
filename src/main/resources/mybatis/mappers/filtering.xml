@@ -2,35 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.tt.Host.FilteringDao">
+<mapper namespace="com.tt.Host.ListingsDao">
 	<select id="getLodgingsByFiltering" parameterType="com.tt.vo.FilteringVO" resultType="com.tt.Lodging.LodgingVO">
 		select
-			A.lodging_bedroom bedroom,
-			A.lodging_bathroom bathroom,
-			A.lodging_singlebed singlebed,
-			A.lodging_doublebed doublebed,
-			C.filtering_kitchen kitchen,
-			C.filtering_ac ac,
-			C.filtering_heater heater,
-			C.filtering_washer washer,
-			C.filtering_drier drier,
-			C.filtering_wifi wifi,
-			C.filtering_parkingLot parkingLot,
-			C.filtering_gym gym,
-			C.filtering_pool pool,
-			C.filtering_terrace terrace,
-			C.filtering_garden garden,
-			C.filtering_nearLake nearLake,
-			C.filtering_nearBeach nearBeach,
-			C.filtering_isRegistering isRegistering,
-			C.filtering_standby standby,
-			C.filtering_isApproved isApproved,
-			C.filtering_isStopped isStopped
+			B.amenity_code code,
+			C.lodging_no no,
+			C.lodging_name name,
+			C.lodging_status status,
+			C.lodging_location location,
+			C.lodging_imm_approval immApproval,
+			C.lodging_bedroom bedroom,
+			C.lodging_singlebed singlebed,
+			C.lodging_doublebed doublebed,
+			C.lodging_bathroom bathroom,
+			C.lodging_review_count reviewCount
 		from 
-			Thxtay_lodging A, select 
-		where A.user_no = B.user_no 
-        and B.user_no = #{}
-        <if test='bedroom != "0"'>
+			Thxtay_user A, Thxtay_amenitylist B, Thxtay_lodging C, Thxtay_filtering F
+		where B.lodging_no = C.lodging_no
+        and A.user_no = #{userNo}
+        and F.bedroom = #{bedroom}
+        and F.kitchen = #{kitchen}
+        and F.bathroom = #{bathroom}
+        and F.singlebed = #{singlebed}
+        and F.doublebed = #{doublebed}
+        and F.ac = #{ac}
+        and F.heater = #{heater}
+        and F.drier = #{drier}
+        and F.washer = #{washer}
+        and F.wifi = #{wifi}
+        and F.parkingLot = #{parkingLot}
+        and F.gym = #{gym}
+        and F.pool = #{pool}
+        and F.terrace = #{terrace}
+        and F.garden = #{garden}
+        and F.nearLake = #{nearLake}
+        and F.nearBeach = #{nearBeach}
+        and F.isRegistering = #{isRegistering}
+        and F.standby = #{standby}
+        and F.isApproved = #{isApproved}
+        and F.isStopped = #{isStopped}
+       <!-- <if test='bedroom != "0"'>
         	and bedroom like #{bedroom}
         </if>
         <if test='bathroom != "0"'>
@@ -61,11 +72,6 @@
         	and parkingLot like #{parkingLot}
         </if>
         <if test='gym != "0"'>
-        
-        
-        
-        
-        
         	and gym like #{gym}
         </if>
         <if test='pool != "0"'>
@@ -95,5 +101,6 @@
         <if test='isStopped != null'>
         	and isStopped like #{isStopped}
         </if>
+         --> 
 	</select>
 </mapper>

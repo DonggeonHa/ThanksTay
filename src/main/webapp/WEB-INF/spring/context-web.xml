@@ -115,6 +115,10 @@
 		<property name="order"  value="2" />
 	</bean>
 
+	<!-- 첨부파일 업로드 -->
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
 	<!--
 		com.sample.web.controller 패키지의 클래스들을 자동으로 스프링 컨테이너의 빈으로 등록시킨다.
 		주로 @Controller, @RestController 어노테이션이 지정되어 있는 컨트롤러 클래스가 스프링의 빈으로 자동 등록된다.

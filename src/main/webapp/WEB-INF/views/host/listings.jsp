@@ -118,7 +118,7 @@ h1 {
 				</div>
 			</div>
 			<div class="d-flex justify-content-between mt-4">
-				<span>주방</span>
+				<span>싱글베드</span>
 				<div class="d-inline-flex">
 					<input type="button" id="btn-kChen-minus" class="filter-buttons filter-button-minus" value="-" />
 					<input type="text" id="input-kChen" name="kitchen" class="filter-buttons" value="0">
