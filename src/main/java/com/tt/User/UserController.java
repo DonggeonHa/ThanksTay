@@ -4,13 +4,16 @@ import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
+import org.apache.tiles.request.Request;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -115,18 +118,21 @@ public class UserController {
 
 	@PostMapping("/img")
 	@ResponseBody
-	public Map<String, Object> result(@RequestParam("picture") MultipartFile userPicture, @RequestParam("email") String userEmail) {
+	public Map<String, Object> result(@RequestParam(name = "picture", required = false) MultipartFile userPicture, @RequestParam("email") String userEmail, MultipartHttpServletRequest request) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		UserVO user = new UserVO();
 
 		try {
-			if (userPicture.isEmpty()) {
+			if (userPicture == null) {
 				// 이미지가 비어있을 경우
-				user.setPicture("resources/images/defaultProfile.jpg");
+				user.setPicture("defaultProfile.jpg");
 				user.setEmail(userEmail);
 			} else {
 				// 파일 업로드 시작
-				String uploadPath = "C:\\Thxtay\\upload\\";
+				// String uploadPath = "webapp/resources/images/upload";
+				String uploadPath = request.getServletContext().getRealPath("resources/images/upload");
+				System.out.println("파일 경로 : " + uploadPath);
+
 				File fileDir = new File(uploadPath);
 				if (!fileDir.exists()) {
 					fileDir.mkdirs();
@@ -137,7 +143,7 @@ public class UserController {
 
 				if (userPicture.getSize() != 0) {
 					// getSize() 메소드는 파일 용량을 구해줌 / 첨부할 파일이 존재할 때 실행
-					userPicture.transferTo(new File(uploadPath + storedFileName)); // 원하는 위치에 저장해줌
+					userPicture.transferTo(new File(uploadPath + "/" + storedFileName)); // 원하는 위치에 저장해줌
 					user.setPicture(storedFileName);
 					user.setEmail(userEmail);
 				}
