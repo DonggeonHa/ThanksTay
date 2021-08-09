@@ -69,7 +69,22 @@
     </repositories>
 
 	<dependencies>
-	
+		<!-- 첨부파일 업로드를 지원하는 라이브러리 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+	    <groupId>org.apache.poi</groupId>
+	  	  	<artifactId>poi</artifactId>
+	   		<version>4.1.2</version>
+		</dependency>
+		<dependency>
+	    	<groupId>org.apache.poi</groupId>
+	    	<artifactId>poi-ooxml</artifactId>
+	    	<version>4.1.2</version>
+		</dependency>
 		<!-- Tiles 라이브러리들 -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>

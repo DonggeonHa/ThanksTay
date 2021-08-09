@@ -73,6 +73,7 @@ h1 {
 					</tr>
 				</thead>
 				<tbody>
+				<!-- 
 					<c:choose>
 						<c:when test="${empty lodgings}">
 							<tr class="align-middle">
@@ -99,6 +100,7 @@ h1 {
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+				 -->
 				</tbody>
 			</table>
 		</div>
@@ -110,16 +112,16 @@ h1 {
 			<div class="d-flex justify-content-between">
 				<span>침실</span>
 				<div class="d-inline-flex">
-					<input type="button" id="btn-bR-minus" data-bed-no="${lodging.bedroom }" class="filter-buttons filter-button-minus" value="-" />
-					<input type="button" id="input-bR" name="value" class="filter-buttons filter-button-value" value="0">
+					<input type="button" id="btn-bR-minus" class="filter-buttons filter-button-minus" value="-" />
+					<input type="text" id="input-bR" name="bedroom" class="filter-buttons filter-button-value" value="0">
 					<input type="button" id="btn-bR-plus" class="filter-buttons" value="+" />
 				</div>
 			</div>
 			<div class="d-flex justify-content-between mt-4">
-				<span>주방</span>
+				<span>싱글베드</span>
 				<div class="d-inline-flex">
 					<input type="button" id="btn-kChen-minus" class="filter-buttons filter-button-minus" value="-" />
-					<input type="button" id="input-kChen" name="value" class="filter-buttons" value="0">
+					<input type="text" id="input-kChen" name="kitchen" class="filter-buttons" value="0">
 					<input type="button" id="btn-kChen-plus" class="filter-buttons" value="+" />
 				</div>
 			</div>
@@ -127,33 +129,33 @@ h1 {
 				<span>욕실</span>
 				<div class="d-inline-flex">
 					<input type="button" id="btn-bTR-minus" class="filter-buttons filter-button-minus" value="-" />
-					<input type="button" id="input-bTR" name="value" class="filter-buttons" value="0">
+					<input type="text" id="input-bTR" name="bathroom" class="filter-buttons" value="0">
 					<input type="button" id="btn-bTR-plus" class="filter-buttons" value="+" />			
 				</div>
 			</div>
 		</div>	
 		<div class="d-flex justify-content-between p-4 border-top">
-			<button>삭제</button>
-			<button class="doFiltering">적용하기</button>
+			<button type="button" id="doDeleteSpace">삭제</button>
+			<button type="button" class="doFiltering">적용하기</button>
 		</div>
 	</div>
 	<div id="filter-status" class="shadow-lg p-3 mb-5 filter-box" style="display:none;">
 		<div class="p-4">
 			<div class="d-flex">
-				<span class="m-2"><input type="checkbox" class="me-3">등록중</span>
+				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-ing" name="isRegistering">등록중</span>
 			</div>	
 			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">승인대기</span>
+				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-standby" name="standby">승인대기</span>
 			</div>	
 			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">승인</span>
+				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-approved" name="isApproved">승인</span>
 			</div>	
 			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">휴업</span>
+				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-stopped" name="isStopped">휴업</span>
 			</div>	
 			<div class="d-flex justify-content-between p-4 border-top">
-				<button>삭제</button>
-				<button class="doFiltering">적용하기</button>
+				<button type="button" id="doDeleteStatus">삭제</button>
+				<button type="button" class="doFiltering">적용하기</button>
 			</div>
 		</div>
 	</div>
@@ -211,8 +213,8 @@ h1 {
 				<span class="m-2"><input type="checkbox" class="me-3">해변과 가까움</span>
 			</div>	
 			<div class="d-flex justify-content-between p-4 border-top">
-				<button>삭제</button>
-				<button class="doFiltering">적용하기</button>
+				<button type="button" id="doDeleteAmenity">삭제</button>
+				<button type="button" class="doFiltering">적용하기</button>
 			</div>
 		</div>
 	</div>
@@ -222,45 +224,46 @@ h1 {
 // sample-09-dom.html처럼 tbody없애고 할 수 있는지 꼭 배열이 필요한지?
 // 검색필터 전부다 써야하는지? 
 //document쓰지 말아라!!
-$('.doFiltering').click(function() {
-	$lodgingTableTbody = $('#lodging-table tbody').empty()
-	$.ajax({
-		type: "GET",
-		url: "/host/filtering",
-		data: $("#form-filtering").serialize(),
-		dataType:'filtering/json',
-		success: function(lodgingLists) {
-			$.each(lodgingLists, function(index, lodgings) {
-				var row = "<tr>"
-				row += "<td>"+'<img src="resources/images/banners/item.png">'+lodgings.name+"</td>"
-				row += "<td>"+lodgings.status+"</td>"
-				row += "<td>"+lodgings.address+"</td>"
-				row += "<td>"+lodgings.immApproval+"</td>"
-				row += "<td>"+lodgings.bedroom+"</td>"
-				row += "<td>"+lodgings.singleroom+"</td>"
-				row += "<td>"+lodgings.doublebed+"</td>"
-				row += "<td>"+lodgings.bathroom+"</td>"
-				row += "<td>"+lodgings.reviewAverage+"</td>"
-				row += "</tr>";
-
-				$lodgingTableTbody.append(row);
-			})
-		}	
-	})	
-});
-
 $(function() {
 	
 	$('#menu-filter-bed').click(function(event) {
 		event.preventDefault()
 		
 		//data-bed-no -> bed-no 이렇게 ok
-		var bedNo = $(this).data('bed-no')	//여기 숫자를 받아와서 기존 디비랑 비교?
+		//var bedNo = $(this).data('bed-no')	//여기 숫자를 받아와서 기존 디비랑 비교?
+		//$('#input-bR').text(bedNo)
 		
+		$('.doFiltering').click(function() {
+		$lodgingTableTbody = $('#lodging-table tbody').empty()
+		
+		$.ajax({
+			type: "GET",
+			url: "/host/filtering",
+			data: $("#form-filtering").serialize(),
+			dataType:'filtering/json',
+			success: function(lodgingLists) {
+					$.each(lodgingLists, function(index, lodgings) {
+					var row = "<tr>"
+					row += "<td>"+'<img src="resources/images/banners/item.png">'+lodgings.name+"</td>"
+					row += "<td>"+lodgings.status+"</td>"
+					row += "<td>"+lodgings.address+"</td>"
+					row += "<td>"+lodgings.immApproval+"</td>"
+					row += "<td>"+lodgings.bedroom+"</td>"
+					row += "<td>"+lodgings.singleroom+"</td>"
+					row += "<td>"+lodgings.doublebed+"</td>"
+					row += "<td>"+lodgings.bathroom+"</td>"
+					row += "<td>"+lodgings.reviewAverage+"</td>"
+					row += "</tr>";
+	
+					$lodgingTableTbody.append(row);
+					})
+				}	
+			})	
+		});			
+				
 		if($('#form-filtering #filter-space').css('display') == 'none') {
 			$('#filter-space').show()
-			
-			var filterBedroom = $(this).data('filter-bR')
+			//var filterBedroom = $(this).data('filter-bR')
 		} else {
 			$('#filter-space').hide()
 		}
