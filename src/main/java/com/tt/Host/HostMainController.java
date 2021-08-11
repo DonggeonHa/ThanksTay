@@ -32,10 +32,11 @@ public class HostMainController {
 	UserService userService;
 	@Autowired
 	LodgingService lodgingService;
-	
 
 	@GetMapping(path = { "/hosting" })
-	public String hosting(UserVO user, Model model) {
+	public String hosting(@LoginUser UserVO user, Model model) {
+		
+		model.addAttribute("loginedUser",user);
 		
 		return "host/hostMain";
 	}
@@ -43,14 +44,13 @@ public class HostMainController {
 	
 	
 	@GetMapping("/lodgingRegister")	// q. 이 부분이 lodgingController에 들어가야하는지?? // 58번줄 hostService->lodgingService로 옮기는 것이 맞는지?
-	public String lodgingRegisterStatus(UserVO user, Model model) { // ajax라 model 삭제할것
-		UserVO loginedUser = userService.getUserByNo(1);
+	public String lodgingRegisterStatus(@LoginUser UserVO user, Model model) { // ajax라 model 삭제할것
 		
-		if (loginedUser == null) { // 로그인창 ㄱㄱ
+		model.addAttribute("loginedUser",user);
+		System.out.println("user는 : "+user);
+		if (user == null) { // 로그인창 ㄱㄱ
 			return "home";
 		}
-		
-		
 
 		//로그인한 유저의 숙소정보 전달
 		
@@ -61,11 +61,9 @@ public class HostMainController {
 		 * 4. json형태로 데이터를 보내서 jsp에서 자바스크립트를 통해 구한다.
 		 * 		2번이 제일 편한데 사용해도 되는지?
 		 * */
-		List<LodgingVO> lodgings = hostService.getLodgingsByLoginedUserNo(loginedUser.getNo());
-		model.addAttribute("loginedUser", loginedUser);
+		List<LodgingVO> lodgings = hostService.getLodgingsByLoginedUserNo(user.getNo());
+		model.addAttribute("loginedUser", user);
 		model.addAttribute("lodgings", lodgings);
-
-
 
 		// 주소 입력시 카카오 지도 api에서 구해주는 위경도 값 입력해야함 -> 남미씨 쪽이랑 연관
 		// 나머지는 -> input
@@ -79,27 +77,5 @@ public class HostMainController {
 		return "redirect:hostMain";
 	}
 
-	@GetMapping("/lodgingTypeAdd")
-	public String lodgingAddForm(UserVO user, Model model ) {
-		UserVO loginedUser = userService.getUserByNo(1);
-
-		logger.info("lodgingTypeAddForm() 실행");
-		String commonCode = hostService.getCommonCodeByContent("숙소타입");
-		List<CommonCodeVO> lodgingTypeCodes = hostService.getCommonCodesByParentCode(commonCode);
 	
-		model.addAttribute("lodgingTypes", lodgingTypeCodes);
-		// 숙소 타입 -> 체크박스 (공통코드로 불러와야함)
-		
-
-		return "host/lodgingTypeAddForm";
-	}
-	
-	@PostMapping("/lodgingDetailAdd")
-	public String lodgingDetailAddForm(UserVO user, Model model) {
-		logger.info("lodgingDetailAddForm 실행");
-		
-		
-		return "host/lodgingDetailAddForm";
-	}
-
 }

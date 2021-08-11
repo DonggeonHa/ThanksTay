@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LodgingDao {
 	LodgingVO getLodingByStatus(String status);
 	
-	List<LodgingVO> getLodgingsByUserNo(int no);
+	List<LodgingVO> getLodgingsByUserNo(int userNo);
 }

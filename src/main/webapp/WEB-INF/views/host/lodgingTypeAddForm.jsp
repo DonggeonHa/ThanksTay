@@ -136,6 +136,9 @@ body {
 	border-radius: 10px;
 	border: 1px solid #d4d4d4;
 }
+.type-choose-btn.active{
+	background : tomato;
+}
 
 .type-font-pos {
 	
@@ -210,12 +213,12 @@ body {
 					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post"
+						<form class="register-form" method="get"
 							action="/lodgingDetailAdd">
 							<c:forEach var="lodgingType" items="${lodgingTypes }">
 								<div class="type-choose-btn-wrapper">
-									<button id="radio-btn" class="type-choose-btn" name="ldgType"
-										type="button" role="radio" onclick="btnClick(this)"
+									<button class="type-choose-btn" name="ldgType"
+										type="button" role="radio"
 										aria-checked="false">
 										<div class="type-font-pos">
 											<div class="type-font">${lodgingType.codeContent }</div>
@@ -259,25 +262,20 @@ body {
 		</div>
 	</div>
 	<script>
-		function btnClick(param) {
-			$("${lodging-type}").ariaChecked = "false";
-			btnStatus = param.ariaChecked = "false" ? "true" : "false";
-			console.log(btnStatus);
-			if (btnStatus == "true") {
-				param.style.border = "1px solid black";
-			} else
-				param.style.border = "1px solid white";
-
-		}
+		
+		/* Q2. 토글이 안됨 */
+		$(".type-choose-btn-wrapper button").click(function(){
+			$(".type-choose-btn-wrapper button").removeClass("active");
+			$(this).addClass("active");
+			var test=$(this).val();
+			console.log(test);
+		})
 
 		$("#prev").click(function() {
 			history.back();
 		})
-
 		$("#next").click(function() {
-			$("#next").click(function() {
-				$(".register-form").submit();
-			})
+			$(".register-form").submit();
 		})
 	</script>
 </body>

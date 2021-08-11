@@ -42,4 +42,6 @@
 		WHERE
 			user_no=#{value}
 	</select>
+	
+	
 </mapper>

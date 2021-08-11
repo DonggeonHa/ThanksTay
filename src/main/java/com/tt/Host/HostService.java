@@ -26,5 +26,8 @@ public interface HostService {
 	
 	List<LodgingVO> getLodgingsByLoginedUserNo(int userNo);
 	
+	
+
+	
 	/* jhw 추가 */
 }
