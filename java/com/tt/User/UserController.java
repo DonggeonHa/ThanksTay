@@ -159,4 +159,13 @@ public class UserController {
 		retVal.put("res", "OK");
 		return retVal;
 	}
+
+	@RequestMapping(value = "/login/getKakaoAuthUrl")
+	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+		String reqUrl = kakaoAuthUrl + "/oauth/authorize?client_id=" + kakaoApiKey + "&redirect_uri=" + redirectURI + "&response_type=code";
+
+		return reqUrl;
+	}
+
+
 }
