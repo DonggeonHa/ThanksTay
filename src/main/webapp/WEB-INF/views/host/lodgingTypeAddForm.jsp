@@ -136,8 +136,9 @@ body {
 	border-radius: 10px;
 	border: 1px solid #d4d4d4;
 }
-.type-choose-btn.active{
-	background : tomato;
+
+.type-choose-btn.active {
+	background: tomato;
 }
 
 .type-font-pos {
@@ -213,13 +214,13 @@ body {
 					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="get"
+						<form class="register-form" method="post"
 							action="/lodgingDetailAdd">
 							<c:forEach var="lodgingType" items="${lodgingTypes }">
 								<div class="type-choose-btn-wrapper">
-									<button class="type-choose-btn" name="ldgType"
-										type="button" role="radio"
-										aria-checked="false">
+									<button class="type-choose-btn" type="button"
+										role="radio" aria-checked="false">
+										<input type="hidden" class="" name="ldgType" value="">
 										<div class="type-font-pos">
 											<div class="type-font">${lodgingType.codeContent }</div>
 										</div>
@@ -262,21 +263,23 @@ body {
 		</div>
 	</div>
 	<script>
-		
 		/* Q2. 토글이 안됨 */
-		$(".type-choose-btn-wrapper button").click(function(){
-			$(".type-choose-btn-wrapper button").removeClass("active");
-			$(this).addClass("active");
-			var test=$(this).val();
-			console.log(test);
-		})
+		$(".type-choose-btn-wrapper button").click(
+				function() {
+					$(".type-choose-btn-wrapper button").removeClass("active");
+					$(this).addClass("active");
+					clickedType = $('.type-choose-btn-wrapper').find('.active').text().trim();
+					$(".type-choose-btn-wrapper button input").val(clickedType);
+				}
+		);
 
 		$("#prev").click(function() {
 			history.back();
-		})
+		});
+		
 		$("#next").click(function() {
 			$(".register-form").submit();
-		})
+		});
 	</script>
 </body>
 </html>
