@@ -7,20 +7,47 @@
 		insert into Thxtay_transction_register
 		(tr_no, tr_name, tr_date, tr_phone, tr_currency, tr_payment, tr_bank_code, tr_account)
 		values
-		(tr_seq.nextval, #{name},#{date}, #{phone}, #{currency}, #{payment}, #{bankCode}, #{account} )
+		(tr_seq.nextval, #{name}, #{date}, #{phone}, #{currency}, #{payment}, #{bankCode}, #{account} )
 	</insert>
 	
-	<select id="getAllTransactionHistory" parameterType="int" resultType="com.tt.vo.TransactionHistoryDTO">
-		select  Pm.booking_no bookingNo, 
+	<select id="getAllTransactionHistoryForExcel" parameterType="int" resultType="com.tt.vo.TransactionHistoryDTO">
+		select  
+				R.tr_account bankAccount,
+				L.lodging_name lodgingName,
+				Pm.booking_no bookingNo, 
 				H.transaction_no transactionNo, 
 				H.lodging_no lodgingNo, 
 			   	H.transaction_created_date createdDate, 
 			   	Pr.price_lodging_fee lodgingFee, 
 			   	Pr.price_cleaning_fee cleaningFee
 		from 
-			Thxtay_transaction_history H, Thxtay_lodging L, Thxtay_payment Pm, Thxtay_price Pr, Thxtay_user U
+			Thxtay_transaction_register R, Thxtay_transaction_history H, Thxtay_lodging L, Thxtay_payment Pm, Thxtay_price Pr, Thxtay_user U
 		where 
-			H.lodging_no = L.lodging_no and H.payment_no = Pm.payment_no
+			H.lodging_no = L.lodging_no 
+			and H.payment_no = Pm.payment_no
+			and H.price_no = Pr.price_no
+			and L.tr_no = R.tr_no
 			and U.user_no = #{userNo}
 	</select>
+<!--
+	<select id="getAllTransactionHistoryByHashMap" parameterType="map" resultType="com.tt.vo.TransactionHistoryDTO">
+		select  
+				R.tr_account bankAccount,
+				L.lodging_name lodgingName,
+				Pm.booking_no bookingNo, 
+				H.transaction_no transactionNo, 
+				H.lodging_no lodgingNo, 
+			   	H.transaction_created_date createdDate, 
+			   	Pr.price_lodging_fee lodgingFee, 
+			   	Pr.price_cleaning_fee cleaningFee
+		from 
+			Thxtay_transaction_register R, Thxtay_transaction_history H, Thxtay_lodging L, Thxtay_payment Pm, Thxtay_price Pr, Thxtay_user U
+		where 
+			H.lodging_no = L.lodging_no 
+			and H.payment_no = Pm.payment_no
+			and H.price_no = Pr.price_no
+			and L.tr_no = R.tr_no
+			and U.user_no = #{userNo}
+	</select>
+ -->	
 </mapper>

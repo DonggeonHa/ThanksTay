@@ -63,39 +63,42 @@ h1 {
 </head>
 </head>
 <body>
-<span class="invalid-feedback">이름 영역은 필수영역 입니다.</span>
 <div class="container">
 	<div class="form">
 		<h1>은행 이체 설정</h1>
 		<ul class="section-progress row">
-			<li id="process1" class="col-2 process-remark1">시작하기</li>
-			<li id="process2"class="col-2 process-remark2">연락처 정보</li>
-			<li id="process3"class="col-2 process-remark3">거의 완료</li>
+			<li id="process1" class="col-2 text-primary">시작하기</li>
+			<li id="process2"class="col-2">연락처 정보</li>
+			<li id="process3"class="col-2">거의 완료</li>
 		</ul>
-		<form id="form-tr" method="post" action="/host/transactionhome">
-			<div id="form-info" class="section-field">
+		<form id="form-tr" method="post" action="/host/trans1" novalidate>
+			<div id="form-info" class="section-field needs-validation">
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationWeb01" class="field-description ms-1">이름</label>
-					 	<input id="input-name" type="text" class="form-control mt-2 ms-1 border-0" name="name" value="신분증에 등록된 영문으로 입력 ex)FirstName LastName">
+					 	<input id="input-name"type="text" class="form-control mt-2 ms-1 border-0" name="name">
 					</div>
+					<span id="warning-name" class="invalid-feedback">이름 영역은 필수영역 입니다.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationServer03" class="field-description ms-1">이메일 주소</label>
 					 	<input id="input-email" type="text" class="form-control mt-2 ms-1 border-0" name="email">
 					</div>
+					<span id="warning-email" class="invalid-feedback">이메일 영역은 필수영역 입니다.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationServer04" class="field-description ms-1">이메일 주소 다시 입력</label>
 					 	<input id="input-email-check" type="text" class="form-control mt-2 ms-1 border-0">
 					</div>
+					<span id="warning-email-check" class="invalid-feedback">이메일 확인 영역은 필수영역 입니다.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationServer04" class="field-description ms-1">날짜 정보 입력</label>
 					 	<input id="input-date" type="date" class="form-control mt-2 ms-1 border-0" name="date">
+					<span id="warning-date" class="invalid-feedback">날짜 입력은 필수영역 입니다.</span>
 					</div>
 				</div>
 				<button type="button" class="mb-4" id="btn-prev1">이전</button>
@@ -186,17 +189,93 @@ $(function() {
 	$('#form-certification').hide()
 	$('#form-bank').hide()
 	
-	$('#btn-next1').click(function() {
+	/*
+		  'use strict'
+
+		  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+		  var forms = document.querySelectorAll('.needs-validation')
+
+		  // Loop over them and prevent submission
+		  Array.prototype.slice.call(forms)
+		    .forEach(function (form) {
+		      form.addEventListener('submit', function (event) {
+		        if (!form.checkValidity()) {
+		          event.preventDefault()
+		          event.stopPropagation()
+		        }
+
+		        form.classList.add('was-validated')
+		      }, false)
+		    })
+*/
+	
+/*
+	$('#input-name').focusin(function() {
+		if($('#input-name').val() == '') {
+			$('#warning-name').show()
+		}	
+	})
+	$('#input-name').focusout(function() {
+		if($('#input-name').val() == '') {
+			$('#warning-name').show()
+		} else {
+			$('#warning-name').hide()
+			
+		}
+	})
+	$('#input-email').focusin(function() {
+		if($('#input-email').val() == '') {
+			$('#warning-email').show()
+		}
+	})
+	$('#input-email-check').focusin(function() {
+		if($('#input-email-check').val() == '') {
+			$('#warning-email-check').show()
+		}	
+	})
+	$('#input-date').focusin(function() {
+		if($('#input-date').val() == '') {
+			$('#warning-date').show()
+		}
+	})
+*/
+/*	
+		var name = $.trim($('#input-name').val())
+		var emailCheck = $.trim($('#input-email-check').val())
+		var date = $.trim($('#input-date').val())
+		var email = $.trim($('#input-email').val())
+		if(!name) {
+			$('#warning-name').show()
+			$('#btn-next').disabled ='disabled' 
+		}
+		if(!email) {
+			$('#warning-email').show()
+			$('#btn-next').disabled ='disabled' 
+		}
+		if(!emailCheck) {
+			$('#warning-email-check').show()
+			$('#btn-next').disabled ='disabled' 
+		}
+		if(!date) {
+			$('#warning-date').show()
+			$('#btn-next').disabled ='disabled'  
+		} else {
+			$('#process1').removeClass('text-primary').addClass('text-dark')
+		}
+
+*/
+//만약 하나라도 경고창이있으면 다음버튼 비활성화이렇게할까?
+	$('#btn-next1').on('click',function() {
 		$('#form-info').hide(500)
 		$('#form-certification').show()
 	
-		//$('#process1').removeClass('process-remark1').addClass('process-remark2')
-		//$('#process2').addClass('text-success').removeClass('text-secondary')
-	})
+	
 	/**/
 	$('#btn-prev2').click(function() {
 		$('#form-certification').hide()
 		$('#form-info').show(500)
+		
+		
 	})
 	$('#btn-next2').click(function() {
 		$('#form-certification').hide(500)
@@ -209,6 +288,7 @@ $(function() {
 	})
 	$('#btn-next3').click(function() {
 		$('#form-tr').submit()
+	})
 	})
 })
 </script>

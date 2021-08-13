@@ -12,5 +12,7 @@ public interface TransactionHistoryService {
 
 	void excelDownload(TransactionHistoryDTO download, HttpServletResponse response) throws Exception;
 
-	List<TransactionHistoryDTO> getAllTransactionHistory(int userNo) throws Exception;
+	List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception;
+	
+	//TransactionHistoryDTO getAllTransactionHistoryByUserNo(int userNo) throws Exception;
 }
