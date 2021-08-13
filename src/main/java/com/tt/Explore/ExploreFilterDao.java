@@ -9,5 +9,7 @@ import com.tt.Lodging.LodgingVO;
 @Mapper
 public interface ExploreFilterDao {
 
-	List<LodgingVO> getLodgingsByFirstFilter(FirstFilterVO firstFilter);
+	List<LodgingVO> getLodgingListByFirstFilter(FirstFilterVO firstFilter);
+	List<LodgingVO> getLodgingListByLatLng(FirstFilterVO firstFilter);
+	List<LodgingVO> getLodgingListByGuests(int guests);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -14,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
@@ -27,6 +31,7 @@ import com.tt.User.UserService;
 import com.tt.User.UserVO;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
+import com.tt.web.view.JsonView;
 
 /*
  * @Controller
@@ -36,6 +41,7 @@ import com.tt.web.utils.SessionUtils;
 @Controller
 public class CommonController {
 	private static Logger logger = LogManager.getLogger(CommonController.class);
+	@Autowired JsonView jsonView;
 	@Autowired ExploreFilterService exploreFilterService;
 	
 	/*
@@ -76,14 +82,39 @@ public class CommonController {
 		return "explore/list";
 	}
 	
+//	@GetMapping(path = {"/explore/list/json"})
+//	public ModelAndView SearchJson(int guests,
+			//double east, double west, double south, double north,
+		//	@RequestParam("location") String location,
+		//	@RequestParam("check-in")@DateTimeFormat Date checkIn, 
+		//	@RequestParam("check-out")@DateTimeFormat Date checkOut,
+		//	@RequestParam(value="guests", required=false, defaultValue="2") int guests, 
+//			 Model model) {
+		
+//		FirstFilterVO firstFilter = new FirstFilterVO(east, west, south, north);
+//		List<LodgingVO> lodgings = exploreFilterService.getLodgingsByGuests(guests);
+//		List<LodgingVO> lodgings = exploreFilterService.getLodgingsByFirstLatLng(firstFilter);
+		
+//		System.out.println("결과:" + lodgings);
+		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("data", lodgings);
+//		mav.setView(jsonView);
+		
+//		return mav;
+//	}
+
+	@GetMapping(path = {"/explore/list/json"})
+	@ResponseBody
+	public List<LodgingVO> SearchJson(int guests){
+		List<LodgingVO> lodgings = exploreFilterService.getLodgingListByGuests(guests);
+		return lodgings;
+	}
+	
 //	@GetMapping(path = {"/explore/list"})
 //	public String MakeList(
 			//	@RequestParam(value="lat", required=false) double latitude,
 			//	@RequestParam(value="lng", required=false) double longitude,
-			//	@RequestParam("location") String location,
-			//	@RequestParam("check-in")@DateTimeFormat Date checkIn, 
-			//	@RequestParam("check-out")@DateTimeFormat Date checkOut,
-			//	@RequestParam(value="guests", required=false, defaultValue="2") int guests, 
 		//	Model model) {
 		//	FirstFilterVO firstFilter = new FirstFilterVO(location, checkIn, checkOut, guests);
 		//	List<LodgingVO> lodgings = exploreFilterService.getLodgingsByFirstFilter(firstFilter);

@@ -7,7 +7,7 @@
 					<div class="col-3">
 						<div class="input-box-1">
 							<label class="form-label">위치</label>
-							<input type="text" class="form-control" name="location" placeholder="어디로 여행가세요" />
+							<input type="text" class="form-control" value="${location }" name="location" placeholder="어디로 여행가세요" />
 								<!-- 현재 이 부분 작동 안함ㄸㄹㄹ -->
 								<!--<div class="dropdown-menu">
 									<li><a class="dropdown-item" href="#">Action</a></li>
@@ -19,13 +19,13 @@
 							<div class="col-6">
 								<div class="input-box-2">
 									<label class="form-label">체크인</label>
-									<input type="text" class="form-control" name="check-in" placeholder="날짜입력" />
+									<input type="text" class="form-control" value="${checkin}" name="checkin" placeholder="날짜입력" />
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-box-3">
 									<label class="form-label">체크아웃</label>
-									<input type="text" class="form-control" name="check-out" placeholder="날짜입력" />
+									<input type="text" class="form-control" value="${checkout}" name="checkout" placeholder="날짜입력" />
 								</div>
 							</div>
 						</div>

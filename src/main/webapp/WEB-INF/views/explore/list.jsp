@@ -114,14 +114,12 @@ a {
 			리스트영역
 			<!-- 300개 이상의 숙소·8월 16일-8월 18일 -->
 			<div class="list-title">
-				<p id="bounds">여기에 좌표값을 출력해보자</p>
-				<p id="bounds2">여기에 새로 뽑은 중앙값을 출력해보자</p>
-				<p class="search-summary">숙박 25건 · 8월 11일 - 8월 13일 · 게스트 4명</p>
-				<p class="search-region">"지도에서 선택한 지역"의 숙소</p>
+				<p class="search-summary">숙박 3건 · 8월 11일 - 8월 13일 · 게스트 ${param.guests }명</p>
+				<p class="search-region">"${location }에서 선택한 지역"의 숙소</p>
 			</div>
 			<!-- dropbox와 pop-up이 섞여있음 -->
 			<div class="option-button-box">
-				<button class="option-button">취소가능</button>
+				<button class="option-button">취소가능</button><!-- 각각 기능이랑 설명 추가 -->
 				<button class="option-button">숙소유형</button>
 				<button class="option-button">요금</button>
 				<button class="option-button">즉시 예약</button>
@@ -131,18 +129,19 @@ a {
 				<p><span>예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요. </span><a href="#">자세히 알아보기</a></p>
 			</div>
 			<!-- 이것이 본론이다! -->
+			<script id="template" type="x-tmpl-mustache">
 			<div class="list-box">
 				<div class="image-wrapper">
 					<div id="carouselControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="resources/lodgings/10001_1.jpg" class="d-block w-100" alt="">
+								<img src="../resources/images/lodgings/10001_1.jpg" class="d-block w-100" alt="">
 							</div>
 							<div class="carousel-item">
-								<img src="resources/lodgings/10001_2.jpg" class="d-block w-100" alt="">
+								<img src="../resources/images/lodgings/10001_2.jpg" class="d-block w-100" alt="">
 							</div>
 							<div class="carousel-item">
-								<img src="resources/lodgings/10001_3.jpg" class="d-block w-100" alt="">
+								<img src="../resources/images/lodgings/10001_3.jpg" class="d-block w-100" alt="">
 							</div>
 						</div>
 						<button class="carousel-control-prev" type="button"
@@ -159,9 +158,9 @@ a {
 				</div>
 				<div class="text-wrapper">
 					<div class="list-box-title">
-						<div class="list-box-title-text">
-							<div class="lodging-summary"><span>대학로</span>의 <span>게스트용 별채 전체</span></div>
-							<div class="lodging-name">대학로 Min's House!! 301<br/></div>
+						<div id="list-box-title-text">
+							<div class="lodging-summary"><span>ADD1st</span>의 <span>게스트용 별채 전체</span></div>
+							<div class="lodging-name">{{name}}<br/></div>
 						</div>
 						<div class="list-box-title-zz">
 							<a href="#"><button class="share"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
@@ -175,8 +174,8 @@ a {
 					<div class="list-box-detail" data="2줄 공간">
 						<!-- 왜 div 나뉘어있는데도 위로 올라가는건지...? -->
 						<div class="first-row">
-							<span>최대인원 </span><span>4명</span><span> · </span>
-							<span>침실</span><span>1개</span><span> · </span>
+							<span>{{maxGuest}}</span><span>명</span><span> · </span>
+							<span>침실</span><span>{{bedroom}}개</span><span> · </span>
 							<span>침대</span><span>2개</span><span> · </span>
 							<span>욕실</span><span>1개</span>
 						</div>
@@ -200,6 +199,7 @@ a {
 					</div>
 				</div>
 			</div>
+			</script>
 			<!-- 중앙정렬 -->
 			<div class="pagination">
 				<div class="page">
@@ -217,70 +217,134 @@ a {
 		</div>
 		<!-- 이 부분 화면 스크롤 마다 어떻게...? -->
 		<div class="col-5" id="right-box">
-			<div id="map" style="width:100%; height:100%;">
+			<div id="map" style="width:100%; height:1000px;">
 			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45232a8f6f95ec00ae6343c8933658fb&libraries=LIBRARY"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45232a8f6f95ec00ae6343c8933658fb&libraries=services,clusterer,drawing"></script>
+<script src="https://unpkg.com/mustache@latest"></script>
 <script type="text/javascript">
 
-//	var location = ${location};
-//	var places = new kakao.maps.services.Places();
-//	places.keywordSearch(location, callback); 
+//지도표시
+var mapContainer = document.getElementById('map'),
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 초기값
+        level: 3 // 지도의 확대 레벨
+    };  
 
-	// 키워드 검색 완료 시 호출되는 콜백함수
-//	var callback = function(result, status) {
-//    if (status === kakao.maps.services.Status.OK) {
-//        console.log(result);
-//    }
-//	};
-//	places.setMap(map);
-//	var position = map.getCenter();
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+var ps = new kakao.maps.services.Places();
 
-	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
-	};
-	var map = new kakao.maps.Map(container, options);
+//var markers = [];
+//마커띄우기
+//function displayMarker(place) {
+    
+    // 마커를 생성하고 지도에 표시합니다
+    //var marker = new kakao.maps.Marker({
+    //    map: map,
+    //    position: new kakao.maps.LatLng(place.latitude, place.longitude) 
+    //});
+//}
+
+//ajax로 검색결과 받아오기
+function getList(){	//나중에 parameter 정리해서 넣을 것
+   	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	var imageSize = new kakao.maps.Size(24, 35); 
+  	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+	$.ajax({
+		//이 url문제도 처리해야됨
+	    url: '/explore/list/json',
+	    type: 'get',
+	    data: {
+	  //  		"east" : east
+	  // 		,"west" : west
+	  //  		,"south" : south
+	  //  		,"north" : north
+	  //    		,"checkIn": checkIn
+	  //    		,"checkOut": checkOut
+	  //   		,
+	     		"guests": '${param.guests}'
+	       		},
+	    dataType: "json",    		
+	    success: function (lodgings) {
+	          $("#left-box .list-box").remove();
+	          var template = $("#template").html();
+	          $.each(lodgings, function(index, lodging) {
+	             
+	             var htmlContent = Mustache.render(template, lodging);
+	             $(htmlContent).appendTo("#left-box .notice-travel");
+	             
+	    //         displayMarker(lodging[index]);
+				 console.log(lodging)
+//	             console.log(lodging.latitude+", "+ lodging.longitude);
+
+
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: new kakao.maps.LatLng(lodging.longitude, lodging.latitude),
+			        title : lodging.name, 
+			        image : markerImage
+			    });
+	          });
+	          
+	    },
+	    error: function(request, status, error){
+	    	alert('통신실패')
+	    	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+	    	console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+
+	    }			
+	});	
 	
-	
-	var bounds = map.getBounds();
-	var southWest = bounds.getSouthWest().toString();
-//	var northEast = bounds.getnorthEast().toString();
-	var boundsStr = bounds.toString();	//이 값을.... 다시 전달해야 하는데 ajax로 재호출해야하나?
-	$('#bounds').text(southWest);
-	$('#bounds2').text(bounds);
+}
 
-	//
-//	function checkBounds(boundsStr){
-//	
-//	}
-//	$.ajax({
-//       url:"/explore/list",
-//       dataType: 'json',
-//        data:{location: location},
-//       success:function () {
-//          
-//        },
-//        error : function () {
-//            alert('ajax통신 실패!!!!');
-//        }
-//    })
-//	function getInfo() {
-//	return boundsStr;
-//	}
+//지도 영역이 이동하면 Refresh
+kakao.maps.event.addListener(map, 'bounds_changed', function() {             
+    var bounds = map.getBounds();
+	var boundsStr = bounds.toString().replace(/[()]/g, '').split(',');
 	
-//	function getInfo() {
-//		var bounds = map.getBounds();
-//		var boundsStr = bounds.toString();
-//		$('#bounds').val(boundsStr);
-//	}
-//	var sw = new kakao.maps.LatLng(36, 127),
-//    ne = new kakao.maps.LatLng(37, 128),
-//    lb = new kakao.maps.LatLngBounds(sw, ne);
+	var south = boundsStr[0];
+	var north = boundsStr[2];
+	var west = boundsStr[1];
+	var east = boundsStr[3];
+	
+	getList();
+});
 
-//	lb.getSouthWest().toString(); // "(36, 127)"
-//
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('${location}', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+//        var marker = new kakao.maps.Marker({
+//            map: map,
+//            position: coords
+//        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+//        var infowindow = new kakao.maps.InfoWindow({
+//            content: '<div style="width:150px;text-align:center;padding:6px 0;">totalPrice♥<br/>클릭시 이벤트</div>'
+//        });
+//        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+
+//지도에 마커를 띄운다
+//        var marker = new kakao.maps.Marker({
+//            map: map,
+//            position: coords
+//        });
+        
 </script>

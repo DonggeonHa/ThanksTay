@@ -6,7 +6,7 @@
 -->
 <mapper namespace="com.tt.Explore.ExploreFilterDao">
 
-    <select id="getLodgingsByFirstFilter" parameterType="com.tt.Explore.FirstFilterVO" resultType="com.tt.Lodging.LodgingVO">
+    <select id="getLodgingListByFirstFilter" parameterType="com.tt.Explore.FirstFilterVO" resultType="com.tt.Lodging.LodgingVO">
         select *
 		from (select A.*,
 					(select sum(decode(B.price_isbooked, 'N', 1))
@@ -20,5 +20,33 @@
 			  <!-- 위경도 조건 추가 / 타입이 Date인데 to_date 필요한지...? test-->
 		where count = (to_date('#{checkOutDate}','YYYY-MM-DD')-to_date('{#checkInDate}','YYYY-MM-DD'));
     </select>
-
+	<select id="getLodgingListByLatLng" parameterType="com.tt.Explore.FirstFilterVO" resultType="com.tt.Lodging.LodgingVO">
+		select lodging_no no, user_no userNo, lodging_name name, lodging_lat latitude, lodging_lng latitude 
+		from thxtay_lodging
+		where lodging_lng &gt; #{west} and lodging_lat &lt; #{east}
+		and lodging_lat &gt; #{south} and lodging_lng &lt; #{north}
+	</select>
+	<select id="getLodgingListByGuests" parameterType="int" resultType="com.tt.Explore.LodgingListVO">
+		select	lodging_no no, 
+				user_no userNo,
+				lodging_city city,
+				lodging_post_no postNo,
+				lodging_address address,
+				lodging_imm_approval approval,
+				lodging_max_guest maxGuest,
+				lodging_image image,
+				lodging_name name,
+				lodging_bedroom bedroom,
+				lodging_singlebed singleBed,
+				lodging_doublebed doubleBed,
+				lodging_view_count viewCount,
+				lodging_review_count reviewCount,
+				lodging_review_average reviewAverage,
+				lodging_status status,
+				lodging_type_code typeCode,
+				lodging_lng longitude,
+				lodging_lat latitude
+		from thxtay_lodging
+		where lodging_max_guest &gt;= #{value}
+	</select>
 </mapper>
