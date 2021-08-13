@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tt.Common.CommonConstant;
 import com.tt.Common.CommonDao;
 import com.tt.vo.CommonCodeVO;
 
@@ -28,12 +29,17 @@ public class LodgingServiceImpl implements LodgingService {
 	public LodgingVO getLodgingRegistering(int userNo) {
 		List<LodgingVO> lodgingList=lodgingDao.getLodgingsByUserNo(userNo);
 		for (LodgingVO lodgingVO : lodgingList) {
-			String statusCode= commonDao.getCommonCodeByCodeContent("등록 중");
+			String statusCode= commonDao.getCommonCodeByCodeContent(CommonConstant.LDG_REGISTERING);	//"등록중" 있던 자리
 			
 			if(lodgingVO.getStatus().equals(statusCode)) {
 				return lodgingVO;
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void registerLodging(LodgingVO lodging) {
+		lodgingDao.insertLodging(lodging);
 	}
 }

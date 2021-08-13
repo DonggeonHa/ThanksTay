@@ -290,15 +290,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		</div>
 	</div>
 	<script>
-		function btnClick(param) {
-			$("${lodging-type}").ariaChecked = "false";
-			btnStatus = param.ariaChecked = "false" ? "true" : "false";
-			console.log(btnStatus);
-			if (btnStatus == "true") {
-				param.style.border = "1px solid black";
-			} else
-				param.style.border = "1px solid white";
-		}
 		
 		// 증감 적용 위한 아이디 배열	=> 강사님 코드로 변경해보기
 		var selectorArray = ["#lodging-bedroom","#lodging-bathroom","#lodging-singlebed","#lodging-doublebed"]; 

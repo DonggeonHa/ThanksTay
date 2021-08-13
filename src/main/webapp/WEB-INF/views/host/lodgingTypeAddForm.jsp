@@ -214,7 +214,7 @@ body {
 					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post"
+						<form class="register-form" method="get"
 							action="/lodgingDetailAdd">
 							<c:forEach var="lodgingType" items="${lodgingTypes }">
 								<div class="type-choose-btn-wrapper">

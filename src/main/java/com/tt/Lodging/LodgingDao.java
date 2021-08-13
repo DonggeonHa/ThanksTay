@@ -9,4 +9,6 @@ public interface LodgingDao {
 	LodgingVO getLodingByStatus(String status);
 	
 	List<LodgingVO> getLodgingsByUserNo(int userNo);
+	
+	void insertLodging(LodgingVO lodging);
 }

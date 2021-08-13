@@ -36,6 +36,8 @@ public class HostMainController {
 	@GetMapping(path = { "/hosting" })
 	public String hosting(@LoginUser UserVO user, Model model) {
 		
+		logger.info(user);
+		if(user!=null)
 		model.addAttribute("loginedUser",user);
 		
 		return "host/hostMain";
@@ -43,13 +45,13 @@ public class HostMainController {
 	
 	
 	
-	@GetMapping("/lodgingRegister")	// q. 이 부분이 lodgingController에 들어가야하는지?? // 58번줄 hostService->lodgingService로 옮기는 것이 맞는지?
-	public String lodgingRegisterStatus(@LoginUser UserVO user, Model model) { // ajax라 model 삭제할것
+	@GetMapping("/lodgingRegister")	
+	public String lodgingRegisterStatus(@LoginUser UserVO user, Model model) {
 		
 		model.addAttribute("loginedUser",user);
 		System.out.println("user는 : "+user);
 		if (user == null) { // 로그인창 ㄱㄱ
-			return "home";
+			return "redirect:login";
 		}
 
 		//로그인한 유저의 숙소정보 전달

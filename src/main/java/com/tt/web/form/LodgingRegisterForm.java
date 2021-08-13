@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LodgingDetailAddForm {
+public class LodgingRegisterForm {
 	
 	//주소
 	private String address; // 주소 상세주소
@@ -20,7 +20,6 @@ public class LodgingDetailAddForm {
 	//숙소가격
 	private int lodgingFee;
 	private int cleaningFee;
-	
 	private double checkIn; // 체크인
 	
 	//세부정보
@@ -37,6 +36,6 @@ public class LodgingDetailAddForm {
 	private boolean immApproval; // 즉시승인여부
 	
 
-	public LodgingDetailAddForm() {
+	public LodgingRegisterForm() {
 	}
 }

@@ -148,6 +148,7 @@ body {
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script>
 		/* hostHeader JS */
+		
 		const toggleBtn = document.querySelector(".navbar_toggleBtn");
 		const menu = document.querySelector('.navbar_menu');
 		const icons = document.querySelector('.navbar_icons');

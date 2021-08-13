@@ -11,4 +11,5 @@ public interface LodgingService {
 		
 		List<LodgingVO> getLodgingsByLoginedUserNo(int userNo);
 		
+		void registerLodging(LodgingVO lodging);
 }
