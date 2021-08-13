@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/f421352664.js"
+	crossorigin="anonymous"></script>
 <style>
 /* CSS초기화 찾아보기 */
-
 
 /* hostHeader CSS */
 :root { -
@@ -11,10 +21,8 @@
 	-accent-color: #d49466;
 }
 
-
-
 a {
-	margin:0 auto;
+	margin: 0 auto;
 	text-decoration: none;
 	color: var(- -text-color);
 }
@@ -34,8 +42,7 @@ a {
 	color: white;
 }
 
-
-.navbar_logo i,a {
+.navbar_logo i, a {
 	color: purple;
 	font-weight: bolder;
 }
@@ -43,17 +50,13 @@ a {
 .navbar_menu {
 	display: flex;
 	list-style: none;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
 .navbar_menu li {
 	padding: 8px 12px;
 }
 
-.navbar_menu li:hover {
-	background-color: yellow;
-	border-radius: 4px;
-}
 
 .navbar_icons {
 	list-style: none;
@@ -63,8 +66,8 @@ a {
 
 .navbar_icons li {
 	padding: 8px 12px;
-	margin-top:4px;
-	align-items: center;	
+	margin-top: 4px;
+	align-items: center;
 }
 
 .navbar_toggleBtn {
@@ -100,7 +103,7 @@ a {
 	}
 	.navbar_icons {
 		display: none;
-		justify-content: center;                                                                                                                                                           
+		justify-content: center;
 		width: 100%;
 	}
 	.navbar_toggleBtn {
@@ -109,7 +112,14 @@ a {
 	.navbar_menu.active, .navbar_icons.active {
 		display: flex;
 	}
-	/* hostHeader CSS */ 
+}
+/* hostHeader CSS */
+.btn-secondary{
+	color: purple;
+	font-weight:bold;
+	border: none;
+	background-color:white;
+}
 </style>
 <script src="https://kit.fontawesome.com/f421352664.js"
 	crossorigin="anonymous"></script>
@@ -122,8 +132,17 @@ a {
 			<li><a href="">투데이</a></li>
 			<li><a href="">메시지</a></li>
 			<li><a href="">달력</a></li>
-			<li><a href="">인사이트</a></li>
-			<li><a href="">메뉴</a></li>
+			<li><a href="/host/earnings">인사이트</a></li>
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button"
+					id="dropdownMenuButton2" data-bs-toggle="dropdown"
+					aria-expanded="false">메뉴</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+					<li><a class="dropdown-item" href="/host/filtering" style="z-index: 10">숙소</a></li>
+					<li><a class="dropdown-item" href="/host/transactionhome" style="z-index: 10">대금수령내역</a></li>
+					<li><a class="dropdown-item" href="#" style="z-index: 10">숙소등록하기</a></li>
+				</ul>
+			</div>
 		</ul>
 		<div class="navbar_icons">
 			<a href=""><i class="fas fa-user-alt"></i></a>
@@ -132,4 +151,5 @@ a {
 			style="display: block;"></i>
 		</a>
 	</nav>
+
 </header>

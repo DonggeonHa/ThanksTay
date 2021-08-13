@@ -137,6 +137,10 @@ body {
 	border: 1px solid #d4d4d4;
 }
 
+.type-choose-btn.active {
+	background: tomato;
+}
+
 .type-font-pos {
 	
 }
@@ -193,7 +197,7 @@ body {
 			<div class="left-area">
 				<a href="home" class="go-main"><i class="fab fa-airbnb"
 					style="color: white; padding: 10px;"></i></a>
-				<p>숙소 정보를 입력해주세요!</p>
+				<p>숙소 타입을 선택하세요!</p>
 			</div>
 			<div class="right-area">
 				<div class="form-wrapper">
@@ -210,11 +214,13 @@ body {
 					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post" action="#">
+						<form class="register-form" method="get"
+							action="/lodgingDetailAdd">
 							<c:forEach var="lodgingType" items="${lodgingTypes }">
 								<div class="type-choose-btn-wrapper">
-									<button id="radio-btn" class="type-choose-btn" type="button"
-										role="radio" onclick="btnClick(this)" aria-checked="false">
+									<button class="type-choose-btn" type="button"
+										role="radio" aria-checked="false">
+										<input type="hidden" class="" name="ldgType" value="">
 										<div class="type-font-pos">
 											<div class="type-font">${lodgingType.codeContent }</div>
 										</div>
@@ -257,27 +263,27 @@ body {
 		</div>
 	</div>
 	<script>
-		$("${lodging-type}").click(function() {
-			$("${lodging-type}").css("border", "10px solid black")
-		});
-
-		function btnClick(param) {
-			btnStatus = param.ariaChecked = "false" ? "true" : "false";
-			console.log(btnStatus);
-			if (btnStatus == "true") {
-				param.style.border = "1px solid black";
-			} else
-				param.style.border = "1px solid white";
-
-		}
+	
+			
+		$(".type-choose-btn-wrapper button").click(
+				function() {
+					$(".type-choose-btn-wrapper *").removeClass("active");
+					$(".type-choose-btn-wrapper button input").removeAttr("name");
+					$(this).addClass("active");
+					$(this).find("input").addClass("active");
+					$(this).find("input").attr("name","ldgType");
+					clickedType = $('.type-choose-btn-wrapper').find('.active').text().trim();
+					$(".type-choose-btn-wrapper button input.active").val(clickedType);
+				}
+		);
 
 		$("#prev").click(function() {
 			history.back();
-		})
-
+		});
+		
 		$("#next").click(function() {
-			location.href="/home";
-		})
+			$(".register-form").submit();
+		});
 	</script>
 </body>
 </html>

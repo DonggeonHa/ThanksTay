@@ -18,13 +18,16 @@ public interface HostService {
 	 * 2. 1번의 commonCode와 동일한 parentCode를 갖는 commonCodeVO 리스트 획득
 	 */
 	
-	String getCommonCodeByContent(String codeContent);
-	
-	List<CommonCodeVO> getCommonCodesByParentCode(String commonCode);
-	
-	List<CommonCodeVO> getAllCommonCodes();
+//	String getCommonCodeByContent(String codeContent);
+//	
+//	List<CommonCodeVO> getCommonCodesByParentCode(String commonCode);
+//	
+//	List<CommonCodeVO> getAllCommonCodes();
 	
 	List<LodgingVO> getLodgingsByLoginedUserNo(int userNo);
+	
+	
+
 	
 	/* jhw 추가 */
 }
