@@ -33,8 +33,7 @@
 		<result column="lodging_lat" property="latitude"/>
 		<result column="lodging_lng" property="longitude"/>
 	</resultMap> -->
-	<insert id="insertLodging"
-		parameterType="com.tt.Lodging.LodgingVO">
+	<insert id="insertLodging" parameterType="com.tt.Lodging.LodgingVO">
 		INSERT INTO
 			thxtay_lodging
 			(lodging_no
