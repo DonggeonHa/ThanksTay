@@ -30,6 +30,7 @@ DROP SEQUENCE TR_SEQ;
 DROP SEQUENCE PAYMENT_SEQ;
 DROP SEQUENCE LODGING_SEQ;
 DROP SEQUENCE TRANSACTIONHISTORY_SEQ;
+DROP SEQUENCE TRANSACTIONREGISTER_SEQ;
 DROP SEQUENCE PRICE_SEQ;
 DROP SEQUENCE LODGINGIMG_SEQ;
 
@@ -329,6 +330,8 @@ CREATE TABLE Thxtay_Transaction_History
 	payment_no number NOT NULL,
 	-- 숙소번호
 	lodging_no number NOT NULL,
+	-- 대금등록 번호
+	TR_no number NOT NULL,
 	-- 정산일
 	transaction_created_date date DEFAULT sysdate,
 	PRIMARY KEY (transaction_no)
@@ -353,7 +356,7 @@ CREATE TABLE Thxtay_Transaction_Register
 	-- 대금등록 통화
 	TR_currency varchar2(255) NOT NULL,
 	-- 대금등록 결제수단
-	TR_payment varchar2(255) NOT NULL,
+	TR_payment varchar2(20) NOT NULL,
 	-- 은행코드
 	TR_bank_code varchar2(20) NOT NULL,
 	-- 대금등록 계좌
@@ -496,6 +499,12 @@ ALTER TABLE Thxtay_Transaction_History
 ;
 
 
+ALTER TABLE Thxtay_Transaction_History
+	ADD FOREIGN KEY (TR_no)
+	REFERENCES Thxtay_Transaction_Register (TR_no)
+;
+
+
 ALTER TABLE Thxtay_Booking
 	ADD FOREIGN KEY (user_no)
 	REFERENCES Thxtay_User (user_no)
@@ -549,6 +558,7 @@ ALTER TABLE Thxtay_Wish_Zzim
 	REFERENCES Thxtay_Wishlist (wishlist_no)
 ;
 
+
 /* Create Sequence */
 
 CREATE SEQUENCE USER_SEQ NOCACHE;
@@ -561,7 +571,10 @@ CREATE SEQUENCE TR_SEQ NOCACHE;
 CREATE SEQUENCE PAYMENT_SEQ NOCACHE;
 CREATE SEQUENCE LODGING_SEQ NOCACHE;
 CREATE SEQUENCE TRANSACTIONHISTORY_SEQ NOCACHE;
+CREATE SEQUENCE TRANSACTIONREGISTER_SEQ NOCACHE;
 CREATE SEQUENCE PRICE_SEQ NOCACHE;
 CREATE SEQUENCE LODGINGIMG_SEQ NOCACHE;
+
+
 
 
