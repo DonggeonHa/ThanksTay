@@ -183,6 +183,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
 						<form id="form-register" style="width: 50%;" method="get"
 							action="saveTemp" novalidate="novalidate">
+							<input type = "hidden" name="status" value="${lodgingRegistering.status }">
+							<input type = "hidden" name="lodgingTypeCode" value="${ldgType }">
 							<div class="mb-3" style="text-align: left">
 								<label class="form-label">숙소명</label> <input type="text"
 									class="form-control" style="width: 100%" id="lodging-name"

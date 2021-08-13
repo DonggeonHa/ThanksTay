@@ -263,13 +263,17 @@ body {
 		</div>
 	</div>
 	<script>
-		/* Q2. 토글이 안됨 */
+	
+			
 		$(".type-choose-btn-wrapper button").click(
 				function() {
-					$(".type-choose-btn-wrapper button").removeClass("active");
+					$(".type-choose-btn-wrapper *").removeClass("active");
+					$(".type-choose-btn-wrapper button input").removeAttr("name");
 					$(this).addClass("active");
+					$(this).find("input").addClass("active");
+					$(this).find("input").attr("name","ldgType");
 					clickedType = $('.type-choose-btn-wrapper').find('.active').text().trim();
-					$(".type-choose-btn-wrapper button input").val(clickedType);
+					$(".type-choose-btn-wrapper button input.active").val(clickedType);
 				}
 		);
 

@@ -34,7 +34,6 @@ public class LodgingRegisterForm {
 	private String lodgingTypeCode; // 숙소_타입코드
 
 	private boolean immApproval; // 즉시승인여부
-	
 
 	public LodgingRegisterForm() {
 	}

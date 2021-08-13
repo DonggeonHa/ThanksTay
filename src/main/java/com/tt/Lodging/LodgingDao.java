@@ -11,4 +11,6 @@ public interface LodgingDao {
 	List<LodgingVO> getLodgingsByUserNo(int userNo);
 	
 	void insertLodging(LodgingVO lodging);
+	
+	void updateLodging(LodgingVO lodging);
 }

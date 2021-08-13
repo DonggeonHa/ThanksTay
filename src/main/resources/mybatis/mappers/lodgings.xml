@@ -83,7 +83,7 @@
 	</insert>
     <select id="getLodgingsByUserNo" parameterType="int" resultType="com.tt.Lodging.LodgingVO">
         SELECT
-            lodging_no                            no                
+             lodging_no                            no                
             ,user_no                            userNo            
             ,lodging_city                        city          
             ,lodging_post_no                    postNo
@@ -116,4 +116,34 @@
         WHERE
             user_no=#{value}
     </select>
+    <update id="updateLodging" parameterType="com.tt.Lodging.LodgingVO">
+		UPDATE
+			thxtay_lodging
+		SET
+			(
+			 lodging_no            =#{no}
+			,user_no               =#{userNo}
+			,lodging_city          =#{city}
+			,lodging_post_no       =#{postNo}
+			,lodging_address       =#{address}
+			,lodging_address_rest  =#{addressRest}
+			,lodging_description   =#{description}
+			,lodging_imm_approval  =#{immApproval}
+			,lodging_max_guest     =#{maxGuest}
+			,lodging_name          =#{name}
+			,lodging_bedroom       =#{bedroom}
+			,lodging_bathroom      =#{bathroom}
+			,lodging_singlebed     =#{singlebed}
+			,lodging_doublebed     =#{doublebed}
+			,lodging_view_count    =#{viewCount}
+			,lodging_location      =#{location}
+			,lodging_value         =#{value}
+			,lodging_status        =#{status}
+			,lodging_type_code     =#{lodgingTypeCode}
+			,lodging_lat           =#{latitude}
+			,lodging_lng           =#{longitude}
+			)
+		WHERE
+			lodging_no=#{no}   
+    </update>
 </mapper>

@@ -42,4 +42,9 @@ public class LodgingServiceImpl implements LodgingService {
 	public void registerLodging(LodgingVO lodging) {
 		lodgingDao.insertLodging(lodging);
 	}
+
+	@Override
+	public void updateLodging(LodgingVO lodging) {
+		lodgingDao.updateLodging(lodging);
+	}
 }
