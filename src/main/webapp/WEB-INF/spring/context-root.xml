@@ -44,18 +44,16 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-	<!-- 
-		commons-dbcp2 라이브러리를 이용한 커넥션풀을 스프링의 빈으로 등록시킨다.
-	 -->
-	 
+	<context:component-scan base-package="com.tt.web.view" />
 
 		<!-- hdg DB 접속정보 -->
-		 <bean id="dataSource" 
+		<bean id="dataSource" 
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		p:driverClassName="oracle.jdbc.OracleDriver"
 		p:url="jdbc:oracle:thin:@thankstay_high?TNS_ADMIN=C://Wallet_ThanksTay"
 		p:username="admin"
-		p:password="Gkehdrjs1234"/> 
+		p:password="Gkehdrjs1234"/>
+
 		
 		<!-- jhw DB 접속정보-->
 		<!-- <bean id="dataSource"
@@ -71,6 +69,14 @@
 		p:driverClassName="oracle.jdbc.OracleDriver"
 		p:url="jdbc:oracle:thin:@localhost:1521:xe"
 		p:username="hr"
+		p:password="zxcv1234" /> -->
+		<!-- hr DB 접속정보 -->
+		<!-- 
+		<bean id="dataSource" 
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:xe"
+		p:username="tt"
 		p:password="zxcv1234" />
 		-->
 

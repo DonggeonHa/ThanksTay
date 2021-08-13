@@ -18,7 +18,10 @@
 			  <!-- 나중에 선택가능하게 if태그 추가 -->
 			  where A.lodging_max_guest >= #{guests})
 			  <!-- 위경도 조건 추가 / 타입이 Date인데 to_date 필요한지...? test-->
+			  and A.lodging_lat &gt; #{west} and A.lodging_lat &lt; #{east}
+			  and A.lodging_lng &gt; #{south} and A.lodging_lng &lt; #{north}
 		where count = (to_date('#{checkOutDate}','YYYY-MM-DD')-to_date('{#checkInDate}','YYYY-MM-DD'));
     </select>
+    
 
 </mapper>

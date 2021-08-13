@@ -14,13 +14,24 @@ public class ExploreFilterServiceImpl implements ExploreFilterService {
 	ExploreFilterDao exploreFilterDao;
 
 	@Override
-	public List<LodgingVO> getLodgingsByFirstFilter(FirstFilterVO firstFilter) {
+	public List<LodgingVO> getLodgingListByFirstFilter(FirstFilterVO firstFilter) {
 		//getLodgingsByFirstFilter로 숙소리스트 가져오기
-		List<LodgingVO> lodgings = exploreFilterDao.getLodgingsByFirstFilter(firstFilter);
+		List<LodgingVO> lodgings = exploreFilterDao.getLodgingListByFirstFilter(firstFilter);
 		//해당 리스트로 wishList여부 체크하기
 		//새로운 dto/map형성 -> return? 아니면 wishList 따로 보낼 수 있나?
 		return lodgings;
 	}
+
+	@Override
+	public List<LodgingVO> getLodgingListByFirstLatLng(FirstFilterVO firstFilter) {
+		return exploreFilterDao.getLodgingListByLatLng(firstFilter);
+	}
+
+	@Override
+	public List<LodgingVO> getLodgingListByGuests(int guests) {
+		return exploreFilterDao.getLodgingListByGuests(guests);
+	}
+	
 
 	//위시리스트 여부체크
 	//첫페이지 만드는데 더 필요한 내용: 검색된 숙소 갯수 숙박비 최소-최댓값 ---- DAO, 메소드 분리? or 서비스에서 한 메소드로 구현?
