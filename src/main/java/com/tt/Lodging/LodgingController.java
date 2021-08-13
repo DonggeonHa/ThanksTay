@@ -94,6 +94,7 @@ public class LodgingController {
 			BeanUtils.copyProperties(lrForm, lodging);
 			lodgingService.updateLodging(lodging);
 			System.out.println(lrForm.getStatus());
+			System.out.println("lodging은:"+lodging);
 			System.out.println("업데이트 실행");
 			
 			return "redirect:home";
