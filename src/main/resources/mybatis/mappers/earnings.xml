@@ -3,10 +3,39 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.tt.Host.HostAnalysisDao">
-	<select id="getAmountByBookingNo">
-		select booking_amount amount
-		from Thxtay_booking
-		where booking_no = #{bookingNo}
+	<select id="checkBookingsByHashMap" parameterType="map" resultType="com.tt.vo.EarningsVO">
+		select sum(decode(booking_status, 'confirmedInput', booking_amount, 0)) confirmedIncome,
+        	   sum(decode(booking_status, 'expectingInput', booking_amount, 0)) expectingIncome
+		from (select 
+     		 decode(B.booking_status, 'BKG0101', 'expectingInput', 
+                                 	  'BKG0103', 'expectingInput', 
+                                	  'BKG0104', 'confirmedInput') booking_status, booking_amount
+   		from 
+      		thxtay_booking B, thxtay_lodging L
+		where 
+			B.lodging_no = L.lodging_no 
+			and L.user_no = #{userNo}
+			and B.booking_status != 'BKG0102'
+			and B.booking_check_out &gt;= #{startDate} 				
+			and B.booking_check_out &lt; add_months(#{startDate},1)
+		)
 	</select>
+	
+	<!--<resultMap type="com.tt.vo.bookingVO" id="bookingResultMap">
+		<id column="L.user_no" property="id"/>
+			<result column="L.user_no" property="userNo"/>
+			<result column="B.booking_check_in" property="checkIn"/>
+	</resultMap>  -->
+	
+	<update id="updateAmountByUserNo" parameterType="com.tt.vo.BookingVO">
+		update
+			thxtay_booking
+		set
+			booking_amount = #{amount}
+		where 
+			user_no = #{userNo}
+	</update>
 
+
+<!-- 사용자 번호로 수입을 list하고 update나 insert로 넣는다. -->
 </mapper>

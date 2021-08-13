@@ -55,14 +55,24 @@ button {
 			<button type="button" class="col btn btn-none">총 수입</button>
 		</div>
 		<div class="first-select-box row gap-3">
-			<select class="col rounded"></select>
-			<select class="col rounded"></select>
+			<select id="bank-box" class="col rounded">
+				<option>모든 대금 수령 방법</option>
+				<c:forEach var="history" items="${transHistory }">
+					<option>${history.bankAccount }</option>
+				</c:forEach>
+			</select>
+			<select id="lodging-box" class="col rounded">
+				<option>모든 숙소</option>
+				<c:forEach var="history" items="${transHistory }">
+					<option>${history.lodgingName }</option>
+				</c:forEach>
+			</select>
 		</div>
 		<div class="first-select-box row gap-3">
-			<select class="col rounded"></select>
-			<select class="col rounded"></select>
-			<select class="col rounded"></select>
-			<select class="col rounded"></select>
+			<select id="stt-box" class="col rounded"></select>
+			<select id="stt-date-box" class="col rounded"></select>
+			<select id="end-box" class="col rounded"></select>
+			<select id="end-date-box" class="col rounded"></select>
 		</div>
 		<div class="mt-3 mb-3">
 			<form action="/host/transactionhome" method="post" enctype="multipart/form-data">
@@ -114,9 +124,39 @@ button {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$('btn-link').click(function() {
+	/*
+	(function() {
+		var option = '';
 		
-	})
+		var twoMonthsAgoText = moment().subtract(2, 'months').format('YYYY년 M월')
+		var twoMonthsAgoValue = moment().subtract(2, 'months').format('YYYY-MM')+'-01'
+		option += '<option value="'+twoMonthsAgoValue+'">'+twoMonthsAgoText+'</option>'
+		
+		var oneMonthAgoText = moment().subtract(1, 'months').format('YYYY년 M월')
+		var oneMonthAgoValue = moment().subtract(1, 'months').format('YYYY-MM')+'-01'
+		option += '<option value="'+oneMonthAgoValue+'">'+oneMonthAgoText+'</option>'
+		
+		var todayText = moment().format('YYYY년 M월')
+		var todayValue = moment().format('YYYY-MM-DD')
+		option += '<option value="'+todayValue+'">'+todayText+'</option>'
+		
+		var oneMonthLaterText = moment().add(1, 'months').format('YYYY년 M월')
+		var oneMonthLaterValue = moment().add(1, 'months').format('YYYY-MM')+'-01'
+		option += '<option value="'+oneMonthLaterValue+'">'+oneMonthLaterText+'</option>'
+	
+		var twoMonthsLaterText = moment().add(2, 'months').format('YYYY년 M월')
+		var twoMonthsLaterValue = moment().add(2, 'months').format('YYYY-MM')+'-01'
+		option += '<option value="'+twoMonthsLaterValue+'">'+twoMonthsLaterText+'</option>'
+		
+		//var selectOptionNo = $(this).val
+		//var $selectedOption = $('#first-select-box #date-box option[value='+selectOptionNo+']')
+		
+		//$selectedOption.find(':checked').prop('disabled',true)
+
+		$('#stt-box').html(option)
+	
+	})() 
+	*/
 })
 </script>
 </body>

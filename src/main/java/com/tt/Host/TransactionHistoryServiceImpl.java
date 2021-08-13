@@ -1,6 +1,7 @@
 package com.tt.Host;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tt.vo.TransactionHistoryDTO;
-import com.tt.vo.TransactionHistoryVO;
 
 @Service("TransactionDownloadService")
 @Transactional
@@ -24,14 +24,14 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 	private HostAnalysisDao hostAnalysisDao;
 	
 	@Override
-	public List<TransactionHistoryDTO> getAllTransactionHistory(int userNo) throws Exception {
-		return hostAnalysisDao.getAllTransactionHistory(userNo);
+	public List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception {
+		return hostAnalysisDao.getAllTransactionHistoryForExcel(userNo);
 	}
 	
 	@Override
 	public void excelDownload(TransactionHistoryDTO download, HttpServletResponse response) throws Exception {
 		
-		List<TransactionHistoryDTO> list = hostAnalysisDao.getAllTransactionHistory(1001);
+		List<TransactionHistoryDTO> list = hostAnalysisDao.getAllTransactionHistoryForExcel(1001);
 	
 		try {
 			SXSSFWorkbook workbook = new SXSSFWorkbook();
@@ -43,8 +43,6 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 			SXSSFCell cell = null;
 			int rowNo = 0;
 			
-			//, "Type", "Confirmation Code", "Start Date", "Nights", "Guest", "Listing", 
-			//"Details", "Reference", "Currency", "Amount", "Paid Out", "Host Fee", "Cleaning Fee"
 			String[] headerArray = {"bookingNo", "transactionNo", "lodgingNo", "createdDate", "lodgingFee", "cleaningFee"};
 			row = sheet.createRow(rowNo++);
 			for(int i=0; i<headerArray.length; i++) {
@@ -94,6 +92,10 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 				e.printStackTrace();
 			}
 	}
+	
+//	public TransactionHistoryDTO getAllTransactionHistoryByUserNo(Map<String, Object> map)throws Exception {
+//		return hostAnalysisDao.getAllTransactionHistoryByUserNo(map);
+//	}
 
 
 	
