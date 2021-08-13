@@ -36,8 +36,15 @@
                 <hr>
                 <div class="d-grid gap-2">
                   <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">페이스북으로 로그인하기</button>
-                  <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">구글로 로그인하기</button>
-                  <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">카카오로 로그인하기</button>
+                  <button type="button" id="kakaoLogout" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">구글로 로그인하기</button>
+                  <button type="button" id="kakaoLogin" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">
+                      <div class="row">
+                          <div class="col-1">
+                              <img src="resources/images/kakaoLogo.png" style="width:30px; height:30px;">
+                          </div>
+                          <div class="col-11 text-center">카카오로 로그인하기</div>
+                      </div>
+                  </button>
                 </div>
             </div>
         </div>
@@ -233,7 +240,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
     $(function () {
         var emailModal = new bootstrap.Modal(document.getElementById("loginRegisterModal"));
@@ -249,6 +256,27 @@
             }
 
             return true;
+        }
+
+        function CheckAge(age) {
+            var d = new Date(age.split("/").reverse().join("-"));
+            var dd = d.getDate();
+            var mm = d.getMonth()+1;
+            var yy = d.getFullYear();
+            var age_date = yy + "/" + mm + "/" + dd;
+            var birthDate = new Date(age_date);
+            var cur = new Date();
+            var diff = cur - birthDate;
+            var age = Math.floor(diff/31536000000);
+            if (age >= 18) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function CheckBirth() {
+
         }
 
         $('#btn-emailCheck').click(function () {
@@ -353,11 +381,19 @@
             }
 
             if (!password) {
-                alertify.alert("성을 입력해주세요.")
+                alertify.alert("비밀번호를 입력해주세요.")
                 $('#RegisterPassword').focus();
 
                 return false;
             }
+
+
+            if (CheckAge(birth) == false) {
+                alertify.alert("만 18세 미만은 가입을 할 수 없습니다.");
+
+                return false;
+            }
+
 
             $.ajax({
                 url:"/register",
@@ -447,4 +483,51 @@
             reader.readAsDataURL(f);
         });
     }
+</script>
+<script>
+    Kakao.init('13a6b02c06860d591edf918abaed6fea'); // 발급받은 javascript 키를 사용
+    console.log(Kakao.isInitialized()); // sdk초기화 여부 판단
+
+    // 카카오 로그인
+    $('#kakaoLogin').click(function() {
+        Kakao.Auth.login({
+            success: function() {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: res => {
+                        const email = res.kakao_account.email;
+                        const picture = res.properties.profile_image;
+                        const name = res.properties.nickname;
+                        const birth = res.kakao_account.birthday;
+                        const age = res.kakao_account.age_range;
+
+                        console.log("이름 사진 이메일 생일 연령대 : " + name, picture, email, birth, age);
+                    },
+                    fail: function(error) {
+                        console.log("로그인은 성공했지만, request user information : " +  JSON.stringify(error));
+                    }
+                })
+            },
+            fail: function(error) {
+                console.log("failed to login: " + JSON.stringify(error));
+
+            }
+        })
+    })
+
+    //카카오로그아웃
+    $('#kakaoLogout').click(function() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (response) {
+                    console.log(response)
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+            Kakao.Auth.setAccessToken(undefined)
+        }
+    })
 </script>

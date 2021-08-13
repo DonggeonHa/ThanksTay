@@ -6,6 +6,7 @@ target/*
 META-INF/*
 Servers/
 .classpath
+/src/main/webapp/resources/images/upload/
 
 ### Eclipse ###
 .metadata
@@ -161,4 +162,5 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
 
