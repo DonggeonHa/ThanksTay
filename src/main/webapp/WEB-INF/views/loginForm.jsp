@@ -36,7 +36,7 @@
                 <hr>
                 <div class="d-grid gap-2">
                   <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">페이스북으로 로그인하기</button>
-                  <button type="button" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">구글로 로그인하기</button>
+                  <button type="button" id="kakaoLogout" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">구글로 로그인하기</button>
                   <button type="button" id="kakaoLogin" class="btn btn-lg my-2" style="background-color:white !important; border: 1px solid black !important;">
                       <div class="row">
                           <div class="col-1">
@@ -275,6 +275,10 @@
             }
         }
 
+        function CheckBirth() {
+
+        }
+
         $('#btn-emailCheck').click(function () {
             var checkEmail = $.trim($('#loginEmail').val());
             if (!checkEmail) {
@@ -495,8 +499,9 @@
                         const picture = res.properties.profile_image;
                         const name = res.properties.nickname;
                         const birth = res.kakao_account.birthday;
+                        const age = res.kakao_account.age_range;
 
-                        console.log("이름 사진 이메일 생일 : " + name, picture, email, birth);
+                        console.log("이름 사진 이메일 생일 연령대 : " + name, picture, email, birth, age);
                     },
                     fail: function(error) {
                         console.log("로그인은 성공했지만, request user information : " +  JSON.stringify(error));
@@ -508,5 +513,21 @@
 
             }
         })
+    })
+
+    //카카오로그아웃
+    $('#kakaoLogout').click(function() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (response) {
+                    console.log(response)
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+            Kakao.Auth.setAccessToken(undefined)
+        }
     })
 </script>
