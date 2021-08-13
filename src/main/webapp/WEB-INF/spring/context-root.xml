@@ -44,41 +44,14 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-	<context:component-scan base-package="com.tt.web.view" />
+	<context:property-placeholder location="classpath:/mybatis/*.properties"/>
 
-		<!-- hdg DB 접속정보 -->
-		<bean id="dataSource" 
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		p:driverClassName="oracle.jdbc.OracleDriver"
-		p:url="jdbc:oracle:thin:@thankstay_high?TNS_ADMIN=C://Wallet_ThanksTay"
-		p:username="admin"
-		p:password="Gkehdrjs1234"/>
-
-		
-		<!-- jhw DB 접속정보-->
-		<!-- <bean id="dataSource"
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		p:driverClassName="oracle.jdbc.OracleDriver"
-		p:url="jdbc:oracle:thin:@db202107231412_high?TNS_ADMIN=C://Wallet_DB202107231412"	
-		p:username="admin"
-		p:password="Ghdnjs!2020106"/> -->
-		
-		<!-- hr DB 접속정보 -->
-		<!-- <bean id="dataSource" 
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		p:driverClassName="oracle.jdbc.OracleDriver"
-		p:url="jdbc:oracle:thin:@localhost:1521:xe"
-		p:username="hr"
-		p:password="zxcv1234" /> -->
-		<!-- hr DB 접속정보 -->
-		<!-- 
-		<bean id="dataSource" 
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		p:driverClassName="oracle.jdbc.OracleDriver"
-		p:url="jdbc:oracle:thin:@localhost:1521:xe"
-		p:username="tt"
-		p:password="zxcv1234" />
-		-->
+	<!-- DB 접속정보 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	p:driverClassName="${db.driverClassName}"
+	p:url="${db.url}"
+	p:username="${db.username}"
+	p:password="${db.password}"/>
 
 	<!-- 
 		선언적 트랜잭션 처리를 지원하는 트랜잭션 매니저를  스프링 컨테이너의 빈으로 등록한다.
