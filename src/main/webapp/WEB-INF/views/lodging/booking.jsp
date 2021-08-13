@@ -388,7 +388,7 @@
 		margin-bottom: 16px;
 	}
 	.booking-box {
-		border: 1px solid #848484;
+		border: 1px solid rgb(176, 176, 176);
 		border-radius: 8px;
 		position: relative;
 	}
@@ -399,7 +399,7 @@
 		background-color: transparent;
 		border-radius: 8px 8px 0px 0px;
 	}
-	.check-in {
+	.check-in, .check-out {
 		position: absolute;
 		top: 12px;
 		left:12px;
@@ -408,8 +408,21 @@
 		color: rgb(34, 34, 34);
 		font-weight: 800;
 	}
-	.check-out {
-		
+	.check-in-date, .check-out-date {
+		padding: 26px 12px 10px;
+		font-size: 14px;
+		color: rgb(113, 113, 113);
+	}
+	.check-in-box {
+		position: relative;
+		flex: 1 1 0%;
+		width: 100%;
+	}
+	.check-out-box {
+		position: relative;
+		flex: 1 1 0%;
+		width: 100%;
+		border-left: 1px solid rgb(176, 176, 176);
 	}
 </style>
 
@@ -419,7 +432,7 @@
 		<div class="row" style="padding-top: 24px">
 			<section>
 				<div class="mb-1">
-					<h1 class="detail-title">큰 침대를 나홀로 (1인실)</h1>
+					<h1 class="detail-title">${lodging.name }</h1>
 				</div>
 				<div class="detail-header"> <!-- flex 달기 -->
 					<div class="detail-subtitle">
@@ -431,14 +444,14 @@
 								1 0 0 0-1.814 0z" fill-rule="evenodd"></path>
 							</svg>
 						</span>
-						<span class="mt-1">4.86</span>
+						<span class="mt-1">${lodging.reviewAverage }</span>
 						<span>
-							<button type="button" class="button-reviewcount">(후기 40개)</button>
+							<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
 						</span>
 						<span class="dot" aria-hedden="true">·</span>
 						<span>
 							<button type="button" class="button-map">
-								Bupyeong1(il)-dong, Bupyeong-gu, 인천(Incheon), 한국
+								 ${lodging.city }, 한국
 							</button>
 						</span>
 					</div>
@@ -491,7 +504,7 @@
 								<div class="image1setup">
 									<a href="" class="image1link">
 										<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-											<img class="img1" src="resources/images/banners/ldg.jpg" style="object-fit: cover; vertical-align: bottom;">
+											<img class="img1" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
 										</div>
 									</a>
 								</div>
@@ -501,7 +514,7 @@
 									<div class="image2setup">
 										<a href="" class="image2link">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img2" src="resources/images/banners/ldg.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img2" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
@@ -510,7 +523,7 @@
 									<div class="image3setup">
 										<a href="" class="image3link">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img3" src="resources/images/banners/ldg.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img3" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
@@ -521,7 +534,7 @@
 									<div class="image4setup">
 										<a href="" class="image4link">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img4" src="resources/images/banners/ldg.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img4" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
@@ -530,7 +543,7 @@
 									<div class="image5setup">
 										<a href="" class="image5link">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img5" src="resources/images/banners/ldg.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img5" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
@@ -588,7 +601,7 @@
 											<div>	<!-- 이미지 -->
 												<div class="photo2" style="height: 56px; width: 56px; border-radius: 50%;">
 													<div class="photo3" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
-														<img class="photo4" src="resources/images/banners/photo.jpg" style="object-fit: cover; vertical-align: bottom;">
+														<img class="photo4" src="resources/images/defaultProfile.jpg" style="object-fit: cover; vertical-align: bottom;">
 													</div>
 												</div>
 											</div>
@@ -799,26 +812,32 @@
 													1 0 0 0-1.814 0z" fill-rule="evenodd"></path>
 												</svg>
 											</span>
-											<span class="mt-1">4.86</span>
+											<span class="mt-1">${lodging.reviewAverage }</span>
 											<span>
-												<button type="button" class="button-reviewcount">(후기 40개)</button>
+												<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
 											</span>
 										</div>
 									</div>
 									<div class="booking-mid">	<!-- 달력 -->
-										<div class="booking-box">
-											<div class="booking-check-in-out">
-												<div>
-													<div class="check-in">체크인</div>
-													<div class="check-out">날짜 추가</div>
+										<div>
+											<div class="booking-box">
+												<div class="booking-check-in-out">
+													<div class="check-in-box">
+														<div class="check-in">체크인</div>
+														<div class="check-in-date">날짜 추가</div>
+													</div>
+													<div class="check-out-box">
+														<div class="check-out">체크아웃</div>
+														<div class="check-out-date">날짜 추가</div>
+													</div>
 												</div>
 												<div>
 													
 												</div>
 											</div>
-											<div>
-												
-											</div>
+										</div>
+										<div id="sticky-calendar">
+											
 										</div>
 									</div>
 									<div>	<!-- 예약 버튼 -->
@@ -834,7 +853,9 @@
 		</div>
 		<!-- 후기 -->
 		<div class="row">
-			
+			<c:forEach var="price" items="${prices }">
+				<div>${price.openDate }</div>
+			</c:forEach>
 		</div>
 		<!-- 지도 -->
 		<div class="row">
@@ -847,7 +868,21 @@
 	</main>
 </div>
 <script>
+
 	$( document ).ready(function() {
+		// json형식으로 model에 담았던 값을 list안에 담는다.
+		var list = JSON.parse('${json}');
+		console.log(list);
+		
+		var ldgldg;
+		var ldgldgldg;
+		var ldgldgldgldg;
+		//for(var i=0; i<list.length; i++) {
+		//	ldgldg = parse(list[i].openDate);
+			
+		//	console.log(ldgldg.getMonth());
+		//}
+
 		function c(passed_month, passed_year, calNum) {
 			var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
 			makeWeek(calendar.weekline);
@@ -862,27 +897,34 @@
 					r++;
 				}
 			} 
+			// 이게 아마 달력에 날짜를 기입하는 부분 42개인 이유는 7개씩 6줄이여서
 			for(var cell=0;cell<42-r;cell++) { // 42 date-cells in calendar
+				// cell이 그 달에 일수 보다 높으면 blank를 넣어라 !!!!! 
+				// (31일 까지 있으면 32일 부터는 blank!!!)
 				if(cell >= calMonthArray.length) {
 					calendar.datesBody.append('<div class="blank"></div>');
 				} else {
+					// 지금칸에 date
 					var shownDate = calMonthArray[cell].day;
 					// Later refactiroing -- iter_date not needed after "today" is found
+					// 지금칸에 년,월,일을 담는다.
 					var iter_date = new Date(passed_year,passed_month,shownDate); 
-					if ( 
-						(
-							( shownDate != today.getDate() && passed_month == today.getMonth() ) 
-							|| passed_month != today.getMonth()
-						) 
-							&& iter_date < today) {						
-						var m = '<div class="past-date">';
-					} else {
-						var m = checkToday(iter_date)?'<div class="today">':"<div>";
+					var opendate;
+					for(var ldg=0; ldg<list.length; ldg++) {
+						opendate = parse(list[ldg].openDate);
+						
+						if (shownDate == opendate.getDate() && passed_month == opendate.getMonth() && passed_year == opendate.getFullYear()
+								&& !checkToday(iter_date)) {
+							var m = "<div>";
+							break;
+						} else {
+							var m = checkToday(iter_date)?'<div class="today">':'<div class="past-date">';
+						}
 					}
 					calendar.datesBody.append(m + shownDate + "</div>");
 				}
 			}
-
+			// 달력 월, 년 표시하는 부분
 			// var color = o[passed_month];
 			calendar.calHeader.find("h2").text(i[passed_month]+" "+passed_year);
 						//.css("background-color",color)
@@ -896,14 +938,28 @@
 			selectDates(selected);
 
 			clickedElement = calendar.datesBody.find('div');
+			// 날짜를 클릭했을 때????
 			clickedElement.on("click", function(){
+				// 클릭한 엘리먼트
 				clicked = $(this);
+				// 클릭한 날짜 class가 past-date(지난 날)이면 아무것도 반환하지 않음!!
 				if (clicked.hasClass('past-date')) { return; }
+				if (clicked.hasClass('blank')) { return; }
+				
+				//if (bothCals.find(".calendar_content").find("div").hasClass('past-date') &) { return; }
+				//if (bothCals.find(".calendar_content").find("div").hasClass('past-date') && 
+				
+				//if (clicked.siblings().is(.past-date, .selected)) {
+				//	return; 
+				//}
 				var whichCalendar = calendar.name;
 				console.log(whichCalendar);
 				// Understading which element was clicked;
+				// this 부모의 부모 class 속성은 변경한다??
 				// var parentClass = $(this).parent().parent().attr('class');
+				// 첫번째, 두번째 클릭했을 경우
 				if (firstClick && secondClick) {
+					
 					thirdClicked = getClickedInfo(clicked, calendar);
 					var firstClickDateObj = new Date(firstClicked.year, 
 												firstClicked.month, 
@@ -914,9 +970,12 @@
 					var thirdClickDateObj = new Date(thirdClicked.year, 
 												thirdClicked.month, 
 												thirdClicked.date);
+					// 세번째에 두번째 날짜보다 더 작은 날짜를 고르고, 첫번째 날짜보다는 클 경우
 					if (secondClickDateObj > thirdClickDateObj
 						&& thirdClickDateObj > firstClickDateObj) {
+						// 세번째 날짜가 두번째 날짜로 바뀐다.
 						secondClicked = thirdClicked;
+						// 
 						// then choose dates again from the start :)
 						bothCals.find(".calendar_content").find("div").each(function(){
 							$(this).removeClass("selected");
@@ -925,6 +984,7 @@
 						selected[firstClicked.year] = {};
 						selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
 						selected = addChosenDates(firstClicked, secondClicked, selected);
+					// 세번째 날짜를 더 높은 날짜를 고를 경우
 					} else { // reset clicks
 						selected = {};
 						firstClicked = [];
@@ -936,11 +996,15 @@
 						});	
 					}
 				}
+				// 위에서 firstClick이 false가되면, 
 				if (!firstClick) {
 					firstClick = true;
 					firstClicked = getClickedInfo(clicked, calendar);
 					selected[firstClicked.year] = {};
 					selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
+					// 첫번째 선택한 날짜를 sticky부분에 표현하기
+					$(".check-in-date").text(firstClicked.year+"."+firstClicked.month+"."+firstClicked.date);
+					$(".check-out-date").text("날짜 추가");
 				} else {
 					console.log('second click');
 					secondClick = true;
@@ -954,16 +1018,20 @@
 					var secondClickDateObj = new Date(secondClicked.year, 
 												secondClicked.month, 
 												secondClicked.date);
-
+					$(".check-out-date").text(secondClicked.year+"."+secondClicked.month+"."+secondClicked.date);
+					// 첫번째 클릭보다 뒤에 날짜를 클릭한 경우
 					if (firstClickDateObj > secondClickDateObj) {
-
+						// 두번째 클릭을 첫번째로 바꾸고, 첫번째 클릭을 두번째 클릭으로 바꾼다.
 						var cachedClickedInfo = secondClicked;
 						secondClicked = firstClicked;
 						firstClicked = cachedClickedInfo;
 						selected = {};
 						selected[firstClicked.year] = {};
 						selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
-
+						// 첫번째 선택한 날짜를 sticky부분에 표현하기(다른경우)
+						$(".check-in-date").text(firstClicked.year+"."+firstClicked.month+"."+firstClicked.date);
+						$(".check-out-date").text(secondClicked.year+"."+secondClicked.month+"."+secondClicked.date);
+					// 같은 날짜를 클릭할 경우
 					} else if (firstClickDateObj.getTime() ==
 								secondClickDateObj.getTime()) {
 						selected = {};
@@ -971,10 +1039,12 @@
 						secondClicked = [];
 						firstClick = false;
 						secondClick = false;
+						$(".check-in-date").text("날짜 추가");
+						$(".check-out-date").text("날짜 추가");
 						$(this).removeClass("selected");
 					}
 
-
+					// 선택한 날짜 추가
 					// add between dates to [selected]
 					selected = addChosenDates(firstClicked, secondClicked, selected);
 				}
@@ -983,12 +1053,16 @@
 			});			
 
 		}
+		/*
 		function selectDates(selected) {
 			if (!$.isEmptyObject(selected)) {
+				// first에 calendar_content
 				var dateElements1 = datesBody1.find('div');
+				// second calendar_content
 				var dateElements2 = datesBody2.find('div');
 
 				function highlightDates(passed_year, passed_month, dateElements){
+					// passed_year이라는 속성이 selected객체 안에 들어있으면 true
 					if (passed_year in selected && passed_month in selected[passed_year]) {
 						var daysToCompare = selected[passed_year][passed_month];
 						// console.log(daysToCompare);
@@ -1007,6 +1081,45 @@
 				highlightDates(nextYear, nextMonth, dateElements2);
 			}
 		}
+		*/
+		function selectDates(selected) {
+	         if (!$.isEmptyObject(selected)) {
+	            // first에 calendar_content
+	            var dateElements1 = datesBody1.find('div');
+	            // second calendar_content
+	            var dateElements2 = datesBody2.find('div');
+
+	            function highlightDates(passed_year, passed_month, dateElements){
+	               // passed_year이라는 속성이 selected객체 안에 들어있으면 true
+	               if (passed_year in selected && passed_month in selected[passed_year]) {
+	                  var daysToCompare = selected[passed_year][passed_month];
+	                  // console.log(daysToCompare);
+	                
+	      
+	           var existPastDate = false;
+	           for (var d in daysToCompare) {
+	                        dateElements.each(function(index) {
+	                           if (parseInt($(this).text()) == daysToCompare[d] && $(this).hasClass('past-date')) {
+	            existPastDate = true;
+	                           }
+	                        }); 
+	         if (!existPastDate) {  
+	            dateElements.each(function(index) {
+	                             if (parseInt($(this).text()) == daysToCompare[d]) {
+	          
+	                               $(this).addClass('selected');
+	                             }
+	                           }); 
+	                        }  
+	                    }
+	                  
+	               }
+	            }
+
+	            highlightDates(year, month, dateElements1);
+	            highlightDates(nextYear, nextMonth, dateElements2);
+	         }
+	      }
 
 		function makeMonthArray(passed_month, passed_year) { // creates Array specifying dates and weekdays
 			var e=[];
@@ -1154,9 +1267,10 @@
 			return clickedInfo;
 		}
 
-
+		// 선택한 날짜 추가 !!!!
 		// Finding between dates MADNESS. Needs refactoring and smartening up :)
 		function addChosenDates(firstClicked, secondClicked, selected) {
+			// 두번째 선택한 값이 년, 월, 일 중에 하나라도 크면 실행
 			if (secondClicked.date > firstClicked.date || 
 				secondClicked.month > firstClicked.month ||
 				secondClicked.year > firstClicked.year) {
@@ -1164,12 +1278,16 @@
 				var added_year = secondClicked.year;
 				var added_month = secondClicked.month;
 				var added_date = secondClicked.date;
+				// 이게 값이다!!!!
 				console.log(selected);
 
+				// 두번째 클릭한 값에 연도가 첫번째 선택한 년도 보다 클 경우
 				if (added_year > firstClicked.year) {	
+					// 두번째 클릭 연도의 모든 월의 모든 날짜를 추가한다.
 					// first add all dates from all months of Second-Clicked-Year
 					selected[added_year] = {};
 					selected[added_year][added_month] = [];
+					// 두번째 클릭 날보다 전날 까지
 					for (var i = 1; 
 						i <= secondClicked.date;
 						i++) {
@@ -1236,5 +1354,30 @@
 			}
 			return selected;
 		}
+		
+		function parse(opendate) {
+			var y = opendate.substr(0,4);
+			var m = opendate.substr(5,2);
+			var d = opendate.substr(8,2);
+			return new Date(y,m-1,d);
+		}
+		
+		$(".button-erase").click(function() {
+			selected = {};
+			firstClicked = [];
+			secondClicked = [];
+			firstClick = false;
+			secondClick = false;
+			$(".check-in-date").text("날짜 추가");
+			$(".check-out-date").text("날짜 추가");
+			$(".calendar").find(".calendar_content").find("div").each(function() {
+				$(this).removeClass("selected");
+			})
+		});
+		
+		
+		
+		
+		
 	});
 </script>
