@@ -64,7 +64,7 @@ public class LodgingController {
 		// 로그인한 유저의 숙소 중 숙소 상태가 "등록중"인 숙소 반환
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
-
+		
 		model.addAttribute("loginedUser", user);
 		model.addAttribute("lodgingRegistering", lodgingRegistering);
 		model.addAttribute("ldgType", typeCmCode);
@@ -90,13 +90,14 @@ public class LodgingController {
 		
 		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
 		// 오류발생
-//		if(lrForm.getStatus()!=null) {
-//			BeanUtils.copyProperties(lrForm, lodging);
-//			lodgingService.updateLodging(lodging);
-//			System.out.println("업데이트 실행");
-//			
-//			return "redirect:home";
-//		}
+		if(!lrForm.getStatus().isEmpty()) {
+			BeanUtils.copyProperties(lrForm, lodging);
+			lodgingService.updateLodging(lodging);
+			System.out.println(lrForm.getStatus());
+			System.out.println("업데이트 실행");
+			
+			return "redirect:home";
+		}
 		
 		// 등록상태가 null일 경우 등록상태:등록중 으로 초기화 먼저 실행 후 숙소등록 작업 실행
 		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
