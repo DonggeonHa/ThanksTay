@@ -502,7 +502,7 @@
                             })
                         },
                         fail: function(error) {
-                            console.log("로그인은 성공했지만, request user information : " +  JSON.stringify(error));
+                            console.log("로그인은 성공했지만, request user informations : " +  JSON.stringify(error));
                         }
                     })
                 },
