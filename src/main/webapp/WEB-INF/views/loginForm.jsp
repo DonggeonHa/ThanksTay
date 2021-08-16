@@ -508,7 +508,6 @@
                 },
                 fail: function(error) {
                     console.log("failed to login: " + JSON.stringify(error));
-
                 }
             })
         })
