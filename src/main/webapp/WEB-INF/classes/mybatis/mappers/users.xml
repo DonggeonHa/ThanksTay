@@ -59,6 +59,13 @@
         (user_seq.nextval, #{password}, #{name}, #{email}, TO_DATE(#{birth},'YYYY-MM-DD'))
     </insert>
 
+    <insert id="insertKakao" parameterType="com.tt.User.UserVO">
+        INSERT INTO thxtay_user
+        (user_no, user_picture, user_name, user_email, user_birth)
+        VALUES
+        (user_seq.nextval, #{picture}, #{name}, #{email}, TO_DATE(#{birth},'YYYY-MM-DD'))
+    </insert>
+
     <update id="updateProfile" parameterType="com.tt.User.UserVO">
         UPDATE
             thxtay_user

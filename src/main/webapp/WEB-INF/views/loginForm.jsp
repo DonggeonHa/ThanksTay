@@ -453,6 +453,81 @@
                 }
             });
         })
+
+        Kakao.init('13a6b02c06860d591edf918abaed6fea'); // 발급받은 javascript 키를 사용
+        console.log(Kakao.isInitialized()); // sdk초기화 여부 판단
+
+        // 카카오 로그인
+        $('#kakaoLogin').click(function() {
+            Kakao.Auth.login({
+                success: function() {
+                    Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: res => {
+                            const email = res.kakao_account.email;
+                            const picture = res.properties.profile_image;
+                            const name = res.properties.nickname;
+
+                            const birthday = res.kakao_account.birthday;
+                            // 카카오에서 받아오는 나이는 출생년도는 테스트용으론 불가하고, 연령대만 받아올 수 있어서 가정을 둔다.
+                            const ageRange = res.kakao_account.age_range;
+                            var age = ageRange.substring(0,2);
+
+                            const getBirth = a => {
+                                const date = new Date();
+                                return date.getFullYear() - a + 1; // 올해 - 나이 + 1
+                            }
+
+                            var birth = getBirth(age) + "-" + birthday.substr(0,2) + "-" + birthday.substr(2,4);
+
+                            $.ajax({
+                                url:"/registerKakao",
+                                dataType: 'json',
+                                method: 'post',
+                                data:{
+                                    name: name,
+                                    birth: birth,
+                                    email: email,
+                                    picture: picture
+                                },
+                                success:function (retVal) {
+                                    if (retVal.res === "OK") {
+                                        alertify.alert('로그인&회원가입 성공');
+                                    }
+                                    emailModal.hide();
+                                },
+                                error : function () {
+                                    alertify.alert('ajax통신 실패!!!!');
+                                }
+                            })
+                        },
+                        fail: function(error) {
+                            console.log("로그인은 성공했지만, request user information : " +  JSON.stringify(error));
+                        }
+                    })
+                },
+                fail: function(error) {
+                    console.log("failed to login: " + JSON.stringify(error));
+
+                }
+            })
+        })
+
+        //카카오로그아웃
+        $('#kakaoLogout').click(function() {
+            if (Kakao.Auth.getAccessToken()) {
+                Kakao.API.request({
+                    url: '/v1/user/unlink',
+                    success: function (response) {
+                        console.log(response)
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                })
+                Kakao.Auth.setAccessToken(undefined)
+            }
+        })
     })
 
     //이미지 미리보기
@@ -483,51 +558,6 @@
             reader.readAsDataURL(f);
         });
     }
-</script>
-<script>
-    Kakao.init('13a6b02c06860d591edf918abaed6fea'); // 발급받은 javascript 키를 사용
-    console.log(Kakao.isInitialized()); // sdk초기화 여부 판단
 
-    // 카카오 로그인
-    $('#kakaoLogin').click(function() {
-        Kakao.Auth.login({
-            success: function() {
-                Kakao.API.request({
-                    url: '/v2/user/me',
-                    success: res => {
-                        const email = res.kakao_account.email;
-                        const picture = res.properties.profile_image;
-                        const name = res.properties.nickname;
-                        const birth = res.kakao_account.birthday;
-                        const age = res.kakao_account.age_range;
 
-                        console.log("이름 사진 이메일 생일 연령대 : " + name, picture, email, birth, age);
-                    },
-                    fail: function(error) {
-                        console.log("로그인은 성공했지만, request user information : " +  JSON.stringify(error));
-                    }
-                })
-            },
-            fail: function(error) {
-                console.log("failed to login: " + JSON.stringify(error));
-
-            }
-        })
-    })
-
-    //카카오로그아웃
-    $('#kakaoLogout').click(function() {
-        if (Kakao.Auth.getAccessToken()) {
-            Kakao.API.request({
-                url: '/v1/user/unlink',
-                success: function (response) {
-                    console.log(response)
-                },
-                fail: function (error) {
-                    console.log(error)
-                },
-            })
-            Kakao.Auth.setAccessToken(undefined)
-        }
-    })
 </script>
