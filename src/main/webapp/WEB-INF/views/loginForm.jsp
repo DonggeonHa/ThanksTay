@@ -497,7 +497,7 @@
                                     emailModal.hide();
                                 },
                                 error : function () {
-                                    alertify.alert('ajax통신 실패!!!!');
+                                    alertify.alert('ajax통신 실패!!!!!!');
                                 }
                             })
                         },
