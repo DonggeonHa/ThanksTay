@@ -5,20 +5,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-
+	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+	
+</script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/f421352664.js"
 	crossorigin="anonymous"></script>
+
+<!-- 카카오 지도 -->
+<!-- <script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ad83f287ea8866c42b5fa5c4bce63d20&libraries=services,clusterer"></script>
+ -->
 <style>
 /* 공통 CSS */
 .container-fluid {
@@ -111,57 +116,6 @@ body {
 	align-items: center;
 }
 
-.register-form {
-	width: 100%;
-}
-
-.type-choose-btn-wrapper {
-	width: 100%;
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.type-choose-btn-wrapper button:hover {
-	background: tomato;
-}
-
-.type-choose-btn-wrapper {
-	padding-top: 30px;
-}
-
-.type-choose-btn {
-	width: 100%;
-	display: flex;
-	border-radius: 10px;
-	border: 1px solid #d4d4d4;
-}
-
-.type-choose-btn.active {
-	background: tomato;
-}
-
-.type-font-pos {
-	
-}
-
-.type-font {
-	margin: 16px 16px 16px 24px;
-}
-
-.type-img-pos {
-	margin-left: auto;
-}
-
-.type-img {
-	
-}
-
-.type-img img {
-	width: 55px;
-	height: 55px;
-}
-
 .wrapper {
 	background-color: gray;
 	display: flex;
@@ -185,6 +139,12 @@ body {
 	margin: 5px;
 	text-align: center;
 }
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
 </style>
 
 
@@ -197,7 +157,7 @@ body {
 			<div class="left-area">
 				<a href="home" class="go-main"><i class="fab fa-airbnb"
 					style="color: white; padding: 10px;"></i></a>
-				<p>숙소 타입을 선택하세요!</p>
+				<p>숙소 정보를 입력해주세요!</p>
 			</div>
 			<div class="right-area">
 				<div class="form-wrapper">
@@ -207,43 +167,67 @@ body {
 								<button class="save-info-items">도움말</button>
 							</div>
 							<div>
-								<button class="save-info-items">저장 및 나가기</button>
+								<button id="save-btn2" class="save-info-items">저장 및 나가기</button>
 							</div>
 						</div>
 					</div>
-					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
-						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post"
-							action="/lodgingDetailAdd">
-							<c:forEach var="lodgingType" items="${lodgingTypes }">
-								<div class="type-choose-btn-wrapper">
-									<button class="type-choose-btn" type="button"
-										role="radio" aria-checked="false">
-										<input type="hidden" class="" name="ldgType" value="">
-										<div class="type-font-pos">
-											<div class="type-font">${lodgingType.codeContent }</div>
-										</div>
-
-										<div class="type-img-pos">
-											<div class="type-img">
-												<img aria-hidden="true" alt=""
-													src="https://a0.muscache.com/im/pictures/eadbcbdb-d57d-44d9-9a76-665a7a4d1cd7.jpg?im_w=240"
-													data-original-uri="https://a0.muscache.com/im/pictures/eadbcbdb-d57d-44d9-9a76-665a7a4d1cd7.jpg?im_w=240"
-													style="object-fit: cover; vertical-align: bottom; border-radius: 4px;">
-											</div>
-										</div>
-									</button>
-								</div>
-							</c:forEach>
+						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center">
+						<form id="form-register" style="width: 50%;" method="post"
+							novalidate="novalidate">
+							<c:if test="${lodgingRegistering.status ne null }">
+								<input type="hidden" name="no" value="${lodgingRegistering.no }">
+								<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
+							</c:if>
+							<!-- 객체로 넣어서 전달하는법 알아보기 -->
+							<input type="hidden" name="name" value="${lodgingRegistering.name }">
+							<input type="hidden" name="status" value="${lodgingRegistering.status }"> 
+							<input type="hidden" name="lodgingTypeCode" value="${lodgingRegistering.lodgingTypeCode }">
+							<input type="hidden" name="bedroom" value="${lodgingRegistering.bedroom}">
+							<input type="hidden" name="bathroom" value="${lodgingRegistering.bathroom}">
+							<input type="hidden" name="doublebed" value="${lodgingRegistering.doublebed}">
+							<input type="hidden" name="singlebed" value="${lodgingRegistering.singlebed}">
+							<input type="hidden" name="description" value="${lodgingRegistering.description}">
+							<input type="hidden" name="latitude" value="33.450701"> 
+							<input type="hidden" name="longitude" value="126.570667">
+								
+							
+							<div class="mb-3" style="text-align: left">
+								<label class="form-label">시군구</label> <input type="text"
+									class="form-control" style="width: 100%" id="lodging-city"
+									name="city" autocomplete="off"
+									value="${lodgingRegistering.city }" />
+							</div>
+							<div class="mb-3" style="text-align: left">
+								<label class="form-label">주소</label> <input type="text"
+									class="form-control" style="width: 100%" id="lodging-address"
+									name="address" autocomplete="off"
+									value="${lodgingRegistering.address }" />
+							</div>
+							<div class="mb-3" style="text-align: left">
+								<label class="form-label">상세주소</label> <input type="text"
+									class="form-control" style="width: 100%"
+									id="lodging-address-rest" name="addressRest" autocomplete="off"
+									value="${lodgingRegistering.addressRest }" />
+							</div>
+							<div class="mb-3" style="text-align: left">
+								<label class="form-label">우편번호</label> <input type="text"
+									class="form-control" style="width: 100%" id="lodging-post-no"
+									name="postNo" autocomplete="off"
+									value="${lodgingRegistering.postNo }" />
+							</div>
 						</form>
+						<!-- <div>
+							카카오 지도
+							<div id="map" style="margin:0 auto; width: 250px; height:200px"></div>
+						</div> -->
 					</div>
 
 					<div style="height: 9%">
 						<div class="progress" style="height: 3px;">
 							<div class="progress-bar" role="progressbar" aria-valuenow="40"
 								aria-valuemin="0" aria-valuemax="10"
-								style="width: 25%; background-color: black; height: 2px;">
+								style="width: 50%; background-color: black; height: 2px;">
 							</div>
 						</div>
 						<div class="nextback-box">
@@ -262,27 +246,36 @@ body {
 			</div>
 		</div>
 	</div>
-	<script>
-			
-		$(".type-choose-btn-wrapper button").click(
-				function() {
-					$(".type-choose-btn-wrapper *").removeClass("active");
-					$(".type-choose-btn-wrapper button input").removeAttr("name");
-					$(this).addClass("active");
-					$(this).find("input").addClass("active");
-					$(this).find("input").attr("name","ldgType");
-					clickedType = $('.type-choose-btn-wrapper').find('.active').text().trim();
-					$(".type-choose-btn-wrapper button input.active").val(clickedType);
-				}
-		);
 
-		$("#prev").click(function() {
-			history.back();
-		});
-		
-		$("#next").click(function() {
-			$(".register-form").submit();
-		});
+	<script>
+	/* serialize */
+	//$("#form-register").serialize();
+	/*  */
+	$("#save-btn2").click(function(){
+ 		/* 클릭 시 숙소명의 값을 읽어와야 한다. */
+		$("#form-register").attr("action","saveTemp")
+		$("#form-register").submit()
+	});
+	 
+	$("#prev").click(function() {
+		history.back();
+	})
+
+	$("#next").click(function() {
+		$("#form-register").attr("action","saveTemp")
+		$("#form-register").submit();
+	})
+
+		/* /* 카카오 지도 API */
+		// 지도를 담을 dom
+		/* var container = document.getElementById("map"); */
+		// 지도를 생성할 때 필요한 기본 옵션
+		/* var options = {
+			center : new kakao.maps.LatLng(33.450701, 126.570667), //LatLng: 위도경도 받아오는 클래스
+			level : 5
+		}; */
+		//지도 생성 및 객체 리턴		
+		/* var map = new kakao.maps.Map(container, options); */ 
 	</script>
 </body>
 </html>

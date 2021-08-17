@@ -35,8 +35,8 @@ public class HostMainController {
 
 	@GetMapping(path = { "/hosting" })
 	public String hosting(@LoginUser UserVO user, Model model) {
-		
 		logger.info(user);
+		
 		if(user!=null)
 		model.addAttribute("loginedUser",user);
 		
@@ -49,7 +49,7 @@ public class HostMainController {
 	public String lodgingRegisterStatus(@LoginUser UserVO user, Model model) {
 		
 		model.addAttribute("loginedUser",user);
-		System.out.println("user는 : "+user);
+		System.out.println("로그인한 유저:"+user);
 		if (user == null) { // 로그인창 ㄱㄱ
 			return "redirect:login";
 		}
@@ -66,9 +66,6 @@ public class HostMainController {
 		List<LodgingVO> lodgings = hostService.getLodgingsByLoginedUserNo(user.getNo());
 		model.addAttribute("loginedUser", user);
 		model.addAttribute("lodgings", lodgings);
-
-		// 주소 입력시 카카오 지도 api에서 구해주는 위경도 값 입력해야함 -> 남미씨 쪽이랑 연관
-		// 나머지는 -> input
 
 		return "host/lodgingRegisterForm";
 	}

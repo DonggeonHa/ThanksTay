@@ -5,20 +5,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-
+	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+	
+</script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/f421352664.js"
 	crossorigin="anonymous"></script>
+
+<!-- 카카오 지도 -->
+<!-- <script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ad83f287ea8866c42b5fa5c4bce63d20&libraries=services,clusterer"></script>
+ -->
 <style>
 /* 공통 CSS */
 .container-fluid {
@@ -75,8 +80,32 @@ body {
 .nextback-box button:hover {
 	background-color: gray;
 }
-
 /* 공통 CSS */
+.amt-area {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.amt-area .btn-wrapper {
+	display: flex;
+	align-items: stretch;
+	margin-top: 20px;
+	flex-flow: wrap;
+}
+
+.amt-area .amt-category .btn-wrapper label {
+	width: 50%;
+	padding: 10px 0;
+	vertical-align: middle;
+}
+
+.amt-area .amt-category .btn-wrapper input[type="checkbox"] {
+	width: 22px;
+	margin-top: 5px;
+	padding: auto 0;
+	vertical-align: middle;
+}
+
 .left-area {
 	align-items: center;
 	flex: 1;
@@ -111,57 +140,6 @@ body {
 	align-items: center;
 }
 
-.register-form {
-	width: 100%;
-}
-
-.type-choose-btn-wrapper {
-	width: 100%;
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.type-choose-btn-wrapper button:hover {
-	background: tomato;
-}
-
-.type-choose-btn-wrapper {
-	padding-top: 30px;
-}
-
-.type-choose-btn {
-	width: 100%;
-	display: flex;
-	border-radius: 10px;
-	border: 1px solid #d4d4d4;
-}
-
-.type-choose-btn.active {
-	background: tomato;
-}
-
-.type-font-pos {
-	
-}
-
-.type-font {
-	margin: 16px 16px 16px 24px;
-}
-
-.type-img-pos {
-	margin-left: auto;
-}
-
-.type-img {
-	
-}
-
-.type-img img {
-	width: 55px;
-	height: 55px;
-}
-
 .wrapper {
 	background-color: gray;
 	display: flex;
@@ -185,6 +163,34 @@ body {
 	margin: 5px;
 	text-align: center;
 }
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+#photo-zone {
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+#photo-zone .boxdesign {
+	transform: translate(0px, -20px);
+	width: 450px;
+	height: 350px;
+	margin: 10px;
+	text-align: center;
+	border: blue dotted 1px;
+}
+
+#photo-zone .boxdesign img {
+	width: 450px;
+	height: 350px;
+	object-fit: cover;
+}
 </style>
 
 
@@ -197,7 +203,7 @@ body {
 			<div class="left-area">
 				<a href="home" class="go-main"><i class="fab fa-airbnb"
 					style="color: white; padding: 10px;"></i></a>
-				<p>숙소 타입을 선택하세요!</p>
+				<p>숙소 정보를 입력해주세요!</p>
 			</div>
 			<div class="right-area">
 				<div class="form-wrapper">
@@ -207,43 +213,75 @@ body {
 								<button class="save-info-items">도움말</button>
 							</div>
 							<div>
-								<button class="save-info-items">저장 및 나가기</button>
+								<button id="save-btn2" class="save-info-items">저장 및 나가기</button>
 							</div>
 						</div>
 					</div>
-					<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
 					<div id="ldg-step1"
-						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form class="register-form" method="post"
-							action="/lodgingDetailAdd">
-							<c:forEach var="lodgingType" items="${lodgingTypes }">
-								<div class="type-choose-btn-wrapper">
-									<button class="type-choose-btn" type="button"
-										role="radio" aria-checked="false">
-										<input type="hidden" class="" name="ldgType" value="">
-										<div class="type-font-pos">
-											<div class="type-font">${lodgingType.codeContent }</div>
-										</div>
-
-										<div class="type-img-pos">
-											<div class="type-img">
-												<img aria-hidden="true" alt=""
-													src="https://a0.muscache.com/im/pictures/eadbcbdb-d57d-44d9-9a76-665a7a4d1cd7.jpg?im_w=240"
-													data-original-uri="https://a0.muscache.com/im/pictures/eadbcbdb-d57d-44d9-9a76-665a7a4d1cd7.jpg?im_w=240"
-													style="object-fit: cover; vertical-align: bottom; border-radius: 4px;">
-											</div>
-										</div>
-									</button>
+						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center">
+						<!-- 파일 업로드  단수-->
+						<div id="photo-zone" >
+						
+							<div class="boxdesign"><img src="${imgList[0].uri }"></div>
+							<div class="boxdesign"><img src="${imgList[1].uri }"></div>
+							<div class="boxdesign"><img src="${imgList[2].uri }"></div>
+							<div class="boxdesign"><img src="${imgList[3].uri }"></div>
+						</div>
+						<form id="form-upfile" style=" bottom:10%; " method="post" action="lodgingImgAdd" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-12 mb-1 d-flex justify-content-between">
+									<span>숙소사진을 첨부하세요 </span> 
 								</div>
-							</c:forEach>
+								<div class="col-12">
+									<div class="mb-3">
+										<div class="input-group">
+											<input type="file" class="form-control" name="upfile"
+												aria-label="Upload">
+											<button id="file-remove" class="btn btn-outline-danger" type="button">
+												<i class='fas fa-minus'></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="text-end">
+								<button type="submit" id="enroll" class="btn btn-primary">등록</button>
+							</div>
 						</form>
+						<!-- 파일 업로드  복수-->
+						<!-- <form id="form-upfile" style="width: 50%;" method="post"
+							novalidate="novalidate" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-12 mb-1 d-flex justify-content-between">
+									<span>숙소사진을 첨부하세요 </span> <span><button type="button"
+											class="btn btn-outline-primary btn-sm">
+											필드추가 <i class='fas fa-plus'></i>
+										</button></span>
+								</div>
+								<div class="col-12">
+									<div class="mb-3">
+										<div class="input-group">
+											<input type="file" class="form-control" name="upfiles"
+												aria-label="Upload">
+											<button class="btn btn-outline-danger" type="button">
+												<i class='fas fa-minus'></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="text-end">
+								<button type="submit" class="btn btn-primary">등록</button>
+							</div>
+						</form> -->
 					</div>
-
+					
+					<!-- 뒤로가기-다음페이지가기 -->
 					<div style="height: 9%">
 						<div class="progress" style="height: 3px;">
 							<div class="progress-bar" role="progressbar" aria-valuenow="40"
 								aria-valuemin="0" aria-valuemax="10"
-								style="width: 25%; background-color: black; height: 2px;">
+								style="width: 50%; background-color: black; height: 2px;">
 							</div>
 						</div>
 						<div class="nextback-box">
@@ -262,27 +300,39 @@ body {
 			</div>
 		</div>
 	</div>
-	<script>
-			
-		$(".type-choose-btn-wrapper button").click(
-				function() {
-					$(".type-choose-btn-wrapper *").removeClass("active");
-					$(".type-choose-btn-wrapper button input").removeAttr("name");
-					$(this).addClass("active");
-					$(this).find("input").addClass("active");
-					$(this).find("input").attr("name","ldgType");
-					clickedType = $('.type-choose-btn-wrapper').find('.active').text().trim();
-					$(".type-choose-btn-wrapper button input.active").val(clickedType);
-				}
-		);
 
-		$("#prev").click(function() {
-			history.back();
-		});
-		
-		$("#next").click(function() {
-			$(".register-form").submit();
-		});
+	<script>
+	$("#form-upfile #enroll").click(function(){
+		if($("#form-upfile input").val()==''){
+			alert("등록할 사진을 선택해주세요");
+			return false;
+		}
+	})
+	
+	$("#file-remove").click(function(){
+		$("#form-upfile input").val('');
+	})
+	
+	/* 이미지 add에선 의미가 없음 */
+	$("#save-btn2").click(function(){
+ 		/* 클릭 시 숙소명의 값을 읽어와야 한다. */
+		$("#form-register").attr("action","saveTemp")
+		$("#form-register").submit()
+	});
+	 
+	$("#prev").click(function() {
+		history.back();
+	})
+
+	$("#next").click(function() {
+		location.href="lodgingRegister"
+	})
+	
+	var list=[];
+	$("input:checked").each(function(i){
+		list.push($(this).val());
+	})
+	console.log(list);
 	</script>
 </body>
 </html>

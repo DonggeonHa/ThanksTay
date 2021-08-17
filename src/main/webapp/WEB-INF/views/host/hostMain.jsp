@@ -110,7 +110,6 @@ body {
 		<%@include file="../common/hostHeader.jsp"%>
 		<section>
 			<div class="todayBox">
-				<%-- <c:if 숙소상태: !등록중> --%>
 				<div class="todayInnerbox">
 					<div class="todayTitle">
 						<p>투데이</p>
@@ -119,16 +118,6 @@ body {
 					</div>
 					<div class="todayNotice">${loginedUser.name }님 지금 바로 에어비앤비의 호스트가 되어 보세요!</div>
 				</div>
-				<%-- </c:if>
-					<c:if 숙소상태: 등록중>
-					<div class="todayInnerbox">
-						<div class="todayTitle">
-							<p>투데이</p>
-							<span><a href="#"><button class="enrollButton">숙소 등록 완료하기</button></a></span>
-						</div>
-						<div class="todayNotice">숙소 등록 절차가 거의 완료되었습니다! 숙소 페이지에 누락된 세부정보 몇 가지를 입력해주세요.</div>
-					</div>
-				</c:if> --%>
 			</div>
 			<div class="reservationWrapperBox">
 				<div class="reservationAlarmBox"></div>

@@ -181,10 +181,17 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form id="form-register" style="width: 50%;" method="get"
-							action="saveTemp" novalidate="novalidate">
-							<input type = "hidden" name="status" value="${lodgingRegistering.status }">
-							<input type = "hidden" name="lodgingTypeCode" value="${ldgType }">
+						<form id="form-register" style="width: 50%;" method="post"
+							novalidate="novalidate">
+							<c:if test="${lodgingRegistering.status ne null }">
+								<input type="hidden" name="no" value="${lodgingRegistering.no }">
+								<input type="hidden" name="userNo"
+									value="${lodgingRegistering.userNo }">
+							</c:if>
+							<input type="hidden" name="status"
+								value="${lodgingRegistering.status }"> <input
+								type="hidden" name="lodgingTypeCode" value="${ldgType }">
+
 							<div class="mb-3" style="text-align: left">
 								<label class="form-label">숙소명</label> <input type="text"
 									class="form-control" style="width: 100%" id="lodging-name"
@@ -309,12 +316,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			})	
 		});
 
-	 	$("#save-btn").click(function(){
+		$("#save-btn").click(function(){
 	 		/* 클릭 시 숙소명의 값을 읽어와야 한다. */
 	 		if(!$("#lodging-name").val()){
 	 			alert("숙소명을 입력해주세요!")
 	 			return false;
 	 		}
+			$("#form-register").attr("action","saveTemp")
 			$("#form-register").submit()
 		});
 		 
@@ -323,7 +331,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		})
 
 		$("#next").click(function() {
-			$(".register-form").submit();
+			$("#form-register").attr("action","lodgingAddressAdd")
+			$("#form-register").submit();
 		})
 	</script>
 </body>
