@@ -61,7 +61,6 @@ public class UserController {
 
 		// UserService의 registerUser(user)를 호출해서 업무로직을 수행한다.
 		userService.registerUser(user);
-		System.out.println(user.getBirth() + ": 생년월일");
 
 		retVal.put("res", "OK");
 		return retVal;

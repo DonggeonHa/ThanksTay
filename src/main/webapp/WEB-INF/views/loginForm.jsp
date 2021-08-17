@@ -432,7 +432,15 @@
             var formData = new FormData();
             formData.append("picture", $("#input-image")[0].files[0]);
             formData.append("email", $.trim($('#loginEmail').val()));
+            /* key 확인하기 */
+            for (let key of formData.keys()) {
+                console.log(key);
+            }
 
+            /* value 확인하기 */
+            for (let value of formData.values()) {
+                console.log(value);
+            }
             jQuery.ajax({
                 url : "/img",
                 type : "POST",

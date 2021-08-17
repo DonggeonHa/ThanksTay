@@ -14,7 +14,7 @@
 		background: #1B1B27;
 		overflow-x: hidden;
 		overflow-y: auto;
-		border-right: 4px solid #ef900e;
+		border-right: 4px solid #c41dff;
 	}
 
 	#page-content-wrapper {

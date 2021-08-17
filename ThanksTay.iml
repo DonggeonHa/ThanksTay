@@ -36,6 +36,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-websocket:5.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.java-websocket:Java-WebSocket:1.5.2" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi:4.1.2" level="project" />
@@ -110,7 +113,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.2.16.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.2.16.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.2.16.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.2.16.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.2.16.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.2.16.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.2.16.RELEASE" level="project" />
