@@ -2,6 +2,7 @@ package com.tt.User;
 
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
+import com.tt.web.form.KakaoRegisterForm;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
 import org.apache.tiles.request.Request;
@@ -60,8 +61,39 @@ public class UserController {
 
 		// UserService의 registerUser(user)를 호출해서 업무로직을 수행한다.
 		userService.registerUser(user);
+		System.out.println(user.getBirth() + ": 생년월일");
 
 		retVal.put("res", "OK");
+		return retVal;
+	}
+
+	@PostMapping("/registerKakao")
+	@ResponseBody
+	public Map<String, Object> registerKakao(KakaoRegisterForm kakaoUserRegisterForm) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		// User객체를 생성하고, UserRegisterForm의 값을 User객체로 복사한다.
+		UserVO user = new UserVO();
+		BeanUtils.copyProperties(kakaoUserRegisterForm, user);
+
+		int res = userService.getUserByEmail(kakaoUserRegisterForm.getEmail());
+
+		if (res == 1) {
+
+			userService.loginKakao(user);
+
+			retVal.put("res", "OK");
+			return retVal;
+		} else if (res == 0) {
+
+			// UserService의 registerUser(user)를 호출해서 업무로직을 수행한다.
+			userService.registerKakao(user);
+			System.out.println(user.getBirth() + ": 생년월일");
+
+			retVal.put("res", "OK");
+			return retVal;
+		}
+
+		retVal.put("res", "FAIL");
 		return retVal;
 	}
 

@@ -170,7 +170,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	margin: 0;
 }
 
-#photo-zone {
+#photo-zone {	
 	width: 80%;
 	display: flex;
 	flex-wrap: wrap;
@@ -179,16 +179,21 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 #photo-zone .boxdesign {
 	transform: translate(0px, -20px);
-	width: 450px;
-	height: 350px;
+	/* width: 450px;
+	height: 350px; */
+	/* 노트북 */
+	width: 250px;
+	height: 200px;
+	/* width:40%;
+	height:50%; */
 	margin: 10px;
 	text-align: center;
 	border: blue dotted 1px;
 }
 
 #photo-zone .boxdesign img {
-	width: 450px;
-	height: 350px;
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
 }
 </style>
@@ -227,7 +232,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<div class="boxdesign"><img src="${imgList[2].uri }"></div>
 							<div class="boxdesign"><img src="${imgList[3].uri }"></div>
 						</div>
-						<form id="form-upfile" style=" bottom:10%; " method="post" action="lodgingImgAdd" enctype="multipart/form-data">
+						<form id="form-upfile" style="margin-top:20%; " method="post" action="lodgingImgAdd" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-12 mb-1 d-flex justify-content-between">
 									<span>숙소사진을 첨부하세요 </span> 
@@ -235,7 +240,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								<div class="col-12">
 									<div class="mb-3">
 										<div class="input-group">
-											<input type="file" class="form-control" name="upfile"
+											<input type="file" id="form-upload" class="form-control" name="upfile"
 												aria-label="Upload">
 											<button id="file-remove" class="btn btn-outline-danger" type="button">
 												<i class='fas fa-minus'></i>
@@ -245,7 +250,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								</div>
 							</div>
 							<div class="text-end">
-								<button type="submit" id="enroll" class="btn btn-primary">등록</button>
+								<button type="button" id="enroll" class="btn btn-primary">등록</button>
 							</div>
 						</form>
 						<!-- 파일 업로드  복수-->
@@ -307,6 +312,26 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			alert("등록할 사진을 선택해주세요");
 			return false;
 		}
+		
+		/* ajax */
+		var formData=new FormData();
+		formData.append("picture", $("#form-upload")[0].files[0]);
+		//타입이 파일인 input 박스는 기본적으로 복수 파일 등록가능
+		$.ajax({
+			url:"/lodgingImgAdd"
+			,type:"POST"
+			,enctype:"multipart/form-data"
+			,dataType:"json"
+			,processData:false
+			,contentType:false
+			,data:formData
+			,success:function(retVal){
+				alert("접속성공"+retVal.upfile)
+			}
+			,error:function(){
+				alert("접속실패")
+			}
+		})
 	})
 	
 	$("#file-remove").click(function(){

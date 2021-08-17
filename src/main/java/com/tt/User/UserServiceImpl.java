@@ -32,6 +32,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void registerKakao(UserVO user) {
+		userDao.insertKakao(user);
+		SessionUtils.addAttribute("LOGINED_USER", user);
+	}
+
+	@Override
 	public int login(String userEmail, String userPassword) {
 		int res = -1;
 		UserVO user = userDao.getUserByEmail(userEmail);
@@ -47,6 +53,17 @@ public class UserServiceImpl implements UserService {
 			SessionUtils.addAttribute("LOGINED_USER", user);
 		}
 
+		return res;
+	}
+
+	@Override
+	public int loginKakao(UserVO user) {
+		int res = -1;
+		UserVO login = userDao.getUserByEmail(user.getEmail());
+
+		SessionUtils.addAttribute("LOGINED_USER", login);
+
+		res = 1;
 		return res;
 	}
 

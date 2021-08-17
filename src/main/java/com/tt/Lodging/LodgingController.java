@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math3.analysis.function.Constant;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +19,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -123,6 +126,43 @@ public class LodgingController {
 		return "host/lodgingImgAddForm";
 	}
 
+//	@PostMapping("/lodgingImgAdd")
+//	@ResponseBody
+//	public Map<String, Object> lodgingImgAddForm(@RequestParam(name="picture", required=false) MultipartFile upfile, @LoginUser UserVO user,
+//			
+//		MultipartHttpServletRequest req, Model model) throws IOException {
+//		
+//		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
+//		int lodgingNo = lodgingRegistering.getNo();
+//		Map<String,	Object> retVal = new HashMap<String, Object>();
+//		retVal.put("upfile", );//MultipartFile객체는 바이너리 데이터를 포함하고 있어서 json으로 변환이 되지 않는다.
+//		System.out.println(upfile);
+////		String uploadPath = req.getServletContext().getRealPath("resources/images/lodgings");
+////		System.out.println(uploadPath);
+////		String filename = System.currentTimeMillis() + upfile.getOriginalFilename();
+////		String filetype = upfile.getContentType();
+////		long filesize = upfile.getSize();
+////		
+////		FileItem fileItem = new FileItem();
+////		fileItem.setFilename(filename);
+////		fileItem.setFiletype(filetype);
+////		fileItem.setFilesize(filesize);
+////		
+////		// 파일 업로드, 주소 줄이는법 질문
+////		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
+////				/* 데스크톱 파일저장 주소*/
+////				//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
+////				/* 노트북주소 파일저장 주소*/
+////				"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings", filename)));
+////		
+////		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
+////		LodgingImgVO lodgingImg = new LodgingImgVO();
+////		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
+////		lodgingImg.setLodgingNo(lodgingNo);
+////		lodgingImgService.addImg(lodgingImg);
+//		
+//		return retVal;
+//	}
 	@PostMapping("/lodgingImgAdd")
 	public String lodgingImgAddForm(@LoginUser UserVO user, @RequestParam("upfile") MultipartFile upfile,
 			MultipartHttpServletRequest req, Model model) throws IOException {
@@ -147,8 +187,10 @@ public class LodgingController {
 
 		// 주소 줄이는법 질문
 		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
-				"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
-				filename)));
+		/* 데스크톱 파일저장 주소*/
+		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
+		/* 노트북주소 파일저장 주소*/
+		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings", filename)));
 		
 		// 등록중인 숙소 조회, 숙소이미지리스트 테이블에 insert
 		LodgingImgVO lodgingImg = new LodgingImgVO();
