@@ -14,6 +14,16 @@
     </definition>
 
 
+    <!-- Admin 쪽 -->
+    <definition name="Admin" template="/WEB-INF/tiles/adminLayouts.jsp">
+        <put-attribute name="Asidebar" value="/WEB-INF/views/common/adminSidebar.jsp" />
+        <put-attribute name="Aindex" value="" />
+    </definition>
+
+    <definition name="Admin/*" extends="Admin">
+        <put-attribute name="Aindex" value="/WEB-INF/views/Admin/{1}.jsp" />
+    </definition>
+
     <!-- Main 쪽 -->
     <definition name="Main" template="/WEB-INF/tiles/layouts.jsp">
    <!-- <put-attribute name="css" value="/WEB-INF/tiles/css.jsp" />
