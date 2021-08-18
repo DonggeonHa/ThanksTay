@@ -183,11 +183,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="hidden" name="name" value="${lodgingRegistering.name }">
 							<input type="hidden" name="status" value="${lodgingRegistering.status }"> 
 							<input type="hidden" name="lodgingTypeCode" value="${lodgingRegistering.lodgingTypeCode }">
-							<input type="hidden" name="bedroom" value="${lodgingRegistering.bedroom}">
-							<input type="hidden" name="bathroom" value="${lodgingRegistering.bathroom}">
-							<input type="hidden" name="doublebed" value="${lodgingRegistering.doublebed}">
-							<input type="hidden" name="singlebed" value="${lodgingRegistering.singlebed}">
-							<input type="hidden" name="description" value="${lodgingRegistering.description}">
+							<input type="hidden" name="bedroom" value="${lodgingRegistering.bedroom }">
+							<input type="hidden" name="bathroom" value="${lodgingRegistering.bathroom }">
+							<input type="hidden" name="doublebed" value="${lodgingRegistering.doublebed }">
+							<input type="hidden" name="singlebed" value="${lodgingRegistering.singlebed }">
+							<input type="hidden" name="description" value="${lodgingRegistering.description }">
 							<input type="hidden" name="latitude" value="33.450701"> 
 							<input type="hidden" name="longitude" value="126.570667">
 								

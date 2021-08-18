@@ -84,14 +84,14 @@ public class LodgingController {
 	}
 
 	@PostMapping("/lodgingAddressAdd")
-	public String lodgingAddressAddForm(@LoginUser UserVO user, /* LodgingRegisterForm lrForm, */ Model model) {
+	public String lodgingAddressAddForm(@LoginUser UserVO user, LodgingRegisterForm lrForm, Model model) {
 		logger.info("lodgingAddressAddForm 실행");
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 
 		model.addAttribute("loginUser", user);
-		model.addAttribute("lodgingRegistering", lodgingRegistering);
-
+		model.addAttribute("lodgingRegistering", lodgingRegistering==null?lrForm:lodgingRegistering);
+		
 		return "host/lodgingAddressAddForm";
 	}
 
