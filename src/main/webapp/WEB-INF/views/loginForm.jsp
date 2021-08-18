@@ -116,9 +116,13 @@
                     <label for="RegisterBirth">생년월일</label>
                     <p style="color: gray; font-size: small" class="pt-1">만 18세 이상의 성인만 회원으로 가입할 수 있습니다.</p>
                 </div>
-
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="RegisterEmail" placeholder="hong@naver.com">
+                    <input type="text" class="form-control" id="RegisterPhone" placeholder="010-1234-5678">
+                    <label for="RegisterBirth">전화번호</label>
+                    <p style="color: gray; font-size: small" class="pt-1">전화번호는 호스트나 게스트, 또는 에어비앤비에서 연락을 취하기 위해 필요합니다.</p>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="RegisterEmail" placeholder="hong@naver.com" readonly>
                     <label for="RegisterEmail">이메일</label>
                     <p style="color: gray; font-size: small" class="pt-1">예약 확인과 영수증을 이메일로 보내드립니다.</p>
                 </div>
@@ -275,10 +279,6 @@
             }
         }
 
-        function CheckBirth() {
-
-        }
-
         $('#btn-emailCheck').click(function () {
             var checkEmail = $.trim($('#loginEmail').val());
             if (!checkEmail) {
@@ -356,6 +356,7 @@
             var firstName = $.trim($('#FirstName').val());
             var name = firstName + lastName;
             var birth = $.trim($('#RegisterBirth').val());
+            var phone = $.trim($('#RegisterPhone').val());
             var email = $.trim($('#RegisterEmail').val());
             var password = $.trim($('#RegisterPassword').val());
 
@@ -376,6 +377,13 @@
             if (!birth) {
                 alertify.alert("생년월일을 입력해주세요.")
                 $('#RegisterBirth').focus();
+
+                return false;
+            }
+
+            if (!phone) {
+                alertify.alert("전화번호를 입력해주세요.")
+                $('#RegisterPhone').focus();
 
                 return false;
             }
@@ -402,6 +410,7 @@
                 data:{
                     name: name,
                     birth: birth,
+                    phone: phone,
                     email: email,
                     password: password
                 },
@@ -565,6 +574,11 @@
             reader.readAsDataURL(f);
         });
     }
-
-
+</script>
+<script>
+    $(document).on("keyup", "#RegisterPhone", function() {
+        $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-") );
+        // copy from https://cublip.tistory.com/326
+        //﻿ 원본과 class 명만 바뀐 상태다.
+    });
 </script>
