@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,8 @@ public class LodgingController {
 	}
 
 	@PostMapping("/lodgingDetailAdd")
-	public String lodgingDetailAddForm(@LoginUser UserVO user, Model model, @RequestParam("ldgType") String type) { // ,
+	public String lodgingDetailAddForm(@LoginUser UserVO user, Model model, LodgingRegisterForm lrForm,
+			@RequestParam("ldgType") String type) { // ,
 		logger.info("lodgingDetailAddForm 실행");
 
 		String typeCmCode = commonService.getCommonCodeByContent(type);
@@ -77,7 +79,7 @@ public class LodgingController {
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 
 		model.addAttribute("loginedUser", user);
-		model.addAttribute("lodgingRegistering", lodgingRegistering);
+		model.addAttribute("lodgingRegistering", lodgingRegistering == null ? lrForm : lodgingRegistering);
 		model.addAttribute("ldgType", typeCmCode);
 
 		return "host/lodgingDetailAddForm";
@@ -90,8 +92,8 @@ public class LodgingController {
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 
 		model.addAttribute("loginUser", user);
-		model.addAttribute("lodgingRegistering", lodgingRegistering==null?lrForm:lodgingRegistering);
-		
+		model.addAttribute("lodgingRegistering", lodgingRegistering == null ? lrForm : lodgingRegistering);
+
 		return "host/lodgingAddressAddForm";
 	}
 
@@ -116,122 +118,98 @@ public class LodgingController {
 		logger.info("lodgingImgAddForm 실행");
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
-		// 
+		//
 		int lodgingNo = lodgingRegistering.getNo();
-		System.out.println("숙소번호: "+lodgingNo);
-		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(lodgingNo);
-		System.out.println("이미지리스트사이즈"+imgList.toString());
+		int getCnt=4;
+		System.out.println("숙소번호: " + lodgingNo);
+		Map<String, Integer> condition= new HashMap<String, Integer>();
+		condition.put("lodgingNo", lodgingNo);
+		condition.put("getCnt", getCnt);
+		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(condition);
 		model.addAttribute("imgList", imgList);
+		System.out.println(imgList.size());
 		//
 		return "host/lodgingImgAddForm";
 	}
 
-//	@PostMapping("/lodgingImgAdd")
-//	@ResponseBody
-//	public Map<String, Object> lodgingImgAddForm(@RequestParam(name="picture", required=false) MultipartFile upfile, @LoginUser UserVO user,
-//			
-//		MultipartHttpServletRequest req, Model model) throws IOException {
-//		
-//		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
-//		int lodgingNo = lodgingRegistering.getNo();
-//		Map<String,	Object> retVal = new HashMap<String, Object>();
-//		retVal.put("upfile", );//MultipartFile객체는 바이너리 데이터를 포함하고 있어서 json으로 변환이 되지 않는다.
-//		System.out.println(upfile);
-////		String uploadPath = req.getServletContext().getRealPath("resources/images/lodgings");
-////		System.out.println(uploadPath);
-////		String filename = System.currentTimeMillis() + upfile.getOriginalFilename();
-////		String filetype = upfile.getContentType();
-////		long filesize = upfile.getSize();
-////		
-////		FileItem fileItem = new FileItem();
-////		fileItem.setFilename(filename);
-////		fileItem.setFiletype(filetype);
-////		fileItem.setFilesize(filesize);
-////		
-////		// 파일 업로드, 주소 줄이는법 질문
-////		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
-////				/* 데스크톱 파일저장 주소*/
-////				//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
-////				/* 노트북주소 파일저장 주소*/
-////				"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings", filename)));
-////		
-////		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
-////		LodgingImgVO lodgingImg = new LodgingImgVO();
-////		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
-////		lodgingImg.setLodgingNo(lodgingNo);
-////		lodgingImgService.addImg(lodgingImg);
-//		
-//		return retVal;
-//	}
 	@PostMapping("/lodgingImgAdd")
-	public String lodgingImgAddForm(@LoginUser UserVO user, @RequestParam("upfile") MultipartFile upfile,
+	@ResponseBody
+	public Map<String, Object> lodgingImgAddForm(@RequestParam(name = "picture", required = false) MultipartFile upfile,
+			@LoginUser UserVO user,
+
 			MultipartHttpServletRequest req, Model model) throws IOException {
 
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		int lodgingNo = lodgingRegistering.getNo();
 
-		// 숙소번호로 등록된 사진리스트 조회하기, 등록된 사진 갯수 전달
-		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(lodgingNo);
-		model.addAttribute("imgList", imgList);
-		
+		// 파일 업로드
 		String uploadPath = req.getServletContext().getRealPath("resources/images/lodgings");
-		System.out.println(uploadPath);
-		String filename = System.currentTimeMillis() + upfile.getOriginalFilename();
-		String filetype = upfile.getContentType();
-		long filesize = upfile.getSize();
-
+		String filename= System.currentTimeMillis()	+ upfile.getOriginalFilename();
 		FileItem fileItem = new FileItem();
 		fileItem.setFilename(filename);
-		fileItem.setFiletype(filetype);
-		fileItem.setFilesize(filesize);
-
-		// 주소 줄이는법 질문
 		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
-		/* 데스크톱 파일저장 주소*/
+		/* 데스크톱 파일저장 주소 */
 		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
 		/* 노트북주소 파일저장 주소*/
-		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings", filename)));
+		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
+		filename)));
 		
-		// 등록중인 숙소 조회, 숙소이미지리스트 테이블에 insert
+		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
 		LodgingImgVO lodgingImg = new LodgingImgVO();
 		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
 		lodgingImg.setLodgingNo(lodgingNo);
 		lodgingImgService.addImg(lodgingImg);
 
-		return "host/lodgingImgAddForm";
+		// 내려주는 파일
+		Map<String, Integer> condition= new HashMap<String, Integer>();
+		int getCnt=4;
+		condition.put("lodgingNo", lodgingNo);
+		condition.put("getCnt", getCnt);
+		List<LodgingImgVO> pictures = lodgingImgService.getImgListByLdgNo(condition);
+		System.out.println("pictures="+pictures);
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		retVal.put("upfile", pictures);// MultipartFile객체는 바이너리 데이터를 포함하고 있어서 json으로 변환이 되지 않는다.
+		logger.info("보내는 파일 " + pictures);
+		logger.info("리턴밸류 " + retVal);
+
+		return retVal;
 	}
 
 //	@PostMapping("/lodgingImgAdd")
-//	public String lodgingImgAddForm(@LoginUser UserVO user, AttachmentFileForm imgForm, MultipartHttpServletRequest request ) throws IOException{
-//		
-//		List<MultipartFile> uploadFiles = imgForm.getUpfiles();
-//		List<FileItem> fileItems = new ArrayList<>();
+//	public String lodgingImgAddForm(@LoginUser UserVO user, @RequestParam("upfile") MultipartFile upfile,
+//			MultipartHttpServletRequest req, Model model) throws IOException {
+//
 //		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 //		int lodgingNo = lodgingRegistering.getNo();
+//
+//		// 숙소번호로 등록된 사진리스트 조회하기, 등록된 사진 갯수 전달
+//		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(lodgingNo);
+//		model.addAttribute("imgList", imgList);
 //		
-//		String uploadPath = request.getServletContext().getRealPath("resources/images/lodgings");
-//		String pictureName;
-//		for (MultipartFile uploadFile : uploadFiles) {
-//			if(!uploadFile.isEmpty()) {
-//				String filename = System.currentTimeMillis()+uploadFile.getOriginalFilename();
-//				String filetype = uploadFile.getContentType();
-//				long filesize = uploadFile.getSize();
-//				
-//				FileItem fileItem = new FileItem();
-//				fileItem.setFilename(filename);
-//				fileItem.setFiletype(filetype);
-//				fileItem.setFilesize(filesize);
-//				fileItems.add(fileItem);
-//				
-//				//주소 줄이는법 질문
-//				FileCopyUtils.copy(uploadFile.getInputStream(), new FileOutputStream(new File("C:\\eGovFrameDev-3.10.0-64bit\\workspace\\workspace_project_thxtay\\thxtay\\src\\main\\webapp\\resources\\images\\lodgings",filename)));
-//			}
-//		}
-//		// 숙소 번호로 숙소이미지 리스트 조회, 숙소이미지리스트 테이블에 insert
-//		LodgingImgVO lodgingImg= new LodgingImgVO();
+//		String uploadPath = req.getServletContext().getRealPath("resources/images/lodgings");
+//		System.out.println(uploadPath);
+//		String filename = System.currentTimeMillis() + upfile.getOriginalFilename();
+//		String filetype = upfile.getContentType();
+//		long filesize = upfile.getSize();
+//
+//		FileItem fileItem = new FileItem();
+//		fileItem.setFilename(filename);
+//		fileItem.setFiletype(filetype);
+//		fileItem.setFilesize(filesize);
+//
+//		// 주소 줄이는법 질문
+//		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
+//		/* 데스크톱 파일저장 주소*/
+//		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
+//		/* 노트북주소 파일저장 주소*/
+//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings", filename)));
+//		
+//		// 등록중인 숙소 조회, 숙소이미지리스트 테이블에 insert
+//		LodgingImgVO lodgingImg = new LodgingImgVO();
+//		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
 //		lodgingImg.setLodgingNo(lodgingNo);
 //		lodgingImgService.addImg(lodgingImg);
-//		
+//
 //		return "host/lodgingImgAddForm";
 //	}
 

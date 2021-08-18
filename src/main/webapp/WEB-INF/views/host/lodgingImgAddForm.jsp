@@ -226,8 +226,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center">
 						<!-- 파일 업로드  단수-->
 						<div id="photo-zone" >
-						
-							<div class="boxdesign"><img src="${imgList[0].uri }"></div>
+							<div class="boxdesign"><img src=""></div>
 							<div class="boxdesign"><img src="${imgList[1].uri }"></div>
 							<div class="boxdesign"><img src="${imgList[2].uri }"></div>
 							<div class="boxdesign"><img src="${imgList[3].uri }"></div>
@@ -315,7 +314,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		
 		/* ajax */
 		var formData=new FormData();
-		formData.append("picture", $("#form-upload")[0].files[0]);
+		var file = $("#form-upload")[0].files[0]
+		formData.append("picture", file);
 		//타입이 파일인 input 박스는 기본적으로 복수 파일 등록가능
 		$.ajax({
 			url:"/lodgingImgAdd"
@@ -326,7 +326,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			,contentType:false
 			,data:formData
 			,success:function(retVal){
-				alert("접속성공"+retVal.upfile)
+				var imgList=retVal;
+				for(var i=0; i<imgList.length; i++)
+				{
+					consoleLog(imgList[i].no);
+				}
+		        $("#photo-zone").find("img:last").attr("src", URL.createObjectURL(file));
+		        
 			}
 			,error:function(){
 				alert("접속실패")
@@ -353,11 +359,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		location.href="lodgingRegister"
 	})
 	
-	var list=[];
 	$("input:checked").each(function(i){
 		list.push($(this).val());
 	})
-	console.log(list);
 	</script>
 </body>
 </html>

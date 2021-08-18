@@ -13,14 +13,18 @@
 			,#{uri})
 	</insert>
 	
-	<select id="getImgListByLdgNo" parameterType="int" resultType="com.tt.Lodging.LodgingImgVO">
+	<select id="getImgListByLdgNo" parameterType="map" resultType="com.tt.Lodging.LodgingImgVO">
 		SELECT
-			lodgingimg_no		no
+			rownum
+			,lodgingimg_no		no
 			,lodging_no			lodgingNo
 			,lodgingimg_uri		uri
 		FROM
 			thxtay_lodging_img
 		WHERE
-			lodging_no=#{value}
+			lodging_no=#{lodgingNo}
+		AND
+            rownum<![CDATA[<=]]>#{getCnt}
+        ORDER BY no DESC
 	</select>
 </mapper>
