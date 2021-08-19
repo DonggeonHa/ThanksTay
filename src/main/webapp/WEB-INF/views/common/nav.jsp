@@ -31,7 +31,7 @@
 						<li><a class="dropdown-item" href="#">계정(?)</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">도움말</a></li>
-						<li><a class="dropdown-item" href="#">로그아웃</a></li>
+						<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
 					</ul>
 				</li>
 				<!--

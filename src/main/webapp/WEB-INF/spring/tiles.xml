@@ -14,10 +14,18 @@
     </definition>
 
 
+    <!-- Admin 쪽 -->
+    <definition name="Admin" template="/WEB-INF/tiles/adminLayouts.jsp">
+        <put-attribute name="Asidebar" value="/WEB-INF/views/common/adminSidebar.jsp" />
+        <put-attribute name="Aindex" value="" />
+    </definition>
+
+    <definition name="Admin/*" extends="Admin">
+        <put-attribute name="Aindex" value="/WEB-INF/views/Admin/{1}.jsp" />
+    </definition>
+
     <!-- Main 쪽 -->
     <definition name="Main" template="/WEB-INF/tiles/layouts.jsp">
-   <!-- <put-attribute name="css" value="/WEB-INF/tiles/css.jsp" />
-        <put-attribute name="js" value="/WEB-INF/tiles/js.jsp" /> -->
         <put-attribute name="header" value="/WEB-INF/views/common/nav.jsp" />
         <put-attribute name="header2" value="/WEB-INF/views/common/nav2.jsp" />
         <put-attribute name="body" value="" />
@@ -34,6 +42,10 @@
     
     <definition name="lodging/*" extends="Main">
         <put-attribute name="body" value="/WEB-INF/views/lodging/{1}.jsp" />
+    </definition>
+
+    <definition name="chatting/*" extends="Main">
+        <put-attribute name="body" value="/WEB-INF/views/chatting/{1}.jsp" />
     </definition>
 
 </tiles-definitions>
