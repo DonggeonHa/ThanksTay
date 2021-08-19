@@ -64,6 +64,11 @@ h1 {
 </head>
 <body>
 <div class="container">
+<input type="hidden" id="user-name" value="${user.name }">
+<input type="hidden" id="user-birth" value="${user.birth }">
+<input type="hidden" id="user-phone" value="${user.phone }">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 	<div class="form">
 		<h1>은행 이체 설정</h1>
 		<ul class="section-progress row">
@@ -71,14 +76,14 @@ h1 {
 			<li id="process2"class="col-2">연락처 정보</li>
 			<li id="process3"class="col-2">거의 완료</li>
 		</ul>
-		<form id="form-tr" method="post" action="/host/trans1" novalidate>
+		<form id="form-tr" method="post" action="/host/trans2">
 			<div id="form-info" class="section-field needs-validation">
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationWeb01" class="field-description ms-1">이름</label>
 					 	<input id="input-name"type="text" class="form-control mt-2 ms-1 border-0" name="name">
 					</div>
-					<span id="warning-name" class="invalid-feedback">이름 영역은 필수영역 입니다.</span>
+					<span id="warning-name" class="invalid-feedback">정보에 등록된 본인 이름을 정확히 기입해 주세요.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
@@ -92,19 +97,18 @@ h1 {
 						<label for="validationServer04" class="field-description ms-1">이메일 주소 다시 입력</label>
 					 	<input id="input-email-check" type="text" class="form-control mt-2 ms-1 border-0">
 					</div>
-					<span id="warning-email-check" class="invalid-feedback">이메일 확인 영역은 필수영역 입니다.</span>
+					<span id="warning-email-check" class="invalid-feedback">이메일이 일치하지 않습니다 정확히 입력해 주세요.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationServer04" class="field-description ms-1">날짜 정보 입력</label>
-					 	<input id="input-date" type="date" class="form-control mt-2 ms-1 border-0" name="date">
-					<span id="warning-date" class="invalid-feedback">날짜 입력은 필수영역 입니다.</span>
+						<label for="validationServer04" class="field-description ms-1">생년 월일</label>
+					 	<input id="input-date" type="date" class="form-control mt-2 ms-1 border-0" name="birth" pattern="\d{4}-\d{2}-\d{2}">
 					</div>
+					<span id="warning-date" class="invalid-feedback">본인의 생년 월일과 일치하지 않습니다.</span>
 				</div>
 				<button type="button" class="mb-4" id="btn-prev1">이전</button>
 				<button type="button" class="mb-4" id="btn-next1">다음</button>
 			</div>
-				
 				
 				
 				
@@ -119,15 +123,16 @@ h1 {
 								<option selected>국가를 번호를 지정해주세요.</option>
 								<option value="1">+82</option>
 							</select>
-					 		<input type="text" class="form-control mt-2 ms-1" name="phone">
+					 		<input id="input-phone" type="text" class="form-control mt-2 ms-1" name="phone">
 						</div>
+						<span id="warning-phone" class="invalid-feedback">정보에 등록된 본인 휴대폰을 정확히 기입해 주세요.</span>
 					</div>
 				</div>
-				<span class="invalid-feedback">휴대폰 번호는 필수 입력 값 입니다.</span>
 				<div class="position-relative p-4">
 					<div class="input-group input-group-lg border border-grey">
-					 	<input type="text" class="form-control mt-2 ms-1 border-0" value="인증번호를 입력해 주세요.">
+					 	<input id="input-number-check" type="text" class="form-control mt-2 ms-1 border-0">
 					</div>
+					<span id="warning-number-check" class="invalid-feedback">인증번호를 입력해주세요.</span>
 				</div>
 				<button type="button" class="mb-4" id="btn-prev2">이전</button>
 				<button type="button" class="mb-4" id="btn-next2">다음</button>
@@ -143,37 +148,42 @@ h1 {
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationWeb01" class="field-description ms-1">통화</label>
-						<select class="form-select" style="width:10%;">
-							<option selected>Open this select menu</option>
-							<option value="KOR">한국</option>
+						<select id="select-currency"class="form-select" style="width:10%;" name="currency">
+							<option selected>KOR(￦)</option>
 						</select>
 					</div>
+					<span id="warning-currency" class="invalid-feedback">통화를 선택해주세요.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationWeb02" class="field-description ms-1">결제수단</label>
-						<select class="form-select" style="width:10%;">
-							<option selected>Open this select menu</option>
-							<option value="계좌">계좌</option>
-							<option value="카드">카드</option>
+						<select id="select-payways" class="form-select" style="width:10%;" name="payment">
+							<option selected></option>
+						<c:forEach var="code" items="${accountCodes }">
+							<option value="${code.commonCode}">${code.codeContent }</option>
+						</c:forEach>
 						</select>
 					</div>
+					<span id="warning-payways" class="invalid-feedback">결재수단을 선택해주세요.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationServer03" class="field-description ms-1">은행 선택</label>
-						<select class="form-select" style="width:10%;">
-							<option selected>Open this select menu</option>
-							<option value="국민은행">국민은행</option>
-							<option value="카카오뱅크">카카오뱅크</option>
+						<select id="select-bank" class="form-select" style="width:10%;" name="bankCode">
+								<option selected>은행을 선택하세요.</option>
+						<c:forEach var="code" items="${bankCodes }">
+								<option value="${code.commonCode}">${code.codeContent }</option>
+						</c:forEach>
 						</select>
+						<span id="warning-bank" class="invalid-feedback"></span>
 					</div>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
 						<label for="validationServer04" class="field-description ms-1">계좌 번호</label>
-					 	<input type="text" class="form-control mt-2 ms-1 border-0" name="account">
+					 	<input id="input-account"type="text" class="form-control mt-2 ms-1 border-0" name="account">
 					</div>
+					<span id="warning-account" class="invalid-feedback">계좌번호를 입력해주세요.</span>
 				</div>
 				<button type="button" class="mb-4" id="btn-prev3">이전</button>
 				<button type="submit" class="mb-4" id="btn-next3">다음</button>
@@ -184,112 +194,217 @@ h1 {
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+<!-- JavaScript Bundle with Popper -->
 <script type="text/javascript">
 $(function() {
+	console.log($('#user-birth').val())
+	console.log($('#user-phone').val())
+	
 	$('#form-certification').hide()
 	$('#form-bank').hide()
-	
-	/*
-		  'use strict'
 
-		  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-		  var forms = document.querySelectorAll('.needs-validation')
-
-		  // Loop over them and prevent submission
-		  Array.prototype.slice.call(forms)
-		    .forEach(function (form) {
-		      form.addEventListener('submit', function (event) {
-		        if (!form.checkValidity()) {
-		          event.preventDefault()
-		          event.stopPropagation()
-		        }
-
-		        form.classList.add('was-validated')
-		      }, false)
-		    })
-*/
-	
-/*
-	$('#input-name').focusin(function() {
-		if($('#input-name').val() == '') {
+	$('#btn-next1').on('click', function() {
+		
+		var name = $('#input-name').val()
+		var user = $('#user-name').val()
+		if(name.trim() != user.trim()) {
 			$('#warning-name').show()
-		}	
-	})
-	$('#input-name').focusout(function() {
-		if($('#input-name').val() == '') {
-			$('#warning-name').show()
-		} else {
+			return false;
+		} else { 
 			$('#warning-name').hide()
+		}
+		var email = $('#input-email').val()
+		if(!email.trim()) {
+			$('#warning-email').show()
+			return false;
+		} else { 
+			$('#warning-email').hide()
+		}
+		var emailCheck = $('#input-email-check').val()
+		if(emailCheck.trim() != email) {
+			$('#warning-email-check').show()
+			return false;
+		} else { 
+			$('#warning-email-check').hide()
+		}
+		var date = $('#input-date').val()
+		var user = $('#user-birth').val()
+		console.log(date)
+		if(date != user) {
+			$('#warning-date').show()
+			return false;
+		} else { 
+			$('#warning-date').hide()
+			$('#process1').removeClass('text-primary').addClass('text-dark')
+			$('#form-info').hide(500)
+			$('#form-certification').show()
+		}
+	})
+	
+	$('#btn-next2').on('click', function() {
+		
+		var phone = $('#input-phone').val()
+		var user = $('#user-phone').val()
+		if(phone.trim() != user.trim()) {
+			$('#warning-phone').show()
+			return false;
+		} else {
+			$('#warning-phone').hide()
+		}
+		var number = $('#input-number-check').val()
+		if(number != 'abc') {
+			$('#warning-number-check').show()
+			return false;
+			//math그걸로 돌려서 넣을까
+		} else {
+			$('#warning-number-check').hide()
+			$('#process1').removeClass('text-primary').addClass('text-dark')
+			$('#form-certification').hide(500)
+			$('#form-bank').show()
+		}
+	})
+
+	$('#form-tr').submit(function() {
+		
+		var selectCurrency = $('#select-currency').val()
+		console.log(selectCurrency)
+		if(!selectCurrency) {
+			$('#warning-currency').show()
+			return false;
+		} else {
+			$('#warning-currency').hide()
+		}
+		
+		var selectPayWays = $('#select-payways').val()
+		if(!selectPayWays) {
+			$('#warning-payways').show()
+			return false
+			//math그걸로 돌려서 넣을까
+		} else {
+			$('#warning-payways').hide()
+		}
+		
+		var selectbank = $('#select-bank').val()
+		if(!selectbank) {
+			$('#warning-bank').show()
+			return false
+		} else {
+			$('#warning-bank').hide()
+		}
+		
+		var inputAccount = $('#input-account').val()
+		if(!inputAccount) {
+			$('#warning-account').show()
+			return false
+		} else {
+			$('#warning-account').hide()
+			$('#process1').removeClass('text-primary').addClass('text-dark')
+		}
+		return ture
+	})
+//1994-10-02 00:00:00		
+		/*
+//		$('#input-name').focusout(function() {
+//			var name = $.trim($('#input-name').val())
+//			if(name == '') {
+//				$('#warning-name').show()
+//				$('#btn-next').prop('disabled') 
+//			} else {
+//				$('#warning-name').hide()
+//				
+//			}
+//		})
+	
+		$('#input-email').focusout(function() {
+			var email = $.trim($('#input-email').val())
+			if(email == '') {
+				$('#warning-email').show()
+				$('#btn-next').prop('disabled') 
+			} else {
+				$('#warning-email').hide()
+				
+			}
+		})
+	
+		$('#input-email-check').focusout(function() {
+			var emailCheck = $.trim($('#input-email-check').val())
+			if(emailCheck == '') {
+				$('#warning-email-check').show()
+				$('#btn-next').prop('disabled')  
+			} else {
+				$('#warning-email-check').hide()
+				
+			}
+		})
+		
+		$('#input-date').focusout(function() {
+			var date = $.trim($('#input-date').val())
+			if(date == '') {
+				$('#warning-date').show()
+				$('#btn-next').prop('disabled')  
+			} else {
+				$('#warning-date').hide()
+				
+			}
+		})
+		$('#form-info').hide(500)
+		$('#form-certification').show()
+	})	
+
+	$('#input-phone').focusout(function() {
+		var phone = $.trim($('#input-phone').val())
+		if(phone == '') {
+			$('#warning-phone').show()
+			$('#btn-confirm').prop('disabled') 
+		} else {
+			$('#warning-phone').hide()
 			
 		}
 	})
-	$('#input-email').focusin(function() {
-		if($('#input-email').val() == '') {
-			$('#warning-email').show()
+	
+	$('#input-confirm').focusout(function() {
+		var confirm = $.trim($('#input-confirm').val())
+		if(confirm == '') {
+			$('#warning-confirm').show()
+			$('#btn-confirm').disabled ='disabled' 
+		} else {
+			$('#warning-confirm').hide()
+			
 		}
-	})
-	$('#input-email-check').focusin(function() {
-		if($('#input-email-check').val() == '') {
-			$('#warning-email-check').show()
-		}	
-	})
-	$('#input-date').focusin(function() {
-		if($('#input-date').val() == '') {
-			$('#warning-date').show()
-		}
-	})
 */
-/*	
-		var name = $.trim($('#input-name').val())
-		var emailCheck = $.trim($('#input-email-check').val())
-		var date = $.trim($('#input-date').val())
-		var email = $.trim($('#input-email').val())
-		if(!name) {
+/*
+var name = $.trim($('#input-name').val())
+var email = $.trim($('#input-email').val())
+var emailCheck = $.trim($('#input-email-check').val())
+var date = $.trim($('#input-date').val())
+//만약 하나라도 경고창이있으면 다음버튼 비활성화이렇게할까?
+	$('#btn-next1').on('click',function() {
+		if(name == '') {
 			$('#warning-name').show()
 			$('#btn-next').disabled ='disabled' 
 		}
-		if(!email) {
+		if(email == '') {
 			$('#warning-email').show()
 			$('#btn-next').disabled ='disabled' 
 		}
-		if(!emailCheck) {
+		if(emailCheck == '') {
 			$('#warning-email-check').show()
 			$('#btn-next').disabled ='disabled' 
 		}
-		if(!date) {
+		if(date == '') {
 			$('#warning-date').show()
 			$('#btn-next').disabled ='disabled'  
-		} else {
+		} 
+		if(name && email && emailCheck && date != '') {
+			$('#btn-next').removeAttr('disabled')
 			$('#process1').removeClass('text-primary').addClass('text-dark')
+			$('#form-info').hide(500)
+			$('#form-certification').show()
 		}
-
-*/
-//만약 하나라도 경고창이있으면 다음버튼 비활성화이렇게할까?
-	$('#btn-next1').on('click',function() {
-		$('#form-info').hide(500)
-		$('#form-certification').show()
+	})
 	
-	
-	/**/
-	$('#btn-prev2').click(function() {
-		$('#form-certification').hide()
-		$('#form-info').show(500)
-		
-		
-	})
-	$('#btn-next2').click(function() {
-		$('#form-certification').hide(500)
-		$('#form-bank').show()
-	})	
-	/**/
-	$('#btn-prev3').click(function() {
-		$('#form-bank').hide(500)
-		$('#form-certification').show()
-	})
-	$('#btn-next3').click(function() {
-		$('#form-tr').submit()
-	})
-	})
+	*/
 })
 </script>
 </body>

@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 			// 패스워드가 맞으면 1
 			res = 1;
 			// 세션에 LOGINED_UESR 란 이름으로 넣음
+			System.out.println("유저서비스임플리 : " + user.getBirth());
 			SessionUtils.addAttribute("LOGINED_USER", user);
 		}
 

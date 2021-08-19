@@ -2,6 +2,8 @@ package com.tt.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,8 +17,9 @@ public class TransactionRegisterVO {
     private int userNo;             // 유저_번호		not null
     
     private String name;            // 대금등록 이름	not null
-    private String email;           // 대금등록 이메일	not null
-    private Date birth;				// 생년월일			not null
+    private String email; // 대금등록 이메일	not null
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;			// 생년월일			not null
 
     private String phone;			//휴대폰			not null
     

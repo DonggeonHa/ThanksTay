@@ -92,10 +92,12 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 				e.printStackTrace();
 			}
 	}
-	
-//	public TransactionHistoryDTO getAllTransactionHistoryByUserNo(Map<String, Object> map)throws Exception {
-//		return hostAnalysisDao.getAllTransactionHistoryByUserNo(map);
-//	}
+
+	@Override
+	public TransactionHistoryDTO getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception {
+
+		return hostAnalysisDao.getAllTransactionHistoryByHashMap(map);
+	}
 
 
 	

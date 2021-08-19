@@ -1,12 +1,11 @@
 package com.tt.Host;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.tt.Lodging.LodgingVO;
 import com.tt.vo.TransactionHistoryDTO;
-import com.tt.vo.TransactionHistoryVO;
 
 public interface TransactionHistoryService {
 
@@ -14,5 +13,5 @@ public interface TransactionHistoryService {
 
 	List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception;
 	
-	//TransactionHistoryDTO getAllTransactionHistoryByUserNo(int userNo) throws Exception;
+	TransactionHistoryDTO getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
 }

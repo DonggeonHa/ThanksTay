@@ -55,57 +55,31 @@ button {
 			<button type="button" class="col btn btn-none">총 수입</button>
 		</div>
 		<div class="first-select-box row gap-3">
-			<select id="bank-box" class="col rounded">
-				<option>모든 대금 수령 방법</option>
-				<c:forEach var="history" items="${transHistory }">
-					<option>${history.bankAccount }</option>
-				</c:forEach>
-			</select>
-			<select id="lodging-box" class="col rounded">
-				<option>모든 숙소</option>
-				<c:forEach var="history" items="${transHistory }">
-					<option>${history.lodgingName }</option>
-				</c:forEach>
-			</select>
+			<select id="bank-box" class="col rounded" name="bankAccount"></select>
+			<select id="lodging-box" class="col rounded" name="lodgingName"></select>
 		</div>
 		<div class="first-select-box row gap-3">
-			<select id="stt-box" class="col rounded"></select>
+			<select id="stt-box" class="col rounded" name="startDate"></select>
 			<select id="stt-date-box" class="col rounded"></select>
-			<select id="end-box" class="col rounded"></select>
+			<select id="end-box" class="col rounded" name="endDate"></select>
 			<select id="end-date-box" class="col rounded"></select>
 		</div>
 		<div class="mt-3 mb-3">
-			<form action="/host/transactionhome" method="post" enctype="multipart/form-data">
+			<form action="/host/transactionhomeexcel" method="post" enctype="multipart/form-data">
 				<h3 class="d-inline fs-6"><strong>수령 완료 금액:</strong></h3>
 				<input type="submit" value="CSV 다운로드" class="d-inline fs-6"/>
 				<div class="border border-light shadow p-3 mb-5 bg-body rounded">
-					<!-- <p>대금 수령 내역이 없습니다.</p>
-					<p>현재 선택한 날짜, 숙소, 대금 수령 방법에 대한 결과</p> -->
 					<div class="row mb-3">
 						<div class="col">
-							<div class="p-2">
+							<div id="table-box"class="p-2">
+								<div id="empty">
+									<p>대금 수령 내역이 없습니다.</p>
+									<p>현재 선택한 날짜, 숙소 대금 수령 방법에 대한 결과</p>
+								</div>
 								<table class="table">
-									<thead>
-										<tr>
-											<th>bookingNo</th>
-											<th>transactionNo</th>
-											<th>lodgingNo</th>
-											<th>createdDate</th>
-											<th>lodgingFee</th>
-											<th>cleaningFee</th>
-										</tr>
+									<thead id="table-thead">
 									</thead>
-									<tbody>
-										<c:forEach var="history" items="${transHistory }">
-											<tr>
-												<td>${history.bookingNo }</td>
-												<td>${history.transactionNo }</td>
-												<td>${history.lodgingNo }</td>
-												<td>${history.createdDate }</td>
-												<td>${history.lodgingFee }</td>
-												<td>${history.cleaningFee }</td>
-											</tr>
-										</c:forEach>
+									<tbody id="table-body">
 									</tbody>
 								</table>
 							</div>
@@ -122,9 +96,10 @@ button {
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script type="text/javascript">
 $(function() {
-	/*
+
 	(function() {
 		var option = '';
 		
@@ -152,11 +127,67 @@ $(function() {
 		//var $selectedOption = $('#first-select-box #date-box option[value='+selectOptionNo+']')
 		
 		//$selectedOption.find(':checked').prop('disabled',true)
+		$('#stt-box, #end-box').html(option)
 
-		$('#stt-box').html(option)
-	
 	})() 
-	*/
+	
+	$('#bank-box').html('<option selected>모든 대금 수령 방법<option>')
+	$('#lodging-box').html('<option>모든 숙소<option>')
+		$.ajax({
+			url:'/host/historyJson',
+			data: {bankAccount: $(this).val()},
+			dataType: 'json',
+			success: function(history) {
+				console.log(history)
+				$('#bank-box').append('<option>'+history.bankAccount+'<option>')
+				if(history != null) {
+					$('[name=bankAccount]').change(function() {
+						var thisone = $(this).val()
+						if(history.bankAccount == thisone) {
+							$('[name=lodgingName]').change(function() {
+								var thisone = $(this).val()
+								console.log(thisone)
+							})
+							$('#lodging-box').append('<option>'+history.lodgingName+'<option>')
+							$('#table-box #empty').remove()
+							$('#table-box').html('<table><thead><tr></tr></thead></table>')
+							$('#table-box table thead tr').append('<td>bookingNo</td>')
+							$('#table-box table thead tr').append('<td>transactionNo</td>')
+							$('#table-box table thead tr').append('<td>lodgingNo</td>')
+							$('#table-box table thead tr').append('<td>createdDate</td>')
+							$('#table-box table thead tr').append('<td>lodgingFee</td>')
+							$('#table-box table thead tr').append('<td>cleaningFee</td>')
+							$('#table-box table').append('<tbody><tr></tr></tbody>')
+							$('#table-box table tbody tr').append('<th>'+history.bookingNo+'</th>')
+							$('#table-box table tbody tr').append('<td>'+history.transactionNo+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.lodgingNo+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.createdDate+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.lodgingFee+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.cleaningFee+'</td>')
+							  
+							console.log(thisone)
+						} else if(history.bankAccount != thisone) {
+							$('#lodging-box option:gt(1)').remove()
+						}						
+					}) 
+					
+					
+					$('[name=startDate]').change(function() {
+						var thisone = $(this).val()
+						console.log(thisone)
+					})
+					$('[name=endDate]').change(function() {
+						var thisone = $(this).val()
+						console.log(thisone)
+					})
+					
+				}
+			},
+			error: function(request, status, error) {
+				alert('통신실패')
+			}
+		})
+
 })
 </script>
 </body>
