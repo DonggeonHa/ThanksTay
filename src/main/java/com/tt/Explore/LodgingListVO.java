@@ -17,7 +17,7 @@ public class LodgingListVO {
 	private String address;
 	private boolean immApproval;
 	private int maxGuest;
-	private String Image;//리스트 풀어야
+	private String image;//리스트 풀어야
 	private String name;
 	private int bedroom;
 	private int singlebed;
@@ -29,6 +29,11 @@ public class LodgingListVO {
 	private String typeCode;
 	private Double longitude;
 	private Double latitude;
+	//추가함
+	private int lodgingFee;
+	private int cleaningFee;
 	//가격정보 추가해야
 	//어메니티
+	private int totalBed;
+	private int totalFee;
 }

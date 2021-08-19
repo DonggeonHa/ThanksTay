@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
-<nav class="navbar navbar-expand-lg" id="header" style="background-color:rgba( 255, 255, 255, 0.5 );">
+<nav class="navbar navbar-expand-lg" id="header" style="background-color:rgba( 0, 0, 0, 0 );">
 	<div class="container">
 		<div class="navbar-brand">
 			<div class="">
