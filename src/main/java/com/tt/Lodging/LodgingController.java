@@ -72,16 +72,15 @@ public class LodgingController {
 		logger.info("lodgingDetailAddForm 실행");
 
 		String typeCmCode = commonService.getCommonCodeByContent(type);
-		System.out.println("숙소타입의 공통코드:" + typeCmCode);
-
 		// 로그인한 유저의 숙소 중 숙소 상태가 "등록중"인 숙소 반환
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
-		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 
 		model.addAttribute("loginedUser", user);
 		model.addAttribute("lodgingRegistering", lodgingRegistering == null ? lrForm : lodgingRegistering);
 		model.addAttribute("ldgType", typeCmCode);
 
+		System.out.println("숙소타입의 공통코드:" + typeCmCode);
+		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		return "host/lodgingDetailAddForm";
 	}
 
@@ -89,11 +88,11 @@ public class LodgingController {
 	public String lodgingAddressAddForm(@LoginUser UserVO user, LodgingRegisterForm lrForm, Model model) {
 		logger.info("lodgingAddressAddForm 실행");
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
-		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 
 		model.addAttribute("loginUser", user);
 		model.addAttribute("lodgingRegistering", lodgingRegistering == null ? lrForm : lodgingRegistering);
 
+		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		return "host/lodgingAddressAddForm";
 	}
 
@@ -101,7 +100,6 @@ public class LodgingController {
 	public String lodgingAmenityAddForm(@LoginUser UserVO user, Model model) {
 		logger.info("lodgingAmenityAddForm 실행");
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
-		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 
 		String amnCode = commonService.getCommonCodeByContent(CommonConstant.AMN_TYPE);
 		List<CommonCodeVO> amnTypes = commonService.getCommonCodesByParentCode(amnCode);
@@ -110,25 +108,31 @@ public class LodgingController {
 		model.addAttribute("lodgingRegistering", lodgingRegistering);
 		model.addAttribute("amnTypes", amnTypes);
 
+		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		return "host/lodgingAmenityAddForm";
 	}
 
 	@GetMapping("/lodgingImgAdd")
 	public String lodgingImgAddForm(@LoginUser UserVO user, Model model) {
 		logger.info("lodgingImgAddForm 실행");
+		
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
-		System.out.println("등록중인 숙소는:" + lodgingRegistering);
-		//
 		int lodgingNo = lodgingRegistering.getNo();
 		int getCnt=4;
-		System.out.println("숙소번호: " + lodgingNo);
+		
 		Map<String, Integer> condition= new HashMap<String, Integer>();
 		condition.put("lodgingNo", lodgingNo);
 		condition.put("getCnt", getCnt);
 		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(condition);
 		model.addAttribute("imgList", imgList);
-		System.out.println(imgList.size());
-		//
+
+		System.out.println("등록중인 숙소는:" + lodgingRegistering);
+		System.out.println("숙소번호: " + lodgingNo);
+		System.out.println("이미지 정보: "+imgList);
+		System.out.println(imgList.get(0).getUri());
+		System.out.println(imgList.get(1).getUri());
+		System.out.println(imgList.get(2).getUri());
+		System.out.println(imgList.get(3).getUri());
 		return "host/lodgingImgAddForm";
 	}
 
@@ -143,15 +147,15 @@ public class LodgingController {
 		int lodgingNo = lodgingRegistering.getNo();
 
 		// 파일 업로드
-		String uploadPath = req.getServletContext().getRealPath("resources/images/lodgings");
+		String uploadPath = req.getSession().getServletContext().getRealPath("/");	// Q. .metadata 안의 경로로 저장이됨
 		String filename= System.currentTimeMillis()	+ upfile.getOriginalFilename();
 		FileItem fileItem = new FileItem();
 		fileItem.setFilename(filename);
 		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
 		/* 데스크톱 파일저장 주소 */
-		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
+		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
 		/* 노트북주소 파일저장 주소*/
-		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
+//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
 		filename)));
 		
 		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
@@ -160,72 +164,36 @@ public class LodgingController {
 		lodgingImg.setLodgingNo(lodgingNo);
 		lodgingImgService.addImg(lodgingImg);
 
+		/* 숙소 이미지파일 조회&화면뿌리기 */
 		// 내려주는 파일
 		Map<String, Integer> condition= new HashMap<String, Integer>();
 		int getCnt=4;
 		condition.put("lodgingNo", lodgingNo);
 		condition.put("getCnt", getCnt);
 		List<LodgingImgVO> pictures = lodgingImgService.getImgListByLdgNo(condition);
-		System.out.println("pictures="+pictures);
+
+		
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		retVal.put("upfile", pictures);// MultipartFile객체는 바이너리 데이터를 포함하고 있어서 json으로 변환이 되지 않는다.
 		logger.info("보내는 파일 " + pictures);
 		logger.info("리턴밸류 " + retVal);
 
+		System.out.println("pictures="+pictures);
 		return retVal;
 	}
-
-//	@PostMapping("/lodgingImgAdd")
-//	public String lodgingImgAddForm(@LoginUser UserVO user, @RequestParam("upfile") MultipartFile upfile,
-//			MultipartHttpServletRequest req, Model model) throws IOException {
-//
-//		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
-//		int lodgingNo = lodgingRegistering.getNo();
-//
-//		// 숙소번호로 등록된 사진리스트 조회하기, 등록된 사진 갯수 전달
-//		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(lodgingNo);
-//		model.addAttribute("imgList", imgList);
-//		
-//		String uploadPath = req.getServletContext().getRealPath("resources/images/lodgings");
-//		System.out.println(uploadPath);
-//		String filename = System.currentTimeMillis() + upfile.getOriginalFilename();
-//		String filetype = upfile.getContentType();
-//		long filesize = upfile.getSize();
-//
-//		FileItem fileItem = new FileItem();
-//		fileItem.setFilename(filename);
-//		fileItem.setFiletype(filetype);
-//		fileItem.setFilesize(filesize);
-//
-//		// 주소 줄이는법 질문
-//		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
-//		/* 데스크톱 파일저장 주소*/
-//		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
-//		/* 노트북주소 파일저장 주소*/
-//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings", filename)));
-//		
-//		// 등록중인 숙소 조회, 숙소이미지리스트 테이블에 insert
-//		LodgingImgVO lodgingImg = new LodgingImgVO();
-//		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
-//		lodgingImg.setLodgingNo(lodgingNo);
-//		lodgingImgService.addImg(lodgingImg);
-//
-//		return "host/lodgingImgAddForm";
-//	}
 
 	@PostMapping("/saveTemp")
 	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm) {
 		logger.info("saveTemp 실행");
-		System.out.println("lrForm:" + lrForm);
 		LodgingVO lodging = new LodgingVO();
 
 		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
 		if (!lrForm.getStatus().isEmpty()) {
 			BeanUtils.copyProperties(lrForm, lodging);
 			lodgingService.updateLodging(lodging);
+
 			System.out.println("업데이트된 숙소의 정보" + lodging);
 			System.out.println("업데이트 실행");
-
 			return "redirect:hosting";
 		}
 
@@ -233,10 +201,9 @@ public class LodgingController {
 		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
 		BeanUtils.copyProperties(lrForm, lodging);
 		lodging.setUserNo(user.getNo());
-
 		lodgingService.registerLodging(lodging);
-		System.out.println("저장된 숙소의 정보:" + lodging);
 
+		System.out.println("저장된 숙소의 정보:" + lodging);
 		return "redirect:hosting";
 	}
 }

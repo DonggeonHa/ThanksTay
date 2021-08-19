@@ -224,13 +224,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center">
-						<!-- 파일 업로드  단수-->
 						<div id="photo-zone" >
-							<div class="boxdesign"><img src=""></div>
-							<div class="boxdesign"><img src="${imgList[1].uri }"></div>
-							<div class="boxdesign"><img src="${imgList[2].uri }"></div>
-							<div class="boxdesign"><img src="${imgList[3].uri }"></div>
+							<div class="boxdesign"><img src="${imgList[0].uri }" alt="사진을 등록해주세요!"></div>
+							<div class="boxdesign"><img src="${imgList[1].uri }" alt="사진을 등록해주세요!"></div>
+							<div class="boxdesign"><img src="${imgList[2].uri }" alt="사진을 등록해주세요!"></div>
+							<div class="boxdesign"><img src="${imgList[3].uri }" alt="사진을 등록해주세요!"></div>
 						</div>
+						<!-- 파일 업로드  단수-->
 						<form id="form-upfile" style="margin-top:20%; " method="post" action="lodgingImgAdd" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-12 mb-1 d-flex justify-content-between">
@@ -306,17 +306,21 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	</div>
 
 	<script>
+	var imgIdx=0;
+	
+	
 	$("#form-upfile #enroll").click(function(){
 		if($("#form-upfile input").val()==''){
 			alert("등록할 사진을 선택해주세요");
 			return false;
 		}
-		
 		/* ajax */
+		//타입이 파일인 input 박스는 기본적으로 복수 파일 등록가능
 		var formData=new FormData();
 		var file = $("#form-upload")[0].files[0]
+		
 		formData.append("picture", file);
-		//타입이 파일인 input 박스는 기본적으로 복수 파일 등록가능
+
 		$.ajax({
 			url:"/lodgingImgAdd"
 			,type:"POST"
@@ -327,12 +331,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			,data:formData
 			,success:function(retVal){
 				var imgList=retVal;
-				for(var i=0; i<imgList.length; i++)
-				{
-					consoleLog(imgList[i].no);
-				}
-		        $("#photo-zone").find("img:last").attr("src", URL.createObjectURL(file));
-		        
+		        $("#photo-zone").find("img:nth("+imgIdx%4+")").attr("src", URL.createObjectURL(file));
+		        imgIdx++;
 			}
 			,error:function(){
 				alert("접속실패")

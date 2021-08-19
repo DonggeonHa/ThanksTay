@@ -14,7 +14,7 @@
 	</insert>
 	
 	<select id="getImgListByLdgNo" parameterType="map" resultType="com.tt.Lodging.LodgingImgVO">
-		SELECT
+		<!-- SELECT
 			rownum
 			,lodgingimg_no		no
 			,lodging_no			lodgingNo
@@ -23,8 +23,27 @@
 			thxtay_lodging_img
 		WHERE
 			lodging_no=#{lodgingNo}
+		<if test="getCnt!=null">
 		AND
             rownum<![CDATA[<=]]>#{getCnt}
-        ORDER BY no DESC
+        </if>
+	ORDER BY no DESC -->
+
+	SELECT rk, no, lodgingNo, uri
+	FROM(
+	SELECT
+		rank() over (order by lodgingimg_no desc) rk
+		,lodgingimg_no no
+		,lodging_no lodgingNo
+		,lodgingimg_uri uri
+	FROM
+		thxtay_lodging_img
+	WHERE
+		lodging_no=#{lodgingNo}
+	)
+	<if test="getCnt!=null">
+	WHERE
+		rk<![CDATA[<=]]>#{getCnt}
+	</if>
 	</select>
 </mapper>
