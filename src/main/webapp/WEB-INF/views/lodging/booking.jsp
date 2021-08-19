@@ -2051,7 +2051,7 @@
 					added_month = 11; // reset month to Dec because we decreased year
 					added_date = getDaysInMonth(added_year, added_month); // reset date as well
 
-					// Now add all dates from all months of inbetween years!!
+					// Now add all dates from all months of inbetween years!!!!!!
 					while (added_year > firstClicked.year) {
 						selected[added_year] = {};
 						for (var i=0; i < 12; i++) {
