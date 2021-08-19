@@ -153,10 +153,11 @@ public class LodgingController {
 		fileItem.setFilename(filename);
 		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
 		/* 데스크톱 파일저장 주소 */
-		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
-		/* 노트북주소 파일저장 주소*/
-//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
-		filename)));
+        //"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
+                uploadPath+"resources/images/lodgings",
+        /* 노트북주소 파일저장 주소*/
+//		        "C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
+        filename)));
 		
 		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
 		LodgingImgVO lodgingImg = new LodgingImgVO();
