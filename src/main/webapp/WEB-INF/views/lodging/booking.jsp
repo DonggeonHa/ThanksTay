@@ -295,7 +295,7 @@
 	
 	
 	.detailbody {
-	display:flex;
+		display:flex;
 	}
 	.left {
 		position: relative;
@@ -375,6 +375,11 @@
 	.booking-top {
 		margin-bottom: 24px;
 	}
+	#booking-top {
+		color: rgb(34, 34, 34);
+		font-weight: 400;
+		font-size: 22px;
+	}
 	.booking-star-rating {
 		display: flex;
 	}
@@ -399,7 +404,7 @@
 		background-color: transparent;
 		border-radius: 8px 8px 0px 0px;
 	}
-	.check-in, .check-out {
+	.check-in, .check-out, .total-number {
 		position: absolute;
 		top: 12px;
 		left:12px;
@@ -408,7 +413,7 @@
 		color: rgb(34, 34, 34);
 		font-weight: 800;
 	}
-	.check-in-date, .check-out-date {
+	.check-in-date, .check-out-date, .guest {
 		padding: 26px 12px 10px;
 		font-size: 14px;
 		color: rgb(113, 113, 113);
@@ -424,31 +429,399 @@
 		width: 100%;
 		border-left: 1px solid rgb(176, 176, 176);
 	}
+	.booking-total-number {
+		display: flex;
+		position: relative;
+		width: 100%;
+		border-top: 1px solid rgb(176, 176, 176);
+	}
+	.booking-button-adult {
+		position: relative;
+		width: 100%;
+		padding-top: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		border-top: 1px solid rgb(176, 176, 176);
+	}
+	.adult-flex, .child-flex {
+		align-items: center;
+		display: flex;
+		width: 100%;
+	}
+	.adult-text {
+		flex: 1 1 0%;
+		font-size: 16px;
+		font-weight: 600;
+	}
+	.button-adult, .button-child {
+		display: flex;
+	}
+	.button-collection {
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 104px;
+		height: 32px;
+	}
+	.button-minus, .button-minus2 {
+		color: rgb(113, 113, 113);
+		border-color: rgb(176, 176, 176);
+		background: rgb(255, 255, 255);
+		width: 32px;
+		height: 32px;
+		display: inline-flex;
+		border-style: solid;
+		text-align: center;
+		border-width: 1px;
+		border-radius: 50%;
+		align-items: center;
+		justify-content: center;
+		font-size: 30px;
+		font-weight: 500;
+		padding-bottom: 8px;
+	}
+	.button-minus:hover, .button-minus2:hover {
+		border-color: rgb(34, 34, 34);
+		background: rgb(255, 255, 255);
+		color: rgb(34, 34, 34);
+	}
+	.adult, .child {
+		color: rgb(113, 113, 113);
+		font-size: 16px;
+	}
+	.button-plus, .button-plus2 {
+		color: rgb(113, 113, 113);
+		border-color: rgb(176, 176, 176);
+		background: rgb(255, 255, 255);
+		width: 32px;
+		height: 32px;
+		display: inline-flex;
+		border-style: solid;
+		text-align: center;
+		border-width: 1px;
+		border-radius: 50%;
+		align-items: center;
+		justify-content: center;
+		font-size: 25px;
+		font-weight: 500;
+		padding-bottom: 8px;
+	}
+	.button-plus:hover, .button-plus2:hover {
+		border-color: rgb(34, 34, 34);
+		background: rgb(255, 255, 255);
+		color: rgb(34, 34, 34);
+	}
+	.booking-button-child {
+		position: relative;
+		width: 100%;
+		padding-top: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+	.child-text-box {
+		flex: 1 1 0%;
+	}
+	.child-text {
+		font-size: 16px;
+		font-weight: 600;
+	}
+	.child-age {
+		font-size: 12px;
+	}
+	.booking-maxGuest {
+		position: relative;
+		width: 100%;
+		padding: 16px;
+	}
+	.explanation {
+		font-size: 14px;
+		color: rgb(34, 34, 34);
+	}
+	.booking-button {
+		position: relative;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 600;
+		border-radius: 8px;
+		outline: none;
+		padding: 14px 24px;
+		border: none;
+		background: rgb(230, 30, 77);
+		color: rgb(255, 255, 255);
+		width: 100%;
+	}
+	.booking-fee {
+		padding-top: 15px;
+	}
+	.Lodging-fee, .Cleaning-fee {
+		padding-bottom: 12px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.fee {
+		font-size: 16px;
+		color: rgb(34, 34, 34);
+		font-weight: 400;
+	}
+	.booking-total-price {
+		border-top: 1px solid rgb(221, 221, 221);
+		margin-top: 8px;
+		padding-top: 16px;
+	}
+	.total-price {
+		display: flex;
+		justify-content: space-between;
+	}
+	.price {
+		font-size: 16px;
+		color: rgb(34, 34, 34);
+		font-weight: 600;
+	}
+	
+	.modal-dialog {
+		z-index: 2000;
+		position: fixed;
+		inset: 0px;
+		display: contents;
+	}
+	.modal-background {
+		background: rgb(255, 255, 255);
+		position: relative;
+		height: 100%;
+		max-height: 100%;
+		width: 100vw;
+		max-width: 100vw;
+		display: flex;
+		flex-direction: column;
+		amimation-fill-mode: both;
+	}
+	.modal-close {
+		top: 24px;
+		position: absolute;
+		left:24px;
+		z-index: 1;
+	}
+	.image-content {
+		flex: 1 1 auto !important;
+		background: rgb(255, 255, 255);
+	}
+	.image-relative {
+		position: relative;
+	}
+	.image-padding {
+		padding-left: 80px;
+		padding-right: 80px;
+	}
+	.image-padding2 {
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}
+	.image-width {
+		width: 66.6667%;
+		margin-left: 16.6667%;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+	.image-grid {
+		display: grid;
+		gap: 8px;
+		grid-template-columns: 1fr;
+	}
+	.modal-image-grid {
+		height: 100%;
+		width: 100%;
+	}
+	.modal-image-relative {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+	.modal-image1 {
+		display: block;
+		height: 100%;
+		position: relative;
+		width: 100%;
+	}
+	.modal-image-relative2 {
+		position: relative;
+	}
+	.modal-image-size {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.modal-image23-grid {
+		display: grid;
+		grid-auto-columns: 1fr;
+		grid-auto-rows: 1fr;
+		gap: 8px;
+		grid-template-columns: 1fr 1fr;
+	}
+	.image-header {
+		flex-basis: 60px;
+		align-items: center;
+		display: flex;
+		flex: 0 0 48px;
+		justify-content: flex-end;
+		padding: 0px 24px;
+		position: sticky;
+		text-align: left;
+		top: 0px;
+		z-index: -1;
+	}
+	.merit-box {
+		margin-left: 16px;
+	}
+	.merit {
+		color: rgb(34, 34, 34);
+		font-weight: 600;
+		font-size: 16px;
+	}
+	.merit-text {
+		color: rgb(113, 113, 113);
+		font-weight: 400;
+		font-size: 14px;
+	}
+	.review-padding {
+		padding-left: 80px;
+		padding-right: 80px;
+	}
+	.review-area {
+		height: 100%;
+		width: 100%;
+	}
+	.review-border {
+		border-top-color: rgb(221, 221, 221);
+		border-top-width: 1px;
+		border-top-style: solid;
+		padding-top: 48px;
+		padding-bottom: 48px;
+	}
+	.no-review {
+		font-size: 22px;
+		color: rgb(34, 34, 34);
+		font-weight: 600;
+	}
+	.review-contents {
+		display: flex;
+		justify-content: flex-start;
+	}
+	.review-contents-left {
+		width: 33.3333%;
+		margin-right: 8.33333%;
+		padding-left: 48px;
+		padding-right: 8px;
+	}
+	.review-left-text {
+		color: rgb(34, 34, 34);
+		font-weight: 400;
+		font-size: 16px;
+	}
+	.review-contents-right {
+		width: 33.3333%;
+		margin-left: 8.33333%;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+	.review-average-block, .review-box-block {
+		display: block;
+	}
+	.review-average-flex, .review-box-flex {
+		display: flex;
+		justify-content: flex-start;
+	}
+	.reviewAverage {
+		padding-left: 8px;
+		padding-right: 8px;
+		width: 41.6667%;
+		margin-right: 8.33333%;
+	}
+	.reviewAverage-box {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 90%;
+	}
+	.reviewAverage-text {
+		width: 90%;
+		color: rgb(34, 34, 34);
+		font-weight: 400;
+		font-size: 16px;
+	}
+	.reviewAverage-bar {
+		width: 50%;
+		display: flex;
+		align-items: center;
+	}
+	.bar-relative {
+		position: relative;
+		height: 4px;
+		width: 100%;
+		margin-right: 4px;
+		background: rgb(221, 221, 221);
+		border-radius: 2px;
+	}
+	.bar-absolute {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		bottom: 0px;
+		background: rgb(34, 34, 34);
+		border-radius: 2px;
+	}
+	.bar-text {
+		color: rgb(34, 34, 34);
+		font-weight: 600;
+		font-size: 12px;
+		margin-left: 6px;
+	}
+	.review-box-flex {
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		width: 100%;
+	}
+	.review-item-padding {
+		width: 41.6667%;
+		margin-right: 8.33333%;
+		padding-left: 8px;
+		padding-right: 8px;
+		position: relative;
+	}
+	.review-item-top {
+		margin-bottom: 16px;
+		display: flex;
+		align-items: center;
+	}
 </style>
 
 <div class="container">
 	<main>
 		<!-- 숙소이름, 평점(후기), 지역, 공유하기, 저장 -->
-		<div class="row" style="padding-top: 24px">
+		<div class="row" style="padding-top: 24px;">	<!-- padding-left: 80px; padding-right: 80px; -->
 			<section>
 				<div class="mb-1">
 					<h1 class="detail-title">${lodging.name }</h1>
 				</div>
 				<div class="detail-header"> <!-- flex 달기 -->
 					<div class="detail-subtitle">
-						<span class="p-2">
-							<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-							focusable="false" style="display: block;height: 14px;width: 14px;fill: #FE2E2E; /* fill: currentcolor; */">
-								<path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 
-								1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 
-								1 0 0 0-1.814 0z" fill-rule="evenodd"></path>
-							</svg>
-						</span>
-						<span class="mt-1">${lodging.reviewAverage }</span>
-						<span>
-							<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
-						</span>
-						<span class="dot" aria-hedden="true">·</span>
+						<c:if test="${lodging.reviewCount ne 0 }">
+							<span class="p-2">
+								<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+								focusable="false" style="display: block;height: 14px;width: 14px;fill: #FE2E2E; /* fill: currentcolor; */">
+									<path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 
+									1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 
+									1 0 0 0-1.814 0z" fill-rule="evenodd"></path>
+								</svg>
+							</span>
+							<span class="mt-1">${lodging.reviewAverage }</span>
+							<span>
+								<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
+							</span>
+							<span class="dot" aria-hedden="true">·</span>
+						</c:if>
 						<span>
 							<button type="button" class="button-map">
 								 ${lodging.city }, 한국
@@ -496,15 +869,15 @@
 		</div>
 		<!-- 사진 -->
 		<div class="row">
-			<div style="padding-top: 24px">	<!-- 넓이 조정?? -->
+			<div style="padding-top: 24px;">	<!-- 넓이 조정?? -->	<!--  padding-left: 80px; padding-right: 80px; -->
 				<div class="imageborder">	<!-- 패딩 탑 -->
 					<div class="imagecollection">	<!-- 사진 (_168ht2w) -->
 						<div class="imagecollection1">
 							<div class="image1">
 								<div class="image1setup">
-									<a href="" class="image1link">
+									<a href="#" class="image1link" data-bs-toggle="modal" data-bs-target="#imageModal">
 										<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-											<img class="img1" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
+											<img class="img1" src="${images[0].uri }" style="object-fit: cover; vertical-align: bottom;">
 										</div>
 									</a>
 								</div>
@@ -512,18 +885,18 @@
 							<div class="image23">
 								<div class="image2">
 									<div class="image2setup">
-										<a href="" class="image2link">
+										<a href="#" class="image2link" data-bs-toggle="modal" data-bs-target="#imageModal">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img2" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img2" src="${images[1].uri }" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
 								</div>
 								<div class="image3">
 									<div class="image3setup">
-										<a href="" class="image3link">
+										<a href="#" class="image3link" data-bs-toggle="modal" data-bs-target="#imageModal">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img3" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img3" src="${images[2].uri }" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
@@ -532,18 +905,18 @@
 							<div class="image45">
 								<div class="image4">
 									<div class="image4setup">
-										<a href="" class="image4link">
+										<a href="#" class="image4link" data-bs-toggle="modal" data-bs-target="#imageModal">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img4" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img4" src="${images[3].uri }" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
 								</div>
 								<div class="image5">
 									<div class="image5setup">
-										<a href="" class="image5link">
+										<a href="#" class="image5link" data-bs-toggle="modal" data-bs-target="#imageModal">
 											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img5" src="resources/images/lodgings/10001_2.jpg" style="object-fit: cover; vertical-align: bottom;">
+												<img class="img5" src="${images[4].uri }" style="object-fit: cover; vertical-align: bottom;">
 											</div>
 										</a>
 									</div>
@@ -551,7 +924,7 @@
 							</div>
 						</div>
 						<div class="view-all">	<!-- 사진 모두 보기 도전하기!!!(_ekor09)  -->
-							<a href="" class="view-link">
+							<a href="#" class="view-link" data-bs-toggle="modal" data-bs-target="#imageModal">
 								<div class="view-svg">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" role="presentation" aria-hidden="true" focusable="false"
 									style="height: 12px; width: 12px; display: block; fill: currentcolor;">
@@ -575,7 +948,7 @@
 		</div>
 		<!-- 예약 내용, 달력 -->
 		<div class="row">
-			<div>	<!-- 전체 영역 설정 !!!ㅜㅜ -->
+			<div>	<!-- 전체 영역 설정 !!!ㅜㅜ -->	<!--  style="padding-left: 80px; padding-right: 80px;" -->
 				<div class="detailbody">
 				<div class="left">	<!-- 왼쪽 -->
 					<div>
@@ -589,13 +962,13 @@
 													<h2 class="lodging-status-content-top">June님이 호스팅하는 주거용 공간 전체</h2>
 												</div>
 												<div>
-													<span>최대 인원 2명</span>
+													<span>최대 인원 ${lodging.maxGuest }명</span>
 													<span>·</span>
-													<span>침실 1개</span>
+													<span>침실 ${lodging.bedroom }개</span>
 													<span>·</span>
-													<span>침대 1개</span>
+													<span>침대 ${lodging.singlebed+lodging.doublebed }개</span>
 													<span>·</span>
-													<span>욕실 1개</span>
+													<span>욕실 ${lodging.bathroom }개</span>
 												</div>
 											</div>
 											<div>	<!-- 이미지 -->
@@ -611,103 +984,66 @@
 							</div>
 						</div>
 						<div class="lodging-introduction">	<!-- 숙소 장점?? -->
-							<div style="padding-top: 32px; padding-bottom: 32px">
+							<div style="padding-top: 32px; padding-bottom: 8px">
+								<c:if test="${lodging.lodgingTypeCode eq 'LDG0201' }">	<!-- 집전체를 사용하게 될 경우 -->
+									<div class="lodging-merit">
+										<div>	<!-- 아이콘 -->
+											<div>
+												<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
+												aria-hidden="true" role="presentation" focusable="false" 
+												style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+													<path d="m17.9772237 1.90551573.1439807.13496509 13.2525 13.25240998-1.4142088 1.4142184-.9603513-.9603098.0008557 12.5832006c0 1.0543618-.8158778 1.9181651-1.8507377 1.9945143l-.1492623.0054857h-22c-1.0543618 0-1.91816512-.8158778-1.99451426-1.8507377l-.00548574-.1492623-.00085571-12.5822006-.95878858.9593098-1.41421142-1.414217 13.25247161-13.25243161c1.1247615-1.1246896 2.9202989-1.16967718 4.0986078-.13494486zm-2.5902053 1.46599297-.0942127.08318915-10.29366141 10.29310155.00085571 14.5822006h5.9991443l.0008557-9.9966c0-1.0543764.8158639-1.9181664 1.8507358-1.9945144l.1492642-.0054856h6c1.0543764 0 1.9181664.8158639 1.9945144 1.8507358l.0054856.1492642-.0008557 9.9966h6.0008557l-.0008557-14.5832006-10.2921737-10.29212525c-.3604413-.36046438-.9276436-.38819241-1.3199522-.08316545zm3.6129816 14.9618913h-6l-.0008557 9.9963994h6z">
+													</path>
+												</svg>
+											</div>
+										</div>
+										<div class="merit-box">
+											<div class="merit">집 전체</div>
+											<div class="merit-text">집 전체를 단독으로 사용하게 됩니다.</div>
+										</div>
+									</div>
+								</c:if>
 								<div class="lodging-merit">
 									<div>	<!-- 아이콘 -->
-										
+										<div>
+											<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
+											aria-hidden="true" role="presentation" focusable="false" 
+											style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+												<path d="M15.032 1.747c.263-1.004 1.692-.993 1.94.015.876 3.577 2.415 6.454 4.614 8.652 2.198 2.199 5.075 3.738 8.652 4.615 1.016.249 1.016 1.693 0 1.942-3.577.877-6.454 2.416-8.652 4.615-2.199 2.198-3.738 5.075-4.615 8.652-.249 1.016-1.693 1.016-1.942 0-.877-3.577-2.416-6.454-4.615-8.652-2.198-2.199-5.075-3.738-8.652-4.615-1.008-.247-1.019-1.676-.015-1.939 3.535-.923 6.394-2.487 8.597-4.69 2.202-2.202 3.765-5.06 4.688-8.595zm.945 3.518l-.133.325c-.88 2.085-2.025 3.914-3.438 5.484l-.33.357-.318.326c-1.6 1.6-3.5 2.893-5.693 3.88l-.475.206-.325.133.352.14c2.108.859 3.952 1.995 5.527 3.407l.358.33.326.319c1.603 1.602 2.887 3.515 3.854 5.732l.203.48.115.291.115-.292c.86-2.108 1.996-3.952 3.408-5.527l.33-.358.319-.326c1.602-1.603 3.515-2.887 5.732-3.854l.48-.203.292-.115-.293-.115c-2.421-.988-4.494-2.34-6.211-4.057-1.603-1.602-2.887-3.515-3.854-5.732l-.203-.48-.138-.351zm11.04-3.891c.13-.502.845-.497.969.007.176.718.48 1.287.913 1.72.433.433 1.002.737 1.72.913.508.125.508.847 0 .972-.718.176-1.287.48-1.72.913-.433.433-.737 1.002-.913 1.72-.125.508-.847.508-.972 0-.176-.718-.48-1.287-.913-1.72-.433-.433-1.002-.737-1.72-.913-.504-.124-.51-.839-.007-.97.71-.185 1.277-.496 1.712-.93.434-.435.745-1.002.93-1.712z">
+												</path>
+											</svg>
+										</div>
 									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
+									<div class="merit-box">
+										<div class="merit">청결 강화</div>
+										<div class="merit-text">에어비앤비의 강화된 5단계 청소 절차를 준수하겠다고 동의한 호스트입니다.</div>
 									</div>
 								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
-								<div class="lodging-merit">
-									<div>	<!-- 아이콘 -->
-										
-									</div>
-									<div>	<!-- 장점 글 -->
-										<div>집 전체</div>
-										<div>공통주택 전체를 단독으로 사용하게 됩니다.</div>
-									</div>
-								</div>
+								<c:forEach var="amenity" items="${amenities }">
+									<c:if test="${amenity.codeContent eq 'WIFI' }">
+										<div class="lodging-merit">
+											<div>	<!-- 아이콘 -->
+												<div>
+													<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
+													aria-hidden="true" role="presentation" focusable="false" 
+													style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+														<path d="m24.6666 1.66675h-17.33335c-1.65685475 0-3 1.34314525-3 3v26.4709039l11.66575-7.2926539 11.6676 7.2926539v-26.4709039c0-1.65686279-1.3431233-3-3-3zm0 2 .1166244.00672754c.4973508.05776355.8833756.48042438.8833756.99327246l-.0006 22.86225-9.6661012-6.041549-9.6668988 6.041549.00025-22.86225c0-.55228525.44771475-1 1-1z">
+														</path>
+													</svg>
+												</div>
+											</div>
+											<div class="merit-box">
+												<div class="merit">무선 인터넷</div>
+												<div class="merit-text">게스트가 자주 찾는 편의시설</div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="lodging-introduction">	<!-- 숙소설명 -->
 							<div style="padding-top: 32px; padding-bottom: 48px">
-								<div>
-									신축건물에 위치한 숙소로 쾌적한 환경과 편리한 교통편을 자랑합니다.
-									게스트용이 아닌 제 아이의 방을 꾸미 듯 모든 면에 신경써서 세팅했답니다.
-									중장기 스테이 환영합니다.
-									신축건물에 위치한 숙소로 쾌적한 환경과 편리한 교통편을 자랑합니다.
-									게스트용이 아닌 제 아이의 방을 꾸미 듯 모든 면에 신경써서 세팅했답니다.
-									중장기 스테이 환영합니다.
-									신축건물에 위치한 숙소로 쾌적한 환경과 편리한 교통편을 자랑합니다.
-									게스트용이 아닌 제 아이의 방을 꾸미 듯 모든 면에 신경써서 세팅했답니다.
-									중장기 스테이 환영합니다.
-								</div>
+								<div>${lodging.description }</div>
 							</div>
 						</div>
 						<div class="lodging-introduction">	<!-- 숙소 편의시설 -->
@@ -796,27 +1132,29 @@
 				</div>
 				<div class="right">	<!-- 오른쪽 -->
 					<div class="booking-sticky">	<!-- sticky설정 -->
-						<div style="margin-top: 48px;">	<!-- 아래 패딩 설정 -->
+						<div style="margin-top: 48px; padding-bottom: 48px;" >	<!-- 아래 패딩 설정 -->
 							<div style="border: 1px solid rgb(221, 221, 221); border-radius: 12px; padding: 24px;">	<!-- 테두리(날짜를 선택하면 div한개 더추가) -->
 								<div>	<!-- 안에 내용 -->
 									<div class="booking-top">	<!-- 타이틀, 후기 -->
-										<div>
+										<div id="booking-top">
 											요금을 확인하려면 날짜를 입력하세요.
 										</div>
-										<div class="booking-star-rating">
-											<span class="booking-star">
-												<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-												focusable="false" style="display: block;height: 12px;width: 12px;fill: #FE2E2E; /* fill: currentcolor; */">
-													<path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 
-													1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 
-													1 0 0 0-1.814 0z" fill-rule="evenodd"></path>
-												</svg>
-											</span>
-											<span class="mt-1">${lodging.reviewAverage }</span>
-											<span>
-												<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
-											</span>
-										</div>
+										<c:if test="${lodging.reviewCount ne 0 }">
+											<div class="booking-star-rating">
+												<span class="booking-star">
+													<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+													focusable="false" style="display: block;height: 12px;width: 12px;fill: #FE2E2E; /* fill: currentcolor; */">
+														<path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 
+														1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 
+														1 0 0 0-1.814 0z" fill-rule="evenodd"></path>
+													</svg>
+												</span>
+												<span class="mt-1">${lodging.reviewAverage }</span>
+												<span>
+													<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
+												</span>
+											</div>
+										</c:if>
 									</div>
 									<div class="booking-mid">	<!-- 달력 -->
 										<div>
@@ -831,16 +1169,62 @@
 														<div class="check-out-date">날짜 추가</div>
 													</div>
 												</div>
-												<div>
-													
+												<div class="booking-total-number">	<!-- 게스트 총인원 -->
+													<div>
+														<div class="total-number">인원</div>
+														<div class="guest">게스트 <span id="guest">1</span>명</div>
+													</div>
+												</div>
+												<div class="booking-button-adult">	<!-- 성인 -->
+													<div class="adult-flex">
+														<div class="adult-text">성인</div>
+														<div class="button-adult">
+															<div class="button-collection">
+																<button class="button-minus" type="button" disabled='disabled'>-</button>
+																<div class="adult">1</div>
+																<button class="button-plus" type="button">+</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="booking-button-child">	<!-- 어린이 -->
+													<div class="child-flex">
+														<div class="child-text-box">
+															<div class="child-text">어린이</div>
+															<div class="child-age">만 2~12세</div>
+														</div>
+														<div class="button-child">
+															<div class="button-collection">
+																<button class="button-minus2" type="button" disabled='disabled'>-</button>
+																<div class="child">0</div>
+																<button class="button-plus2" type="button">+</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="booking-maxGuest">
+													<div class="explanation">
+														최대 <span id="maxGuest">${lodging.maxGuest }</span>명. 유아(만 2세미만)는 숙박인원에 포함되지 않습니다.
+													</div>
 												</div>
 											</div>
 										</div>
-										<div id="sticky-calendar">
-											
-										</div>
 									</div>
-									<div>	<!-- 예약 버튼 -->
+									<div>	<!-- 예약 버튼(옵션을 선택할 때마다 값을 넣어주기 -->
+										<form action="" method="post">
+											<input type="hidden" name="lodging_no" value="${lodging.no }">
+											<input type="hidden" name="checkin" value="">
+											<input type="hidden" name="checkout" value="">
+											<input type="hidden" name="days" value="">
+											<input type="hidden" name="number_of_guests" value="">
+											<input type="hidden" name="totalLodgingFee" value="">
+											<input type="hidden" name="totalCleaningFee" value="">
+											<input type="hidden" name="amount" value="">
+											<button type="submit" class="booking-button">예약 가능 여부 보기</button>
+										</form>
+									</div>
+									<!-- 여기부터는 달력 선택이 끝나면 div를 넣는다. -->
+									<div class="booking-fee">
 										
 									</div>
 								</div>
@@ -853,9 +1237,176 @@
 		</div>
 		<!-- 후기 -->
 		<div class="row">
-			<c:forEach var="price" items="${prices }">
-				<div>${price.openDate }</div>
-			</c:forEach>
+			<div>	<!--  class="review-padding" -->
+				<div class="review-area">
+					<div class="review-border">
+						<c:choose>
+							<c:when test="${lodging.reviewCount eq 0 }">
+								<div style="padding-bottom: 24px;">
+									<div class="no-review">후기 (아직) 없음</div>
+								</div>
+								<div class="review-contents">
+									<div class="review-contents-left">
+										<div class="review-left-text">* 해당 숙소에 대한 후기가 없습니다.</div>
+									</div>
+									<div class="review-contents-right">
+										<div class="review-left-text">* 여행에 차질이 없도록 최선을 다해 도와드리겠습니다.모든 예약은 에어비앤비의 게스트 환불 정책에 따라 보호를 받습니다.</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div style="padding-bottom: 32px;">
+									<div class="no-review">평점 ${lodging.reviewAverage } · 후기 ${lodging.reviewCount }개</div>
+								</div>
+								<div class="review-average-block">
+									<div style="margin-bottom: 24px;">
+										<div class="review-average-flex">
+											<div class="reviewAverage">
+												<div style="margin-bottom: 16px;">
+													<div class="reviewAverage-box">
+														<div class="reviewAverage-text">
+															청결도
+														</div>
+														<div class="reviewAverage-bar">
+															<div class="bar-relative">
+																<span class="bar-absolute" style="width: ${lodging.cleanness / 5 * 100 }%;"></span>
+															</div>
+															<span class="bar-text">${lodging.cleanness }</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="reviewAverage">
+												<div style="margin-bottom: 16px;">
+													<div class="reviewAverage-box">
+														<div class="reviewAverage-text">
+															정확성
+														</div>
+														<div class="reviewAverage-bar">
+															<div class="bar-relative">
+																<span class="bar-absolute" style="width: ${lodging.accuracy / 5 * 100 }%;"></span>
+															</div>
+															<span class="bar-text">${lodging.accuracy }</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="review-average-flex">
+											<div class="reviewAverage">
+												<div style="margin-bottom: 16px;">
+													<div class="reviewAverage-box">
+														<div class="reviewAverage-text">
+															의사소통
+														</div>
+														<div class="reviewAverage-bar">
+															<div class="bar-relative">
+																<span class="bar-absolute" style="width: ${lodging.communication / 5 * 100 }%;"></span>
+															</div>
+															<span class="bar-text">${lodging.communication }</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="reviewAverage">
+												<div style="margin-bottom: 16px;">
+													<div class="reviewAverage-box">
+														<div class="reviewAverage-text">
+															위치
+														</div>
+														<div class="reviewAverage-bar">
+															<div class="bar-relative">
+																<span class="bar-absolute" style="width: ${lodging.location / 5 * 100 }%;"></span>
+															</div>
+															<span class="bar-text">${lodging.location }</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="review-average-flex">
+											<div class="reviewAverage">
+												<div style="margin-bottom: 16px;">
+													<div class="reviewAverage-box">
+														<div class="reviewAverage-text">
+															체크인
+														</div>
+														<div class="reviewAverage-bar">
+															<div class="bar-relative">
+																<span class="bar-absolute" style="width: ${lodging.checkIn / 5 * 100 }%;"></span>
+															</div>
+															<span class="bar-text">${lodging.checkIn }</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="reviewAverage">
+												<div style="margin-bottom: 16px;">
+													<div class="reviewAverage-box">
+														<div class="reviewAverage-text">
+															가격 대비 만족도
+														</div>
+														<div class="reviewAverage-bar">
+															<div class="bar-relative">
+																<span class="bar-absolute" style="width: ${lodging.value / 5 * 100 }%;"></span>
+															</div>
+															<span class="bar-text">${lodging.value }</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="review-box-block">
+									<div>
+										<div class="review-box-flex">
+											<div class="review-item-padding">
+												<div style="margin-bottom: 40px;">
+													<div class="review-item-top">
+														<div class="photo2" style="height: 56px; width: 56px; border-radius: 50%;">
+															<div class="photo3" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																<img class="photo4" src="resources/images/defaultProfile.jpg" style="object-fit: cover; vertical-align: bottom;">
+															</div>
+														</div>
+														<div style="margin-left: 12px;">
+															<div style="font-size: 16px; font-weight: 600;">대섭</div>
+															<div style="font-size: 14px; font-weight: 400; color: #717171">2021년8월</div>
+														</div>
+													</div>
+													<div>
+														<div>
+															<span>
+																잘 묵고가요! 청결,위치 여러가지로 아주 만족스런 숙소입니다.
+																호스트님 연락도 바로 주시고 너무 잘묵고갑니다! 송도 방문시 재방문하고 싶어요.
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div>
+												
+											</div>
+											<div>
+												
+											</div>
+											<div>
+												
+											</div>
+											<div>
+												
+											</div>
+											<div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- 지도 -->
 		<div class="row">
@@ -866,6 +1417,99 @@
 			
 		</div>
 	</main>
+	<!-- modal -->
+	<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-background" style="position: relative;">
+				<div class="image-content">
+					<div tabindex="0" class="image-relative">
+						<section>
+							<div class="image-padding">
+								<div style="--maxWidth:1128px;">
+									<section>
+										<div class="image-padding2">
+											<div>
+												<div class="image-width">
+													<div class="image-grid">
+														<div class="modal-image-grid" style="display: grid; grid-area: 1 / 1 / auto / auto;">
+															<div class="modal-image-relative">
+																<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
+																	<div class="modal-image-size">
+																		<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																			<img class="img1" src="${images[0].uri }" style="object-fit: cover;">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div style="display: grid; grid-area: 2 / 1 / auto / auto;">
+															<div class="modal-image23-grid">
+																<div class="modal-image-grid" style="grid-area: 1 / 1 / auto / auto;">
+																	<div class="modal-image-relative">
+																		<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
+																			<div class="modal-image-size">
+																				<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																					<img class="img1" src="${images[1].uri }" style="object-fit: cover;">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-image-grid" style="grid-area: 1 / 2 / auto / auto;">
+																	<div class="modal-image-relative">
+																		<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
+																			<div class="modal-image-size">
+																				<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																					<img class="img1" src="${images[2].uri }" style="object-fit: cover;">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div style="display: grid; grid-area: 3 / 1 / auto / auto;">
+															<div class="modal-image-grid" style="grid-area: 1 / 1 / auto / auto;">
+																<div class="modal-image-relative">
+																	<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
+																		<div class="modal-image-size">
+																			<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																				<img class="img1" src="${images[3].uri }" style="object-fit: cover;">
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div style="display: grid; grid-area: 4 / 1 / auto / auto;">
+															<div class="modal-image-grid" style="grid-area: 1 / 1 / auto / auto;">
+																<div class="modal-image-relative">
+																	<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
+																		<div class="modal-image-size">
+																			<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																				<img class="img1" src="${images[4].uri }" style="object-fit: cover;">
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div>
+														
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script>
 
@@ -874,9 +1518,13 @@
 		var list = JSON.parse('${json}');
 		console.log(list);
 		
-		var ldgldg;
-		var ldgldgldg;
-		var ldgldgldgldg;
+		var value = $("input[name=number_of_guests]").attr('value');
+		console.log(value);
+		//var adult = parseInt($(".adult").text());
+		//var guest = parseInt($("#guest").text());
+		//$("#guest").text(guest+1);
+		//var guest1 = parseInt($("#guest").text());
+		//console.log(guest);
 		//for(var i=0; i<list.length; i++) {
 		//	ldgldg = parse(list[i].openDate);
 			
@@ -945,13 +1593,9 @@
 				// 클릭한 날짜 class가 past-date(지난 날)이면 아무것도 반환하지 않음!!
 				if (clicked.hasClass('past-date')) { return; }
 				if (clicked.hasClass('blank')) { return; }
+				// 우선 당일 예약은 불가능하게 만들었다!!!
+				if (clicked.hasClass('today')) { return; }
 				
-				//if (bothCals.find(".calendar_content").find("div").hasClass('past-date') &) { return; }
-				//if (bothCals.find(".calendar_content").find("div").hasClass('past-date') && 
-				
-				//if (clicked.siblings().is(.past-date, .selected)) {
-				//	return; 
-				//}
 				var whichCalendar = calendar.name;
 				console.log(whichCalendar);
 				// Understading which element was clicked;
@@ -1005,6 +1649,9 @@
 					// 첫번째 선택한 날짜를 sticky부분에 표현하기
 					$(".check-in-date").text(firstClicked.year+"."+firstClicked.month+"."+firstClicked.date);
 					$(".check-out-date").text("날짜 추가");
+					$(".heading-section").text("체크아웃 날짜를 선택하세요.");
+					$("#booking-top").text("요금을 확인하려면 날짜를 입력하세요.");
+					$(".booking-fee").empty();
 				} else {
 					console.log('second click');
 					secondClick = true;
@@ -1019,6 +1666,12 @@
 												secondClicked.month, 
 												secondClicked.date);
 					$(".check-out-date").text(secondClicked.year+"."+secondClicked.month+"."+secondClicked.date);
+					
+					// 몇박인지 계산하는 법
+					var btMs = secondClickDateObj.getTime() - firstClickDateObj.getTime();
+					var btDay = btMs / (1000*60*60*24);
+					var city = $(".button-map").text();
+					$(".heading-section").text(city+"에서"+btDay+"박");
 					// 첫번째 클릭보다 뒤에 날짜를 클릭한 경우
 					if (firstClickDateObj > secondClickDateObj) {
 						// 두번째 클릭을 첫번째로 바꾸고, 첫번째 클릭을 두번째 클릭으로 바꾼다.
@@ -1041,12 +1694,100 @@
 						secondClick = false;
 						$(".check-in-date").text("날짜 추가");
 						$(".check-out-date").text("날짜 추가");
+						$(".heading-section").text("체크인 날짜를 선택해주세요.");
 						$(this).removeClass("selected");
 					}
 
 					// 선택한 날짜 추가
 					// add between dates to [selected]
 					selected = addChosenDates(firstClicked, secondClicked, selected);
+					
+					// input에 checkin, checkout 넣기
+					var checkin = $(".check-in-date").text();
+					var checkout = $(".check-out-date").text();
+					console.log(checkout);
+					$("input[name=checkin]").attr('value', checkin);
+					$("input[name=checkout]").attr('value', checkout);
+					
+					// 여기부터 내가 만든 부분(가격을 화면에 표시하기 위해서)
+					var totalPrice = 0;
+					var totalCleaningPrice = 0;
+					// 첫번째 클릭한 연도, 달
+					var bookingFirstDate = selected[firstClicked.year][firstClicked.month];
+					// 두번째 클릭한 연도, 달
+					var bookingSecondDate = selected[secondClicked.year][secondClicked.month];
+					// 연도가 같을 경우
+					if (firstClicked.year == secondClicked.year) {
+						// 달이 같을 경우
+						if (firstClicked.month == secondClicked.month) {
+							// 총 숙박료
+							var firstMontTotalPrice = firstMonthPrice(bookingFirstDate, firstClicked, secondClicked);
+							// 총 숙박료/숙박일
+							totalPrice = firstMontTotalPrice / btDay;
+							// 총 청소비
+							var firstMontTotalCleaningPrice = firstMonthCleaningPrice(bookingFirstDate, firstClicked, secondClicked);
+							
+							$("#booking-top").text("₩"+totalPrice.toLocaleString()+"/ 박");
+							$("input[name=totalLodgingFee]").attr('value', firstMontTotalPrice);
+							$("input[name=totalCleaningFee]").attr('value', firstMontTotalCleaningPrice);
+							
+							console.log("다 같을때" + firstMontTotalPrice.toLocaleString());
+						// 달이 다를 경우
+						} else {	// 달이 다를때....
+							var firstMontTotalPrice = firstMonthPrice(bookingFirstDate, firstClicked, secondClicked);
+							var secondMontTotalPrice = secondMonthPrice(bookingSecondDate, firstClicked, secondClicked);
+							
+							var total = firstMontTotalPrice+secondMontTotalPrice;
+							// var totalLength = bookingFirstDate.length+bookingSecondDate.length;
+							
+							totalPrice = total / btDay;
+							
+							// 총 청소비
+							var firstMontTotalCleaningPrice = firstMonthCleaningPrice(bookingFirstDate, firstClicked, secondClicked);
+							
+							$("#booking-top").text("₩"+totalPrice.toLocaleString()+"/ 박");
+							$("input[name=totalLodgingFee]").attr('value', total);
+							$("input[name=totalCleaningFee]").attr('value', firstMontTotalCleaningPrice);
+							console.log("달이 다를 경우"+totalPrice);
+						}
+						
+					
+					// 년도가 다를경우
+					} else if (firstClicked.year != secondClicked.year) {
+						var firstMontTotalPrice = firstMonthPrice(bookingFirstDate, firstClicked, secondClicked);
+						var secondMontTotalPrice = secondMonthPrice(bookingSecondDate, firstClicked, secondClicked);
+						var total = firstMontTotalPrice+secondMontTotalPrice;
+						// var totalLength = bookingFirstDate.length+bookingSecondDate.length;
+						
+						totalPrice = total / btDay;
+						
+						// 총 청소비
+						var firstMontTotalCleaningPrice = firstMonthCleaningPrice(bookingFirstDate, firstClicked, secondClicked);
+						
+						$("#booking-top").text("₩"+totalPrice.toLocaleString()+"/ 박");
+						$("input[name=totalLodgingFee]").attr('value', total);
+						$("input[name=totalCleaningFee]").attr('value', firstMontTotalCleaningPrice);
+						console.log("다 다를 경우"+totalPrice);
+					}
+					console.log("하하하하핳"+totalPrice);
+					// 숙박일
+					$(".booking-fee").prepend(makeDiv(btDay, totalPrice, firstMontTotalCleaningPrice));
+					// input에 총 가격 넣기
+					$("input[name=amount]").attr('value', totalPrice * btDay+firstMontTotalCleaningPrice);
+					
+					var length = firstClicked.year == secondClicked.year && firstClicked.month == secondClicked.month?1:0;
+					console.log(totalPrice);
+					// 가격을 알기위해 Object안에 있는 값 조회하기
+					// var bookingYear = selected[firstClicked.year];
+					// var bookingMonth = selected[firstClicked.year][firstClicked.month];
+					// var bookingDate = selected[firstClicked.year][firstClicked.month][0];
+					// var datee = new Date(firstClicked.year, firstClicked.month, bookingDate);
+					// var price = parseInt(lodgingPrice(datee));
+					// var total = 0;
+					// console.log("하하하핳");
+					// total += price;
+					// total += price;
+					// console.log(price+price);
 				}
 				// console.log(selected);
 				selectDates(selected);
@@ -1362,6 +2103,12 @@
 			return new Date(y,m-1,d);
 		}
 		
+		function btDay(firstDate, secondDate) {
+			var btMs = secondDate.getTime() - firstDate();
+			var btDay = btMs / (1000*60*60*24);
+			return btDay;
+		}
+		
 		$(".button-erase").click(function() {
 			selected = {};
 			firstClicked = [];
@@ -1370,14 +2117,206 @@
 			secondClick = false;
 			$(".check-in-date").text("날짜 추가");
 			$(".check-out-date").text("날짜 추가");
+			$(".heading-section").text("체크인 날짜를 선택해주세요.");
+			$("#booking-top").text("요금을 확인하려면 날짜를 입력하세요.");
+			$(".booking-fee").empty();
 			$(".calendar").find(".calendar_content").find("div").each(function() {
 				$(this).removeClass("selected");
 			})
 		});
+		// 해당 날짜 숙박요금 
+		function lodgingPrice(bookingDate) {
+			for(var ldg=0; ldg<list.length; ldg++) {
+				var opendate = parse(list[ldg].openDate);
+				
+				if (bookingDate.getDate() == opendate.getDate() && bookingDate.getMonth() == opendate.getMonth() && bookingDate.getFullYear() == opendate.getFullYear()) {
+					var price = list[ldg].lodgingFee;
+					return price;
+				}
+			}
+		}
+		// 해당 날짜 청소비
+		function cleaningPrice(bookingDate) {
+			for(var ldg=0; ldg<list.length; ldg++) {
+				var opendate = parse(list[ldg].openDate);
+				
+				if (bookingDate.getDate() == opendate.getDate() && bookingDate.getMonth() == opendate.getMonth() && bookingDate.getFullYear() == opendate.getFullYear()) {
+					var price = list[ldg].cleaningFee;
+					return price;
+				}
+			}
+		}
+		
+		// 첫번째 클릭연도 두번째 클릭연도가 같을경우 첫번째 달
+		function firstMonthPrice(bookingFirstDate, firstClicked, secondClicked) {
+			var totalPrice = 0;
+			// 체크 아웃 날짜는 돈을 받으면 안된다.
+			var length = firstClicked.year == secondClicked.year && firstClicked.month == secondClicked.month?1:0;
+			for (var i=0; i<bookingFirstDate.length-length; i++) {
+				// 선택된 날짜 만들기 
+				var bookingDate = new Date(firstClicked.year, firstClicked.month, bookingFirstDate[i]);
+				var price = parseInt(lodgingPrice(bookingDate));
+				totalPrice += price;
+			}
+			// 나누는건 다른곳에서 하자
+			// var priceAvg = totalPrice / bookingFirstDate.length;
+			return totalPrice;
+		}
+		
+		// 첫번째 클릭연도 두번째 클릭연도가 같은 경우 두번째 달
+		function secondMonthPrice(bookingSecondDate, firstClicked, secondClicked) {
+			var totalPrice = 0;
+			for (var i=0; i<bookingSecondDate.length-1; i++) {
+				// 선택된 날짜 만들기 
+				var bookingDate = new Date(secondClicked.year, secondClicked.month, bookingSecondDate[i]);
+				var price = parseInt(lodgingPrice(bookingDate));
+				totalPrice += price;
+			}
+			// 나누는건 다른곳에서 하자
+			// var priceAvg = totalPrice / bookingSecondDate.length;
+			return totalPrice;
+		}
+		// 첫번째 클릭연도 두번째 클릭연도가 같을경우 첫번째 달- 청소비
+		function firstMonthCleaningPrice(bookingFirstDate, firstClicked, secondClicked) {
+			var totalPrice = 0;
+			// 체크 아웃 날짜는 돈을 받으면 안된다.
+			var length = firstClicked.year == secondClicked.year && firstClicked.month == secondClicked.month?1:0;
+			for (var i=0; i<bookingFirstDate.length-length; i++) {
+				// 선택된 날짜 만들기 
+				var bookingDate = new Date(firstClicked.year, firstClicked.month, bookingFirstDate[i]);
+				var price = parseInt(cleaningPrice(bookingDate));
+				totalPrice += price;
+			}
+			// 나누는건 다른곳에서 하자
+			// var priceAvg = totalPrice / bookingFirstDate.length;
+			return totalPrice;
+		}
+		
+		// 첫번째 클릭연도 두번째 클릭연도가 같은 경우 두번째 달- 청소비
+		function secondMonthCleaningPrice(bookingSecondDate, firstClicked, secondClicked) {
+			var totalPrice = 0;
+			for (var i=0; i<bookingSecondDate.length-1; i++) {
+				// 선택된 날짜 만들기 
+				var bookingDate = new Date(secondClicked.year, secondClicked.month, bookingSecondDate[i]);
+				var price = parseInt(cleaningPrice(bookingDate));
+				totalPrice += price;
+			}
+			// 나누는건 다른곳에서 하자
+			// var priceAvg = totalPrice / bookingSecondDate.length;
+			return totalPrice;
+		}
 		
 		
 		
 		
+		
+		// 인원 선택하는 버튼을 클릭했을 때 이벤트
+		// 성인 추가를 눌렀을 경우(항상 1이상이고, 최대인원 보다는 작아야 한다.)
+		$(".button-plus").click(function() {
+			var maxGuest = parseInt($("#maxGuest").text());
+			var guest = parseInt($("#guest").text());
+			var adult = parseInt($(".adult").text());
+			
+			$("#guest").text(guest+1);
+			$(".adult").text(adult+1);
+			var guest2 = parseInt($("#guest").text());
+			
+			$("input[name=number_of_guests]").attr('value', guest2);
+			
+			if (guest2 == maxGuest) {
+				$(".button-plus").prop('disabled', true);
+				$(".button-plus2").prop('disabled', true);
+				$(".button-minus").prop('disabled', false);
+			} else {
+				$(".button-minus").prop('disabled', false);
+			}
+		})
+		$(".button-minus").click(function() {
+			var minGuest = 1;
+			var guest = parseInt($("#guest").text());
+			var adult = parseInt($(".adult").text());
+			
+			if (adult == 1) {
+				return;
+			}
+			
+			$("#guest").text(guest-1);
+			$(".adult").text(adult-1);
+			var guest2 = parseInt($("#guest").text());
+			$("input[name=number_of_guests]").attr('value', guest2);
+			
+			if (guest2 == minGuest) {
+				$(".button-plus").prop('disabled', false);
+				$(".button-plus2").prop('disabled', false);
+				$(".button-minus").prop('disabled', true);
+			} else {
+				$(".button-plus").prop('disabled', false);
+				$(".button-plus2").prop('disabled', false);
+				$(".button-minus").prop('disabled', false);
+			}
+		})
+		$(".button-plus2").click(function() {
+			var maxGuest = parseInt($("#maxGuest").text());
+			var guest = parseInt($("#guest").text());
+			var child = parseInt($(".child").text());
+			
+			$("#guest").text(guest+1);
+			$(".child").text(child+1);
+			var guest2 = parseInt($("#guest").text());
+			$("input[name=number_of_guests]").attr('value', guest2);
+			
+			if (guest2 == maxGuest) {
+				$(".button-plus").prop('disabled', true);
+				$(".button-plus2").prop('disabled', true);
+				$(".button-minus2").prop('disabled', false);
+			} else {
+				$(".button-minus2").prop('disabled', false);
+			}
+		})
+		$(".button-minus2").click(function() {
+			var minGuest = 1;
+			var guest = parseInt($("#guest").text());
+			var child = parseInt($(".child").text());
+			
+			if (child == 0) {
+				return;
+			}
+			
+			$("#guest").text(guest-1);
+			$(".child").text(child-1);
+			var guest2 = parseInt($("#guest").text());
+			$("input[name=number_of_guests]").attr('value', guest2);
+			
+			if (guest2 == minGuest) {
+				$(".button-plus").prop('disabled', false);
+				$(".button-plus2").prop('disabled', false);
+				$(".button-minus2").prop('disabled', true);
+			} else {
+				$(".button-plus").prop('disabled', false);
+				$(".button-plus2").prop('disabled', false);
+				$(".button-minus2").prop('disabled', false);
+			}
+		})
+		// 요금합계 나오는 <div>넣기
+		function makeDiv(btDay, totalPrice, firstMontTotalCleaningPrice) {
+			var row = "<div>";
+			row += "<div class='Lodging-fee'>";
+			row += "<div class='fee'>₩"+totalPrice.toLocaleString()+" x "+btDay+"박</div>";
+			row += "<div class='fee'>₩"+(totalPrice * btDay).toLocaleString()+"</div>";
+			row += "</div>";
+			row += "<div class='Cleaning-fee'>";
+			row += "<div class='fee'>청소비</div>";
+			row += "<div class='fee'>₩"+firstMontTotalCleaningPrice.toLocaleString()+"</div>";
+			row += "</div>";
+			row += "</div>";
+			row += "<div class='booking-total-price'>";
+			row += "<div class='total-price'>";
+			row += "<div class='price'>총 합계</div>";
+			row += "<div class='price'>₩"+(totalPrice * btDay+firstMontTotalCleaningPrice).toLocaleString()+"</div>";
+			row += "</div>";
+			row += "</div>";
+			return row;
+		}
 		
 	});
 </script>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tt.vo.AmenityListDTO;
 import com.tt.vo.PriceVO;
 
 @Controller
@@ -27,12 +28,21 @@ public class BookingController {
 	
 	@GetMapping("/booking")
 	public String booking(@RequestParam("no") int lodgingNo, Model model) throws JsonProcessingException {
+		// 숙소정보를 보낸다.
 		LodgingVO lodging = bookingService.getLodgingDetail(lodgingNo);
 		model.addAttribute("lodging", lodging);
 		
 		
-		List<PriceVO> priceList = bookingService.getVacancy(lodgingNo);
 		
+		// 숙소이미지 정보를 보낸다.
+		List<LodgingImgVO> imageList = bookingService.getLodgingIMG(lodgingNo);
+		model.addAttribute("images", imageList);
+		// 편의시설 리스트를 보낸다.
+		List<AmenityListDTO> amenityList = bookingService.getAmenitiesByLodgingNo(lodgingNo);
+		model.addAttribute("amenities", amenityList);
+		
+		// 예약이 가능한 날짜를 보낸다.
+		List<PriceVO> priceList = bookingService.getVacancy(lodgingNo);
 		List<Date> dates = new ArrayList<Date>();
 		for(PriceVO price : priceList) {
 			dates.add(price.getOpenDate());
