@@ -56,4 +56,31 @@
             and lodging_no = #{value}
 	</select>
 	
+	<select id="getLodgingImgByLodgingNo" parameterType="int" resultType="com.tt.Lodging.LodgingImgVO">
+		SELECT
+			lodgingimg_no		no,
+			lodging_no			lodgingNo,
+			lodgingimg_uri		uri
+		FROM
+			thxtay_lodging_img
+		WHERE
+			lodging_no = #{value}
+		order by lodgingimg_no asc
+	</select>
+	
+	<select id="getAmenitiesByLodgingNo" parameterType="int" resultType="com.tt.vo.AmenityListDTO">
+		SELECT
+			A.amenity_code		    code,
+			A.lodging_no			lodgingNo,
+			C.codecontent			codeContent,
+			C.parentcode			parentCode
+		FROM
+			thxtay_amenitylist A, thxtay_common_code C
+		WHERE
+            A.lodging_no = #{value}
+            and A.amenity_code = C.commoncode
+	</select>
+	
+	
+	
 </mapper>
