@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-
 <style type="text/css">
+.list-box{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #EBEBEB !important;
+    height: 220px;
+}
+.spacing{
+	border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #EBEBEB !important;
+}
 .option-button{
 	<!--나중에 쳐낼 부분은 쳐내자-->
     text-align: center !important;
@@ -33,10 +45,6 @@
 .search-region{
 	font-size: 25px;
 	font-weight: 800;
-	
-}
-.list-box{
-	box-sizing: border-box;
 	
 }
 .notice-travel{
@@ -109,9 +117,10 @@ a {
 }
 </style>
 <div class="container-fluid">
-	<div class=row>
-		<div class="col-7" id="left-box">
+	<div class="row ms-3">
+		<div class="col-6" id="left-box">
 			리스트영역
+			<i class="bi bi-heart"></i>
 			<!-- 300개 이상의 숙소·8월 16일-8월 18일 -->
 			<div class="list-title">
 				<p class="search-summary">숙박 3건 · 8월 11일 - 8월 13일 · 게스트 ${param.guests }명</p>
@@ -129,6 +138,8 @@ a {
 				<p><span>예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요. </span><a href="#">자세히 알아보기</a></p>
 			</div>
 			<!-- 이것이 본론이다! -->
+			<div class="spacing">
+			</div>
 			<script id="template" type="x-tmpl-mustache">
 			<div class="list-box">
 				<div class="image-wrapper">
@@ -157,16 +168,16 @@ a {
 					</div>
 				</div>
 				<div class="text-wrapper">
-					<div class="list-box-title">
+					<div class="list-box-title" style="display:flex;">
 						<div id="list-box-title-text">
 							<div class="lodging-summary"><span>ADD1st</span>의 <span>게스트용 별채 전체</span></div>
 							<div class="lodging-name">{{name}}<br/></div>
 						</div>
-						<div class="list-box-title-zz">
-							<a href="#"><button class="share"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+						<div class="list-box-title-zz" style="margin-left:auto;">
+							<a href="#"><button class="share" style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
  							<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
 							</svg></button></a>
-							<a href="#"><button class="zzim"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
+							<a href="#"><button class="zzim"><i class="bi bi-heart"></i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
 							<path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
 							</svg></button></a>
 						</div>
@@ -176,8 +187,8 @@ a {
 						<div class="first-row">
 							<span>{{maxGuest}}</span><span>명</span><span> · </span>
 							<span>침실</span><span>{{bedroom}}개</span><span> · </span>
-							<span>침대</span><span>2개</span><span> · </span>
-							<span>욕실</span><span>1개</span>
+							<span>침대</span><span>{{bed}}개</span><span> · </span>
+							<span>욕실</span><span>{{bathroom}}개</span>
 						</div>
 						<div class="second-row">
 							<span>주방</span><span> · </span>
@@ -186,12 +197,12 @@ a {
 							<span>세탁기</span>
 						</div>
 					</div>
-					<div class="dynamic-info">
+					<div class="dynamic-info" style="display:flex;">
 						<div class="review-info">
-							<span>4.94</span>
-							<span>후기 194개</span>
+							<span>{{reviewAverage}}</span>
+							<span>후기 {{reviewCount}}개</span>
 						</div>
-						<div class="price-info">
+						<div class="price-info" style="margin-left:auto;">
 							<span>할인가격</span>
 							<span>원래가격/박</span>
 							<span>총액</span>
@@ -216,7 +227,8 @@ a {
 			</div>
 		</div>
 		<!-- 이 부분 화면 스크롤 마다 어떻게...? -->
-		<div class="col-5" id="right-box">
+		<div class="col-6" id="right-box">
+			
 			<div id="map" style="width:100%; height:1000px;">
 			</div>
 		</div>
@@ -274,21 +286,61 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 	          $("#left-box .list-box").remove();
 	          var template = $("#template").html();
 	          $.each(lodgings, function(index, lodging) {
-	             
 	             var htmlContent = Mustache.render(template, lodging);
 	             $(htmlContent).appendTo("#left-box .notice-travel");
 	             
-	    //         displayMarker(lodging[index]);
-				 console.log(lodging)
-//	             console.log(lodging.latitude+", "+ lodging.longitude);
 
+	            //var content = '<button type="button" style="border-radius:35px;"class="n btn-outline-dark">'+lodging.name+'</button>';
+	            var content = document.createElement('button');
+	            content.className = 'btn btn-outline-dark';
+	            content.innerHTML = lodging.name;
+	            content.style.cssText = 'border-radius:35px; position:relative;'
 
-			    var marker = new kakao.maps.Marker({
+	            var customOverlay = new kakao.maps.CustomOverlay({
+			        position: new kakao.maps.LatLng(lodging.longitude, lodging.latitude),
+	            	content: content
+	            });
+	            customOverlay.setMap(map);
+	            
+	            /*
+	            var iwContent = document.createElement('div');
+	            iwContent.className = 'card';
+	            iwContent.style.cssText='width: 18rem; z-index:0;';
+	            //지도 실행안됨.... 왜?
+	            */		
+	            var iwContent = '<div class="card" style="width: 18rem; z-index:0; position:absolute; top: -50%;">'
+	            				 + '<img src="" class="card-img-top" alt="">'
+	           					 + '<div class="card-body">'
+	            				 + '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>'
+	          					 + '</div>'
+	          					 + '</div>'; 
+	          					 // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+				
+	         	// 인포윈도우를 생성합니다
+	        	var infowindow = new kakao.maps.InfoWindow({
+	            	content : iwContent
+	         	});
+	            
+	          	//실행안됨....
+	            //$(".btn-outline-dark").on('click', function(infowindow){
+	            content.addEventListener('click', function () {
+	            	infowindow.open(map, customOverlay);
+	            });
+	            	
+	            /*
+	            kakao.maps.event.addListener(customOverlay, 'click', function() {
+		              infowindow.open(map, marker);  
+
+	            });
+				*/
+	            /*
+	            var marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
 			        position: new kakao.maps.LatLng(lodging.longitude, lodging.latitude),
 			        title : lodging.name, 
 			        image : markerImage
 			    });
+			    */
 	          });
 	          
 	    },

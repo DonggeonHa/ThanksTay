@@ -17,6 +17,10 @@
 			  from thxtay_lodging A
 			  <!-- 나중에 선택가능하게 if태그 추가 -->
 			  where A.lodging_max_guest >= #{guests})
+			  <!-- 즉시예약가능여부 -->
+			  <!-- 숙소 유형  -->
+			  <!-- 요금 범위  -->
+			  <!-- pagenation! -->
 			  <!-- 위경도 조건 추가 / 타입이 Date인데 to_date 필요한지...? test-->
 		where count = (to_date('#{checkOutDate}','YYYY-MM-DD')-to_date('{#checkInDate}','YYYY-MM-DD'));
     </select>
