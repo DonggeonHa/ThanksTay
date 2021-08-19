@@ -32,8 +32,10 @@ public class LodgingListVO {
 	//추가함
 	private int lodgingFee;
 	private int cleaningFee;
+	private String amentityList;
 	//가격정보 추가해야
 	//어메니티
 	private int totalBed;
 	private int totalFee;
+	private boolean isWishlisted;
 }
