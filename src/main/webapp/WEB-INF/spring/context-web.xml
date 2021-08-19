@@ -127,6 +127,19 @@
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 
+	<bean id="echoHandler" class="com.tt.Chatting.EchoHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping path="/echo" handler="echoHandler"/>
+		<!-- WebSocket Handshake : 웹소켓 핸들러 클래스(echoHandler)가 호출되기전에 HttpSession에 접속하여  -->
+		<!-- '이용자 아이디를 추출하는 기능' 등을 인터셉터가 수행하도록 설정 -->
+		<!--<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>-->
+		<websocket:sockjs />
+	</websocket:handlers>
+
+
 	<!--
 		com.sample.web.controller 패키지의 클래스들을 자동으로 스프링 컨테이너의 빈으로 등록시킨다.
 		주로 @Controller, @RestController 어노테이션이 지정되어 있는 컨트롤러 클래스가 스프링의 빈으로 자동 등록된다.
@@ -157,6 +170,11 @@
 	</context:component-scan>
 
 	<context:component-scan base-package="com.tt.Lodging">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+
+	<context:component-scan base-package="com.tt.Chatting">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
