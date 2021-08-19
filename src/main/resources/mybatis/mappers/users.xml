@@ -35,7 +35,7 @@
             user_no             as no,
             user_password       as password,
             user_email          as email,
-            user_birth          as birth,
+            TO_CHAR(user_birth, 'YYYY-MM-DD')          as birth,
             user_phone          as phone,
             user_picture        as picture,
             user_email_check    as emailCheck,
