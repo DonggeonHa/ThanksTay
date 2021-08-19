@@ -89,5 +89,5 @@
 	<mybatis-spring:scan base-package="com.tt.Explore"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.tt.Host"		annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.tt.Lodging"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
-	<!--<mybatis-spring:scan base-package="com.tt.Chatting"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />-->
+	<mybatis-spring:scan base-package="com.tt.Chatting"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 </beans>
