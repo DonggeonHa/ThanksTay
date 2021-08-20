@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.AdminMapper">
+
+	<select id="getMembers" resultType="com.tt.User.UserVO"> <!-- 이거 처리한 결과물을 list 타입으로 만들어주면 된다. select id은 내용을 호출 함. -->
+		select *
+		from (select ROW_NUMBER() OVER (order by USER_EMAIL_CHECK DESC , USER_NO ASC) as RNUM, USER_NO, USER_EMAIL, USER_NAME, USER_BIRTH, USER_PHONE,
+					USER_EMAIL_CHECK
+			  from(select * from THXTAY_USER))
+ 	</select>
+</mapper>

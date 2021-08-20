@@ -119,7 +119,6 @@
 		UPDATE
 			thxtay_lodging
 		SET
-			(
 			 lodging_no            =#{no}
 			,user_no               =#{userNo}
 			,lodging_city          =#{city}
@@ -141,7 +140,6 @@
 			,lodging_type_code     =#{lodgingTypeCode}
 			,lodging_lat           =#{latitude}
 			,lodging_lng           =#{longitude}
-			)
 		WHERE
 			lodging_no=#{no}   
     </update>

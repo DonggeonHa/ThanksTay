@@ -4,10 +4,10 @@
 
 <mapper namespace="com.tt.Host.HostAnalysisDao">
 	<insert id="insertBank" parameterType="com.tt.vo.TransactionRegisterVO">
-		insert into Thxtay_transction_register
-		(tr_no, tr_name, tr_date, tr_phone, tr_currency, tr_payment, tr_bank_code, tr_account)
+		insert into Thxtay_transaction_register
+		(tr_no, user_no, tr_name, tr_email, tr_birth, tr_phone, tr_currency, tr_payment, tr_bank_code, tr_account)
 		values
-		(tr_seq.nextval, #{name}, #{date}, #{phone}, #{currency}, #{payment}, #{bankCode}, #{account} )
+		(tr_seq.nextval, #{userNo}, #{name}, #{email}, #{birth}, #{phone}, #{currency}, #{payment}, #{bankCode}, #{account} )
 	</insert>
 	
 	<select id="getAllTransactionHistoryForExcel" parameterType="int" resultType="com.tt.vo.TransactionHistoryDTO">
@@ -26,10 +26,10 @@
 			H.lodging_no = L.lodging_no 
 			and H.payment_no = Pm.payment_no
 			and H.price_no = Pr.price_no
-			and L.tr_no = R.tr_no
+			and R.tr_no = H.tr_no
 			and U.user_no = #{userNo}
 	</select>
-<!--
+
 	<select id="getAllTransactionHistoryByHashMap" parameterType="map" resultType="com.tt.vo.TransactionHistoryDTO">
 		select  
 				R.tr_account bankAccount,
@@ -46,8 +46,13 @@
 			H.lodging_no = L.lodging_no 
 			and H.payment_no = Pm.payment_no
 			and H.price_no = Pr.price_no
-			and L.tr_no = R.tr_no
+			and H.tr_no = R.tr_no
 			and U.user_no = #{userNo}
 	</select>
- -->	
+
+	<select id="getCommonCodeByPntCode" parameterType="string" resultType="com.tt.vo.CommonCodeVO">
+		select commoncode, codecontent
+		from thxtay_common_code
+		where parentcode like #{value}
+	</select>
 </mapper>
