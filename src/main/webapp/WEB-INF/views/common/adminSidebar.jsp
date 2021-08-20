@@ -113,7 +113,7 @@
 	<nav>
 		<ul class="sidebar-image">
 			<li class="sidebar-brand" style="margin: 15px 0;">
-				<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555; padding-left: 15%;" href="./admin/index">Thxtay</a>
+				<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555; padding-left: 15%;" href="/admin/index">Thxtay</a>
 			</li>
 			<li class="main text-white d-flex align-items-end" style="padding-left: 10%; list-style: none;">
 				<a href="/home" id="index">메인페이지로&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></a>
@@ -124,7 +124,7 @@
 			<li class="main text-white">
 				회원관리
 				<ul>
-					<li><a href="#">일반회원관리</a></li>
+					<li><a href="/admin/userList">일반회원관리</a></li>
 					<li><a href="#">호스트회원관리</a></li>
 				</ul>
 			</li>
