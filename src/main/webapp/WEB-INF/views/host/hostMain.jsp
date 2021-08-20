@@ -1,20 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="https://kit.fontawesome.com/f421352664.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>부트스트랩5 템플릿</title>
 <style>
 /* 공통 CSS */
 .container-fluid {
@@ -103,49 +88,42 @@ body {
 	padding-left: 10%;
 }
 </style>
-
-</head>
-<body>
-	<div class="container-fluid">
-		<%@include file="../common/hostHeader.jsp"%>
-		<section>
-			<div class="todayBox">
-				<div class="todayInnerbox">
-					<div class="todayTitle">
-						<p>투데이</p>
-						<span><a href="lodgingRegister"><button
-									class="enrollButton">새 숙소 등록하기</button></a></span>
-					</div>
-					<div class="todayNotice">${loginedUser.name }님 지금 바로 에어비앤비의 호스트가 되어 보세요!</div>
+<div class="container-fluid">
+	<section>
+		<div class="todayBox">
+			<div class="todayInnerbox">
+				<div class="todayTitle">
+					<p>투데이</p>
+					<span><a href="lodgingRegister"><button
+								class="enrollButton">새 숙소 등록하기</button></a></span>
 				</div>
+				<div class="todayNotice">${loginedUser.name }님 지금 바로 에어비앤비의 호스트가 되어 보세요!</div>
 			</div>
-			<div class="reservationWrapperBox">
-				<div class="reservationAlarmBox"></div>
-				<div class="reservationAlarmText">
-					<p>예약</p>
-					<p>게스트가 숙소를 예약하면 여기에 표시됩니다.</p>
-				</div>
+		</div>
+		<div class="reservationWrapperBox">
+			<div class="reservationAlarmBox"></div>
+			<div class="reservationAlarmText">
+				<p>예약</p>
+				<p>게스트가 숙소를 예약하면 여기에 표시됩니다.</p>
 			</div>
-		</section>
-	<%@ include file="../common/footer.jsp"%>
-	</div>
-	<script src="https://kit.fontawesome.com/f421352664.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-		/* hostHeader JS */
-		
-		const toggleBtn = document.querySelector(".navbar_toggleBtn");
-		const menu = document.querySelector('.navbar_menu');
-		const icons = document.querySelector('.navbar_icons');
+		</div>
+	</section>
+</div>
+<script src="https://kit.fontawesome.com/f421352664.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	/* hostHeader JS */
+	
+	const toggleBtn = document.querySelector(".navbar_toggleBtn");
+	const menu = document.querySelector('.navbar_menu');
+	const icons = document.querySelector('.navbar_icons');
 
-		toggleBtn.addEventListener('click', function() {
-			menu.classList.toggle('active');
-			icons.classList.toggle('active');
-		});
-	</script>
-</body>
-</html>
+	toggleBtn.addEventListener('click', function() {
+		menu.classList.toggle('active');
+		icons.classList.toggle('active');
+	});
+</script>

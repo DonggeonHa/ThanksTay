@@ -63,7 +63,7 @@ public class LodgingController {
 
 		model.addAttribute("lodgingTypes", lodgingTypeCodes);
 
-		return "host/lodgingTypeAddForm";
+		return "host/registerLodging/lodgingTypeAddForm";
 	}
 
 	@PostMapping("/lodgingDetailAdd")
@@ -81,7 +81,7 @@ public class LodgingController {
 
 		System.out.println("숙소타입의 공통코드:" + typeCmCode);
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
-		return "host/lodgingDetailAddForm";
+		return "host/registerLodging/lodgingDetailAddForm";
 	}
 
 	@PostMapping("/lodgingAddressAdd")
@@ -93,7 +93,7 @@ public class LodgingController {
 		model.addAttribute("lodgingRegistering", lodgingRegistering == null ? lrForm : lodgingRegistering);
 
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
-		return "host/lodgingAddressAddForm";
+		return "host/registerLodging/lodgingAddressAddForm";
 	}
 
 	@GetMapping("/lodgingAmenityAdd")
@@ -109,7 +109,7 @@ public class LodgingController {
 		model.addAttribute("amnTypes", amnTypes);
 
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
-		return "host/lodgingAmenityAddForm";
+		return "host/registerLodging/lodgingAmenityAddForm";
 	}
 
 	@GetMapping("/lodgingImgAdd")
@@ -129,41 +129,37 @@ public class LodgingController {
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		System.out.println("숙소번호: " + lodgingNo);
 		System.out.println("이미지 정보: "+imgList);
-		System.out.println(imgList.get(0).getUri());
-		System.out.println(imgList.get(1).getUri());
-		System.out.println(imgList.get(2).getUri());
-		System.out.println(imgList.get(3).getUri());
-		return "host/lodgingImgAddForm";
+		return "host/registerLodging/lodgingImgAddForm";
 	}
 
 	@PostMapping("/lodgingImgAdd")
 	@ResponseBody
 	public Map<String, Object> lodgingImgAddForm(@RequestParam(name = "picture", required = false) MultipartFile upfile,
-			@LoginUser UserVO user,
-
-			MultipartHttpServletRequest req, Model model) throws IOException {
-
+			@LoginUser UserVO user,	MultipartHttpServletRequest req, Model model) throws IOException {
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		int lodgingNo = lodgingRegistering.getNo();
 
 		// 파일 업로드
+		// 프로퍼티스 파일에 경로 설정해서 뿌리기
 		String uploadPath = req.getSession().getServletContext().getRealPath("/");	// Q. .metadata 안의 경로로 저장이됨
 		String filename= System.currentTimeMillis()	+ upfile.getOriginalFilename();
 		FileItem fileItem = new FileItem();
 		fileItem.setFilename(filename);
 		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
 		/* 데스크톱 파일저장 주소 */
-        //"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
-                uploadPath+"resources/images/lodgings",
-        /* 노트북주소 파일저장 주소*/
-//		        "C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
-        filename)));
+		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
+		/* 노트북주소 파일저장 주소*/
+		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
+		uploadPath+"resources/images/lodgings",
+		filename)));
 		
 		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
 		LodgingImgVO lodgingImg = new LodgingImgVO();
 		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
 		lodgingImg.setLodgingNo(lodgingNo);
 		lodgingImgService.addImg(lodgingImg);
+		
+		System.out.println("업로드 파일 주소:"+uploadPath);
 
 		/* 숙소 이미지파일 조회&화면뿌리기 */
 		// 내려주는 파일
@@ -173,7 +169,6 @@ public class LodgingController {
 		condition.put("getCnt", getCnt);
 		List<LodgingImgVO> pictures = lodgingImgService.getImgListByLdgNo(condition);
 
-		
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		retVal.put("upfile", pictures);// MultipartFile객체는 바이너리 데이터를 포함하고 있어서 json으로 변환이 되지 않는다.
 		logger.info("보내는 파일 " + pictures);

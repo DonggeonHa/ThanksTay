@@ -179,7 +179,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								<input type="hidden" name="no" value="${lodgingRegistering.no }">
 								<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
 							</c:if>
-							<!-- 객체로 넣어서 전달하는법 알아보기 -->
+							<!-- 8/12일 강의 참고해보기 -->
 							<input type="hidden" name="name" value="${lodgingRegistering.name }">
 							<input type="hidden" name="status" value="${lodgingRegistering.status }"> 
 							<input type="hidden" name="lodgingTypeCode" value="${lodgingRegistering.lodgingTypeCode }">
