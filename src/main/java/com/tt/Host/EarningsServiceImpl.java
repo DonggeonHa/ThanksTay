@@ -14,11 +14,10 @@ import com.tt.User.UserVO;
 import com.tt.vo.BookingVO;
 import com.tt.vo.EarningsVO;
 
-@Service("EarningsService")
+@Service
 public class EarningsServiceImpl implements EarningsService{
 
 	@Autowired HostAnalysisDao hostAnalysisDao;
-	@Autowired
 	
 	@Override
 	public EarningsVO getEarningsByHashMap(Map<String, Object> map) throws Exception {
