@@ -120,7 +120,6 @@ a {
 	<div class="row ms-3">
 		<div class="col-6" id="left-box">
 			리스트영역
-			<i class="bi bi-heart"></i>
 			<!-- 300개 이상의 숙소·8월 16일-8월 18일 -->
 			<div class="list-title">
 				<p class="search-summary">숙박 3건 · 8월 11일 - 8월 13일 · 게스트 ${param.guests }명</p>
@@ -170,7 +169,7 @@ a {
 				<div class="text-wrapper">
 					<div class="list-box-title" style="display:flex;">
 						<div id="list-box-title-text">
-							<div class="lodging-summary"><span>ADD1st</span>의 <span>게스트용 별채 전체</span></div>
+							<div class="lodging-summary"><span>{param.location}</span>의 <span>게스트용 별채 전체</span></div>
 							<div class="lodging-name">{{name}}<br/></div>
 						</div>
 						<div class="list-box-title-zz" style="margin-left:auto;">
@@ -234,6 +233,28 @@ a {
 		</div>
 	</div>
 </div>
+<!-- ------------------------------------------편의시설 체크용 모달----------------------------------------------- -->
+
+<!-- -----------------------------------------위시리스트용 모달--------------------------------------------------------- -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="wishlistModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="wishlistModal">위시리스트</h5>
+      </div>
+      <div class="modal-body">
+        <a href="#">
+        	<div class="wishlist">
+	       		<img src="">
+	       		<div>글자영역</div>
+       		</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45232a8f6f95ec00ae6343c8933658fb&libraries=services,clusterer,drawing"></script>
 <script src="https://unpkg.com/mustache@latest"></script>
 <script type="text/javascript">

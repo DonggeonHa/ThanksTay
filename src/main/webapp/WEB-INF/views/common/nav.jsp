@@ -2,9 +2,7 @@
 <nav class="navbar navbar-expand-lg" id="header" style="background-color:rgba( 0, 0, 0, 0 );">
 	<div class="container">
 		<div class="navbar-brand">
-			<div class="">
-				<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555;" href="/home">Thxtay</a>
-			</div>
+			<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555;" href="/home">Thxtay</a>
 		<!-- 이 부분이 airbnb에는 button으로 구현되어 있는 듯 하다: 아래와 엮어서 form으로 묶여있음 -->
 		<!-- <ul class="nav justify-content-center">
 				<li class="nav-item"><a class="nav-link active"
