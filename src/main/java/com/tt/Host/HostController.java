@@ -100,18 +100,13 @@ public class HostController {
 		
 		return "host/transactionhome";
 	}
-	
-	/* 호스트 대금 등록 HOME & 대금수령 리스트 출력 (메뉴 > 대금수령내역) */
-	@GetMapping("/host/transactionhome")
-	public String getAllTransactionHistory(Model model) throws Exception {	
-		return "host/transactionhome";
-	}
-	
 	/* 대금수령 리스트 EXCEL(CSV다운로드) (메뉴 > 대금수령내역) */
 	@RequestMapping(value="/host/transactionhomeexcel")
 	public @ResponseBody void excelDown(@ModelAttribute TransactionHistoryDTO download, HttpServletResponse response, HttpServletRequest request) throws Exception {
 	transactionHistoryService.excelDownload(download, response);
 	}	
+	
+	
 	
 	@Autowired EarningsService earningsService;
 	
@@ -130,6 +125,44 @@ public class HostController {
 		return "host/earnings";
 	}
 	
+	/* 호스트 대금 등록 HOME & 대금수령 리스트 출력 (메뉴 > 대금수령내역) */
+	@GetMapping("/host/transactionhome")
+	public String transactionRegisterBankAccount (@LoginUser UserVO user, Model model) throws Exception {	
+
+		List<TransactionHistoryDTO> transHistory = transactionHistoryService.getAllTransactionHistoryForExcel(user.getNo());
+		
+		System.out.println("트랜잭션!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(transHistory);
+		model.addAttribute("transHistory", transHistory);
+		return "host/transactionhome";
+	}
+	
+	@GetMapping("/host/historyJson")
+	@ResponseBody
+	public Map<String, Object> historyJson(@LoginUser UserVO user, String bankAccount, 
+		@DateTimeFormat(pattern = "yyyy-MM")Date date, Model model) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNo", user.getNo());
+		//map.put("createdDate", date);
+		TransactionHistoryDTO transHistory = transactionHistoryService.getAllTransactionHistoryByUserNo(user.getNo());
+		map.put("lodgingName", transHistory.getLodgingName());
+		map.put("createdDate", transHistory.getCreatedDate());
+		map.put("bankAccount", transHistory.getBankAccount());
+		
+//	if(bankAccount != transHistory.getBankAccount()) {
+	//		return map;
+		//} else {
+		//}
+		System.out.println("히스토리");
+		System.out.println(transHistory);
+		
+		System.out.println("맵ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ");
+		System.out.println(map);
+		
+		return map;
+	}
+	
 	@RequestMapping("/host/earningsJson")
 	@ResponseBody
 	public Map<String, Object> earningsJson(@LoginUser UserVO user, @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate, Model model) throws Exception {
@@ -145,6 +178,7 @@ public class HostController {
 		result.put("earnings", earnings);
 		result.put("chart", earningsList);
 		
+		System.out.println("뤼절트" + result);
 		return result;
 	}
 	
@@ -153,22 +187,6 @@ public class HostController {
 		earningsService.updateEarnings(user.getNo());
 		
 		System.out.println("실행" + new Date());
-	}
-	
-	@GetMapping("/host/historyJson")
-	@ResponseBody
-	public TransactionHistoryDTO historyJson(
-		@RequestParam(name="userNo", required=false, defaultValue="9999")int userNo,
-		@RequestParam(name="bankAccount", required=false)String bankAccount,
-		@RequestParam(name="lodgingName", required=false)String lodgingName,
-		@DateTimeFormat(pattern = "yyyy-MM-dd") Date date, Model model) throws Exception {
-			Map<String, Object> map = new HashedMap<String, Object>();
-			map.put("userNo",userNo);
-			map.put("bankAccount",bankAccount);
-			map.put("lodgingName",lodgingName);
-			map.put("date", date);
-			TransactionHistoryDTO history = transactionHistoryService.getAllTransactionHistoryByHashMap(map);
-			return history;
 	}
 	
 }

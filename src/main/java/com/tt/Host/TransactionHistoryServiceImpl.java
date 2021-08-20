@@ -94,11 +94,14 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 	}
 
 	@Override
-	public TransactionHistoryDTO getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception {
+	public 	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception {
 
 		return hostAnalysisDao.getAllTransactionHistoryByHashMap(map);
 	}
 
+	@Override
+	public 	TransactionHistoryDTO getAllTransactionHistoryByUserNo(int userNo) throws Exception {
+		return hostAnalysisDao.getAllTransactionHistoryByUserNo(userNo);
+	}
 
-	
 }
