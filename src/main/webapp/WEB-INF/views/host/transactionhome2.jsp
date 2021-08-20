@@ -55,19 +55,14 @@ button {
 			<button type="button" class="col btn btn-none">총 수입</button>
 		</div>
 		<div class="first-select-box row gap-3">
-			<select id="bank-box" class="col rounded" name="bankAccount">
-				<option value="" selected disabled>모든 대금 수령 방법</option>
-				<c:forEach var="value" items="${transHistory }">
-					<option value="${value.bankAccount }">${value.bankAccount }</option>
-				</c:forEach>
-			</select>
-			<select id="lodging-box" class="col rounded" name="lodgingName">
-					<option>모든 숙소</option>
-			</select>
+			<select id="bank-box" class="col rounded" name="bankAccount"></select>
+			<select id="lodging-box" class="col rounded" name="lodgingName"></select>
 		</div>
 		<div class="first-select-box row gap-3">
-			<select id="stt-box" class="col rounded searching-date" name="startDate"></select>
-			<select id="end-box" class="col rounded searching-date" name="endDate"></select>
+			<select id="stt-box" class="col rounded" name="startDate"></select>
+			<select id="stt-date-box" class="col rounded"></select>
+			<select id="end-box" class="col rounded" name="endDate"></select>
+			<select id="end-date-box" class="col rounded"></select>
 		</div>
 		<div class="mt-3 mb-3">
 			<form action="/host/transactionhomeexcel" method="post" enctype="multipart/form-data">
@@ -109,11 +104,11 @@ $(function() {
 		var option = '';
 		
 		var twoMonthsAgoText = moment().subtract(2, 'months').format('YYYY년 M월')
-		var twoMonthsAgoValue = moment().subtract(2, 'months').format('YYYY-MM')
+		var twoMonthsAgoValue = moment().subtract(2, 'months').format('YYYY-MM')+'-01'
 		option += '<option value="'+twoMonthsAgoValue+'">'+twoMonthsAgoText+'</option>'
 		
 		var oneMonthAgoText = moment().subtract(1, 'months').format('YYYY년 M월')
-		var oneMonthAgoValue = moment().subtract(1, 'months').format('YYYY-MM')
+		var oneMonthAgoValue = moment().subtract(1, 'months').format('YYYY-MM')+'-01'
 		option += '<option value="'+oneMonthAgoValue+'">'+oneMonthAgoText+'</option>'
 		
 		var todayText = moment().format('YYYY년 M월')
@@ -121,11 +116,11 @@ $(function() {
 		option += '<option value="'+todayValue+'">'+todayText+'</option>'
 		
 		var oneMonthLaterText = moment().add(1, 'months').format('YYYY년 M월')
-		var oneMonthLaterValue = moment().add(1, 'months').format('YYYY-MM')
+		var oneMonthLaterValue = moment().add(1, 'months').format('YYYY-MM')+'-01'
 		option += '<option value="'+oneMonthLaterValue+'">'+oneMonthLaterText+'</option>'
 	
 		var twoMonthsLaterText = moment().add(2, 'months').format('YYYY년 M월')
-		var twoMonthsLaterValue = moment().add(2, 'months').format('YYYY-MM')
+		var twoMonthsLaterValue = moment().add(2, 'months').format('YYYY-MM')+'-01'
 		option += '<option value="'+twoMonthsLaterValue+'">'+twoMonthsLaterText+'</option>'
 		
 		//var selectOptionNo = $(this).val
@@ -134,40 +129,62 @@ $(function() {
 		//$selectedOption.find(':checked').prop('disabled',true)
 		$('#stt-box, #end-box').html(option)
 
+
 	
-//	$('#bank-box').html('<option selected>모든 대금 수령 방법<option>')
-//	$('#lodging-box').html('<option>모든 숙소<option>')
-	function doFiltering(data) {
+	$('#bank-box').html('<option selected>모든 대금 수령 방법<option>')
+	$('#lodging-box').html('<option>모든 숙소<option>')
 		$.ajax({
 			url:'/host/historyJson',
-			data: {bankAccount: data,
-				   },
+			data: {bankAccount: $(this).val()},
 			dataType: 'json',
-			success: function(filtering) {
-					//$('#table-thead tr').append('<th>'+transHistory.bankAccount+'</th>')
-				console.log(filtering)	
-					//transaction_created_date는 stt-box의 YYYY-MM보다  크고 end-box의 YYYY-MM보다 작아야 한다.
-					var bankAccount = $('#bank-box').val()
-					console.log(bankAccount)
-					console.log(filtering.bankAccount)
-					console.log(filtering.lodgingName)
-					console.log(filtering.createdDate)
-					if(!bankAccount == filtering.bankAccount) {
-						$('#lodging-box').html('<option>현재 계좌에 등록된 숙소가 없습니다.</option>')
-					} else {
-						$('#lodging-box').html('<option>모든 숙소</option>')
-						$('#lodging-box').append('<option>'+filtering.lodgingName+'</option>')
-					}
+			success: function(history) {
+				console.log(history)
+				$('#bank-box').append('<option>'+history.bankAccount+'<option>')
+				if(history != null) {
+					$('[name=bankAccount]').change(function() {
+						var thisone = $(this).val()
+						if(history.bankAccount == thisone) {
+							$('[name=lodgingName]').change(function() {
+								var thisone = $(this).val()
+								console.log(thisone)
+							})
+							$('#lodging-box').append('<option>'+history.lodgingName+'<option>')
+							$('#table-box #empty').remove()
+							$('#table-box').html('<table><thead><tr></tr></thead></table>')
+							$('#table-box table thead tr').append('<td>bookingNo</td>')
+							$('#table-box table thead tr').append('<td>transactionNo</td>')
+							$('#table-box table thead tr').append('<td>lodgingNo</td>')
+							$('#table-box table thead tr').append('<td>createdDate</td>')
+							$('#table-box table thead tr').append('<td>lodgingFee</td>')
+							$('#table-box table thead tr').append('<td>cleaningFee</td>')
+							$('#table-box table').append('<tbody><tr></tr></tbody>')
+							$('#table-box table tbody tr').append('<th>'+history.bookingNo+'</th>')
+							$('#table-box table tbody tr').append('<td>'+history.transactionNo+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.lodgingNo+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.createdDate+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.lodgingFee+'</td>')
+							$('#table-box table tbody tr').append('<td>'+history.cleaningFee+'</td>')
+							  
+							console.log(thisone)
+						} else if(history.bankAccount != thisone) {
+							$('#lodging-box option:gt(1)').remove()
+						}						
+					}) 
 					
-			}			
-				
+					
+					//$('[name=startDate]').change(function() {
+				//		var thisone = $(this).val()
+				//		console.log(thisone)
+				//	})
+				//	$('[name=endDate]').change(function() {
+				//		var thisone = $(this).val()
+				//		console.log(thisone)
+				//	})
+					
+				}
+			}
 		})
-	}
-		$('[name=bankAccount]').change(function() {
-			var bankAccount = $('#bank-box').val()
-			doFiltering(bankAccount)
-		})
-		
+
 })
 </script>
 </body>

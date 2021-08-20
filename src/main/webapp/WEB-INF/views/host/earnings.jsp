@@ -168,7 +168,8 @@ $(function() {
 			success: function(data) {
 				var earnings = data.earnings
 				var earningsList = data.chart
-
+				console.log(earnings)
+				console.log(data)
 					$('#totalIncome span').text('￦' + new Number(earnings.confirmedIncome+earnings.expectingIncome).toLocaleString());
 					$('#cfdIncome span').text('￦' + new Number(earnings.confirmedIncome).toLocaleString());
 					$('#eptIncome span').text('￦' +  new Number(earnings.expectingIncome).toLocaleString());

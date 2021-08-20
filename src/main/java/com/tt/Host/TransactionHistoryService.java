@@ -13,5 +13,8 @@ public interface TransactionHistoryService {
 
 	List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception;
 	
-	TransactionHistoryDTO getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
+	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
+
+	TransactionHistoryDTO getAllTransactionHistoryByUserNo(int userNo) throws Exception;
+
 }
