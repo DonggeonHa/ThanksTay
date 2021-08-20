@@ -67,7 +67,7 @@ public class HostMainController {
 		model.addAttribute("loginedUser", user);
 		model.addAttribute("lodgings", lodgings);
 
-		return "host/lodgingRegisterForm";
+		return "host/registerLodging/lodgingRegisterForm";
 	}
 
 	@PostMapping("/lodgingRegister")

@@ -9,8 +9,8 @@
         <put-attribute name="content" value="" />
     </definition>
 
-    <definition name="Mypage/NoTiles/*" extends="Empty">
-        <put-attribute name="content" value="" />
+    <definition name="host/registerLodging/*" extends="Empty">
+        <put-attribute name="content" value="/WEB-INF/views/host/registerLodging/{1}.jsp" />
     </definition>
 
 
@@ -22,6 +22,17 @@
 
     <definition name="Admin/*" extends="Admin">
         <put-attribute name="Aindex" value="/WEB-INF/views/Admin/{1}.jsp" />
+    </definition>
+
+    <!-- HostMain 쪽 -->
+    <definition name="Host" template="/WEB-INF/tiles/hostLayout.jsp">
+        <put-attribute name="HostHeader" value="/WEB-INF/views/common/hostHeader.jsp" />
+        <put-attribute name="HostBody" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+    </definition>
+
+    <definition name="host/*" extends="Host">
+        <put-attribute name="HostBody" value="/WEB-INF/views/host/{1}.jsp" />
     </definition>
 
     <!-- Main 쪽 -->

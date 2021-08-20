@@ -14,21 +14,6 @@
 	</insert>
 	
 	<select id="getImgListByLdgNo" parameterType="map" resultType="com.tt.Lodging.LodgingImgVO">
-		<!-- SELECT
-			rownum
-			,lodgingimg_no		no
-			,lodging_no			lodgingNo
-			,lodgingimg_uri		uri
-		FROM
-			thxtay_lodging_img
-		WHERE
-			lodging_no=#{lodgingNo}
-		<if test="getCnt!=null">
-		AND
-            rownum<![CDATA[<=]]>#{getCnt}
-        </if>
-	ORDER BY no DESC -->
-
 	SELECT rk, no, lodgingNo, uri
 	FROM(
 	SELECT
