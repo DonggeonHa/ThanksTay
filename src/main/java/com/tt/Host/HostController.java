@@ -1,18 +1,14 @@
 package com.tt.Host;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections4.map.HashedMap;
-import org.apache.commons.lang.time.DateUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -27,19 +23,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tt.Lodging.LodgingVO;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
-import com.tt.vo.BookingVO;
-import com.tt.vo.CommonCodeVO;
-import com.tt.vo.EarningsVO;
-import com.tt.vo.FilteringVO;
-import com.tt.vo.TransactionHistoryDTO;
-import com.tt.vo.TransactionHistoryVO;
-import com.tt.vo.TransactionRegisterVO;
+import com.tt.Common.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
 
 @Controller

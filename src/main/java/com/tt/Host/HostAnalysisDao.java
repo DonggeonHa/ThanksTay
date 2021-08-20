@@ -6,11 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tt.User.UserVO;
-import com.tt.vo.BookingVO;
-import com.tt.vo.CommonCodeVO;
-import com.tt.vo.EarningsVO;
-import com.tt.vo.TransactionHistoryDTO;
-import com.tt.vo.TransactionRegisterVO;
+import com.tt.Lodging.BookingVO;
+import com.tt.Common.CommonCodeVO;
 
 @Mapper
 public interface HostAnalysisDao {

@@ -1,12 +1,10 @@
 package com.tt.Host;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.tt.User.UserVO;
-import com.tt.vo.BookingVO;
-import com.tt.vo.EarningsVO;
+import com.tt.Lodging.BookingVO;
 
 public interface EarningsService {
 	

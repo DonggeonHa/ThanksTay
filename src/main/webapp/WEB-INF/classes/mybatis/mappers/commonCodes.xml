@@ -16,7 +16,7 @@
 		WHERE
 			codecontent = #{value}
 	</select>
-	<select id="getAllCommonCodeVos" resultType="com.tt.vo.CommonCodeVO">
+	<select id="getAllCommonCodeVos" resultType="com.tt.Common.CommonCodeVO">
 		SELECT 
 			commoncode 		as commonCode
 			,parentcode		as parentCode
@@ -29,7 +29,7 @@
 	</select>
 	
 	
-	<select id="getCommonCodeVosByParentCode" parameterType="string" resultType="com.tt.vo.CommonCodeVO">
+	<select id="getCommonCodeVosByParentCode" parameterType="string" resultType="com.tt.Common.CommonCodeVO">
 		SELECT 
 			commoncode
 			,parentcode		

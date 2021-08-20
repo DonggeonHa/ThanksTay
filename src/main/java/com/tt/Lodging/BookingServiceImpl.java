@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tt.vo.AmenityListDTO;
-import com.tt.vo.PriceVO;
+import com.tt.Host.PriceVO;
 
 @Service
 public class BookingServiceImpl implements BookingService {

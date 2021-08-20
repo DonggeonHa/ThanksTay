@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tt.Lodging.LodgingVO;
-import com.tt.vo.FilteringVO;
 
 @Service
 public class ListingsServiceImpl implements ListingsService{

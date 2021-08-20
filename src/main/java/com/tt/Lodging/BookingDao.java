@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.tt.vo.AmenityListDTO;
-import com.tt.vo.PriceVO;
-import com.tt.vo.ReviewDTO;
+import com.tt.Host.PriceVO;
 
 @Mapper
 public interface BookingDao {

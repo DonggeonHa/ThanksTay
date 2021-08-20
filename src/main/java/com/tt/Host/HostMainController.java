@@ -9,15 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tt.Common.CommonDao;
 import com.tt.Lodging.LodgingService;
 import com.tt.Lodging.LodgingVO;
-import com.tt.User.UserDao;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
-import com.tt.vo.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
 
 //어찌짤까? Controller(URL 주소연결)->HostDao->sql->Service->ServiceImpl-> Controller 완성 

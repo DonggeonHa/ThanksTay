@@ -3,14 +3,14 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.tt.Host.HostAnalysisDao">
-	<insert id="insertBank" parameterType="com.tt.vo.TransactionRegisterVO">
+	<insert id="insertBank" parameterType="com.tt.Host.TransactionRegisterVO">
 		insert into Thxtay_transaction_register
 		(tr_no, user_no, tr_name, tr_email, tr_birth, tr_phone, tr_currency, tr_payment, tr_bank_code, tr_account)
 		values
 		(tr_seq.nextval, #{userNo}, #{name}, #{email}, #{birth}, #{phone}, #{currency}, #{payment}, #{bankCode}, #{account} )
 	</insert>
 	
-	<select id="getAllTransactionHistoryForExcel" parameterType="int" resultType="com.tt.vo.TransactionHistoryDTO">
+	<select id="getAllTransactionHistoryForExcel" parameterType="int" resultType="com.tt.Host.TransactionHistoryDTO">
 		select  
 				U.user_no userNo,
 				R.tr_account bankAccount,
@@ -32,7 +32,7 @@
 		        and U.user_no = #{userNo}
 	</select>
 	
-	<select id="getAllTransactionHistoryByUserNo" parameterType="int" resultType="com.tt.vo.TransactionHistoryDTO">
+	<select id="getAllTransactionHistoryByUserNo" parameterType="int" resultType="com.tt.Host.TransactionHistoryDTO">
 		select  
 				U.user_no userNo,
 				R.tr_account bankAccount,
@@ -54,7 +54,7 @@
 		        and U.user_no = #{userNo}
 	</select>
 
-	<select id="getAllTransactionHistoryByHashMap" parameterType="map" resultType="com.tt.vo.TransactionHistoryDTO">
+	<select id="getAllTransactionHistoryByHashMap" parameterType="map" resultType="com.tt.Host.TransactionHistoryDTO">
 		select  
                 U.user_no userNo,
 				R.tr_account bankAccount,
@@ -80,7 +80,7 @@
 
 	</select>
 
-	<select id="getCommonCodeByPntCode" parameterType="string" resultType="com.tt.vo.CommonCodeVO">
+	<select id="getCommonCodeByPntCode" parameterType="string" resultType="com.tt.Common.CommonCodeVO">
 		select commoncode, codecontent
 		from thxtay_common_code
 		where parentcode like #{value}

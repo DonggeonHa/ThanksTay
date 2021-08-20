@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tt.vo.AmenityListDTO;
-import com.tt.vo.PriceVO;
+import com.tt.Host.PriceVO;
 
 @Controller
 public class BookingController {

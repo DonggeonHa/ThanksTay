@@ -3,7 +3,6 @@ package com.tt.Host;
 import java.util.List;
 
 import com.tt.Lodging.LodgingVO;
-import com.tt.vo.FilteringVO;
 
 public interface ListingsService {
 	

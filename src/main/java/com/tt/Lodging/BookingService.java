@@ -2,8 +2,7 @@ package com.tt.Lodging;
 
 import java.util.List;
 
-import com.tt.vo.AmenityListDTO;
-import com.tt.vo.PriceVO;
+import com.tt.Host.PriceVO;
 
 public interface BookingService {
 

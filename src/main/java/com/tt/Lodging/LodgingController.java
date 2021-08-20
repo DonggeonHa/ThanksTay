@@ -3,13 +3,10 @@ package com.tt.Lodging;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.math3.analysis.function.Constant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -25,18 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tt.Common.CommonConstant;
-import com.tt.Common.CommonDao;
 import com.tt.Common.CommonService;
 import com.tt.Host.HostMainController;
 import com.tt.Host.HostService;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
-import com.tt.vo.CommonCodeVO;
+import com.tt.Common.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
-import com.tt.web.form.AttachmentFileForm;
 import com.tt.web.form.LodgingRegisterForm;
-
-import lombok.extern.apachecommons.CommonsLog;
 
 @Controller
 public class LodgingController {

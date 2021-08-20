@@ -5,8 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.tt.vo.TransactionHistoryDTO;
-
 public interface TransactionHistoryService {
 
 	void excelDownload(TransactionHistoryDTO download, HttpServletResponse response) throws Exception;

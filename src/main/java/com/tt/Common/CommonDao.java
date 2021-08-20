@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.tt.vo.CommonCodeVO;
-
 @Mapper
 public interface CommonDao {
 	/* jhw 추가 */

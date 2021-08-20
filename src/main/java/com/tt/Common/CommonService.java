@@ -2,8 +2,6 @@ package com.tt.Common;
 
 import java.util.List;
 
-import com.tt.vo.CommonCodeVO;
-
 public interface CommonService {
 	String getCommonCodeByContent(String codeContent);
 	

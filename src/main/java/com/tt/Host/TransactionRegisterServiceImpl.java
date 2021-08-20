@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tt.vo.CommonCodeVO;
-import com.tt.vo.TransactionHistoryDTO;
-import com.tt.vo.TransactionHistoryVO;
-import com.tt.vo.TransactionRegisterVO;
+import com.tt.Common.CommonCodeVO;
 
 @Service
 public class TransactionRegisterServiceImpl implements TransactionRegisterService{

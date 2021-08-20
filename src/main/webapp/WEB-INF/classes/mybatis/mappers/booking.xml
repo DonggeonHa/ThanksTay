@@ -38,7 +38,7 @@
 			lodging_no=#{value}
 	</select>
 	
-	<select id="getPricesByLodgingNo" parameterType="int" resultType="com.tt.vo.PriceVO">
+	<select id="getPricesByLodgingNo" parameterType="int" resultType="com.tt.Host.PriceVO">
 		SELECT
 			price_no				no,
 			lodging_no			    lodgingNo,
@@ -68,7 +68,7 @@
 		order by lodgingimg_no asc
 	</select>
 	
-	<select id="getAmenitiesByLodgingNo" parameterType="int" resultType="com.tt.vo.AmenityListDTO">
+	<select id="getAmenitiesByLodgingNo" parameterType="int" resultType="com.tt.Lodging.AmenityListDTO">
 		SELECT
 			A.amenity_code		    code,
 			A.lodging_no			lodgingNo,

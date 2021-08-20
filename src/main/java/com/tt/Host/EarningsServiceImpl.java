@@ -1,7 +1,6 @@
 package com.tt.Host;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.tt.User.UserVO;
-import com.tt.vo.BookingVO;
-import com.tt.vo.EarningsVO;
+import com.tt.Lodging.BookingVO;
 
 @Service
 public class EarningsServiceImpl implements EarningsService{

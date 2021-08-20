@@ -2,13 +2,11 @@ package com.tt.Lodging;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tt.Common.CommonConstant;
 import com.tt.Common.CommonDao;
-import com.tt.vo.CommonCodeVO;
 
 @Service
 public class LodgingServiceImpl implements LodgingService {
