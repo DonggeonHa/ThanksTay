@@ -10,4 +10,5 @@ public interface AdminDao {
 
     /* 일반회원관리 */
     List<UserVO> getUsers();
+    UserVO getUserByNo(int userNo);
 }

@@ -28,13 +28,8 @@
 
 <!-- UserList -->
 <script>
-	$(document).ready(function() {
-		selectData();
-	});
-  
-
 	// 목록
-	function selectData() {
+	$(function () {
 		$('#remo').remove();
 		// table 내부 내용 모두 제거(초기화)
 		$('#user-table').empty();
@@ -61,21 +56,20 @@
 					var output = '';
 					output += '<tbody class="text-center">'
 					output += '<tr>';
-					output += '<td>' + item.user_NO + '</td>'; // undefined ㅗ
-					output += '<td><a href="./detailMember.ad" class="detail_data" '
-					output += 'USER_NO=' + item.user_NO + '>' + item.user_EMAIL + '</a></td>';
-					output += '<td>' + item.user_NAME + '</td>';
-					output += '<td>' + item.user_BIRTH + '</td>';
-					output += '<td>' + item.user_PHONE + '</td>';
+					output += '<td>' + item.rnum + '</td>';
+					output += '<td><div class="detailData" data-user-no=' + item.NO + '>' + item.EMAIL + '</div></td>';
+					output += '<td>' + item.NAME + '</td>';
+					output += '<td>' + item.BIRTH + '</td>';
+					output += '<td>' + item.PHONE + '</td>';
 
-					if (item.user_EMAIL_CHECK == 0) {
+					if (item.EMAILCHECK == 'N') {
 						output += '<td>이메일 인증대기</td>';
 					} else {
 						output += '<td>이메일 인증완료</td>';
 					}
 					
-					output += '<td><a href="./deleteMember.ad" class="del_data" ';
-					output += 'USER_NO=' + item.user_NO + '><i class="fas fa-trash-alt" ></i></a></td>';
+					output += '<td><a href="./deleteUser" class="delData" ';
+					output += 'no=' + item.NO + '><i class="fas fa-trash-alt" ></i></a></td>';
 					output += '</tr>';
 					output += '</tbody>'
 					console.dir("output : " + output);
@@ -88,7 +82,7 @@
 				alert("code:"+request.status+"\n"+"error:"+error);
 			}
 		});
-	}
+	});
 	
 	/*$(document).on('click', '.del_data', function(event) {
 		$('#remo').remove();
@@ -115,33 +109,34 @@
 		
 		// 기본 이벤트 제거
 		event.preventDefault();
-	});
-	
-	$(document).on('click', '.detail_data', function(event) {
+	});*/
+
+	$(document).on('click', '.detailData', function(event) {
 		var popupX = (window.screen.width / 2) - (500 / 2); // 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 뺴주었음.
 		var popupY = (window.screen.height / 2) - (630 / 2); // 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 뺴주었음
 		var pop = window.open('about:blank', 'Info', 'scrollbars=yes, resizable=yes, width=500, height=630, left=' + popupX + ', top=' + popupY);
-		jQuery.ajax({
-			url : $(this).attr("href"), //$(this) : //항목을 눌렀을때 그 걸 가르킴 .attr("href") 속성된 이름값중에 "href"을 통해서? 읽어온다??
+		var userNo = $(this).data("userNo");
+
+		$.ajax({
+			url : "/admin/detailUser", //$(this) : //항목을 눌렀을때 그 걸 가르킴 .attr("href") 속성된 이름값중에 "href"을 통해서? 읽어온다??
 			type : 'GET',
-			data : {'MEMBER_NUM' : $(this).attr("member_NUM")},
-			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+			data : {no : userNo},
 			dataType : 'json',
 			success : function (retVal) {
-				if (retVal.res == "OK") {
-					pop.location.href="memberInfo.ad?MEMBER_NUM=" + retVal.MemberVO.member_NUM;	
-		 		}
+				if (retVal.res === "OK") {
+					pop.location.href="./userInfo?no=" + retVal.UserVO.no;
+				}
 			},
 			error: function(request,status,error) {
 				alert("ajax detailmember 통신 실패!");
 				alert("code:"+request.status+"\n"+"error:"+error);
 			}
 		});
-		
+
 		// 기본 이벤트 제거
 		event.preventDefault();
-	});*/
-	
+	});
+
 	// 만들어진 테이블에 페이지 처리
 	function page() { 	
 		$('#remo').empty();

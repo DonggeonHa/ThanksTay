@@ -10,14 +10,15 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
-    AdminDao adminDao;
+    @Autowired AdminDao adminDao;
 
     @Override
     public List<UserVO> getUsers() {
-        List<UserVO> userList = null;
+        return adminDao.getUsers();
+    }
 
-
-        return userList;
+    @Override
+    public UserVO detailUser(int userNo) {
+        return adminDao.getUserByNo(userNo);
     }
 }

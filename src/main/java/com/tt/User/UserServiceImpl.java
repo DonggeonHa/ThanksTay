@@ -11,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	
-	// @Autowired CartItemDao cartItemDao;
-	// @Autowired ReviewDao reviewDao;
+
 	@Autowired UserDao userDao;
 	
 	@Override

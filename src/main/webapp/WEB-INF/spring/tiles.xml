@@ -13,6 +13,10 @@
         <put-attribute name="content" value="/WEB-INF/views/host/registerLodging/{1}.jsp" />
     </definition>
 
+    <definition name="Admin/Info/*" extends="Empty">
+        <put-attribute name="content" value="/WEB-INF/views/Admin/Info/{1}.jsp" />
+    </definition>
+
 
     <!-- Admin 쪽 -->
     <definition name="Admin" template="/WEB-INF/tiles/adminLayouts.jsp">

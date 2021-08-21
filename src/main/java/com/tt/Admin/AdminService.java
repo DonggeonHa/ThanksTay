@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface AdminService {
 
-    public List<UserVO> getUsers();
+    List<UserVO> getUsers();
+    UserVO detailUser(int userNo);
 }

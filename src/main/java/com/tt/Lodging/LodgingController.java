@@ -145,6 +145,11 @@ public class LodgingController {
 		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
 		uploadPath+"resources/images/lodgings",
 		filename)));
+
+		File fileDir = new File(uploadPath + "resources/images/lodgings");
+		if (!fileDir.exists()) {
+			fileDir.mkdirs();
+		}
 		
 		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
 		LodgingImgVO lodgingImg = new LodgingImgVO();
