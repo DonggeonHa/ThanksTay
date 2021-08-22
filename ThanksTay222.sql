@@ -18,21 +18,7 @@ DROP TABLE Thxtay_Transaction_Register CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_Wishlist CASCADE CONSTRAINTS;
 DROP TABLE Thxtay_User CASCADE CONSTRAINTS;
 
-/* Drop Sequence */
 
-DROP SEQUENCE USER_SEQ;
-DROP SEQUENCE CR_SEQ;
-DROP SEQUENCE CM_SEQ;
-DROP SEQUENCE BOOK_SEQ;
-DROP SEQUENCE REVIEW_SEQ;
-DROP SEQUENCE WISHLIST_SEQ;
-DROP SEQUENCE TR_SEQ;
-DROP SEQUENCE PAYMENT_SEQ;
-DROP SEQUENCE LODGING_SEQ;
-DROP SEQUENCE TRANSACTIONHISTORY_SEQ;
-DROP SEQUENCE TRANSACTIONREGISTER_SEQ;
-DROP SEQUENCE PRICE_SEQ;
-DROP SEQUENCE LODGINGIMG_SEQ;
 
 
 /* Create Tables */
@@ -79,37 +65,31 @@ CREATE TABLE Thxtay_Booking
 
 
 -- 채팅메시지
-CREATE TABLE Thxtay_Chatting_Message
+CREATE TABLE Thxtay_Chat_Message
 (
 	-- 메세지번호
 	cm_no number NOT NULL,
-	-- 유저번호
-	user_no number NOT NULL,
 	-- 채팅방번호
 	cr_no number NOT NULL,
 	-- 채팅메세지
 	cm_contents clob NOT NULL,
 	-- 송신시간
 	cm_created_time date DEFAULT sysdate,
-	-- 채팅옵션
-	cm_opt char(1) DEFAULT '1',
-	-- 확인여부
-	cm_check char(1) DEFAULT 'N',
 	PRIMARY KEY (cm_no)
 );
 
 
 -- 채팅방
-CREATE TABLE Thxtay_Chatting_Room
+CREATE TABLE Thxtay_Chat_Room
 (
 	-- 채팅방번호
 	cr_no number NOT NULL,
 	-- 유저번호
 	user_no number NOT NULL,
-	-- 호스트
-	cr_host varchar2(255),
-	-- 관리자
-	cr_admin varchar2(255),
+	-- 호스트번호
+	cr_host_no number,
+	-- 관리자번호
+	cr_admin_no number,
 	-- 생성일
 	cr_created_date date DEFAULT sysdate,
 	PRIMARY KEY (cr_no)
@@ -439,9 +419,9 @@ ALTER TABLE Thxtay_Review
 ;
 
 
-ALTER TABLE Thxtay_Chatting_Message
+ALTER TABLE Thxtay_Chat_Message
 	ADD FOREIGN KEY (cr_no)
-	REFERENCES Thxtay_Chatting_Room (cr_no)
+	REFERENCES Thxtay_Chat_Room (cr_no)
 ;
 
 
@@ -511,13 +491,7 @@ ALTER TABLE Thxtay_Booking
 ;
 
 
-ALTER TABLE Thxtay_Chatting_Message
-	ADD FOREIGN KEY (user_no)
-	REFERENCES Thxtay_User (user_no)
-;
-
-
-ALTER TABLE Thxtay_Chatting_Room
+ALTER TABLE Thxtay_Chat_Room
 	ADD FOREIGN KEY (user_no)
 	REFERENCES Thxtay_User (user_no)
 ;
@@ -559,22 +533,159 @@ ALTER TABLE Thxtay_Wish_Zzim
 ;
 
 
-/* Create Sequence */
 
-CREATE SEQUENCE USER_SEQ NOCACHE;
-CREATE SEQUENCE CR_SEQ NOCACHE;
-CREATE SEQUENCE CM_SEQ NOCACHE;
-CREATE SEQUENCE BOOK_SEQ NOCACHE;
-CREATE SEQUENCE REVIEW_SEQ NOCACHE;
-CREATE SEQUENCE WISHLIST_SEQ NOCACHE;
-CREATE SEQUENCE TR_SEQ NOCACHE;
-CREATE SEQUENCE PAYMENT_SEQ NOCACHE;
-CREATE SEQUENCE LODGING_SEQ NOCACHE;
-CREATE SEQUENCE TRANSACTIONHISTORY_SEQ NOCACHE;
-CREATE SEQUENCE TRANSACTIONREGISTER_SEQ NOCACHE;
-CREATE SEQUENCE PRICE_SEQ NOCACHE;
-CREATE SEQUENCE LODGINGIMG_SEQ NOCACHE;
+/* Comments */
 
+COMMENT ON TABLE Thxtay_Amenitylist IS '편의시설리스트';
+COMMENT ON COLUMN Thxtay_Amenitylist.amenity_code IS '편의시설코드';
+COMMENT ON COLUMN Thxtay_Amenitylist.lodging_no IS '숙소번호';
+COMMENT ON TABLE Thxtay_Booking IS '예약';
+COMMENT ON COLUMN Thxtay_Booking.booking_no IS '예약번호';
+COMMENT ON COLUMN Thxtay_Booking.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Booking.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Booking.booking_check_in IS '체크인 날짜';
+COMMENT ON COLUMN Thxtay_Booking.booking_check_out IS '체크아웃 날짜';
+COMMENT ON COLUMN Thxtay_Booking.booking_date IS '숙박일수';
+COMMENT ON COLUMN Thxtay_Booking.booking_status IS '예약상태';
+COMMENT ON COLUMN Thxtay_Booking.booking_guest IS '예약인원';
+COMMENT ON COLUMN Thxtay_Booking.booking_total_lodging_fee IS '총 숙박료';
+COMMENT ON COLUMN Thxtay_Booking.booking_total_cleaning_fee IS '총 청소비';
+COMMENT ON COLUMN Thxtay_Booking.booking_amount IS '총액';
+COMMENT ON TABLE Thxtay_Chat_Message IS '채팅메시지';
+COMMENT ON COLUMN Thxtay_Chat_Message.cm_no IS '메세지번호';
+COMMENT ON COLUMN Thxtay_Chat_Message.cr_no IS '채팅방번호';
+COMMENT ON COLUMN Thxtay_Chat_Message.cm_contents IS '채팅메세지';
+COMMENT ON COLUMN Thxtay_Chat_Message.cm_created_time IS '송신시간';
+COMMENT ON TABLE Thxtay_Chat_Room IS '채팅방';
+COMMENT ON COLUMN Thxtay_Chat_Room.cr_no IS '채팅방번호';
+COMMENT ON COLUMN Thxtay_Chat_Room.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Chat_Room.cr_host_no IS '호스트번호';
+COMMENT ON COLUMN Thxtay_Chat_Room.cr_admin_no IS '관리자번호';
+COMMENT ON COLUMN Thxtay_Chat_Room.cr_created_date IS '생성일';
+COMMENT ON TABLE Thxtay_Common_Code IS '공통코드';
+COMMENT ON COLUMN Thxtay_Common_Code.parentCode IS '상위공통코드';
+COMMENT ON COLUMN Thxtay_Common_Code.commonCode IS '공통코드';
+COMMENT ON COLUMN Thxtay_Common_Code.codeContent IS '공통코드명';
+COMMENT ON COLUMN Thxtay_Common_Code.importance IS '우선순위';
+COMMENT ON COLUMN Thxtay_Common_Code.createdDate IS '등록일시';
+COMMENT ON COLUMN Thxtay_Common_Code.updatedDate IS '수정일시';
+COMMENT ON TABLE Thxtay_Deleted_User IS '탈퇴한유저';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_password IS '비밀번호';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_email IS '이메일';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_birth IS '생년월일';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_phone IS '전화번호';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_picture IS '프로필사진';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_email_check IS '이메일 확인';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_name IS '이름';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_info IS '소개';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_isHost IS '호스트여부';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_isAdmin IS '관리자여부';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_deleted_date IS '탈퇴일';
+COMMENT ON COLUMN Thxtay_Deleted_User.user_updated_date IS '수정일';
+COMMENT ON TABLE Thxtay_Lodging IS '숙소';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Lodging.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_city IS '주소_시군구';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_post_no IS '주소_우편번호';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_address IS '주소_상세주소';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_address_rest IS '주소_나머지주소';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_description IS '숙소설명';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_imm_approval IS '즉시승인여부';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_max_guest IS '최대 인원수';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_image IS '숙소사진';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_name IS '숙소이름';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_bedroom IS '침실 수';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_bathroom IS '욕실 수';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_singlebed IS '1인용 침대';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_doublebed IS '2인용 침대';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_view_count IS '조회수';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_review_count IS '리뷰 갯수';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_review_average IS '리뷰 평점';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_cleanness IS '청결도';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_communication IS '의사소통';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_check_in IS '체크인';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_accuracy IS '정확성';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_location IS '위치(리뷰)';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_value IS '가격대비 만족도';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_status IS '숙소상태 : 등록중, 승인대기';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_type_code IS '숙소타입 코드 : 집전체, 호텔객실';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_lat IS '숙소위도';
+COMMENT ON COLUMN Thxtay_Lodging.lodging_lng IS '숙소경도';
+COMMENT ON TABLE Thxtay_Lodging_Img IS '숙소사진리스트';
+COMMENT ON COLUMN Thxtay_Lodging_Img.lodgingImg_no IS '숙소사진번호';
+COMMENT ON COLUMN Thxtay_Lodging_Img.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Lodging_Img.lodgingImg_uri IS '숙소사진 파일명';
+COMMENT ON TABLE Thxtay_Payment IS '결제';
+COMMENT ON COLUMN Thxtay_Payment.payment_no IS '결제번호';
+COMMENT ON COLUMN Thxtay_Payment.booking_no IS '예약번호';
+COMMENT ON COLUMN Thxtay_Payment.payment_created_date IS '결제일시';
+COMMENT ON COLUMN Thxtay_Payment.payment_method IS '결제수단';
+COMMENT ON TABLE Thxtay_Price IS '요금';
+COMMENT ON COLUMN Thxtay_Price.price_no IS '요금번호';
+COMMENT ON COLUMN Thxtay_Price.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Price.price_lodging_fee IS '숙박료';
+COMMENT ON COLUMN Thxtay_Price.price_cleaning_fee IS '청소비';
+COMMENT ON COLUMN Thxtay_Price.price_open_date IS '영업일';
+COMMENT ON COLUMN Thxtay_Price.price_isBooked IS '예약가능여부';
+COMMENT ON COLUMN Thxtay_Price.price_updated_date IS '수정일';
+COMMENT ON COLUMN Thxtay_Price.price_created_date IS '등록일';
+COMMENT ON TABLE Thxtay_Review IS '리뷰';
+COMMENT ON COLUMN Thxtay_Review.review_no IS '리뷰번호';
+COMMENT ON COLUMN Thxtay_Review.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Review.booking_no IS '예약번호';
+COMMENT ON COLUMN Thxtay_Review.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Review.review_created_date IS '등록일';
+COMMENT ON COLUMN Thxtay_Review.review_updated_date IS '수정일';
+COMMENT ON COLUMN Thxtay_Review.review_comment IS '리뷰내용';
+COMMENT ON COLUMN Thxtay_Review.review_isUpdated IS '수정여부';
+COMMENT ON COLUMN Thxtay_Review.review_stars IS '별점';
+COMMENT ON COLUMN Thxtay_Review.review_cleanness IS '청결도';
+COMMENT ON COLUMN Thxtay_Review.review_communication IS '의사소통';
+COMMENT ON COLUMN Thxtay_Review.review_check_in IS '체크인';
+COMMENT ON COLUMN Thxtay_Review.review_accuracy IS '정확성';
+COMMENT ON COLUMN Thxtay_Review.review_location IS '위치(리뷰)';
+COMMENT ON COLUMN Thxtay_Review.review_value IS '가격대비 만족도';
+COMMENT ON TABLE Thxtay_Transaction_History IS '대금수령내역';
+COMMENT ON COLUMN Thxtay_Transaction_History.transaction_no IS '대금수령번호';
+COMMENT ON COLUMN Thxtay_Transaction_History.price_no IS '요금번호';
+COMMENT ON COLUMN Thxtay_Transaction_History.payment_no IS '결제번호';
+COMMENT ON COLUMN Thxtay_Transaction_History.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Transaction_History.TR_no IS '대금등록 번호';
+COMMENT ON COLUMN Thxtay_Transaction_History.transaction_created_date IS '정산일';
+COMMENT ON TABLE Thxtay_Transaction_Register IS '대금등록';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_no IS '대금등록 번호';
+COMMENT ON COLUMN Thxtay_Transaction_Register.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_name IS '대금등록 이름';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_email IS '대금등록 이메일';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_birth IS '대금등록 생년월일';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_phone IS '대금등록 전화번호';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_currency IS '대금등록 통화';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_payment IS '대금등록 결제수단';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_bank_code IS '은행코드';
+COMMENT ON COLUMN Thxtay_Transaction_Register.TR_account IS '대금등록 계좌';
+COMMENT ON TABLE Thxtay_User IS '유저';
+COMMENT ON COLUMN Thxtay_User.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_User.user_password IS '비밀번호';
+COMMENT ON COLUMN Thxtay_User.user_email IS '이메일';
+COMMENT ON COLUMN Thxtay_User.user_birth IS '생년월일';
+COMMENT ON COLUMN Thxtay_User.user_phone IS '전화번호';
+COMMENT ON COLUMN Thxtay_User.user_picture IS '프로필사진';
+COMMENT ON COLUMN Thxtay_User.user_email_check IS '이메일 확인';
+COMMENT ON COLUMN Thxtay_User.user_name IS '이름';
+COMMENT ON COLUMN Thxtay_User.user_info IS '소개';
+COMMENT ON COLUMN Thxtay_User.user_isHost IS '호스트여부';
+COMMENT ON COLUMN Thxtay_User.user_isAdmin IS '관리자여부';
+COMMENT ON COLUMN Thxtay_User.user_deleted IS '탈퇴여부';
+COMMENT ON COLUMN Thxtay_User.user_created_date IS '생성일';
+COMMENT ON COLUMN Thxtay_User.user_updated_date IS '수정일';
+COMMENT ON TABLE Thxtay_Wishlist IS '찜목록';
+COMMENT ON COLUMN Thxtay_Wishlist.wishlist_no IS '찜목록 번호';
+COMMENT ON COLUMN Thxtay_Wishlist.user_no IS '유저번호';
+COMMENT ON COLUMN Thxtay_Wishlist.wishlist_name IS '찜목록 이름';
+COMMENT ON TABLE Thxtay_Wish_Zzim IS '찜';
+COMMENT ON COLUMN Thxtay_Wish_Zzim.lodging_no IS '숙소번호';
+COMMENT ON COLUMN Thxtay_Wish_Zzim.wishlist_no IS '찜목록 번호';
 
 
 

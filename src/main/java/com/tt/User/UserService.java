@@ -34,4 +34,6 @@ public interface UserService {
      */
     UserVO getUserByNo(int userNo);
 
+    UserVO getUserByName(String name);
+
 }

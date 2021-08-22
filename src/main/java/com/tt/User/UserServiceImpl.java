@@ -1,7 +1,6 @@
 package com.tt.User;
 
 import com.tt.exception.LoginException;
-import com.tt.exception.UserRegisterException;
 import com.tt.web.utils.SessionUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,6 @@ public class UserServiceImpl implements UserService {
 			// 패스워드가 맞으면 1
 			res = 1;
 			// 세션에 LOGINED_UESR 란 이름으로 넣음
-			System.out.println("유저서비스임플리 : " + user.getBirth());
 			SessionUtils.addAttribute("LOGINED_USER", user);
 		}
 
@@ -87,4 +85,11 @@ public class UserServiceImpl implements UserService {
 	public UserVO getUserByNo(int userNo) {
 		return userDao.getUserByNo(userNo);
 	}
+
+	@Override
+	public UserVO getUserByName(String userName) {
+		return userDao.getUserByName(userName);
+	}
+
+
 }

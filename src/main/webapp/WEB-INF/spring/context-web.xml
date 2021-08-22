@@ -10,7 +10,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.2.xsd
         http://www.springframework.org/schema/websocket
-        http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<!-- 
 		spring mvc관련 어노테이션을 분석하고, 적절한 처리를 담당하는 클래스들을 스프링 컨테이너의 빈으로 등록시킨다.
@@ -127,7 +129,7 @@
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 
-	<bean id="echoHandler" class="com.tt.Chatting.EchoHandler" />
+	<bean id="echoHandler" class="com.tt.Chat.WebSocketHandler" />
 
 	<websocket:handlers>
 		<websocket:mapping path="/echo" handler="echoHandler"/>
@@ -174,12 +176,13 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 
-	<context:component-scan base-package="com.tt.Chatting">
+	<context:component-scan base-package="com.tt.Chat">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 	
 	<context:component-scan base-package="com.tt.web.view" />
+
 </beans>
 
 

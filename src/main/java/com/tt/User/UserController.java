@@ -5,7 +5,6 @@ import com.tt.exception.UserRegisterException;
 import com.tt.web.form.KakaoRegisterForm;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
-import org.apache.tiles.request.Request;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -144,6 +139,9 @@ public class UserController {
 
 	@GetMapping("/logout")
 	public String logout() {
+
+		UserVO user = (UserVO)SessionUtils.getAttribute("LOGINED_USER");
+
 		SessionUtils.destroySession();
 		return "redirect:home";
 	}

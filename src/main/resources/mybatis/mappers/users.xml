@@ -26,6 +26,29 @@
             user_no = #{value}
 		
 	</select>
+
+    <select id="getUserByName" parameterType="string" resultType="com.tt.User.UserVO">
+        SELECT
+            user_no             as no,
+            user_password       as password,
+            user_email          as email,
+            TO_CHAR(user_birth, 'YYYY-MM-DD')          as birth,
+            user_phone          as phone,
+            user_picture        as picture,
+            user_email_check    as emailCheck,
+            user_name           as name,
+            user_info           as info,
+            user_ishost         as isHost,
+            user_isadmin        as isAdmin,
+            user_deleted        as deleted,
+            user_created_date   as createdDate,
+            user_updated_date   as updatedDate
+        FROM
+            thxtay_user
+        WHERE
+            user_no = #{value}
+
+    </select>
 	
     <select id="getUserByEmail" parameterType="string" resultType="com.tt.User.UserVO">
         SELECT
@@ -46,6 +69,30 @@
         FROM
             thxtay_user
         WHERE
+            user_email = #{value}
+    </select>
+
+    <select id="getHostByEmail" parameterType="string" resultType="com.tt.User.UserVO">
+        SELECT
+            user_no             as no,
+            user_password       as password,
+            user_email          as email,
+            TO_CHAR(user_birth, 'YYYY-MM-DD')          as birth,
+            user_phone          as phone,
+            user_picture        as picture,
+            user_email_check    as emailCheck,
+            user_name           as name,
+            user_info           as info,
+            user_ishost         as isHost,
+            user_isadmin        as isAdmin,
+            user_deleted        as deleted,
+            user_created_date   as createdDate,
+            user_updated_date   as updatedDate
+        FROM
+            thxtay_user
+        WHERE
+            user_ishost = 'Y'
+        AND
             user_email = #{value}
     </select>
 

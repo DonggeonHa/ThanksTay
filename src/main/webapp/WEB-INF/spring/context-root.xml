@@ -44,7 +44,7 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-	<context:component-scan base-package="com.tt.Chatting">
+	<context:component-scan base-package="com.tt.Chat">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
@@ -94,5 +94,5 @@
 	<mybatis-spring:scan base-package="com.tt.Explore"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.tt.Host"		annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.tt.Lodging"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
-	<mybatis-spring:scan base-package="com.tt.Chatting"	annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
+	<mybatis-spring:scan base-package="com.tt.Chat" annotation="org.apache.ibatis.annotations.Mapper" factory-ref="sqlSessionFactory" />
 </beans>

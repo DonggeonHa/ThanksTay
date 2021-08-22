@@ -13,8 +13,12 @@
         <put-attribute name="content" value="/WEB-INF/views/host/registerLodging/{1}.jsp" />
     </definition>
 
-    <definition name="Admin/Info/*" extends="Empty">
-        <put-attribute name="content" value="/WEB-INF/views/Admin/Info/{1}.jsp" />
+    <definition name="admin/Info/*" extends="Empty">
+        <put-attribute name="content" value="/WEB-INF/views/admin/Info/{1}.jsp" />
+    </definition>
+
+    <definition name="chat/room/*" extends="Empty">
+        <put-attribute name="content" value="/WEB-INF/views/chat/room/{1}.jsp" />
     </definition>
 
 
