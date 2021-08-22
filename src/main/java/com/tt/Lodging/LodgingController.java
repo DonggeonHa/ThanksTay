@@ -3,6 +3,7 @@ package com.tt.Lodging;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.cbor.Jackson2CborDecoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -27,6 +29,9 @@ import com.tt.Host.HostMainController;
 import com.tt.Host.HostService;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tt.Common.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.LodgingRegisterForm;
@@ -103,6 +108,23 @@ public class LodgingController {
 
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		return "host/registerLodging/lodgingAmenityAddForm";
+	}
+	
+	@PostMapping("/lodgingAmenityAdd")
+	@ResponseBody
+	public List<CommonCodeVO> lodgingAmenityAddForm(@RequestParam(name="codeContent",required = false) String codeContent){
+		List<CommonCodeVO> retVal=new ArrayList<CommonCodeVO>();
+		
+		String cmCode=commonService.getCommonCodeByContent(codeContent);
+		retVal = commonService.getCommonCodesByParentCode(cmCode);
+		for (CommonCodeVO val : retVal) {
+			System.out.println("조회된값:"+val);
+		}
+//		Gson gson =new Gson();
+//		String jsonText = gson.toJson(retVal);
+//		System.out.println(jsonText);
+		return retVal;
+
 	}
 
 	@GetMapping("/lodgingImgAdd")

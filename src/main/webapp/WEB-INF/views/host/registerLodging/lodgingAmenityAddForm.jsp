@@ -20,10 +20,6 @@
 <script src="https://kit.fontawesome.com/f421352664.js"
 	crossorigin="anonymous"></script>
 
-<!-- 카카오 지도 -->
-<!-- <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ad83f287ea8866c42b5fa5c4bce63d20&libraries=services,clusterer"></script>
- -->
 <style>
 /* 공통 CSS */
 .container-fluid {
@@ -104,6 +100,13 @@ body {
 	padding: auto 0;
 	vertical-align: middle;
 }
+.scroll-wrapper{
+	overflow-y:scroll;
+	-ms-overflow-style: none; 
+} 
+.scroll-wrapper::-webkit-scrollbar{
+	display:none;
+}
 
 .left-area {
 	align-items: center;
@@ -163,11 +166,6 @@ body {
 	text-align: center;
 }
 
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-	{
-	-webkit-appearance: none;
-	margin: 0;
-}
 </style>
 
 
@@ -195,46 +193,33 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</div>
 					</div>
 					<div id="ldg-step1"
-						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center">
-						<form id="form-register" style="width: 50%;" method="post"
-							novalidate="novalidate">
-							<c:if test="${lodgingRegistering.status ne null }">
-								<input type="hidden" name="no" value="${lodgingRegistering.no }">
-								<input type="hidden" name="userNo"
-									value="${lodgingRegistering.userNo }">
-							</c:if>
-							<!-- 객체로 넣어서 전달하는법 알아보기 -->
-							<input type="hidden" name="name" value="${lodgingRegistering.name }">
-							<input type="hidden" name="status" value="${lodgingRegistering.status }"> 
-							<input type="hidden" name="lodgingTypeCode" value="${lodgingRegistering.lodgingTypeCode }">
-							<input type="hidden" name="bedroom" value="${lodgingRegistering.bedroom}">
-							<input type="hidden" name="bathroom" value="${lodgingRegistering.bathroom}">
-							<input type="hidden" name="doublebed" value="${lodgingRegistering.doublebed}">
-							<input type="hidden" name="singlebed" value="${lodgingRegistering.singlebed}">
-							<input type="hidden" name="description" value="${lodgingRegistering.description}">
-							<input type="hidden" name="city" value="${lodgingRegistering.city}">
-							<input type="hidden" name="address" value="${lodgingRegistering.address}">
-							<input type="hidden" name="addressRest" value="${lodgingRegistering.addressRest}">
-							<input type="hidden" name="postNo" value="${lodgingRegistering.postNo}">
-							<input type="hidden" name="latitude" value="33.450701"> 
-							<input type="hidden" name="longitude" value="126.570667">
-							
-							<div class="amt-area">
-								<div class="amt-category" >
-									<h2>편의시설</h2>
-									<div class="btn-wrapper">
+						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center; ">
+						<div class="scroll-wrapper">
+							<form id="form-register" style="width: 50%;" method="post"
+								novalidate="novalidate">
+								<c:if test="${lodgingRegistering.status ne null }">
+									<input type="hidden" name="no" value="${lodgingRegistering.no }">
+									<input type="hidden" name="userNo"
+										value="${lodgingRegistering.userNo }">
+								</c:if>
+								
+								<div class="amt-area">
+									<div class="amt-category" >
+										<h2>편의시설</h2>
+										<div class="btn-wrapper">
 										<c:forEach var="amenity" items="${amnTypes }">
-										<label style="display:flex;"><input type="checkbox"/>${amenity.codeContent}</label>
+											<label style="display:flex;"><input type="checkbox"/>${amenity.codeContent }</label>
 										</c:forEach>
+										</div>
+									</div>
+								</div>
+								<div class="amt-area">
+									<div class="amt-category" id="checked-category">
 										
 									</div>
 								</div>
-							</div>
-							
-							<div aria-hidden="true">
-								<h3>asdlfkjweoi</h3>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 
 					<div style="height: 9%">
@@ -260,8 +245,37 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			</div>
 		</div>
 	</div>
-
 	<script>
+	var checked=$('.amt-category :checked').parent('label').text();
+	$('.amt-category input').on("click",function(){
+		//먼저 초기화
+		$("#checked-category").empty();
+		//클릭시마다 체크박스 each로 돌면서 append
+		$(".amt-category input").each(function(){
+			if($(this).prop('checked')==true){
+				var codeContent = $(this).parent().text();
+				$.ajax({
+					url:"/lodgingAmenityAdd"
+					,type:"post"
+					,data:
+					{"codeContent":codeContent}
+					,dataType:"json"
+					,success:function(retVal){
+						$("#checked-category").append("<h5 style='padding-top:20px;'>"+codeContent+"</h5>")
+						for(i in retVal){
+							$("#checked-category").append("<div class='amt-category btn-wrapper'><input type='checkbox'>"+retVal[i].codeContent+"</input></div>")
+									
+						} 
+					}
+					,error:function(){
+						alert(codeContent)
+					}
+				})
+			}
+		})
+		
+	})
+
 	$("#save-btn").click(function(){
  		/* 클릭 시 숙소명의 값을 읽어와야 한다. */
 		$("#form-register").attr("action","saveTemp")
