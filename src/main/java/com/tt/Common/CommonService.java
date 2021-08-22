@@ -8,4 +8,6 @@ public interface CommonService {
 	List<CommonCodeVO> getCommonCodesByParentCode(String commonCode);
 	
 	List<CommonCodeVO> getAllCommonCodes();
+	
+	
 }

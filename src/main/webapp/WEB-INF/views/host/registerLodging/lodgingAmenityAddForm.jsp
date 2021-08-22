@@ -87,6 +87,7 @@ body {
 	align-items: stretch;
 	margin-top: 20px;
 	flex-flow: wrap;
+	padding-bottom:10px;
 }
 
 .amt-area .amt-category .btn-wrapper label {
@@ -189,6 +190,12 @@ body {
 							</div>
 							<div>
 								<button id="save-btn" class="save-info-items">저장 및 나가기</button>
+								<form id="save-data" method="post">
+								<c:if test="${lodgingRegistering.status ne null }">
+									<input type="hidden" name="no" value="${lodgingRegistering.no }">
+									<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
+								</c:if>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -197,24 +204,18 @@ body {
 						<div class="scroll-wrapper">
 							<form id="form-register" style="width: 50%;" method="post"
 								novalidate="novalidate">
-								<c:if test="${lodgingRegistering.status ne null }">
-									<input type="hidden" name="no" value="${lodgingRegistering.no }">
-									<input type="hidden" name="userNo"
-										value="${lodgingRegistering.userNo }">
-								</c:if>
-								
 								<div class="amt-area">
 									<div class="amt-category" >
-										<h2>편의시설</h2>
+										<h2 style="font-weight:bold">편의시설</h2>
 										<div class="btn-wrapper">
 										<c:forEach var="amenity" items="${amnTypes }">
-											<label style="display:flex;"><input type="checkbox"/>${amenity.codeContent }</label>
+											<label style="display:flex; "><input type="checkbox"/>${amenity.codeContent }</label>
 										</c:forEach>
 										</div>
 									</div>
 								</div>
 								<div class="amt-area">
-									<div class="amt-category" id="checked-category">
+									<div class="amt-category"  id="checked-category">
 										
 									</div>
 								</div>
@@ -261,10 +262,9 @@ body {
 					{"codeContent":codeContent}
 					,dataType:"json"
 					,success:function(retVal){
-						$("#checked-category").append("<h5 style='padding-top:20px;'>"+codeContent+"</h5>")
+						$("#checked-category").append("<h5 style='border-top:1px black dotted; padding-top:20px; font-weight:bold'>"+codeContent+"</h5>")
 						for(i in retVal){
-							$("#checked-category").append("<div class='amt-category btn-wrapper'><input type='checkbox'>"+retVal[i].codeContent+"</input></div>")
-									
+							$("#checked-category").append("<div class='amt-category'><label class='btn-wrapper'><input type='checkbox'>"+retVal[i].codeContent+"</input></label></div>")
 						} 
 					}
 					,error:function(){
@@ -275,11 +275,19 @@ body {
 		})
 		
 	})
-
+	
 	$("#save-btn").click(function(){
- 		/* 클릭 시 숙소명의 값을 읽어와야 한다. */
-		$("#form-register").attr("action","saveTemp")
-		$("#form-register").submit()
+		/* #checked-category의 모든 input태그 중 checked를 선택해서 saveTemp3로 보내줄 것 */
+		amenityList = new Array();
+		$("#checked-category input").each(function(){
+ 			if($(this).prop('checked')==true){
+				amenityList.push($(this).parent().text())
+			}
+		})
+		for(i in amenityList){
+			$("#save-data").append("<input name='selected-items' type='hidden' value="+amenityList[i]+">")
+		}
+		$("#save-data").attr("action","saveTemp3").submit();
 	});
 	 
 	$("#prev").click(function() {

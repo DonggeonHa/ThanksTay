@@ -35,4 +35,6 @@ public class CommonServiceImpl implements CommonService {
 	public List<CommonCodeVO> getCommonCodesByParentCode(String commonCode) {
 		return  commonDao.getCommonCodeVosByParentCode(commonCode);
 	}
+
+	
 }

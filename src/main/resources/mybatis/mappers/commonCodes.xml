@@ -45,7 +45,22 @@
 			parentcode=#{value}
 		</where> 
 	</select>
-	<select id="getAllCommonCodes" useCache="true" resultType="string">
+	
+	<!-- 왜 안되는지? -->
+	<select id="getCmCodesByContents" resultType="java.util.List">
+		SELECT
+			commoncode 		as commonCode
+		FROM
+			thxtay_common_code
+		WHERE
+			codecontent in
+			<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			
+	</select>
+	
+	<!-- <select id="getAllCommonCodes" useCache="true" resultType="string">
 		SELECT	
 			commoncode
 		FROM
@@ -56,5 +71,5 @@
 			parentcode
 		FROM
 			thxtay_common_code
-	</select>
+	</select> -->
 </mapper>

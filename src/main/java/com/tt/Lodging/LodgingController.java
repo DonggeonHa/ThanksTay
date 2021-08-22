@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tt.Common.CommonConstant;
+import com.tt.Common.CommonDao;
 import com.tt.Common.CommonService;
 import com.tt.Host.HostMainController;
 import com.tt.Host.HostService;
@@ -50,6 +51,8 @@ public class LodgingController {
 	LodgingService lodgingService;
 	@Autowired
 	LodgingImgService lodgingImgService;
+	@Autowired
+	LodgingAmtService lodgingAmtService;
 
 	@GetMapping("/lodgingTypeAdd")
 	public String lodgingAddForm(@LoginUser UserVO user, Model model) {
@@ -217,4 +220,29 @@ public class LodgingController {
 		System.out.println("저장된 숙소의 정보:" + lodging);
 		return "redirect:hosting";
 	}
+	@PostMapping("/saveTemp3")
+	public String saveTemp3(@LoginUser UserVO user, @RequestParam("selected-items") List<String> amenityList, @RequestParam("no") int ldgNo) {
+		System.out.println("유저번호:"+user.getNo());
+		System.out.println("등록중숙소번호:"+ldgNo);
+		for (String amenity : amenityList) {
+			System.out.println("편의시설:"+amenity);
+		}
+		List<AmenityListVO> amenities = new ArrayList<AmenityListVO>();
+		
+		//amenityList에 해당하는 code들 불러오기 => Q1. amtCodes를 먼저 뽑아놓고 사용하려 했으나 xml파일의 forEach 에러 ->질문
+//		List<String> amtCodes = lodgingAmtService.getAmtCodesByContents(amenityList);
+		
+		//for문 돌면서 ldgNo 추가, amtCode추가.
+		for(int i=0; i<amenityList.size();i++) {
+			amenities.get(i).setLodgingNo(ldgNo);
+//			for문 마다 db접속됨 -> Q1 해결 시 코드 수정 필요
+			String amtCode=commonService.getCommonCodeByContent(amenityList.get(i));
+			amenities.get(i).setCode(amtCode);
+			System.out.println(amenities.get(i));
+		}
+		
+		//amenityList로 
+		return "redirect:hosting";
+	}
+	
 }

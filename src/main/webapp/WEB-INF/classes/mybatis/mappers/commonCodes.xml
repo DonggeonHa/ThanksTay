@@ -16,6 +16,7 @@
 		WHERE
 			codecontent = #{value}
 	</select>
+	
 	<select id="getAllCommonCodeVos" resultType="com.tt.Common.CommonCodeVO">
 		SELECT 
 			commoncode 		as commonCode
@@ -27,7 +28,6 @@
 		FROM	
 			thxtay_common_code
 	</select>
-	
 	
 	<select id="getCommonCodeVosByParentCode" parameterType="string" resultType="com.tt.Common.CommonCodeVO">
 		SELECT 
@@ -45,7 +45,20 @@
 			parentcode=#{value}
 		</where> 
 	</select>
-	<select id="getAllCommonCodes" useCache="true" resultType="string">
+	
+	<select id="getCmCodesByContents" parameterType="java.util.List" resultType="java.util.List">
+		SELECT
+			commoncode 		as commonCode
+		FROM
+			thxtay_common_code
+		WHERE
+			codecontent in(
+			<foreach collection="contents" item="item" separator=",">
+				#{item}
+			</foreach>
+			)
+	</select>
+	<!-- <select id="getAllCommonCodes" useCache="true" resultType="string">
 		SELECT	
 			commoncode
 		FROM
@@ -56,5 +69,5 @@
 			parentcode
 		FROM
 			thxtay_common_code
-	</select>
+	</select> -->
 </mapper>
