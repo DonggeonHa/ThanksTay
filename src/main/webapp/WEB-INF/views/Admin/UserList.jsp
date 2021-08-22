@@ -62,14 +62,15 @@
 					output += '<td>' + item.BIRTH + '</td>';
 					output += '<td>' + item.PHONE + '</td>';
 
-					if (item.EMAILCHECK == 'N') {
-						output += '<td>이메일 인증대기</td>';
-					} else {
-						output += '<td>이메일 인증완료</td>';
+					if (item.ISHOST == 'N') {
+						output += '<td>호스트 신청 전</td>';
+						output += '<td></td>';
+					} else if (item.ISHOST == 'M'){
+						output += '<td>호스트 신청 중</td>';
+						output += '<td><a href="./deleteUser" class="delData" ';
+						output += 'no=' + item.NO + '><i class="fas fa-arrow-up"></i></a></td>';
 					}
-					
-					output += '<td><a href="./deleteUser" class="delData" ';
-					output += 'no=' + item.NO + '><i class="fas fa-trash-alt" ></i></a></td>';
+
 					output += '</tr>';
 					output += '</tbody>'
 					console.dir("output : " + output);

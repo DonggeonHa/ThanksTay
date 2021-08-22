@@ -23,12 +23,12 @@ public class AdminController {
     @RequestMapping(value = "/admin/index")
     public String Menu() {
 
-        return "Admin/Aindex";
+        return "admin/Aindex";
     }
 
     @RequestMapping(value = "/admin/userList")
     public String MemberList() {
-        return "Admin/UserList";
+        return "admin/UserList";
     }
 
     //produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다
@@ -72,11 +72,10 @@ public class AdminController {
             UserVO res = adminService.detailUser(userNo);
 
             model.addAttribute("UserVO", res);
-            System.out.println("값 줘봐 : " + model.getAttribute("UserVO"));
 
         } catch(Exception e) {
             System.out.println("UserInfo : " + e.getMessage());
         }
-        return "Admin/Info/UserInfo";
+        return "admin/Info/UserInfo";
     }
 }

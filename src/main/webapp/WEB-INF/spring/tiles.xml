@@ -28,8 +28,8 @@
         <put-attribute name="Aindex" value="" />
     </definition>
 
-    <definition name="Admin/*" extends="Admin">
-        <put-attribute name="Aindex" value="/WEB-INF/views/Admin/{1}.jsp" />
+    <definition name="admin/*" extends="Admin">
+        <put-attribute name="Aindex" value="/WEB-INF/views/admin/{1}.jsp" />
     </definition>
 
     <!-- HostMain 쪽 -->
