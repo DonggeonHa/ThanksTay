@@ -6,8 +6,6 @@ target/*
 META-INF/*
 Servers/
 .classpath
-/src/main/webapp/resources/images/upload/
-/src/main/webapp/resources/images/lodgings/
 /src/main/resources/mybatis/db.properties
 
 ### Eclipse ###
