@@ -155,6 +155,11 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
+	
+	<context:component-scan base-package="com.tt.Wishlist">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
 
 	<context:component-scan base-package="com.tt.User">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

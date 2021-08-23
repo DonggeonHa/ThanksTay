@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+
 <!-- <nav class="navbar sticky-top justify-content-center"
 	style="background-color: rgba(0, 0, 0, 0.0);">
 	<form action="explore/list">
