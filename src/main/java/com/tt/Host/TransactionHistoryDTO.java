@@ -13,14 +13,19 @@ import lombok.ToString;
 @ToString
 public class TransactionHistoryDTO {
 	
-	private int userNo;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date createdDate;
+	private String userName;
 	private String bankAccount;
 	private int bookingNo;
-	private int transactionNo;
-	private int lodgingNo;
 	private String lodgingName;
-	@JsonFormat(pattern = "yyyy-MM")
-	private Date createdDate;
+	private int bookingDate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date checkIn;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date checkOut;
 	private int lodgingFee;
 	private int cleaningFee;
+	private int hostFee;
+	private int paidOut;
 }

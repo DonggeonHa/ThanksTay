@@ -73,7 +73,6 @@ h1 {
 					</tr>
 				</thead>
 				<tbody>
-				<!-- 
 					<c:choose>
 						<c:when test="${empty lodgings}">
 							<tr class="align-middle">
@@ -100,7 +99,6 @@ h1 {
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-				 -->
 				</tbody>
 			</table>
 		</div>
@@ -242,6 +240,7 @@ $(function() {
 			data: $("#form-filtering").serialize(),
 			dataType:'filtering/json',
 			success: function(lodgingLists) {
+					console.log(lodgingLists)
 					$.each(lodgingLists, function(index, lodgings) {
 					var row = "<tr>"
 					row += "<td>"+'<img src="resources/images/banners/item.png">'+lodgings.name+"</td>"
@@ -268,7 +267,6 @@ $(function() {
 			$('#filter-space').hide()
 		}
 	})
-	
 	
 	$('#menu-filter-amenity').click(function(event) {
 		event.preventDefault()

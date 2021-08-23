@@ -169,13 +169,13 @@ $(function() {
 				var earnings = data.earnings
 				var earningsList = data.chart
 				console.log(earnings)
-				console.log(data)
+				console.log(earningsList)
 					$('#totalIncome span').text('￦' + new Number(earnings.confirmedIncome+earnings.expectingIncome).toLocaleString());
 					$('#cfdIncome span').text('￦' + new Number(earnings.confirmedIncome).toLocaleString());
 					$('#eptIncome span').text('￦' +  new Number(earnings.expectingIncome).toLocaleString());
 					
-					$('#fee-cleaning').text('￦' +  new Number(earnings.confirmedIncome+earnings.expectingIncome/10).toLocaleString());
-					$('#fee-cancel').text('￦' +  new Number(earnings.confirmedIncome+earnings.expectingIncome/50).toLocaleString());
+					$('#fee-cleaning').text('￦' +  new Number(earnings.confirmedIncomeCleaningFee + earnings.expectingIncomeCleaningFee).toLocaleString());
+					$('#fee-cancel').text('￦' +  new Number(earnings.canceledIncome).toLocaleString());
 					//차트 그리기
 					refreshChart(earningsList)
 			}

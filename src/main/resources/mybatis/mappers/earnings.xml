@@ -4,12 +4,16 @@
 
 <mapper namespace="com.tt.Host.HostAnalysisDao">
 	<select id="getEarningsByHashMap" parameterType="map" resultType="com.tt.Host.EarningsVO">
-		select nvl(sum(decode(booking_status, 'confirmedInput', booking_amount, 0)),0) confirmedIncome,
-        	   nvl(sum(decode(booking_status, 'expectingInput', booking_amount, 0)),0) expectingIncome
+		select nvl(sum(decode(booking_status, 'confirmedIncome', booking_amount, 0)),0) confirmedIncome,
+        	   nvl(sum(decode(booking_status, 'expectingIncome', booking_amount, 0)),0) expectingIncome,
+        	   nvl(sum(decode(booking_status, 'canceledIncome', booking_amount, 0)),0) canceledIncome,
+        	   nvl(sum(decode(booking_status, 'confirmedIncome', booking_total_cleaning_fee, 0)), 0) confirmedIncomeCleaningFee,
+               nvl(sum(decode(booking_status, 'expectingIncome', booking_total_cleaning_fee, 0)), 0) expectingIncomeCleaningFee
 		from (select 
-     		 decode(B.booking_status, 'BKG0101', 'expectingInput', 
-                                 	  'BKG0103', 'expectingInput', 
-                                	  'BKG0104', 'confirmedInput') booking_status, booking_amount
+     		 decode(B.booking_status, 'BKG0101', 'expectingIncome', 
+     		   						  'BKG0102', 'canceledIncome',
+                                 	  'BKG0103', 'expectingIncome', 
+                                	  'BKG0104', 'confirmedIncome') booking_status, booking_amount, booking_total_cleaning_fee
    		from 
       		thxtay_booking B, thxtay_lodging L
 		where 
