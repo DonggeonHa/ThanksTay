@@ -28,4 +28,8 @@ public interface UserDao {
 
     void updateProfile(UserVO user);
 
+    void updateWithdrawal(UserVO user);
+
+    void insertDeletedUser(DeletedUserVO duser);
+
 }

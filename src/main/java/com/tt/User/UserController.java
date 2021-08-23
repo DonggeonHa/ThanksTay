@@ -2,21 +2,18 @@ package com.tt.User;
 
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
+import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.KakaoRegisterForm;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +87,9 @@ public class UserController {
 
 			retVal.put("res", "OK");
 			return retVal;
+		} else if (res == 2) {
+			retVal.put("res", "ERROR");
+			return retVal;
 		}
 
 		retVal.put("res", "FAIL");
@@ -114,6 +114,8 @@ public class UserController {
 
 		} else if (res == 0) {
 			retVal.put("res", "FAIL");
+		} else if (res == 2) {
+			retVal.put("res", "ERROR");
 		}
 
 		return retVal;
@@ -189,6 +191,32 @@ public class UserController {
 		} catch (Exception e) {
 			System.out.println("파일업로드 실패!"+ e);
 		}
+
+		retVal.put("res", "OK");
+		return retVal;
+	}
+
+	@PostMapping("/withdrawal")
+	@ResponseBody
+	public Map<String, Object> withdrawal(@LoginUser UserVO userVO) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+
+		userService.updateWithdrawal(userVO);
+
+		retVal.put("res", "OK");
+		retVal.put("users", userVO);
+		return retVal;
+	}
+
+	@RequestMapping("/moveDeletedUser")
+	@ResponseBody
+	public Map<String, Object> moveDeletedUser(@RequestParam(name = "user", required = false) UserVO userVO) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		System.out.println("잘 변경됌 ?" + userVO.getDeleted());
+
+		DeletedUserVO duser = new DeletedUserVO();
+		BeanUtils.copyProperties(userVO, duser);
+		userService.insertDeletedUser(duser);
 
 		retVal.put("res", "OK");
 		return retVal;

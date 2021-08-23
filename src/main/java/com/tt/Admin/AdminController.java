@@ -1,6 +1,7 @@
 package com.tt.Admin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tt.User.DeletedUserVO;
 import com.tt.User.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,14 +28,19 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/userList")
-    public String MemberList() {
+    public String UserList1() {
         return "admin/UserList";
+    }
+
+    @RequestMapping(value = "/admin/deletedUserList")
+    public String DeletedUserList1() {
+        return "admin/DeletedUserList";
     }
 
     //produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다
     @RequestMapping(value = "/admin/getUsers", produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String UserList() {
+    public String UserList2() {
         List<UserVO> userList = adminService.getUsers();
         String str = "";
 
@@ -77,5 +83,21 @@ public class AdminController {
             System.out.println("UserInfo : " + e.getMessage());
         }
         return "admin/Info/UserInfo";
+    }
+
+    @RequestMapping(value = "/admin/getDeletedUsers", produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String DeletedUserList2() {
+        List<DeletedUserVO> deletedUserList = adminService.getDeletedUsers();
+        String str = "";
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(deletedUserList);
+        } catch (Exception e) {
+            System.out.println("first() mapper : " + e.getMessage());
+        }
+
+        return str;
     }
 }

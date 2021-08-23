@@ -26,6 +26,29 @@
             user_no = #{value}
 		
 	</select>
+
+    <select id="getUserByName" parameterType="string" resultType="com.tt.User.UserVO">
+        SELECT
+            user_no             as no,
+            user_password       as password,
+            user_email          as email,
+            TO_CHAR(user_birth, 'YYYY-MM-DD')          as birth,
+            user_phone          as phone,
+            user_picture        as picture,
+            user_email_check    as emailCheck,
+            user_name           as name,
+            user_info           as info,
+            user_ishost         as isHost,
+            user_isadmin        as isAdmin,
+            user_deleted        as deleted,
+            user_created_date   as createdDate,
+            user_updated_date   as updatedDate
+        FROM
+            thxtay_user
+        WHERE
+            user_no = #{value}
+
+    </select>
 	
     <select id="getUserByEmail" parameterType="string" resultType="com.tt.User.UserVO">
         SELECT
@@ -46,6 +69,30 @@
         FROM
             thxtay_user
         WHERE
+            user_email = #{value}
+    </select>
+
+    <select id="getHostByEmail" parameterType="string" resultType="com.tt.User.UserVO">
+        SELECT
+            user_no             as no,
+            user_password       as password,
+            user_email          as email,
+            TO_CHAR(user_birth, 'YYYY-MM-DD')          as birth,
+            user_phone          as phone,
+            user_picture        as picture,
+            user_email_check    as emailCheck,
+            user_name           as name,
+            user_info           as info,
+            user_ishost         as isHost,
+            user_isadmin        as isAdmin,
+            user_deleted        as deleted,
+            user_created_date   as createdDate,
+            user_updated_date   as updatedDate
+        FROM
+            thxtay_user
+        WHERE
+            user_ishost = 'Y'
+        AND
             user_email = #{value}
     </select>
 
@@ -71,4 +118,22 @@
         WHERE
             user_email = #{email}
     </update>
+
+    <update id="updateWithdrawal" parameterType="com.tt.User.UserVO">
+        UPDATE
+            thxtay_user
+        SET
+            user_deleted = 'Y'
+        WHERE
+            user_no = #{no}
+    </update>
+
+    <insert id="insertDeletedUser" parameterType="com.tt.User.DeletedUserVO">
+        INSERT INTO thxtay_deleted_user
+            (user_no, user_password, user_email, user_birth, user_phone, user_picture, user_email_check,
+             user_name, user_info, user_ishost, user_isadmin, user_deleted, user_created_date, user_updated_date)
+        VALUES
+            (#{no}, #{password}, #{email}, TO_DATE(#{birth},'YYYY-MM-DD'), #{phone}, #{picture}, #{emailCheck}, #{name}, #{info},
+             #{isHost}, #{isAdmin}, #{deleted}, #{createdDate}, #{updatedDate})
+    </insert>
 </mapper>

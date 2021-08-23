@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div>
+<div class="pt-3">
 	<table class="table table-striped">
 		<colgroup>
 			<col style="width:30%">
@@ -19,6 +19,10 @@
 				</c:choose>
 
 			</td>
+		</tr>
+		<tr>
+			<th scope="row">생년월일</th>
+			<td>${UserVO.birth}</td>
 		</tr>
 		<tr>
 			<th scope="row">이름</th>

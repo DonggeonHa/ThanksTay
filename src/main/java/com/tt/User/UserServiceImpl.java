@@ -71,7 +71,9 @@ public class UserServiceImpl implements UserService {
 
 		if (user != null) {
 			if (!"N".equalsIgnoreCase(user.getDeleted())) {
-				throw new LoginException("사용중지된 회원", "탈퇴 혹은 일시정지 처리된 사용자입니다.");
+				res = 2;
+
+				return res;
 			}
 			res = 1;	// 이메일이 있다.
 		} else {
@@ -91,5 +93,13 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserByName(userName);
 	}
 
+	@Override
+	public void updateWithdrawal(UserVO user) {
+		userDao.updateWithdrawal(user);
+	}
 
+	@Override
+	public void insertDeletedUser(DeletedUserVO duser) {
+		userDao.insertDeletedUser(duser);
+	}
 }

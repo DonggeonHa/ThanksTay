@@ -57,20 +57,17 @@
 					output += '<tbody class="text-center">'
 					output += '<tr>';
 					output += '<td>' + item.rnum + '</td>';
-					output += '<td><div class="detailData" data-user-no=' + item.NO + '>' + item.EMAIL + '</div></td>';
+					output += '<td>' + item.EMAIL + '</td>';
 					output += '<td>' + item.NAME + '</td>';
 					output += '<td>' + item.BIRTH + '</td>';
 					output += '<td>' + item.PHONE + '</td>';
 
 					if (item.ISHOST == 'N') {
-						output += '<td>호스트 신청 전</td>';
-						output += '<td></td>';
-					} else if (item.ISHOST == 'M'){
-						output += '<td>호스트 신청 중</td>';
-						output += '<td><a href="./deleteUser" class="delData" ';
-						output += 'no=' + item.NO + '><i class="fas fa-arrow-up"></i></a></td>';
+						output += '<td>일반회원</td>';
+					} else if (item.ISHOST == 'Y'){
+						output += '<td>호스트 회원</td>';
 					}
-
+					output += '<td><a href="#" class="detailData" data-user-no=' + item.NO + '><i class="fas fa-info-circle"></i></a></td>';
 					output += '</tr>';
 					output += '</tbody>'
 					console.dir("output : " + output);
@@ -84,38 +81,11 @@
 			}
 		});
 	});
-	
-	/*$(document).on('click', '.del_data', function(event) {
-		$('#remo').remove();
-		jQuery.ajax({
-			url : $(this).attr("href"), //$(this) : //항목을 눌렀을때 그 걸 가르킴 .attr("href") 속성된 이름값중에 "href"을 통해서? 읽어온다??
-			type : 'GET',
-			data : {'MEMBER_NUM' : $(this).attr("member_NUM")},
-			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-			dataType : 'json',
-			success : function (retVal) {
-				alertify.alert("탈퇴처리 되었습니다.");
-				if (retVal.res == "OK") {
-					// 데이터 성공할 때 이벤트 작성
-					selectData();
-				} else {
-					alert("delete Fail !!");
-				}
-				page();
-			},
-			error : function() {
-				alert("ajax 삭제 통신 실패!");
-			}
-		});
-		
-		// 기본 이벤트 제거
-		event.preventDefault();
-	});*/
 
 	$(document).on('click', '.detailData', function(event) {
 		var popupX = (window.screen.width / 2) - (500 / 2); // 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 뺴주었음.
 		var popupY = (window.screen.height / 2) - (630 / 2); // 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 뺴주었음
-		var pop = window.open('about:blank', 'Info', 'scrollbars=yes, resizable=yes, width=500, height=630, left=' + popupX + ', top=' + popupY);
+		var pop = window.open('about:blank', 'Info', 'scrollbars=yes, resizable=yes, width=450, height=550, left=' + popupX + ', top=' + popupY);
 		var userNo = $(this).data("userNo");
 
 		$.ajax({

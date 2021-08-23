@@ -1,5 +1,6 @@
 package com.tt.Admin;
 
+import com.tt.User.DeletedUserVO;
 import com.tt.User.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +11,6 @@ public interface AdminDao {
 
     /* 일반회원관리 */
     List<UserVO> getUsers();
+    List<DeletedUserVO> getDeletedUsers();
     UserVO getUserByNo(int userNo);
 }

@@ -84,7 +84,7 @@
 	}
 
 	tbody td a:hover {
-		color: rgba(239, 144, 14);
+		color: #c41dff;
 	}
 
 	tr.pageing:hover {
@@ -103,7 +103,7 @@
 
 	.page-item.active .page-link {
 		z-index: 0 !important;
-		background-color: #ef900e !important;
+		background-color: #c41dff !important;
 		border-color: #dee2e6 !important;
 		color : white !important;
 	}
@@ -124,8 +124,8 @@
 			<li class="main text-white">
 				회원관리
 				<ul>
-					<li><a href="/admin/userList">일반회원관리</a></li>
-					<li><a href="#">호스트회원관리</a></li>
+					<li><a href="/admin/userList">일반 회원관리</a></li>
+					<li><a href="#">탈퇴한 회원관리</a></li>
 				</ul>
 			</li>
 			<li class="main text-white">

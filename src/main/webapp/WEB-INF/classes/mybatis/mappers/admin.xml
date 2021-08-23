@@ -10,7 +10,17 @@
 		<result column="USER_NAME" property="name"/>
 		<result column="USER_BIRTH" property="birth"/>
 		<result column="USER_PHONE" property="phone"/>
-		<result column="USER_EMAIL_CHECK" property="emailCheck"/>
+		<result column="USER_ISHOST" property="isHost"/>
+	</resultMap>
+
+	<resultMap id="deletedUserMap" type="java.util.HashMap">
+		<result column="RNUM" property="rnum"/>
+		<result column="USER_NO" property="no"/>
+		<result column="USER_EMAIL" property="email"/>
+		<result column="USER_NAME" property="name"/>
+		<result column="USER_BIRTH" property="birth"/>
+		<result column="USER_PHONE" property="phone"/>
+		<result column="USER_ISHOST" property="isHost"/>
 	</resultMap>
 
 	<select id="getUsers" resultMap="userMap">
@@ -21,15 +31,16 @@
 				USER_NAME 					as name,
 		TO_CHAR(USER_BIRTH, 'YYYY-MM-DD') 	as birth,
 				USER_PHONE 					as phone,
-				USER_EMAIL_CHECK 			as emailCheck
+				USER_ISHOST 				as isHost
 		FROM (SELECT
-					 ROW_NUMBER() OVER (ORDER BY USER_EMAIL_CHECK DESC , USER_NO ASC) as RNUM,
-					 USER_NO, USER_EMAIL, USER_NAME, USER_BIRTH, USER_PHONE, USER_EMAIL_CHECK
+					 ROW_NUMBER() OVER (ORDER BY USER_NO ASC) as RNUM,
+					 USER_NO, USER_EMAIL, USER_NAME, USER_BIRTH, USER_PHONE, USER_ISHOST
 			  FROM
 			  		 (SELECT
 			  		 		 *
 			  	   	  FROM
-			  	   	  		 THXTAY_USER))
+			  	   	  		 THXTAY_USER
+					  WHERE USER_DELETED = 'N'))
  	</select>
 
 	<select id="getUserByNo" parameterType="int" resultType="com.tt.User.UserVO">
@@ -51,5 +62,24 @@
 				THXTAY_USER
 		WHERE
 				USER_NO = #{value}
+	</select>
+
+	<select id="getDeletedUsers" resultMap="deletedUserMap">
+		SELECT
+			RNUM,
+			USER_NO 					as no,
+				USER_EMAIL 					as email,
+				USER_NAME 					as name,
+		TO_CHAR(USER_BIRTH, 'YYYY-MM-DD') 	as birth,
+				USER_PHONE 					as phone,
+				USER_ISHOST 				as isHost
+		FROM (SELECT
+			ROW_NUMBER() OVER (ORDER BY USER_NO ASC) as RNUM,
+			USER_NO, USER_EMAIL, USER_NAME, USER_BIRTH, USER_PHONE, USER_ISHOST
+			FROM
+			(SELECT
+			*
+			FROM
+			THXTAY_DELETED_USER))
 	</select>
 </mapper>

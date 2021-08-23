@@ -6,8 +6,41 @@
 </style>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginRegisterModal">Launch demo modal
-</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginRegisterModal">로그인&회원가입</button>
+<button type="button" class="btn btn-primary" id="withdrawal">회원탈퇴</button>
+
+<!---------------------------------------------- 회원탈퇴 ------------------------------------------------------->
+<div class="modal fade" id="withdrawalModal" aria-hidden="true" aria-labelledby="withdrawalModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="row modal-header d-flex justify-content-between">
+                <div class="col-4">
+                    <button type="button" style="float: left;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-4">
+                    <p class="modal-title text-center" id="withdrawalModalLabel" style="font-size: 1.1em"><strong>회원탈퇴</strong></p>
+                </div>
+                <div class="col-4">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <p class=""> 정말로 회원을 탈퇴하시겠습니까? </p>
+                </div>
+                <form action="/withdrawal" method="post" id="Yes">
+                    <div class="d-grid gap-2">
+                        <input type="hidden" value="${LOGINED_USER.no}" name="no">
+                        <button type="submit" class="btn btn-secondary btn-lg" style="font-size: 1.1em;" id="btn-withdrawal">예</button>
+                    </div>
+                </form>
+                <div class="d-grid gap-2 mt-3">
+                    <button type="button" class="btn btn-danger btn-lg" style="font-size: 1.1em;" id="btn-cancel">아니요</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!---------------------------------------------- 로그인 또는 회원가입 ------------------------------------------------------->
 <div class="modal fade" id="loginRegisterModal" tabindex="-1" aria-labelledby="loginRegisterModal" aria-hidden="true">
@@ -244,6 +277,23 @@
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        var withdrawalModal = new bootstrap.Modal(document.getElementById("withdrawalModal"));
+
+        $('#withdrawal').click(function () {
+            withdrawalModal.show();
+        });
+
+        $('#btn-withdrawal').click(function () {
+            document.getElementById("Yes").submit();
+        });
+
+        $('#btn-cancel').click(function() {
+            withdrawalModal.hide();
+        });
+    })
+</script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
     $(function () {
@@ -306,6 +356,9 @@
                         passwordModal.show();
                     } else if(retVal.res === "FAIL") {
                         registerModal.show();
+                    } else if(retVal.res === "ERROR") {
+                        alertify.alert("회원탈퇴된 회원입니다.");
+                        return false;
                     }
                     emailModal.hide();
                 },
@@ -510,11 +563,14 @@
                                 success:function (retVal) {
                                     if (retVal.res === "OK") {
                                         alertify.alert('로그인&회원가입 성공');
+                                    } else if (retVal.res === "ERROR") {
+                                        alertify.alert('탈퇴처리된 회원입니다.');
+                                        return false;
                                     }
                                     emailModal.hide();
                                 },
-                                error : function () {
-                                    alertify.alert('ajax통신 실패!!!!!!');
+                                error : function (request, status, error) {
+                                    alertify.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                                 }
                             })
                         },
