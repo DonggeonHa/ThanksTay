@@ -307,6 +307,17 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	<script>
 	var imgIdx=0;
+	for(i=0; i<4; i++){
+		// 사진 추가 시 빈 칸 부터 표현해주기 위한 코드
+		// ($(".boxdesign img[src$='.jpg']")[i]!=undefined) ? imgIdx++ : break;	//=>3항 연산자는 값이 반환돼야 한다.
+		// img태그의 src에 .jpg로 끝나는 경로가 있는 요소의 값을 반환
+		if($(".boxdesign img[src$='.jpg']")[i]!=undefined){
+			imgIdx++;
+		}else{
+			break;
+		}
+	}
+	
 	
 	
 	$("#form-upfile #enroll").click(function(){

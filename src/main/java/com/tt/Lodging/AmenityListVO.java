@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class AmenityListVO {
     
-    private int code;           // 편의시설 코드
+    private String code;           // 편의시설 코드
     private int lodgingNo;      // 숙소_번호
     
     /*

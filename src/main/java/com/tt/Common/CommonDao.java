@@ -27,5 +27,9 @@ public interface CommonDao {
 	
 	List<CommonCodeVO> getCommonCodeVosByParentCode(String commonCode);
 	
+	/**
+	 * 복수의 CodeContents에 해당하는 복수의 CmCodes 반환
+	 */
+	List<String> getCmCodesByContents(List<String> contents);
 	/* jhw 추가 */
 }

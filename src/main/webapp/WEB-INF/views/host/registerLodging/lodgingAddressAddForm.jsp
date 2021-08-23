@@ -19,11 +19,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/f421352664.js"
 	crossorigin="anonymous"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- 카카오 지도 -->
-<!-- <script type="text/javascript"
+<script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ad83f287ea8866c42b5fa5c4bce63d20&libraries=services,clusterer"></script>
- -->
+
 <style>
 /* 공통 CSS */
 .container-fluid {
@@ -188,39 +189,29 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="hidden" name="doublebed" value="${lodgingRegistering.doublebed }">
 							<input type="hidden" name="singlebed" value="${lodgingRegistering.singlebed }">
 							<input type="hidden" name="description" value="${lodgingRegistering.description }">
-							<input type="hidden" name="latitude" value="33.450701"> 
-							<input type="hidden" name="longitude" value="126.570667">
+							
+							<input id="lat" type="hidden" name="latitude" value="${lodgingRegistering.latitude }"> 
+							<input id="lng" type="hidden" name="longitude" value="${lodgingRegistering.longitude }">
 								
 							
 							<div class="mb-3" style="text-align: left">
-								<label class="form-label">시군구</label> <input type="text"
-									class="form-control" style="width: 100%" id="lodging-city"
-									name="city" autocomplete="off"
-									value="${lodgingRegistering.city }" />
+								<label class="form-label">우편번호</label> 
+								<input type="text" class="form-control" style="width: 100%" 
+								id="member_post" name="postNo" autocomplete="off"	value="${lodgingRegistering.city }"
+								onclick="findAddr()" />
 							</div>
 							<div class="mb-3" style="text-align: left">
-								<label class="form-label">주소</label> <input type="text"
-									class="form-control" style="width: 100%" id="lodging-address"
-									name="address" autocomplete="off"
-									value="${lodgingRegistering.address }" />
+								<label class="form-label">주소</label> 
+								<input type="text" class="form-control" style="width: 100%" id="member_addr"
+								name="address" autocomplete="off" value="${lodgingRegistering.address }" />
 							</div>
 							<div class="mb-3" style="text-align: left">
-								<label class="form-label">상세주소</label> <input type="text"
-									class="form-control" style="width: 100%"
-									id="lodging-address-rest" name="addressRest" autocomplete="off"
-									value="${lodgingRegistering.addressRest }" />
+								<label class="form-label">상세주소</label> 
+								<input type="text" class="form-control" style="width: 100%"	id="lodging-address-rest" 
+								name="addressRest" autocomplete="off" value="${lodgingRegistering.addressRest }" />
 							</div>
-							<div class="mb-3" style="text-align: left">
-								<label class="form-label">우편번호</label> <input type="text"
-									class="form-control" style="width: 100%" id="lodging-post-no"
-									name="postNo" autocomplete="off"
-									value="${lodgingRegistering.postNo }" />
-							</div>
+							
 						</form>
-						<!-- <div>
-							카카오 지도
-							<div id="map" style="margin:0 auto; width: 250px; height:200px"></div>
-						</div> -->
 					</div>
 
 					<div style="height: 9%">
@@ -248,9 +239,41 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	</div>
 
 	<script>
-	/* serialize */
-	//$("#form-register").serialize();
-	/*  */
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	function findAddr(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				console.log(data);
+				
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var jibunAddr = data.jibunAddress; // 지번 주소 변수
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('member_post').value = data.zonecode;
+				if(roadAddr !== ''){
+					document.getElementById("member_addr").value = roadAddr;
+				} 
+				else if(jibunAddr !== ''){
+					document.getElementById("member_addr").value = jibunAddr;
+				}
+				
+				geocoder.addressSearch(roadAddr, function(result, status) {
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === kakao.maps.services.Status.OK) {
+				        var lng = new kakao.maps.LatLng(0,result[0].x).La;//경도
+				        var lat = new kakao.maps.LatLng(result[0].y,0).Ma;//위도
+				        document.getElementById("lat").value = lat;
+				        document.getElementById("lng").value = lng;
+				        alert("경도="+lng+", 위도="+lat)
+				    } 
+				});    
+			}
+		}).open();
+	}
 	$("#save-btn2").click(function(){
  		/* 클릭 시 숙소명의 값을 읽어와야 한다. */
 		$("#form-register").attr("action","saveTemp")
@@ -265,17 +288,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		$("#form-register").attr("action","saveTemp")
 		$("#form-register").submit();
 	})
-
-		/* /* 카카오 지도 API */
-		// 지도를 담을 dom
-		/* var container = document.getElementById("map"); */
-		// 지도를 생성할 때 필요한 기본 옵션
-		/* var options = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), //LatLng: 위도경도 받아오는 클래스
-			level : 5
-		}; */
-		//지도 생성 및 객체 리턴		
-		/* var map = new kakao.maps.Map(container, options); */ 
 	</script>
 </body>
 </html>

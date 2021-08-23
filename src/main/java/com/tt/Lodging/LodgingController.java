@@ -3,6 +3,7 @@ package com.tt.Lodging;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.cbor.Jackson2CborDecoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -22,11 +24,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tt.Common.CommonConstant;
+import com.tt.Common.CommonDao;
 import com.tt.Common.CommonService;
 import com.tt.Host.HostMainController;
 import com.tt.Host.HostService;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tt.Common.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.LodgingRegisterForm;
@@ -45,6 +51,8 @@ public class LodgingController {
 	LodgingService lodgingService;
 	@Autowired
 	LodgingImgService lodgingImgService;
+	@Autowired
+	LodgingAmtService lodgingAmtService;
 
 	@GetMapping("/lodgingTypeAdd")
 	public String lodgingAddForm(@LoginUser UserVO user, Model model) {
@@ -104,6 +112,23 @@ public class LodgingController {
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		return "host/registerLodging/lodgingAmenityAddForm";
 	}
+	
+	@PostMapping("/lodgingAmenityAdd")
+	@ResponseBody
+	public List<CommonCodeVO> lodgingAmenityAddForm(@RequestParam(name="codeContent",required = false) String codeContent){
+		List<CommonCodeVO> retVal=new ArrayList<CommonCodeVO>();
+		
+		String cmCode=commonService.getCommonCodeByContent(codeContent);
+		retVal = commonService.getCommonCodesByParentCode(cmCode);
+		for (CommonCodeVO val : retVal) {
+			System.out.println("조회된값:"+val);
+		}
+//		Gson gson =new Gson();
+//		String jsonText = gson.toJson(retVal);
+//		System.out.println(jsonText);
+		return retVal;
+
+	}
 
 	@GetMapping("/lodgingImgAdd")
 	public String lodgingImgAddForm(@LoginUser UserVO user, Model model) {
@@ -142,7 +167,7 @@ public class LodgingController {
 		/* 데스크톱 파일저장 주소 */
 		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
 		/* 노트북주소 파일저장 주소*/
-		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
+//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
 		uploadPath+"resources/images/lodgings",
 		filename)));
 
@@ -200,4 +225,31 @@ public class LodgingController {
 		System.out.println("저장된 숙소의 정보:" + lodging);
 		return "redirect:hosting";
 	}
+	@PostMapping("/saveTemp3")
+	public String saveTemp3(@LoginUser UserVO user, @RequestParam("selected-items") List<String> amenityList, @RequestParam("no") int ldgNo) {
+		System.out.println("유저번호:"+user.getNo());
+		System.out.println("등록중숙소번호:"+ldgNo);
+		for (String amenity : amenityList) {
+			System.out.println("편의시설:"+amenity);
+		}
+		List<AmenityListVO> amenities = new ArrayList<AmenityListVO>();
+		AmenityListVO amenity = new AmenityListVO();
+		//Q2
+		//amenityList에 해당하는 code들 불러오기 => Q1. 파라미터로 배열을 전달하여 amtCodes를 먼저 뽑아놓고 사용하려 했으나 xml파일의 forEach 에러 ->질문
+//		List<String> amtCodes = lodgingAmtService.getAmtCodesByContents(amenityList);
+		
+		//for문 돌면서 ldgNo 추가, amtCode추가.
+		for(int i=0; i<amenityList.size();i++) {
+//			for문 마다 db접속됨 -> Q1 해결 시 코드 수정 필요
+			String amtCode=commonService.getCommonCodeByContent(amenityList.get(i));
+			amenity.setCode(amtCode);
+			amenity.setLodgingNo(ldgNo);
+			System.out.println("저장될편의시설:"+amenity);
+			lodgingAmtService.registerAmt(amenity);	// 편의시설테이블 제약조건 수정필요, amenity_no추가해야함
+		} 
+		//amenityList로
+		
+		return "redirect:hosting";
+	}
+	
 }
