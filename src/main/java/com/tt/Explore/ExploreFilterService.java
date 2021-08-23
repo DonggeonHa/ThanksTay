@@ -6,7 +6,6 @@ import com.tt.Lodging.LodgingVO;
 
 public interface ExploreFilterService {
 
-	List<LodgingVO> getLodgingListByFirstFilter(FirstFilterVO firstFilter);
-	List<LodgingVO> getLodgingListByFirstLatLng(FirstFilterVO firstFilter);
+	List<LodgingVO> getLodgingListBySearchFilter(SearchFilterVO searchFilter);
 	List<LodgingVO> getLodgingListByGuests(int guests);
 }

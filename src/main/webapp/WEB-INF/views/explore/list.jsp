@@ -8,6 +8,9 @@
     border-bottom-color: #EBEBEB !important;
     height: 220px;
 }
+.list-title{
+	margin-top: 40px;
+}
 .spacing{
 	border-bottom-width: 1px !important;
     border-bottom-style: solid !important;
@@ -51,7 +54,7 @@
 	font-size: 15px;
 	padding-top: 25px;
 }
-a { 
+.notice-travel a { 
 	text-decoration:underline;
 	color:black;
 } 
@@ -115,11 +118,23 @@ a {
 .text-wrapper{
 	position: relative;
 }
+h5.modal-title{
+	justify-content: center;
+}
+.modal-body .wishlist{
+	padding: 10px;
+}
+.modal-body .wishlist a{
+	text-decoration: none;
+}	
+.modal-body .wishlist .thumbnail{
+	width: 60px; height: 60px; border-radius: 10px; background-color: black;
+	margin-right: 15px;
+}
 </style>
 <div class="container-fluid">
 	<div class="row ms-3">
 		<div class="col-6" id="left-box">
-			리스트영역
 			<!-- 300개 이상의 숙소·8월 16일-8월 18일 -->
 			<div class="list-title">
 				<p class="search-summary">숙박 3건 · 8월 11일 - 8월 13일 · 게스트 ${param.guests }명</p>
@@ -176,7 +191,7 @@ a {
 							<a href="#"><button class="share" style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
  							<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
 							</svg></button></a>
-							<a href="#"><button class="zzim"><i class="bi bi-heart"></i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
+							<a href="#" data-bs-toggle="modal" data-bs-target="#wishlist"><button class="zzim"><i class="bi bi-heart"></i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
 							<path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
 							</svg></button></a>
 						</div>
@@ -227,7 +242,6 @@ a {
 		</div>
 		<!-- 이 부분 화면 스크롤 마다 어떻게...? -->
 		<div class="col-6" id="right-box">
-			
 			<div id="map" style="width:100%; height:1000px;">
 			</div>
 		</div>
@@ -236,20 +250,28 @@ a {
 <!-- ------------------------------------------편의시설 체크용 모달----------------------------------------------- -->
 
 <!-- -----------------------------------------위시리스트용 모달--------------------------------------------------------- -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="wishlistModal" aria-hidden="true">
+<div class="modal fade" id="wishlist" tabindex="-1" aria-labelledby="wishlistModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header text-center">
+        <h5 class="modal-title center" style="justify-content: center; text-align:center;" id="wishlistModal">위시리스트</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <h5 class="modal-title" id="wishlistModal">위시리스트</h5>
       </div>
       <div class="modal-body">
-        <a href="#">
-        	<div class="wishlist">
-	       		<img src="">
-	       		<div>글자영역</div>
-       		</div>
-        </a>
+       	<div class="wishlist">
+       		 <a href="#">
+	       		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-lg thumbnail" style="padding: 15px;" viewBox="0 0 16 16">
+  <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+</svg>
+	       		<span>새로운 위시리스트 만들기</span>
+        	</a>
+        </div>
+       	<div class="wishlist">
+       		 <a href="#">
+	       		<img class="thumbnail" src="/resources/images/mains/seoul.webp">
+	       		<span>머물고 싶은 장소</span>
+        	</a>
+        </div>
       </div>
     </div>
   </div>
@@ -272,16 +294,15 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 var ps = new kakao.maps.services.Places();
 
-//var markers = [];
-//마커띄우기
-//function displayMarker(place) {
-    
-    // 마커를 생성하고 지도에 표시합니다
-    //var marker = new kakao.maps.Marker({
-    //    map: map,
-    //    position: new kakao.maps.LatLng(place.latitude, place.longitude) 
-    //});
-//}
+//전역변수
+	var south;
+	var north;
+	var west;
+	var east;
+	var checkIn;
+	var checkOut;
+	var guests;
+	var locations;
 
 //ajax로 검색결과 받아오기
 function getList(){	//나중에 parameter 정리해서 넣을 것
@@ -293,14 +314,14 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 	    url: '/explore/list/json',
 	    type: 'get',
 	    data: {
-	  //  		"east" : east
-	  // 		,"west" : west
-	  //  		,"south" : south
-	  //  		,"north" : north
-	  //    		,"checkIn": checkIn
-	  //    		,"checkOut": checkOut
-	  //   		,
-	     		"guests": '${param.guests}'
+	 	  		"east" : east
+	   			,"west" : west
+	   			,"south" : south
+	   			,"north" : north
+	    		,"checkIn": checkIn
+	    		,"checkOut": checkOut
+	     		,"guests": '${param.guests}'
+	     		,"location": '${param.location}'
 	       		},
 	    dataType: "json",    		
 	    success: function (lodgings) {
@@ -309,7 +330,9 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 	          $.each(lodgings, function(index, lodging) {
 	             var htmlContent = Mustache.render(template, lodging);
 	             $(htmlContent).appendTo("#left-box .notice-travel");
-	             
+	             //list-box에 링크부여
+	             $('.list-box').attr("onclick", "location.href='/booking?='"+lodging.no+"';");
+
 
 	            //var content = '<button type="button" style="border-radius:35px;"class="n btn-outline-dark">'+lodging.name+'</button>';
 	            var content = document.createElement('button');
@@ -380,10 +403,10 @@ kakao.maps.event.addListener(map, 'bounds_changed', function() {
     var bounds = map.getBounds();
 	var boundsStr = bounds.toString().replace(/[()]/g, '').split(',');
 	
-	var south = boundsStr[0];
-	var north = boundsStr[2];
-	var west = boundsStr[1];
-	var east = boundsStr[3];
+	south = boundsStr[0];
+	north = boundsStr[2];
+	west = boundsStr[1];
+	east = boundsStr[3];
 	
 	getList();
 });
@@ -391,33 +414,16 @@ kakao.maps.event.addListener(map, 'bounds_changed', function() {
 
 // 주소로 좌표를 검색합니다
 geocoder.addressSearch('${location}', function(result, status) {
-
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
 
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-//        var marker = new kakao.maps.Marker({
-//            map: map,
-//            position: coords
-//        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-//        var infowindow = new kakao.maps.InfoWindow({
-//            content: '<div style="width:150px;text-align:center;padding:6px 0;">totalPrice♥<br/>클릭시 이벤트</div>'
-//        });
-//        infowindow.open(map, marker);
-
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
     } 
+    getList();
 });    
 
-//지도에 마커를 띄운다
-//        var marker = new kakao.maps.Marker({
-//            map: map,
-//            position: coords
-//        });
-        
+//list-box에 onclick이벤트 부여
 </script>

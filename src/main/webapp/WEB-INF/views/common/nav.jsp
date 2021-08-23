@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
-<nav class="navbar navbar-expand-lg" id="header" style="background-color:rgba( 0, 0, 0, 0 );">
+<nav class="navbar navbar-expand-lg" id="header" style="background-color:rgba( 0, 0, 0, 0 ); box-shadow: rgb(0, 0, 0, 0.3) 0px 1px 12px;">
 	<div class="container">
 		<div class="navbar-brand">
 			<a style="font-family: 'Lobster', cursive; font-size:40px; text-decoration-line: none; color: #FF5555;" href="/home">Thxtay</a>

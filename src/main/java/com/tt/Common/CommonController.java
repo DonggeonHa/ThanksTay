@@ -24,11 +24,12 @@ import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
 import com.tt.Explore.ExploreFilterDao;
 import com.tt.Explore.ExploreFilterService;
-import com.tt.Explore.FirstFilterVO;
+import com.tt.Explore.SearchFilterVO;
 import com.tt.Host.HostMainController;
 import com.tt.Lodging.LodgingVO;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
+import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;
 import com.tt.web.view.JsonView;
@@ -45,6 +46,9 @@ public class CommonController {
 	private static Logger logger = LogManager.getLogger(CommonController.class);
 	@Autowired JsonView jsonView;
 	@Autowired ExploreFilterService exploreFilterService;
+	@Autowired UserService userService;
+	
+	
 	
 	/*
 	 * @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
@@ -82,34 +86,35 @@ public class CommonController {
 	public String Search(String location, Model model) {
 		model.addAttribute("location", location);
 		return "explore/list";
-	}
-	
-//	@GetMapping(path = {"/explore/list/json"})
-//	public ModelAndView SearchJson(int guests,
-			//double east, double west, double south, double north,
-		//	@RequestParam("location") String location,
-		//	@RequestParam("check-in")@DateTimeFormat Date checkIn, 
-		//	@RequestParam("check-out")@DateTimeFormat Date checkOut,
-		//	@RequestParam(value="guests", required=false, defaultValue="2") int guests, 
-//			 Model model) {
-		
-//		FirstFilterVO firstFilter = new FirstFilterVO(east, west, south, north);
-//		List<LodgingVO> lodgings = exploreFilterService.getLodgingsByGuests(guests);
-//		List<LodgingVO> lodgings = exploreFilterService.getLodgingsByFirstLatLng(firstFilter);
-		
-//		System.out.println("결과:" + lodgings);
-		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("data", lodgings);
-//		mav.setView(jsonView);
-		
-//		return mav;
-//	}
+	}	
+
 
 	@GetMapping(path = {"/explore/list/json"})
 	@ResponseBody
-	public List<LodgingVO> SearchJson(int guests){
-		List<LodgingVO> lodgings = exploreFilterService.getLodgingListByGuests(guests);
+	public List<LodgingVO> SearchJson(
+			@RequestParam(value="location", required=false, defaultValue="") String location, 
+			@RequestParam(value="east", required=false, defaultValue="-1") double east, 
+			@RequestParam(value="west", required=false, defaultValue="-1") double west, 
+			@RequestParam(value="south", required=false, defaultValue="-1") double south, 
+			@RequestParam(value="north", required=false, defaultValue="-1") double north, 
+			@RequestParam(value="checkin", required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date checkIn, 
+			@RequestParam(value="checkout", required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOut,
+			@RequestParam(value="guests", required=false, defaultValue="2") int guests,
+			@RequestParam(value="status", required=false, defaultValue="LDG0303") String status,	
+			//defaultValue로 하드코딩...? 아니면 위에 상수 정의? property에서 특정 값만 미리 설정해놓는 방법도 있다.
+			//시간날 때 해결하기
+			@RequestParam(value="type", required=false) String type,
+			@RequestParam(value="immApproval", required=false, defaultValue="N") String immApproval, //boolean으로 어떻게? parseBoolean?
+			@RequestParam(value="amenity", required=false, defaultValue="") List<String> amenity,
+			@LoginUser UserVO user
+			){
+
+		int userNo = 0;
+		if(user != null) {
+			userNo = user.getNo();
+		}
+		SearchFilterVO searchFilter = new SearchFilterVO(location, east, west, south, north, checkIn, checkOut, guests, status, type, immApproval, amenity, userNo);
+		List<LodgingVO> lodgings = exploreFilterService.getLodgingListBySearchFilter(searchFilter);
 		return lodgings;
 	}
 	
@@ -118,8 +123,8 @@ public class CommonController {
 			//	@RequestParam(value="lat", required=false) double latitude,
 			//	@RequestParam(value="lng", required=false) double longitude,
 		//	Model model) {
-		//	FirstFilterVO firstFilter = new FirstFilterVO(location, checkIn, checkOut, guests);
-		//	List<LodgingVO> lodgings = exploreFilterService.getLodgingsByFirstFilter(firstFilter);
+		//	SearchFilterVO searchFilter = new SearchFilterVO(location, checkIn, checkOut, guests);
+		//	List<LodgingVO> lodgings = exploreFilterService.getLodgingsBySearchFilter(searchFilter);
 		
 		//	model.addAttribute("lodgings", lodgings);
 		//	return "explore/list";
