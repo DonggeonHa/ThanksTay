@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.tt.User.UserVO;
 import com.tt.Lodging.BookingVO;
+import com.tt.Lodging.LodgingVO;
 import com.tt.Common.CommonCodeVO;
 
 @Mapper
@@ -18,8 +19,13 @@ public interface HostAnalysisDao {
 	List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception;
 	//대금 리스트로 출력(TransactionHistoryDTO)
 	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
+
+	List<TransactionHistoryDTO> getAllTransactionHistoryByUserNo(int userNo) throws Exception;
 	
-	TransactionHistoryDTO getAllTransactionHistoryByUserNo(int userNo) throws Exception;
+	TransactionRegisterVO getTransactionHistoryByUserNo(int userNo) throws Exception;
+	
+	List<LodgingVO> getAllLodgingsByUserNo(int userNo) throws Exception;
+	
 	
 	/* EarningsVO / BookingVO */
 	//수입 출력(EarningsVO)
@@ -35,4 +41,5 @@ public interface HostAnalysisDao {
 	
 	//공통코드
 	List<CommonCodeVO> getCommonCodeByPntCode(String code) throws Exception;
+	
 }
