@@ -33,4 +33,18 @@ public interface BookingService {
 	 * @return 숙소편의시설 리스트
 	 */
 	List<AmenityListDTO> getAmenitiesByLodgingNo(int lodgingNo);
+	
+	void booking(BookingVO booking);
+	
+	BookingVO getBookingNoByBooking(BookingVO booking);
+	
+	void insertPayment(PaymentVO payment);
+	
+	List<ReviewDTO> getReview(int lodgingNo);
+	
+	BookingVO getBookingNoByUserNo(BookingVO booking);
+	
+	void insertReview(ReviewVO review);
+	
+	void updateLodging(LodgingVO lodging);
 }

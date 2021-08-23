@@ -17,7 +17,7 @@ public class ReviewDTO {
     private int bookingNo;      // 예약_번호
     private Date createdDate;   // 등록일
     private Date updatedDate;   // 수정일
-    private String comment;     // 리뷰내용
+    private String comments;     // 리뷰내용
     private String isUpdated;   // 수정여부
     //private int stars;          // 별점
     //private int cleanness;      // 청결도

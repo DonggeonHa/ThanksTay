@@ -553,7 +553,7 @@
 	.booking-fee {
 		padding-top: 15px;
 	}
-	.Lodging-fee, .Cleaning-fee {
+	.Lodging-fee, .Cleaning-fee, .service-fee {
 		padding-bottom: 12px;
 		display: flex;
 		justify-content: space-between;
@@ -795,6 +795,138 @@
 		display: flex;
 		align-items: center;
 	}
+	.review-all {
+		border: 1px solid #222222;
+		background: #FFFFFF;
+		padding: 13px 23px;
+		text-align: center;
+		border-radius: 8px;
+		text-decoration: none;
+		font-size: 16px;
+		font-weight: 600;
+		color: #222222;
+	}
+	.review-button-flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.modal-review {
+		padding: 40px;
+		align-items: center;
+		display: flex;
+		justify-content: center;
+	}
+	.modal-contents {
+		display: contents;
+	}
+	.modal-review-flex {
+		position: relative;
+		width: 100%;
+		max-width: 1032px;
+		border-radius: 12px;
+		background: rgb(255, 255, 255);
+		max-height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.modal-review-padding {
+		flex: 1 1 auto;
+		overflow: auto;
+		padding: 24px;
+	}
+	.modal-review-relative {
+		outline: none;
+		position: relative;
+		margin-top: -24px;
+	}
+	.modal-review-header {
+		top: -24px;
+		background-color: rgb(255, 255, 255);
+		padding-bottom: 24px;
+		position: sticky;
+		z-index: 1;
+	}
+	.modal-review-text {
+		padding-top: 30px;
+		padding-left: 8px;
+		padding-right: 8px;
+		position: relative;
+	}
+	.modal-review-text-font {
+		color: rgb(34, 34, 34);
+		font-size: 32px;
+		font-weight: 800;
+	}
+	.modal-review-body, .modal-review-left-flex {
+		margin-left: -8px;
+		margin-right: -8px;
+	}
+	.modal-review-left {
+		width: 33.3333%;
+		float: left;
+		padding-left: 8px;
+		padding-right: 8px;
+		position: relative;
+	}
+	.modal-review-right {
+		width: 58.3333%;
+		float: left;
+		margin-left: 8.33333%;
+		padding-left: 8px;
+		padding-right: 8px;
+		position: relative;
+	}
+	.modal-review-left-flex {
+		margin-left: -8px;
+		margin-right: -8px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.modal-reviewAverage-box {
+		width: 100%;
+		padding-left: 8px;
+		padding-right: 8px;
+		position: relative;
+	}
+	.modal-reviewAverage-box-flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
+	.modal-reviewAverage-bar {
+		display: flex;
+		align-items: center;
+		margin-left: 12px;
+		width: 75%;
+	}
+	.modal-review-flex2 {
+		position: relative;
+		width: 100%;
+		max-width: 800px;
+		border-radius: 12px;
+		background: rgb(255, 255, 255);
+		max-height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.modal-review-text-font2 {
+		color: rgb(34, 34, 34);
+		font-size: 20px;
+		font-weight: 800;
+	}
+	.map-border, .rule-border {
+		height: 100%;
+		width: 100%;
+		border-top-color: rgb(221, 221, 221);
+		border-top-width: 1px;
+		border-top-style: solid;
+	}
+	.map-height {
+		height: 480px;
+		margin-bottom: 32px;
+	}
 </style>
 
 <div class="container">
@@ -818,7 +950,7 @@
 							</span>
 							<span class="mt-1">${lodging.reviewAverage }</span>
 							<span>
-								<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
+								<button type="button" class="button-reviewcount" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">(후기 ${lodging.reviewCount }개)</button>
 							</span>
 							<span class="dot" aria-hedden="true">·</span>
 						</c:if>
@@ -1151,7 +1283,7 @@
 												</span>
 												<span class="mt-1">${lodging.reviewAverage }</span>
 												<span>
-													<button type="button" class="button-reviewcount">(후기 ${lodging.reviewCount }개)</button>
+													<button type="button" class="button-reviewcount" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">(후기 ${lodging.reviewCount }개)</button>
 												</span>
 											</div>
 										</c:if>
@@ -1211,16 +1343,17 @@
 										</div>
 									</div>
 									<div>	<!-- 예약 버튼(옵션을 선택할 때마다 값을 넣어주기 -->
-										<form action="" method="post">
-											<input type="hidden" name="lodging_no" value="${lodging.no }">
-											<input type="hidden" name="checkin" value="">
-											<input type="hidden" name="checkout" value="">
-											<input type="hidden" name="days" value="">
-											<input type="hidden" name="number_of_guests" value="">
-											<input type="hidden" name="totalLodgingFee" value="">
-											<input type="hidden" name="totalCleaningFee" value="">
-											<input type="hidden" name="amount" value="">
-											<button type="submit" class="booking-button">예약 가능 여부 보기</button>
+										<form id="form-booking" action="payment" method="post">
+											<input type="hidden" id="user-no" name="userNo" value="${user.no }"> <!-- 로그인이랑 연결되면 넣기${LOGINED_USER.no } -->
+											<input type="hidden" id="lodging-no" name="lodgingNo" value="${lodging.no }">
+											<input type="hidden" id="check-in" name="checkIn" value="">
+											<input type="hidden" id="check-out" name="checkOut" value="">
+											<input type="hidden" id="date" name="date" value="">
+											<input type="hidden" id="form-guest" name="guest" value="1">
+											<input type="hidden" id="total-lodging-fee" name="totalLodgingFee" value="">
+											<input type="hidden" id="total-cleaning-fee" name="totalCleaningFee" value="">
+											<input type="hidden" id="amount" name="amount" value="">
+											<button type="submit" class="booking-button">예약 하기</button>
 										</form>
 									</div>
 									<!-- 여기부터는 달력 선택이 끝나면 div를 넣는다. -->
@@ -1361,45 +1494,48 @@
 								<div class="review-box-block">
 									<div>
 										<div class="review-box-flex">
-											<div class="review-item-padding">
-												<div style="margin-bottom: 40px;">
-													<div class="review-item-top">
-														<div class="photo2" style="height: 56px; width: 56px; border-radius: 50%;">
-															<div class="photo3" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
-																<img class="photo4" src="resources/images/defaultProfile.jpg" style="object-fit: cover; vertical-align: bottom;">
+											<c:forEach var="review" items="${reviews }" begin="0" end="5">	<!-- ${reviews } -->
+												<c:if test="${review.no ne null }">
+													<div class="review-item-padding">
+														<div style="margin-bottom: 40px;">
+															<div class="review-item-top">
+																<div class="photo2" style="height: 56px; width: 56px; border-radius: 50%;">
+																	<div class="photo3" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																		<img class="photo4" src="resources/images/defaultProfile.jpg" style="object-fit: cover; vertical-align: bottom;">
+																	</div>
+																</div>
+																<div style="margin-left: 12px;">
+																	<div style="font-size: 16px; font-weight: 600;">${review.name }</div>
+																	<div style="font-size: 14px; font-weight: 400; color: #717171"><fmt:formatDate value="${review.createdDate }" pattern="yyyy년M월"/></div>
+																</div>
+															</div>
+															<div>
+																<div>
+																	<span>
+																		${review.comments }
+																	</span>
+																</div>
 															</div>
 														</div>
-														<div style="margin-left: 12px;">
-															<div style="font-size: 16px; font-weight: 600;">대섭</div>
-															<div style="font-size: 14px; font-weight: 400; color: #717171">2021년8월</div>
-														</div>
 													</div>
-													<div>
-														<div>
-															<span>
-																잘 묵고가요! 청결,위치 여러가지로 아주 만족스런 숙소입니다.
-																호스트님 연락도 바로 주시고 너무 잘묵고갑니다! 송도 방문시 재방문하고 싶어요.
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div>
-												
-											</div>
-											<div>
-												
-											</div>
-											<div>
-												
-											</div>
-											<div>
-												
-											</div>
-											<div>
-												
-											</div>
+												</c:if>
+											</c:forEach>
 										</div>
+									</div>
+								</div>
+								<div>
+									<div class="review-button-flex">
+										<div>
+											<c:if test="${lodging.reviewCount > 6 }"> <!-- ${lodging.reviewCount > 6 } -->
+												<a herf="#" class="review-all" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 ${lodging.reviewCount }개 모두 보기</a>
+											</c:if>
+										</div>
+										<div>
+											<c:if test="${bookingNo2 != 0 }">	<!-- ${bookingNo2 != null } -->
+												<a herf="#" class="review-all" style="margin-right: 78px;" id="btn-open-review-modal" data-bs-toggle="modal" data-bs-target="#reviewFormModal">후기 작성하기</a>
+											</c:if>
+										</div>
+										
 									</div>
 								</div>
 							</c:otherwise>
@@ -1410,14 +1546,105 @@
 		</div>
 		<!-- 지도 -->
 		<div class="row">
-			
+			<div class="map-border">
+				<div style="padding-top: 48px; padding-bottom: 48px;">
+					<div style="padding-bottom: 24px;">
+						<div>
+							<h2 style="font-size: 22px; font-weight: 800;">
+								호스팅 지역
+							</h2>
+						</div>
+					</div>
+					<div style="padding-bottom: 24px;">
+						<div style="font-weight: 400; font-size: 16px;">${lodging.city }, 한국</div>
+					</div>
+					<div class="map-height" id="map">	<!-- 지도 넣기 -->
+						
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- 호스트 소개 -->
-		<div class="row">
+		<div>
 			
 		</div>
+		<!-- 알아두어야 할 사항 -->
+		<div class="row">
+			<div class="rule-border">
+				<div style="padding-top: 48px; padding-bottom: 48px;">
+					<div>
+						<div style="padding-bottom: 24px;">
+							<div>
+								<h2 style="font-size: 22px; font-weight: 800;">
+									알아두어야 할 사항
+								</h2>
+							</div>
+						</div>
+						<div style="display: flex; justify-content: flex-start; flex-wrap: wrap; width: 100%;">
+							<div style="padding-left: 8px; padding-right: 8px;width: 33%; ">
+								<div style="margin-right: 10px;">
+									<div style="width: 100%;">
+										<div style="margin-bottom: 15px; font-size: 16px; font-weight: 600;">
+											숙소 이용규칙
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 체크인: 오후4:00 이후
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 체크아웃 시간: 오전 11:00
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 유아(만 2세 미만)에게 적합하지 않음
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 흡연금지
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 반려동물 동반 불가
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 파티나 이벤트 금지
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="padding-left: 8px; padding-right: 8px;width: 33%; ">
+								<div style="margin-right: 10px;">
+									<div style="width: 100%;">
+										<div style="margin-bottom: 15px; font-size: 16px; font-weight: 600;">
+											건강과 안전
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 에어비앤비의 강화된 청소 절차 준수에 동의했습니다.
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 에어비앤비의 사회적 거리 두기 및 관련 가이드라인이 적용됩니다.
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 일산화탄소 경보기 설치 여부 정보 없음
+										</div>
+										<div style="margin-bottom: 8px;">
+											* 화재경보기 설치 여부 정보 없음
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="padding-left: 8px; padding-right: 8px;width: 33%; ">
+								<div style="margin-right: 10px;">
+									<div style="width: 100%;">
+										<div style="margin-bottom: 15px; font-size: 16px; font-weight: 600;">
+											환불 정책
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
-	<!-- modal -->
+	<!-- modal 이미지 -->
 	<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-background" style="position: relative;">
@@ -1510,7 +1737,251 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- modal 리뷰 -->
+	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-review">
+				<div class="modal-contents">
+					<div class="modal-review-flex">
+						<div class="modal-review-padding">
+							<div class="modal-review-relative">
+								<section>
+									<div class="modal-review-header">
+										<div style="margin-left: -8px; margin-right: -8px;">
+											<div class="modal-review-text">
+												<h2 class="modal-review-text-font">평점 ${lodging.reviewAverage } · 후기 ${lodging.reviewCount }개</h2>
+											</div>
+										</div>
+									</div>
+									<div class="modal-review-body">
+										<div class="modal-review-left">
+											<div class="modal-review-left-flex">
+												<div class="modal-reviewAverage-box">
+													<div style="margin-bottom: 12px;">
+														<div class="modal-reviewAverage-box-flex">
+															<div style="width: 100%; font-size: 14px;">
+																청결도
+															</div>
+															<div class="modal-reviewAverage-bar">
+																<div class="bar-relative">
+																	<span class="bar-absolute" style="width: ${lodging.cleanness / 5 * 100 }%;"></span>
+																</div>
+																<span class="bar-text">${lodging.cleanness }</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-reviewAverage-box">
+													<div style="margin-bottom: 12px;">
+														<div class="modal-reviewAverage-box-flex">
+															<div style="width: 100%; font-size: 14px;">
+																정확성
+															</div>
+															<div class="modal-reviewAverage-bar">
+																<div class="bar-relative">
+																	<span class="bar-absolute" style="width: ${lodging.accuracy / 5 * 100 }%;"></span>
+																</div>
+																<span class="bar-text">${lodging.accuracy }</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-reviewAverage-box">
+													<div style="margin-bottom: 12px;">
+														<div class="modal-reviewAverage-box-flex">
+															<div style="width: 100%; font-size: 14px;">
+																의사소통
+															</div>
+															<div class="modal-reviewAverage-bar">
+																<div class="bar-relative">
+																	<span class="bar-absolute" style="width: ${lodging.communication / 5 * 100 }%;"></span>
+																</div>
+																<span class="bar-text">${lodging.communication }</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-reviewAverage-box">
+													<div style="margin-bottom: 12px;">
+														<div class="modal-reviewAverage-box-flex">
+															<div style="width: 100%; font-size: 14px;">
+																위치
+															</div>
+															<div class="modal-reviewAverage-bar">
+																<div class="bar-relative">
+																	<span class="bar-absolute" style="width: ${lodging.location / 5 * 100 }%;"></span>
+																</div>
+																<span class="bar-text">${lodging.location }</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-reviewAverage-box">
+													<div style="margin-bottom: 12px;">
+														<div class="modal-reviewAverage-box-flex">
+															<div style="width: 100%; font-size: 14px;">
+																체크인
+															</div>
+															<div class="modal-reviewAverage-bar">
+																<div class="bar-relative">
+																	<span class="bar-absolute" style="width: ${lodging.checkIn / 5 * 100 }%;"></span>
+																</div>
+																<span class="bar-text">${lodging.checkIn }</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-reviewAverage-box">
+													<div style="margin-bottom: 12px;">
+														<div class="modal-reviewAverage-box-flex">
+															<div style="width: 100%; font-size: 14px;">
+																가격 대비 만족도
+															</div>
+															<div class="modal-reviewAverage-bar">
+																<div class="bar-relative">
+																	<span class="bar-absolute" style="width: ${lodging.value / 5 * 100 }%;"></span>
+																</div>
+																<span class="bar-text">${lodging.value }</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-review-right">
+											<c:forEach var="review" items="${reviews }">	<!-- ${reviews } -->
+												<div>
+													<div style="margin-bottom: 48px;">
+														<div class="review-item-top">
+															<div class="photo2" style="height: 56px; width: 56px; border-radius: 50%;">
+																<div class="photo3" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																	<img class="photo4" src="resources/images/defaultProfile.jpg" style="object-fit: cover; vertical-align: bottom;">
+																</div>
+															</div>
+															<div style="margin-left: 12px;">
+																<div style="font-size: 16px; font-weight: 600;">${review.name }</div>
+																<div style="font-size: 14px; font-weight: 400; color: #717171"><fmt:formatDate value="${review.createdDate }" pattern="yyyy년M월"/></div>
+															</div>
+														</div>
+														<div>
+															<span style="font-size: 14px; font-weight: 400;">
+																${review.comments }
+															</span>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- modal -->
+	<div class="modal fade" id="reviewFormModal" tabindex="-1" aria-labelledby="reviewFormModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-review-flex2">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="form-review">
+							<input type="hidden" name="bookingNo" id="" value="7">	<!-- ${bookingNo2 } -->
+							<input type="hidden" name="userNo" id="" value="1001">	<!-- 로그인 유저 번호 -->
+							<input type="hidden" name="lodgingNo" id="" value="${lodging.no }">
+							<div class="row px-2 mb-2" style="display: flex; flex-wrap: wrap;">
+								<div style="width: 33%;">
+									<label class="" for="cleanness">청결도</label>
+									<select id="cleanness" name="cleanness">
+										<option value="5" selected>5점</option>
+										<option value="4">4점</option>
+										<option value="3">3점</option>
+										<option value="2">2점</option>
+										<option value="1">1점</option>
+									</select>
+								</div>
+								<div style="width: 33%;">
+									<label class="" for="accuracy">정확성</label>
+									<select id="accuracy" name="accuracy">
+										<option value="5" selected>5점</option>
+										<option value="4">4점</option>
+										<option value="3">3점</option>
+										<option value="2">2점</option>
+										<option value="1">1점</option>
+									</select>
+								</div>
+								<div style="width: 33%;">
+									<label class="" for="communication">의사소통</label>
+									<select id="communication" name="communication">
+										<option value="5" selected>5점</option>
+										<option value="4">4점</option>
+										<option value="3">3점</option>
+										<option value="2">2점</option>
+										<option value="1">1점</option>
+									</select>
+								</div>
+							</div>
+							<div class="row px-2 mb-2" style="display: flex; flex-wrap: wrap;">
+								<div style="width: 33%;">
+									<label class="" for="location">위치</label>
+									<select id="location" name="location">
+										<option value="5" selected>5점</option>
+										<option value="4">4점</option>
+										<option value="3">3점</option>
+										<option value="2">2점</option>
+										<option value="1">1점</option>
+									</select>
+								</div>
+								<div style="width: 33%;">
+									<label class="" for="checkIn">체크인</label>
+									<select id="checkIn" name="checkIn">
+										<option value="5" selected>5점</option>
+										<option value="4">4점</option>
+										<option value="3">3점</option>
+										<option value="2">2점</option>
+										<option value="1">1점</option>
+									</select>
+								</div>
+								<div style="width: 33%;">
+									<label class="" for="value">가격대비 만족도</label>
+									<select id="value" name="value">
+										<option value="5" selected>5점</option>
+										<option value="4">4점</option>
+										<option value="3">3점</option>
+										<option value="2">2점</option>
+										<option value="1">1점</option>
+									</select>
+								</div>
+							</div>
+							<div class="row px-2">
+								<textarea rows="10" class="form-control" id="review-content" name="comment" placeholder="내용을 입력하세요"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="btn-post-review">등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+		
 </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1faae7df692fc8fd9a922684cd0361c8&libraries=services,clusterer,drawing"></script>
 <script>
 
 	$( document ).ready(function() {
@@ -1518,8 +1989,12 @@
 		var list = JSON.parse('${json}');
 		console.log(list);
 		
-		var value = $("input[name=number_of_guests]").attr('value');
-		console.log(value);
+		var ksksksks = "${user.no }";
+		console.log(ksksksks);
+		console.log("제발되어라 배가 너무 고프다");
+		
+		//var value = $("input[name=number_of_guests]").attr('value');
+		//console.log(value);
 		//var adult = parseInt($(".adult").text());
 		//var guest = parseInt($("#guest").text());
 		//$("#guest").text(guest+1);
@@ -1647,7 +2122,7 @@
 					selected[firstClicked.year] = {};
 					selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
 					// 첫번째 선택한 날짜를 sticky부분에 표현하기
-					$(".check-in-date").text(firstClicked.year+"."+firstClicked.month+"."+firstClicked.date);
+					$(".check-in-date").text(firstClicked.year+"."+(firstClicked.month+1)+"."+firstClicked.date);
 					$(".check-out-date").text("날짜 추가");
 					$(".heading-section").text("체크아웃 날짜를 선택하세요.");
 					$("#booking-top").text("요금을 확인하려면 날짜를 입력하세요.");
@@ -1665,13 +2140,23 @@
 					var secondClickDateObj = new Date(secondClicked.year, 
 												secondClicked.month, 
 												secondClicked.date);
-					$(".check-out-date").text(secondClicked.year+"."+secondClicked.month+"."+secondClicked.date);
+					$(".check-out-date").text(secondClicked.year+"."+(secondClicked.month+1)+"."+secondClicked.date);
 					
 					// 몇박인지 계산하는 법
 					var btMs = secondClickDateObj.getTime() - firstClickDateObj.getTime();
-					var btDay = btMs / (1000*60*60*24);
+					var btDay;
+					if (btMs < 0) {
+						btDay = (btMs / (1000*60*60*24)) * -1;
+						console.log("작다")
+					} else {
+						btDay = (btMs / (1000*60*60*24));
+						console.log("크다")
+					}
+					//var btDay = (btMs / (1000*60*60*24));
 					var city = $(".button-map").text();
 					$(".heading-section").text(city+"에서"+btDay+"박");
+					
+					
 					// 첫번째 클릭보다 뒤에 날짜를 클릭한 경우
 					if (firstClickDateObj > secondClickDateObj) {
 						// 두번째 클릭을 첫번째로 바꾸고, 첫번째 클릭을 두번째 클릭으로 바꾼다.
@@ -1684,6 +2169,7 @@
 						// 첫번째 선택한 날짜를 sticky부분에 표현하기(다른경우)
 						$(".check-in-date").text(firstClicked.year+"."+firstClicked.month+"."+firstClicked.date);
 						$(".check-out-date").text(secondClicked.year+"."+secondClicked.month+"."+secondClicked.date);
+						
 					// 같은 날짜를 클릭할 경우
 					} else if (firstClickDateObj.getTime() ==
 								secondClickDateObj.getTime()) {
@@ -1705,9 +2191,10 @@
 					// input에 checkin, checkout 넣기
 					var checkin = $(".check-in-date").text();
 					var checkout = $(".check-out-date").text();
-					console.log(checkout);
-					$("input[name=checkin]").attr('value', checkin);
-					$("input[name=checkout]").attr('value', checkout);
+					$("input[name=checkIn]").attr('value', checkin);
+					$("input[name=checkOut]").attr('value', checkout);
+					$("input[name=date]").attr('value', btDay);
+					console.log(btDay);
 					
 					// 여기부터 내가 만든 부분(가격을 화면에 표시하기 위해서)
 					var totalPrice = 0;
@@ -1773,7 +2260,8 @@
 					// 숙박일
 					$(".booking-fee").prepend(makeDiv(btDay, totalPrice, firstMontTotalCleaningPrice));
 					// input에 총 가격 넣기
-					$("input[name=amount]").attr('value', totalPrice * btDay+firstMontTotalCleaningPrice);
+					$("input[name=amount]").attr('value', ((totalPrice * btDay)+firstMontTotalCleaningPrice+(totalPrice * btDay * 0.1)));
+					
 					
 					var length = firstClicked.year == secondClicked.year && firstClicked.month == secondClicked.month?1:0;
 					console.log(totalPrice);
@@ -2102,6 +2590,12 @@
 			var d = opendate.substr(8,2);
 			return new Date(y,m-1,d);
 		}
+		function parse1(check) {
+			var y = opendate.substr(0,4);
+			var m = opendate.substr(5,2);
+			var d = opendate.substr(8,2);
+			return new Date(y,m,d);
+		}
 		
 		function btDay(firstDate, secondDate) {
 			var btMs = secondDate.getTime() - firstDate();
@@ -2221,7 +2715,7 @@
 			$(".adult").text(adult+1);
 			var guest2 = parseInt($("#guest").text());
 			
-			$("input[name=number_of_guests]").attr('value', guest2);
+			$("input[name=guest]").attr('value', guest2);
 			
 			if (guest2 == maxGuest) {
 				$(".button-plus").prop('disabled', true);
@@ -2243,7 +2737,7 @@
 			$("#guest").text(guest-1);
 			$(".adult").text(adult-1);
 			var guest2 = parseInt($("#guest").text());
-			$("input[name=number_of_guests]").attr('value', guest2);
+			$("input[name=guest]").attr('value', guest2);
 			
 			if (guest2 == minGuest) {
 				$(".button-plus").prop('disabled', false);
@@ -2263,7 +2757,7 @@
 			$("#guest").text(guest+1);
 			$(".child").text(child+1);
 			var guest2 = parseInt($("#guest").text());
-			$("input[name=number_of_guests]").attr('value', guest2);
+			$("input[name=guest]").attr('value', guest2);
 			
 			if (guest2 == maxGuest) {
 				$(".button-plus").prop('disabled', true);
@@ -2304,19 +2798,121 @@
 			row += "<div class='fee'>₩"+totalPrice.toLocaleString()+" x "+btDay+"박</div>";
 			row += "<div class='fee'>₩"+(totalPrice * btDay).toLocaleString()+"</div>";
 			row += "</div>";
-			row += "<div class='Cleaning-fee'>";
-			row += "<div class='fee'>청소비</div>";
-			row += "<div class='fee'>₩"+firstMontTotalCleaningPrice.toLocaleString()+"</div>";
-			row += "</div>";
+			
+			if (firstMontTotalCleaningPrice != 0) {
+				row += "<div class='Cleaning-fee'>";
+				row += "<div class='fee'>청소비</div>";
+				row += "<div class='fee'>₩"+firstMontTotalCleaningPrice.toLocaleString()+"</div>";
+				row += "</div>";
+			}
+			
+			row += "<div class='service-fee'>";
+			row += "<div class='fee'>숙박세와 수수료</div>";
+			row += "<div class='fee'>₩"+(totalPrice * btDay * 0.1).toLocaleString()+"</div>";
 			row += "</div>";
 			row += "<div class='booking-total-price'>";
 			row += "<div class='total-price'>";
 			row += "<div class='price'>총 합계</div>";
-			row += "<div class='price'>₩"+(totalPrice * btDay+firstMontTotalCleaningPrice).toLocaleString()+"</div>";
+			row += "<div class='price'>₩"+((totalPrice * btDay)+firstMontTotalCleaningPrice+(totalPrice * btDay * 0.1)).toLocaleString()+"</div>";
 			row += "</div>";
 			row += "</div>";
 			return row;
 		}
+		
+		// 예약하기 버튼을 눌렀을 경우
+		$("#form-booking").submit(function() {
+			var userNo = $("#user-no").val();
+			if (!userNo) {
+				alert("로그인이 필요한 서비스입니다.");
+				return false;
+			}
+			
+			var checkIn = $("#check-in").val();
+			if (!checkIn) {
+				alert("달력에서 예약할 날짜를 선택해 주세요.");
+				return false;
+			}
+			
+			var checkOut = $("#check-out").val();
+			if (!checkOut) {
+				alert("달력에서 예약할 날짜를 선택해 주세요.");
+				return false;
+			}
+			return true;
+		})
+		
+		var todoModal = new bootstrap.Modal(document.getElementById("reviewFormModal"), {
+		keyboard: false
+		});
+		
+		$("#btn-open-review-modal").click(function() {
+			// 5점으로 바꾸는 코드 넣기
+			$("#review-content").val("");
+		});
+		
+		// 모달창에서 등록 버튼을 클릭했을 때
+		$("#btn-post-review").click(function() {
+		
+			$.ajax({
+				type: "POST",
+				url: "reviews/add",
+				data: $("#form-review").serialize(),									// category=외근&title=노동부 방문&writer=홍길동 쿼리스트링형태로 서버로 전달된다.
+				dataType: 'json',
+				success: function(todo) {
+					console.log("성공성공");
+				},
+				complete: function() {
+					todoModal.hide();
+				}
+			});
+		})
+		// 위도
+		var lat = "${lodging.latitude }";
+		console.log(lat);
+		// 경도
+		var lng = "${lodging.longitude }";
+		console.log(lat);
+		// 주소
+		var address = "${lodging.address }"
+		var name = "${lodging.name }"
+		
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+		   //center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		   center: new kakao.maps.LatLng(lat, lng),
+		   level: 3 //지도의 레벨(확대, 축소 정도)
+		};
+		
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(address, function(result, status) {
+
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+name+'</div>'
+		        });
+		        infowindow.open(map, marker);
+
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+		});    
+			
 		
 	});
 </script>

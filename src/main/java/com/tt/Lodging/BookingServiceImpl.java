@@ -41,4 +41,51 @@ public class BookingServiceImpl implements BookingService {
 		 
 		return amenityList;
 	}
+	 
+	 @Override
+	public void booking(BookingVO booking) {
+		 // 예약을 하고
+		bookingDao.insertBooking(booking);
+		// 예약한 날짜를 price 테이블에 'Y'라고 표시한다.
+		bookingDao.updatePrice(booking);
+	}
+	 
+	 @Override
+	public BookingVO getBookingNoByBooking(BookingVO booking) {
+		BookingVO bookingNo = bookingDao.getBookingNoByBooking(booking);
+		 
+		return bookingNo;
+	}
+	 
+	@Override
+	public void insertPayment(PaymentVO payment) {
+		bookingDao.insertPayment(payment);
+		
+	}
+	
+	@Override
+	public List<ReviewDTO> getReview(int lodgingNo) {
+		List<ReviewDTO> reviewList = bookingDao.getReviewByLodgingNo(lodgingNo);
+		
+		return reviewList;
+	}
+	
+	@Override
+	public BookingVO getBookingNoByUserNo(BookingVO booking) {
+		BookingVO bookingNo = bookingDao.getBookingNoByUserNo(booking);
+		
+		return bookingNo;
+	}
+	
+	@Override
+	public void insertReview(ReviewVO review) {
+		bookingDao.insertReview(review);
+		
+	}
+	
+	@Override
+	public void updateLodging(LodgingVO lodging) {
+		bookingDao.updateLodging(lodging);
+		
+	}
 }
