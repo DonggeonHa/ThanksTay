@@ -12,7 +12,8 @@ public class LodgingAmtServiceImpl implements LodgingAmtService {
 
 	@Autowired
 	CommonDao commonDao;
-	
+	@Autowired
+	LodgingAmtDao amtDao;
 	/**
 	 * 복수의 편의시설 codeContent를 받아서 조건에 해당하는 commonCode들을 반환 
 	 */
@@ -27,7 +28,6 @@ public class LodgingAmtServiceImpl implements LodgingAmtService {
 	 */
 	@Override
 	public void registerAmt(AmenityListVO amenity) {
-		// TODO Auto-generated method stub
-		
+		amtDao.insertAmt(amenity);
 	}
 }

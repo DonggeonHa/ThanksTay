@@ -228,20 +228,21 @@ public class LodgingController {
 			System.out.println("편의시설:"+amenity);
 		}
 		List<AmenityListVO> amenities = new ArrayList<AmenityListVO>();
-		
-		//amenityList에 해당하는 code들 불러오기 => Q1. amtCodes를 먼저 뽑아놓고 사용하려 했으나 xml파일의 forEach 에러 ->질문
+		AmenityListVO amenity = new AmenityListVO();
+		//amenityList에 해당하는 code들 불러오기 => Q1. 파라미터로 배열을 전달하여 amtCodes를 먼저 뽑아놓고 사용하려 했으나 xml파일의 forEach 에러 ->질문
 //		List<String> amtCodes = lodgingAmtService.getAmtCodesByContents(amenityList);
 		
 		//for문 돌면서 ldgNo 추가, amtCode추가.
 		for(int i=0; i<amenityList.size();i++) {
-			amenities.get(i).setLodgingNo(ldgNo);
 //			for문 마다 db접속됨 -> Q1 해결 시 코드 수정 필요
 			String amtCode=commonService.getCommonCodeByContent(amenityList.get(i));
-			amenities.get(i).setCode(amtCode);
-			System.out.println(amenities.get(i));
-		}
+			amenity.setCode(amtCode);
+			amenity.setLodgingNo(ldgNo);
+			System.out.println("저장될편의시설:"+amenity);
+			lodgingAmtService.registerAmt(amenity);	// 편의시설테이블 제약조건 수정필요, amenity_no추가해야함
+		} 
+		//amenityList로
 		
-		//amenityList로 
 		return "redirect:hosting";
 	}
 	
