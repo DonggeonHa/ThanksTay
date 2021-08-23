@@ -17,7 +17,6 @@
 						<img src="${pageContext.request.contextPath}/resources/images/upload/${UserVO.picture}" style="width: 200px; height: 200px;">
 					</c:otherwise>
 				</c:choose>
-
 			</td>
 		</tr>
 		<tr>
