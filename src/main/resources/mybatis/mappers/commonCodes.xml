@@ -39,14 +39,11 @@
 			,updateddate	
 		FROM	
 			thxtay_common_code
-		<where>
-			<!-- commoncode는 됨 -->
-			<!-- Q. 기대값: LDG01을 부모코드로 갖는 LDG0101, 0102, 0103, BUT 아무값도 조회가 안됨, developer에서는 동작 확인-->
+		WHERE
 			parentcode=#{value}
-		</where> 
 	</select>
 	
-	<!-- 왜 안되는지? -->
+	<!-- Q2. 왜 안되는지? -->
 	<select id="getCmCodesByContents" resultType="java.util.List">
 		SELECT
 			commoncode 		as commonCode

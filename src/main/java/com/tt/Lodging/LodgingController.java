@@ -167,7 +167,7 @@ public class LodgingController {
 		/* 데스크톱 파일저장 주소 */
 		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
 		/* 노트북주소 파일저장 주소*/
-		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
+//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
 		uploadPath+"resources/images/lodgings",
 		filename)));
 		
@@ -229,6 +229,7 @@ public class LodgingController {
 		}
 		List<AmenityListVO> amenities = new ArrayList<AmenityListVO>();
 		AmenityListVO amenity = new AmenityListVO();
+		//Q2
 		//amenityList에 해당하는 code들 불러오기 => Q1. 파라미터로 배열을 전달하여 amtCodes를 먼저 뽑아놓고 사용하려 했으나 xml파일의 forEach 에러 ->질문
 //		List<String> amtCodes = lodgingAmtService.getAmtCodesByContents(amenityList);
 		

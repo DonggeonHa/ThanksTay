@@ -107,6 +107,10 @@ body {
 				<p>게스트가 숙소를 예약하면 여기에 표시됩니다.</p>
 			</div>
 		</div>
+		<div class="todayBox">
+			<div class="todayInnerbox">
+			</div>
+		</div>
 	</section>
 </div>
 <script src="https://kit.fontawesome.com/f421352664.js"
