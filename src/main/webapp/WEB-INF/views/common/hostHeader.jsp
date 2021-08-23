@@ -1,16 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/f421352664.js"
-	crossorigin="anonymous"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <style>
 /* CSS초기화 찾아보기 */
 
@@ -43,8 +32,9 @@ a {
 }
 
 .navbar_logo i, a {
-	color: purple;
+	color: #222222 !important;
 	font-weight: bolder;
+	text-decoration-line: none !important;
 }
 
 .navbar_menu {
@@ -82,7 +72,7 @@ a {
 	.navbar {
 		flex-direction: column;
 		align-items: flex-start;
-		padding: 8px, 24px;
+		padding: 8px 24px;
 		position: relative;
 	}
 	.navbar_logo {
@@ -115,7 +105,7 @@ a {
 }
 /* hostHeader CSS */
 .btn-secondary{
-	color: purple;
+	color: #222222;
 	font-weight:bold;
 	border: none;
 	background-color:white;
@@ -126,7 +116,7 @@ a {
 <header>
 	<nav class="navbar">
 		<div class="navbar_logo">
-			<a href="home"><i class="fab fa-airbnb"></i></a>
+			<a href="/hosting"><i class="fab fa-airbnb"></i></a>
 		</div>
 		<ul class="navbar_menu">
 			<li><a href="">투데이</a></li>
@@ -138,7 +128,7 @@ a {
 					id="dropdownMenuButton2" data-bs-toggle="dropdown"
 					aria-expanded="false">메뉴</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-					<li><a class="dropdown-item" href="/host/filtering" style="z-index: 10">숙소</a></li>
+					<li><a class="dropdown-item" href="/host/listings" style="z-index: 10">숙소</a></li>
 					<li><a class="dropdown-item" href="/host/transactionhome" style="z-index: 10">대금수령내역</a></li>
 					<li><a class="dropdown-item" href="#" style="z-index: 10">숙소등록하기</a></li>
 				</ul>
