@@ -81,6 +81,110 @@
             and A.amenity_code = C.commoncode
 	</select>
 	
+	<insert id="insertBooking" parameterType="com.tt.Lodging.BookingVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select book_seq.nextval from dual
+		</selectKey>
+		INSERT INTO thxtay_booking
+            (booking_no, user_no, lodging_no, booking_check_in, booking_check_out,
+            booking_date, booking_guest, booking_total_lodging_fee, booking_total_cleaning_fee, booking_amount)
+        VALUES
+            (#{no}, #{userNo}, #{lodgingNo}, #{checkIn}, #{checkOut}, #{date}, #{guest},
+            #{totalLodgingFee}, #{totalCleaningFee}, #{amount})
+	</insert>
 	
+	<update id="updatePrice" parameterType="com.tt.Lodging.BookingVO">
+		UPDATE
+    		thxtay_price
+		SET
+    		price_isbooked = 'Y',
+   			price_updated_date = sysdate
+		WHERE
+    		lodging_no = #{lodgingNo}
+   			and price_open_date >= #{checkIn}
+    		and #{checkOut} >= price_open_date
+	</update>
+	
+	<select id="getBookingNoByBooking" parameterType="com.tt.Lodging.BookingVO" resultType="com.tt.Lodging.BookingVO">
+		SELECT
+			booking_no				no
+		FROM
+			thxtay_booking
+		WHERE
+			lodging_no = #{lodgingNo}
+			and booking_check_in = #{checkIn}
+			and booking_check_out = #{checkOut}
+			and user_no = #{userNo}
+	</select>
+	
+	<insert id="insertPayment" parameterType="com.tt.Lodging.PaymentVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select payment_seq.nextval from dual
+		</selectKey>
+		INSERT INTO thxtay_payment
+            (payment_no, booking_no, payment_method)
+        VALUES
+            (#{no}, #{bookingNo}, #{method})
+	</insert>
+	
+	<select id="getReviewByLodgingNo" parameterType="int" resultType="com.tt.Lodging.ReviewDTO">
+		SELECT
+			R.review_no					no,
+			R.user_no					userNo,
+			R.lodging_no				lodgingNo,
+			R.booking_no				bookingNo,
+			R.review_created_date		createdDate,
+			R.review_updated_date		updatedDate,
+			R.review_comment			comments,
+			R.review_isupdated			isUpdated,
+			U.user_name					name
+		FROM
+			thxtay_review R, thxtay_user U
+		WHERE
+			R.lodging_no = #{value}
+			and R.user_no = U.user_no
+		order by R.review_created_date asc
+	</select>
+	
+	<select id="getBookingNoByUserNo" parameterType="com.tt.Lodging.BookingVO" resultType="com.tt.Lodging.BookingVO">
+		SELECT
+			booking_no				no
+		FROM
+			thxtay_booking
+		WHERE
+			lodging_no = #{lodgingNo}
+			and user_no = #{userNo}
+	</select>
+	
+	
+	<insert id="insertReview" parameterType="com.tt.Lodging.ReviewVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select review_seq.nextval from dual
+		</selectKey>
+		INSERT INTO thxtay_review
+            (review_no, lodging_no, booking_no, user_no, review_created_date, review_comment, review_stars,
+             review_cleanness, review_communication, review_check_in, review_accuracy, review_location, review_value)
+        VALUES
+            (#{no}, #{lodgingNo}, #{bookingNo}, #{userNo}, sysdate, #{comment}, #{stars}, #{cleanness}, #{communication}, 
+            #{checkIn}, #{accuracy}, #{location}, #{value})
+	</insert>
+	
+	
+	<update id="updateLodging" parameterType="com.tt.Lodging.LodgingVO">
+		UPDATE
+    		thxtay_lodging
+		SET
+    		lodging_review_count			= #{reviewCount},
+    		lodging_review_average			= #{reviewAverage},
+    		lodging_cleanness				= #{cleanness},
+    		lodging_communication			= #{communication},
+    		lodging_check_in				= #{checkIn},
+    		lodging_accuracy				= #{accuracy},
+    		lodging_location				= #{location},
+    		lodging_value					= #{value},
+    		lodging_status					= #{status}
+		WHERE
+    		lodging_no = #{no}
+	</update>
 	
 </mapper>
