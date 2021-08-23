@@ -44,17 +44,16 @@
 	</select>
 	
 	<!-- Q2. 왜 안되는지? -->
-	<select id="getCmCodesByContents" resultType="java.util.List">
+	<select id="getCmCodesByContents" resultType="string"> <!-- 파라미터값은 @param을 사용해서 리스트를 받아옴 -->
 		SELECT
 			commoncode 		as commonCode
 		FROM
 			thxtay_common_code
 		WHERE
 			codecontent in
-			<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+			<foreach collection="list" item="item" index="index" open="(" separator="," close=")"><!-- list자리에  -->
 				#{item}
 			</foreach>
-			
 	</select>
 	
 	<!-- <select id="getAllCommonCodes" useCache="true" resultType="string">
