@@ -30,7 +30,7 @@
                 </div>
                 <form action="/withdrawal" method="post" id="Yes">
                     <div class="d-grid gap-2">
-                        <input type="hidden" value="${LOGINED_USER.no}" name="no">
+                        <input type="hidden" value="${sessionScope.LOGINED_USER.no}" name="no">
                         <button type="submit" class="btn btn-secondary btn-lg" style="font-size: 1.1em;" id="btn-withdrawal">예</button>
                     </div>
                 </form>

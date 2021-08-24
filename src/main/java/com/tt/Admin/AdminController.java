@@ -1,15 +1,15 @@
 package com.tt.Admin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tt.Common.CommonCodeVO;
 import com.tt.User.DeletedUserVO;
 import com.tt.User.UserVO;
+import com.tt.web.utils.SessionUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,10 +22,7 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping(value = "/admin/index")
-    public String Menu() {
-
-        return "admin/Aindex";
-    }
+    public String Menu() { return "admin/Aindex"; }
 
     @RequestMapping(value = "/admin/userList")
     public String UserList1() {
@@ -35,6 +32,15 @@ public class AdminController {
     @RequestMapping(value = "/admin/deletedUserList")
     public String DeletedUserList1() {
         return "admin/DeletedUserList";
+    }
+
+    @RequestMapping(value = "/admin/commonCodeList")
+    public String CommonCodeList(Model model) {
+        List<CommonCodeVO> parentCode = adminService.getParentCode();
+
+        model.addAttribute("parentCode", parentCode);
+
+        return "admin/CommonCodeList";
     }
 
     //produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다
@@ -99,5 +105,28 @@ public class AdminController {
         }
 
         return str;
+    }
+
+    @RequestMapping(value = "/admin/getCommonCode", produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String CommonCodeList2() {
+        List<CommonCodeVO> commoncodeList = adminService.getCommonCode();
+        String str = "";
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(commoncodeList);
+        } catch (Exception e) {
+            System.out.println("first() mapper : " + e.getMessage());
+        }
+
+        return str;
+    }
+
+    @PostMapping("/admin/insertCommonCode")
+    public String insertCommonCode(CommonCodeVO commonCodeVO) {
+        adminService.insertCommonCode(commonCodeVO);
+
+        return "redirect:/admin/commonCodeList";
     }
 }

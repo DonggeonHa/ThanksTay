@@ -28,7 +28,7 @@ public interface UserDao {
 
     void updateProfile(UserVO user);
 
-    void updateWithdrawal(UserVO user);
+    void updateWithdrawal(int userNo);
 
     void insertDeletedUser(DeletedUserVO duser);
 

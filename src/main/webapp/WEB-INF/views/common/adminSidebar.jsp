@@ -125,7 +125,7 @@
 				회원관리
 				<ul>
 					<li><a href="/admin/userList">일반 회원관리</a></li>
-					<li><a href="#">탈퇴한 회원관리</a></li>
+					<li><a href="/admin/deletedUserList">탈퇴한 회원관리</a></li>
 				</ul>
 			</li>
 			<li class="main text-white">
@@ -144,7 +144,7 @@
 			<li class="main text-white">
 				공통코드관리
 				<ul>
-					<li><a href="#">공통코드</a></li>
+					<li><a href="/admin/commonCodeList">공통코드</a></li>
 				</ul>
 			</li>
 		</ul>

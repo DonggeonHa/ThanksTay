@@ -94,8 +94,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateWithdrawal(UserVO user) {
-		userDao.updateWithdrawal(user);
+	public void updateWithdrawal(int userNo) {
+		userDao.updateWithdrawal(userNo);
 	}
 
 	@Override

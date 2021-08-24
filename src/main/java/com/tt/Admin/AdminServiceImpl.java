@@ -1,5 +1,6 @@
 package com.tt.Admin;
 
+import com.tt.Common.CommonCodeVO;
 import com.tt.User.DeletedUserVO;
 import com.tt.User.UserDao;
 import com.tt.User.UserVO;
@@ -24,7 +25,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public void insertCommonCode(CommonCodeVO commonCodeVO) {
+        adminDao.insertCommonCode(commonCodeVO);
+    }
+
+    @Override
     public List<DeletedUserVO> getDeletedUsers() {
         return adminDao.getDeletedUsers();
+    }
+
+    @Override
+    public List<CommonCodeVO> getCommonCode() {
+        return adminDao.getCommonCode();
+    }
+
+    @Override
+    public List<CommonCodeVO> getParentCode() {
+        return adminDao.getParentCode();
     }
 }

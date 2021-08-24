@@ -27,13 +27,15 @@ import java.util.UUID;
 @Controller
 public class UserController {
 
-	@Autowired UserService userService;
+	@Autowired
+	UserService userService;
 
 	@ExceptionHandler(UserRegisterException.class)
 	public String handleUserRegisterException(UserRegisterException ex, Model model) {
 		model.addAttribute("error", ex);
 		return "form";
 	}
+
 	@ExceptionHandler(LoginException.class)
 	public String handleLoginException(LoginException ex, Model model) {
 		model.addAttribute("error", ex);
@@ -146,7 +148,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout() {
 
-		UserVO user = (UserVO)SessionUtils.getAttribute("LOGINED_USER");
+		UserVO user = (UserVO) SessionUtils.getAttribute("LOGINED_USER");
 
 		SessionUtils.destroySession();
 		return "redirect:home";
@@ -189,7 +191,7 @@ public class UserController {
 
 
 		} catch (Exception e) {
-			System.out.println("파일업로드 실패!"+ e);
+			System.out.println("파일업로드 실패!" + e);
 		}
 
 		retVal.put("res", "OK");
@@ -197,28 +199,16 @@ public class UserController {
 	}
 
 	@PostMapping("/withdrawal")
-	@ResponseBody
-	public Map<String, Object> withdrawal(@LoginUser UserVO userVO) {
-		Map<String, Object> retVal = new HashMap<String, Object>();
+	public String withdrawal(int no) {
+		userService.updateWithdrawal(no);
 
-		userService.updateWithdrawal(userVO);
-
-		retVal.put("res", "OK");
-		retVal.put("users", userVO);
-		return retVal;
-	}
-
-	@RequestMapping("/moveDeletedUser")
-	@ResponseBody
-	public Map<String, Object> moveDeletedUser(@RequestParam(name = "user", required = false) UserVO userVO) {
-		Map<String, Object> retVal = new HashMap<String, Object>();
-		System.out.println("잘 변경됌 ?" + userVO.getDeleted());
+		UserVO user = userService.getUserByNo(no);
 
 		DeletedUserVO duser = new DeletedUserVO();
-		BeanUtils.copyProperties(userVO, duser);
+		BeanUtils.copyProperties(user, duser);
 		userService.insertDeletedUser(duser);
 
-		retVal.put("res", "OK");
-		return retVal;
+		SessionUtils.destroySession();
+		return "redirect:/home";
 	}
 }

@@ -1,5 +1,6 @@
 package com.tt.Admin;
 
+import com.tt.Common.CommonCodeVO;
 import com.tt.User.DeletedUserVO;
 import com.tt.User.UserVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,5 +13,8 @@ public interface AdminDao {
     /* 일반회원관리 */
     List<UserVO> getUsers();
     List<DeletedUserVO> getDeletedUsers();
+    List<CommonCodeVO> getCommonCode();
+    List<CommonCodeVO> getParentCode();
     UserVO getUserByNo(int userNo);
+    void insertCommonCode(CommonCodeVO commonCodeVO);
 }

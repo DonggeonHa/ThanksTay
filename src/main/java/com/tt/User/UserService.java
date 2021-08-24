@@ -36,7 +36,7 @@ public interface UserService {
 
     UserVO getUserByName(String name);
 
-    void updateWithdrawal(UserVO user);
+    void updateWithdrawal(int userNo);
 
     void insertDeletedUser(DeletedUserVO duser);
 

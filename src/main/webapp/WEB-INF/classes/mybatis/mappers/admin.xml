@@ -66,20 +66,42 @@
 
 	<select id="getDeletedUsers" resultMap="deletedUserMap">
 		SELECT
-			RNUM,
-			USER_NO 					as no,
+				RNUM,
+				USER_NO 					as no,
 				USER_EMAIL 					as email,
 				USER_NAME 					as name,
 		TO_CHAR(USER_BIRTH, 'YYYY-MM-DD') 	as birth,
 				USER_PHONE 					as phone,
 				USER_ISHOST 				as isHost
 		FROM (SELECT
-			ROW_NUMBER() OVER (ORDER BY USER_NO ASC) as RNUM,
-			USER_NO, USER_EMAIL, USER_NAME, USER_BIRTH, USER_PHONE, USER_ISHOST
-			FROM
-			(SELECT
-			*
-			FROM
-			THXTAY_DELETED_USER))
+					ROW_NUMBER() OVER (ORDER BY USER_NO ASC) as RNUM,
+					USER_NO, USER_EMAIL, USER_NAME, USER_BIRTH, USER_PHONE, USER_ISHOST
+			  FROM
+					(SELECT	* FROM THXTAY_DELETED_USER))
 	</select>
+	<select id="getCommonCode" resultType="com.tt.Common.CommonCodeVO">
+		SELECT
+				PARENTCODE 					as parentCode,
+				COMMONCODE 					as commonCode,
+				CODECONTENT 				as codeContent,
+				IMPORTANCE 					as importance,
+				CREATEDDATE 				as createdDate,
+				UPDATEDDATE 				as updatedDate
+		FROM
+				thxtay_common_code
+	</select>
+
+	<select id="getParentCode" resultType="com.tt.Common.CommonCodeVO">
+		SELECT
+				PARENTCODE 					as parentCode
+		FROM
+				thxtay_common_code
+	</select>
+
+	<insert id="insertCommonCode" parameterType="com.tt.Common.CommonCodeVO">
+		INSERT INTO thxtay_common_code
+		(parentcode, commoncode, codecontent, importance)
+		VALUES
+			(#{parentCode}, #{commonCode}, #{codeContent}, #{importance})
+	</insert>
 </mapper>
