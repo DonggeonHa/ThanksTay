@@ -13,7 +13,8 @@ import lombok.ToString;
 @ToString
 public class TransactionHistoryDTO {
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	private int trNo;
+	@JsonFormat(pattern = "yyyy-MM-dd" ,timezone = "Asia/Seoul")
 	private Date createdDate;
 	private String userName;
 	private String bankAccount;
