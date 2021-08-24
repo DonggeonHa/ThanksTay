@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <title>Transaction Register Step1</title>
 <style type="text/css">
 .container {
@@ -60,9 +55,8 @@ h1 {
 	justify-content: space-around;
 }
 </style>
-</head>
-</head>
-<body>
+
+
 <div class="container">
 <input type="hidden" id="user-name" value="${user.name }">
 <input type="hidden" id="user-birth" value="${user.birth }">
@@ -80,28 +74,28 @@ h1 {
 			<div id="form-info" class="section-field needs-validation">
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationWeb01" class="field-description ms-1">이름</label>
+						<label class="field-description ms-1">이름</label>
 					 	<input id="input-name"type="text" class="form-control mt-2 ms-1 border-0" name="name">
 					</div>
 					<span id="warning-name" class="invalid-feedback">정보에 등록된 본인 이름을 정확히 기입해 주세요.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationServer03" class="field-description ms-1">이메일 주소</label>
+						<label class="field-description ms-1">이메일 주소</label>
 					 	<input id="input-email" type="text" class="form-control mt-2 ms-1 border-0" name="email">
 					</div>
 					<span id="warning-email" class="invalid-feedback">이메일 영역은 필수영역 입니다.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationServer04" class="field-description ms-1">이메일 주소 다시 입력</label>
+						<label class="field-description ms-1">이메일 주소 다시 입력</label>
 					 	<input id="input-email-check" type="text" class="form-control mt-2 ms-1 border-0">
 					</div>
 					<span id="warning-email-check" class="invalid-feedback">이메일이 일치하지 않습니다 정확히 입력해 주세요.</span>
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationServer04" class="field-description ms-1">생년 월일</label>
+						<label class="field-description ms-1">생년 월일</label>
 					 	<input id="input-date" type="date" class="form-control mt-2 ms-1 border-0" name="birth" pattern="\d{4}-\d{2}-\d{2}">
 					</div>
 					<span id="warning-date" class="invalid-feedback">본인의 생년 월일과 일치하지 않습니다.</span>
@@ -117,7 +111,7 @@ h1 {
 			<div id="form-certification" class="section-field">
 				<div class="m-4">
 					<div>
-						<label for="validationServer01" class="ms-1 d-block">휴대폰 번호</label>
+						<label class="ms-1 d-block">휴대폰 번호</label>
 						<div class="input-group row">
 							<select class="form-select" style="width:10%;">
 								<option selected>국가를 번호를 지정해주세요.</option>
@@ -147,7 +141,7 @@ h1 {
 			<div id="form-bank" class="section-field">
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationWeb01" class="field-description ms-1">통화</label>
+						<label class="field-description ms-1">통화</label>
 						<select id="select-currency"class="form-select" style="width:10%;" name="currency">
 							<option selected>KOR(￦)</option>
 						</select>
@@ -156,7 +150,7 @@ h1 {
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationWeb02" class="field-description ms-1">결제수단</label>
+						<label class="field-description ms-1">결제수단</label>
 						<select id="select-payways" class="form-select" style="width:10%;" name="payment">
 							<option selected></option>
 						<c:forEach var="code" items="${accountCodes }">
@@ -168,7 +162,7 @@ h1 {
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationServer03" class="field-description ms-1">은행 선택</label>
+						<label class="field-description ms-1">은행 선택</label>
 						<select id="select-bank" class="form-select" style="width:10%;" name="bankCode">
 								<option selected>은행을 선택하세요.</option>
 						<c:forEach var="code" items="${bankCodes }">
@@ -180,7 +174,7 @@ h1 {
 				</div>
 				<div class="position-relative m-4">
 					<div class="input-group input-group-lg border border-grey">
-						<label for="validationServer04" class="field-description ms-1">계좌 번호</label>
+						<label class="field-description ms-1">계좌 번호</label>
 					 	<input id="input-account"type="text" class="form-control mt-2 ms-1 border-0" name="account">
 					</div>
 					<span id="warning-account" class="invalid-feedback">계좌번호를 입력해주세요.</span>
@@ -191,9 +185,7 @@ h1 {
 		</form>
 	</div>
 </div>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <!-- JavaScript Bundle with Popper -->
 <script type="text/javascript">
@@ -407,6 +399,3 @@ var date = $.trim($('#input-date').val())
 	*/
 })
 </script>
-</body>
-</body>
-</html>

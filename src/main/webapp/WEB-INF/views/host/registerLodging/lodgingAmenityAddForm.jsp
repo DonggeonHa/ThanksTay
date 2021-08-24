@@ -1,24 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous">
-	
-</script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/f421352664.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f421352664.js"	crossorigin="anonymous"></script>
 
 <style>
 /* 공통 CSS */
@@ -171,134 +154,133 @@ body {
 
 
 <title>새 숙소 등록하기</title>
-</head>
 
-<body>
-	<div class="container-fluid">
-		<div class="wrapper">
-			<div class="left-area">
-				<a href="home" class="go-main"><i class="fab fa-airbnb"
-					style="color: white; padding: 10px;"></i></a>
-				<p>숙소 정보를 입력해주세요!</p>
-			</div>
-			<div class="right-area">
-				<div class="form-wrapper">
-					<div class="right-area-top">
-						<div class="save-info">
-							<div>
-								<button class="save-info-items">도움말</button>
-							</div>
-							<div>
-								<button id="save-btn" class="save-info-items">저장 및 나가기</button>
-								<form id="save-data" method="post">
-								<c:if test="${lodgingRegistering.status ne null }">
-									<input type="hidden" name="no" value="${lodgingRegistering.no }">
-									<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
-								</c:if>
-								</form>
-							</div>
+
+
+<div class="container-fluid">
+	<div class="wrapper">
+		<div class="left-area">
+			<a href="home" class="go-main"><i class="fab fa-airbnb"
+				style="color: white; padding: 10px;"></i></a>
+			<p>숙소 정보를 입력해주세요!</p>
+		</div>
+		<div class="right-area">
+			<div class="form-wrapper">
+				<div class="right-area-top">
+					<div class="save-info">
+						<div>
+							<button class="save-info-items">도움말</button>
 						</div>
-					</div>
-					<div id="ldg-step1"
-						style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center; ">
-						<div class="scroll-wrapper">
-							<form id="form-register" style="width: 50%;" method="post"
-								novalidate="novalidate">
-								<div class="amt-area">
-									<div class="amt-category" >
-										<h2 style="font-weight:bold">편의시설</h2>
-										<div class="btn-wrapper">
-										<c:forEach var="amenity" items="${amnTypes }">
-											<label style="display:flex; "><input type="checkbox"/>${amenity.codeContent }</label>
-										</c:forEach>
-										</div>
-									</div>
-								</div>
-								<div class="amt-area">
-									<div class="amt-category"  id="checked-category">
-										
-									</div>
-								</div>
+						<div>
+							<button id="save-btn" class="save-info-items">저장 및 나가기</button>
+							<form id="save-data" method="post">
+							<c:if test="${lodgingRegistering.status ne null }">
+								<input type="hidden" name="no" value="${lodgingRegistering.no }">
+								<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
+							</c:if>
 							</form>
 						</div>
 					</div>
+				</div>
+				<div id="ldg-step1"
+					style="height: 80%; display: flex; align-items: center; flex-direction: column; justify-content: center; ">
+					<div class="scroll-wrapper">
+						<form id="form-register" style="width: 50%;" method="post"
+							novalidate="novalidate">
+							<div class="amt-area">
+								<div class="amt-category" >
+									<h2 style="font-weight:bold">편의시설</h2>
+									<div class="btn-wrapper">
+									<c:forEach var="amenity" items="${amnTypes }">
+										<label style="display:flex; "><input type="checkbox"/>${amenity.codeContent }</label>
+									</c:forEach>
+									</div>
+								</div>
+							</div>
+							<div class="amt-area">
+								<div class="amt-category"  id="checked-category">
 
-					<div style="height: 9%">
-						<div class="progress" style="height: 3px;">
-							<div class="progress-bar" role="progressbar" aria-valuenow="40"
-								aria-valuemin="0" aria-valuemax="10"
-								style="width: 50%; background-color: black; height: 2px;">
+								</div>
 							</div>
-						</div>
-						<div class="nextback-box">
-							<div>
-								<button class="nextback-items" id="next"
-									style="color: white; background-color: black">다음</button>
-							</div>
-							<div>
-								<button class="nextback-items" id="prev"
-									style="text-decoration: underline;">뒤로</button>
-							</div>
-						</div>
-
+						</form>
 					</div>
+				</div>
+
+				<div style="height: 9%">
+					<div class="progress" style="height: 3px;">
+						<div class="progress-bar" role="progressbar" aria-valuenow="40"
+							aria-valuemin="0" aria-valuemax="10"
+							style="width: 50%; background-color: black; height: 2px;">
+						</div>
+					</div>
+					<div class="nextback-box">
+						<div>
+							<button class="nextback-items" id="next"
+								style="color: white; background-color: black">다음</button>
+						</div>
+						<div>
+							<button class="nextback-items" id="prev"
+								style="text-decoration: underline;">뒤로</button>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-	var checked=$('.amt-category :checked').parent('label').text();
-	$('.amt-category input').on("click",function(){
-		//먼저 초기화
-		$("#checked-category").empty();
-		//클릭시마다 체크박스 each로 돌면서 append
-		$(".amt-category input").each(function(){
-			if($(this).prop('checked')==true){
-				var codeContent = $(this).parent().text();
-				$.ajax({
-					url:"/lodgingAmenityAdd"
-					,type:"post"
-					,data:
-					{"codeContent":codeContent}
-					,dataType:"json"
-					,success:function(retVal){
-						$("#checked-category").append("<h5 style='border-top:1px black dotted; padding-top:20px; font-weight:bold'>"+codeContent+"</h5>")
-						for(i in retVal){
-							$("#checked-category").append("<div class='amt-category'><label class='btn-wrapper'><input type='checkbox'>"+retVal[i].codeContent+"</input></label></div>")
-						} 
+</div>
+<script>
+var checked=$('.amt-category :checked').parent('label').text();
+$('.amt-category input').on("click",function(){
+	//먼저 초기화
+	$("#checked-category").empty();
+	//클릭시마다 체크박스 each로 돌면서 append
+	$(".amt-category input").each(function(){
+		if($(this).prop('checked')==true){
+			var codeContent = $(this).parent().text();
+			$.ajax({
+				url:"/lodgingAmenityAdd"
+				,type:"post"
+				,data:
+				{"codeContent":codeContent}
+				,dataType:"json"
+				,success:function(retVal){
+					$("#checked-category").append("<h5 style='border-top:1px black dotted; padding-top:20px; font-weight:bold'>"+codeContent+"</h5>")
+					for(i in retVal){
+						$("#checked-category").append("<div class='amt-category'><label class='btn-wrapper'><input type='checkbox'>"+retVal[i].codeContent+"</input></label></div>")
 					}
-					,error:function(){
-						alert(codeContent)
-					}
-				})
-			}
-		})
-		
-	})
-	
-	$("#save-btn").click(function(){
-		/* #checked-category의 모든 input태그 중 checked를 선택해서 saveTemp3로 보내줄 것 */
-		amenityList = new Array();
-		$("#checked-category input").each(function(){
- 			if($(this).prop('checked')==true){
-				amenityList.push($(this).parent().text())
-			}
-		})
-		for(i in amenityList){
-			$("#save-data").append("<input name='selected-items' type='hidden' value="+amenityList[i]+">")
+				}
+				,error:function(){
+					alert(codeContent)
+				}
+			})
 		}
-		$("#save-data").attr("action","saveTemp3").submit();
-	});
-	 
-	$("#prev").click(function() {
-		history.back();
 	})
 
-	$("#next").click(function() {
-		$("#form-register").attr("action","lodgingImgAdd")
-		$("#form-register").submit();
-	})
+})
 
-	</script>
-</body>
-</html>
+$("#save-btn").click(function(){
+	/* #checked-category의 모든 input태그 중 checked를 선택해서 saveTemp3로 보내줄 것 */
+	amenityList = new Array();
+	$("#checked-category input").each(function(){
+		if($(this).prop('checked')==true){
+			amenityList.push($(this).parent().text())
+		}
+	})
+	for(i in amenityList){
+		$("#save-data").append("<input name='selected-items' type='hidden' value="+amenityList[i]+">")
+	}
+	$("#save-data").attr("action","saveTemp3").submit();
+});
+
+$("#prev").click(function() {
+	history.back();
+})
+
+$("#next").click(function() {
+	$("#form-register").attr("action","lodgingImgAdd")
+	$("#form-register").submit();
+})
+
+</script>
+

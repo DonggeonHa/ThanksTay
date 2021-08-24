@@ -1,11 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <title>Transaction Home</title>
 <style type="text/css">
 .table>:not(caption)>*>* {
@@ -49,10 +43,8 @@ button {
 }
 
 </style>
-</head>
-<body>
+
 <div class="container p-0" >
-<input id="trNo" name="" class="d-hidden" value="${transHistory.no}">	
 	<div id="container-top" class="row">
 		<h1>대금 수령 내역</h1>
 		<div class="nav row col-md-7 border-bottom border-light gap-3">
@@ -104,8 +96,7 @@ button {
 		</div>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -291,5 +282,3 @@ function dofiltering() {
 					})
 */	
 </script>
-</body>
-</html>

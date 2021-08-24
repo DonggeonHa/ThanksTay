@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
 
-<script src="https://kit.fontawesome.com/f421352664.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f421352664.js"	crossorigin="anonymous"></script>
 <style>
 
 /* 공통 CSS */
@@ -123,79 +112,68 @@ body {
 	padding-bottom: 20px;
 }
 </style>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <title>숙소 등록 상태</title>
-</head>
-<body>
-	<div class="container-fluid">
-		<div class="lodgingEnrollment">
-			<div class="leftArea">
-				<a href="home" class="go-main"><i class="fab fa-airbnb"
-					style="color: white; padding: 10px;"></i></a>
-				<div class="welcomeMessage">${loginedUser.name }님환영합니다</div>
-			</div>
-			<div class="lodgingStatus" style="position: absloute;">
-				<div class="lodgingStatusWrapper">
-					<div class="chooseStatus" style="padding-bottom: 50px;">
-						<c:forEach var="lodging" items="${lodgings }">
-							<c:if test="${lodging.status eq 'LDG0301' }">
-								<c:set var="lodgingRegistering" value="${lodging}" />
-							</c:if>
-						</c:forEach>
-						<c:if test="${lodgingRegistering.status eq 'LDG0301'}">
-							<h2 style="font-weight: bold">숙소 등록 완료하기</h2>
-							<div class="chooseStatus">
-							<a href="/lodgingTypeAdd">
-								<button class="chooseStatusBtn" type="button" role="radio"
-									aria-checked="false">
-									<p id="lodgingRegistering">${lodgingRegistering.name }</p>
-								</button>
-							</a>
-							</div>
-							<div class="chooseStatus">
-							<a href="/lodgingAmenityAdd">
-								<button class="chooseStatusBtn" type="button" role="radio"
-									aria-checked="false">
-									<p id="lodgingRegistering">숙소 편의시설 등록하기</p>
-								</button>
-							</a>
-							</div>
-							<div class="chooseStatus">
-							<a href="/lodgingImgAdd">
-								<button class="chooseStatusBtn" type="button" role="radio"
-									aria-checked="false">
-									<p id="lodgingRegistering">숙소 사진 업로드하기</p>
-								</button>
-							</a>
-							</div>
+
+<div class="container-fluid">
+	<div class="lodgingEnrollment">
+		<div class="leftArea">
+			<a href="home" class="go-main"><i class="fab fa-airbnb"
+				style="color: white; padding: 10px;"></i></a>
+			<div class="welcomeMessage">${loginedUser.name }님환영합니다</div>
+		</div>
+		<div class="lodgingStatus" style="position: absloute;">
+			<div class="lodgingStatusWrapper">
+				<div class="chooseStatus" style="padding-bottom: 50px;">
+					<c:forEach var="lodging" items="${lodgings }">
+						<c:if test="${lodging.status eq 'LDG0301' }">
+							<c:set var="lodgingRegistering" value="${lodging}" />
 						</c:if>
-					</div>
-					<h2 style="font-weight: bold">숙소 등록 시작하기</h2>
-					<div class="chooseStatus">
-						<a href="/lodgingTypeAdd"> <!-- 등록중인 숙소가 있을 때 새로운 숙소 등록하기 누를 시 => 등록중인 숙소 지우고 새로 시작 -->
+					</c:forEach>
+					<c:if test="${lodgingRegistering.status eq 'LDG0301'}">
+						<h2 style="font-weight: bold">숙소 등록 완료하기</h2>
+						<div class="chooseStatus">
+						<a href="/lodgingTypeAdd">
 							<button class="chooseStatusBtn" type="button" role="radio"
 								aria-checked="false">
-								<p>새로운 숙소 등록하기</p>
+								<p id="lodgingRegistering">${lodgingRegistering.name }</p>
 							</button>
 						</a>
-					</div>
-					<div class="chooseStatus">
+						</div>
+						<div class="chooseStatus">
+						<a href="/lodgingAmenityAdd">
+							<button class="chooseStatusBtn" type="button" role="radio"
+								aria-checked="false">
+								<p id="lodgingRegistering">숙소 편의시설 등록하기</p>
+							</button>
+						</a>
+						</div>
+						<div class="chooseStatus">
+						<a href="/lodgingImgAdd">
+							<button class="chooseStatusBtn" type="button" role="radio"
+								aria-checked="false">
+								<p id="lodgingRegistering">숙소 사진 업로드하기</p>
+							</button>
+						</a>
+						</div>
+					</c:if>
+				</div>
+				<h2 style="font-weight: bold">숙소 등록 시작하기</h2>
+				<div class="chooseStatus">
+					<a href="/lodgingTypeAdd"> <!-- 등록중인 숙소가 있을 때 새로운 숙소 등록하기 누를 시 => 등록중인 숙소 지우고 새로 시작 -->
 						<button class="chooseStatusBtn" type="button" role="radio"
 							aria-checked="false">
-							<p>기존 숙소 수정하기</p>
+							<p>새로운 숙소 등록하기</p>
 						</button>
-					</div>
+					</a>
+				</div>
+				<div class="chooseStatus">
+					<button class="chooseStatusBtn" type="button" role="radio"
+						aria-checked="false">
+						<p>기존 숙소 수정하기</p>
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		
-	</script>
-</body>
-</html>
+</div>

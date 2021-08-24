@@ -2,7 +2,6 @@ package com.tt.User;
 
 import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
-import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.KakaoRegisterForm;
 import com.tt.web.form.UserRegisterForm;
 import com.tt.web.utils.SessionUtils;

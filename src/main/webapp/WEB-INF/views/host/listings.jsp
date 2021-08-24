@@ -1,11 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title>Listings</title>
 <!-- 여기를 먼저? -->
 <style type="text/css">
@@ -32,9 +25,7 @@ h1 {
 	width: unset;
 }
 </style>
-</head>
-<body>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>	<!-- 이거 설명..? 어떤 버전이여도 상관 없는지.. -->
+
 <div class="container">
 	<main class="pt-5">
 		<div class="mb-5">
@@ -322,5 +313,3 @@ $(function() {
 	
 })
 </script>
-</body>
-</html>
