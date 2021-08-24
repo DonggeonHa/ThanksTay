@@ -3,7 +3,11 @@ package com.tt.Lodging;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +32,9 @@ import com.tt.Common.CommonDao;
 import com.tt.Common.CommonService;
 import com.tt.Host.HostMainController;
 import com.tt.Host.HostService;
+import com.tt.Host.PriceDto;
+import com.tt.Host.PriceService;
+import com.tt.Host.PriceVO;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -36,6 +43,9 @@ import com.google.gson.GsonBuilder;
 import com.tt.Common.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.LodgingRegisterForm;
+import com.tt.web.form.PriceRegisterForm;
+
+import freemarker.template.SimpleDate;
 
 @Controller
 public class LodgingController {
@@ -53,6 +63,8 @@ public class LodgingController {
 	LodgingImgService lodgingImgService;
 	@Autowired
 	LodgingAmtService lodgingAmtService;
+	@Autowired
+	PriceService priceService;
 
 	@GetMapping("/lodgingTypeAdd")
 	public String lodgingAddForm(@LoginUser UserVO user, Model model) {
@@ -201,16 +213,71 @@ public class LodgingController {
 		return retVal;
 	}
 
+//	@PostMapping("/saveTemp")
+//	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm) {
+//		logger.info("saveTemp 실행");
+//		LodgingVO lodging = new LodgingVO();
+//		
+//		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
+//		if (!lrForm.getStatus().isEmpty()) {
+//			BeanUtils.copyProperties(lrForm, lodging);
+//			lodgingService.updateLodging(lodging);
+//			
+//			System.out.println("업데이트된 숙소의 정보" + lodging);
+//			System.out.println("업데이트 실행");
+//			return "redirect:hosting";
+//		}
+//		
+//		// 등록상태가 null일 경우 등록상태:등록중 으로 초기화 먼저 실행 후 숙소등록 작업 실행
+//		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
+//		System.out.println("lrForm:"+lrForm);
+//		BeanUtils.copyProperties(lrForm, lodging);
+//		lodging.setUserNo(user.getNo());
+//		lodgingService.registerLodging(lodging);
+//		
+//		System.out.println("저장된 숙소의 정보:" + lodging);
+//		return "redirect:hosting";
+//	}
 	@PostMapping("/saveTemp")
-	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm) {
+	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm, PriceRegisterForm prForm
+			,@RequestParam("no") int lodgingNo
+			,@RequestParam("startDate") Date startDate
+			,@RequestParam("endDate") Date endDate) {
 		logger.info("saveTemp 실행");
-		LodgingVO lodging = new LodgingVO();
+		
+		PriceDto ldgPrice=new PriceDto();
+		Calendar cal= Calendar.getInstance();
+		Calendar cal2= Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 
+		cal.setTime(startDate);
+		cal2.setTime(endDate);
+		
+		int difference = Math.abs(cal2.get(Calendar.DATE)-cal.get(Calendar.DATE));
+		
+		for(int i=0;i<difference+1;i++) {
+			cal.add(Calendar.DATE, +1);
+			String dateStr= sdf.format(cal.getTime());
+			prForm.setOpenDate(dateStr);
+			prForm.setLodgingNo(lodgingNo);
+			BeanUtils.copyProperties(prForm, ldgPrice);
+			//하나씩 insert 해야함
+			System.out.println("prForm에 저장될 lodgingNo"+lodgingNo);
+			System.out.println("숙소의 요금등록정보"+ldgPrice);
+			System.out.println(sdf.format(cal.getTime()));
+			priceService.registerLdgPrice(ldgPrice);
+		}
+		
+		System.out.println("시작일"+startDate);
+		System.out.println("종료일"+endDate);
+		
+		LodgingVO lodging = new LodgingVO();
 		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
 		if (!lrForm.getStatus().isEmpty()) {
 			BeanUtils.copyProperties(lrForm, lodging);
 			lodgingService.updateLodging(lodging);
-
+			
+			
 			System.out.println("업데이트된 숙소의 정보" + lodging);
 			System.out.println("업데이트 실행");
 			return "redirect:hosting";
@@ -218,13 +285,20 @@ public class LodgingController {
 
 		// 등록상태가 null일 경우 등록상태:등록중 으로 초기화 먼저 실행 후 숙소등록 작업 실행
 		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
+		System.out.println("lrForm:"+lrForm);
 		BeanUtils.copyProperties(lrForm, lodging);
 		lodging.setUserNo(user.getNo());
 		lodgingService.registerLodging(lodging);
 
+		if(prForm!=null) {
+		PriceVO priceVo = new PriceVO();
+		System.out.println("생성");
+		}
+		System.out.println("숙소의 요금등록정보"+prForm);
 		System.out.println("저장된 숙소의 정보:" + lodging);
 		return "redirect:hosting";
 	}
+	
 	@PostMapping("/saveTemp3")
 	public String saveTemp3(@LoginUser UserVO user, @RequestParam("selected-items") List<String> amenityList, @RequestParam("no") int ldgNo) {
 		System.out.println("유저번호:"+user.getNo());

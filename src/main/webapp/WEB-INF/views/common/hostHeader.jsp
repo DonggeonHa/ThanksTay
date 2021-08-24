@@ -116,7 +116,7 @@ a {
 <header>
 	<nav class="navbar">
 		<div class="navbar_logo">
-			<a href="/hosting"><i class="fab fa-airbnb"></i></a>
+			<a href="/home"><i class="fab fa-airbnb"></i></a>
 		</div>
 		<ul class="navbar_menu">
 			<li><a href="">투데이</a></li>

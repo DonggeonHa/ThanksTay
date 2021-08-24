@@ -197,7 +197,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<div class="mb-3" style="text-align: left">
 								<label class="form-label">우편번호</label> 
 								<input type="text" class="form-control" style="width: 100%" 
-								id="member_post" name="postNo" autocomplete="off"	value="${lodgingRegistering.city }"
+								id="member_post" name="postNo" autocomplete="off" value="${lodgingRegistering.postNo }"
 								onclick="findAddr()" />
 							</div>
 							<div class="mb-3" style="text-align: left">
