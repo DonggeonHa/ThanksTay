@@ -9,15 +9,12 @@ import com.tt.Lodging.LodgingVO;
 import com.tt.User.UserVO;
 
 public interface TransactionHistoryService {
-
-
-	//List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception;
 	
-	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
-
+	TransactionRegisterVO getTransactionHistoryByUserNo(int userNo) throws Exception;
+	
 	List<TransactionHistoryDTO> getAllTransactionHistoryByUserNo(int userNo) throws Exception;
 
-	TransactionRegisterVO getTransactionHistoryByUserNo(int userNo) throws Exception;
+	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
 
 	void excelDownload(UserVO user, TransactionHistoryDTO download, HttpServletResponse response) throws Exception;
 

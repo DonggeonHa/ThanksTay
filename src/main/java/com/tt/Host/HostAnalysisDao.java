@@ -12,20 +12,21 @@ import com.tt.Common.CommonCodeVO;
 
 @Mapper
 public interface HostAnalysisDao {
-	/* TransactionHistoryVO / TransactionRegisterVO */
+	/* TransactionHistoryDTO / TransactionRegisterVO */
 	//대금 은행 등록(TransactionRegisterVO)
 	void insertBank(TransactionRegisterVO register);
-	//대금 리스트로 출력(TransactionHistoryDTO) & 엑셀 다운로드
-	List<TransactionHistoryDTO> getAllTransactionHistoryForExcel(int userNo) throws Exception;
-	//대금 리스트로 출력(TransactionHistoryDTO)
-	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
-
-	List<TransactionHistoryDTO> getAllTransactionHistoryByUserNo(int userNo) throws Exception;
-	
+	//대금 리스트로 출력(TransactionHistoryDTO) int
 	TransactionRegisterVO getTransactionHistoryByUserNo(int userNo) throws Exception;
-	
+	//대금 리스트로 출력(TransactionHistoryDTO) int
+	List<TransactionHistoryDTO> getAllTransactionHistoryByUserNo(int userNo) throws Exception;
+	//대금 리스트로 출력(TransactionHistoryDTO) Map
+	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception;
+	//대금 모든 숙소 리스트로 출력
 	List<LodgingVO> getAllLodgingsByUserNo(int userNo) throws Exception;
 	
+	
+	//공통코드
+	List<CommonCodeVO> getCommonCodeByPntCode(String code) throws Exception;
 	
 	/* EarningsVO / BookingVO */
 	//수입 출력(EarningsVO)
@@ -38,8 +39,5 @@ public interface HostAnalysisDao {
 	List<BookingVO> getAllBookingsByUserNo(int userNo) throws Exception;
 	
 	List<UserVO> getAllUsers() throws Exception;
-	
-	//공통코드
-	List<CommonCodeVO> getCommonCodeByPntCode(String code) throws Exception;
 	
 }

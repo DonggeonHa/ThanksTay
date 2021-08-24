@@ -118,22 +118,18 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 				e.printStackTrace();
 			}
 	}
-
-	@Override
-	public 	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception {
-		return hostAnalysisDao.getAllTransactionHistoryByHashMap(map);
-	}
-
 	@Override
 	public TransactionRegisterVO getTransactionHistoryByUserNo(int userNo) throws Exception {
 		return hostAnalysisDao.getTransactionHistoryByUserNo(userNo);
 	}
-	
 	@Override 
 	public List<TransactionHistoryDTO> getAllTransactionHistoryByUserNo(int userNo) throws Exception {
 		return hostAnalysisDao.getAllTransactionHistoryByUserNo(userNo);
 	}
-	
+	@Override
+	public 	List<TransactionHistoryDTO> getAllTransactionHistoryByHashMap(Map<String, Object> map) throws Exception {
+		return hostAnalysisDao.getAllTransactionHistoryByHashMap(map);
+	}
 	@Override
 	public List<LodgingVO> getAllLodgingsByUserNo(int userNo) throws Exception {
 		return hostAnalysisDao.getAllLodgingsByUserNo(userNo);

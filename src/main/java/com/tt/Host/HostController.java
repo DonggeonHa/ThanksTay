@@ -96,24 +96,26 @@ public class HostController {
 		List<LodgingVO> lodgings = transactionHistoryService.getAllLodgingsByUserNo(user.getNo());
 		model.addAttribute("lodgings", lodgings);
 		
+		System.out.println("-----------------------------------");
+		System.out.println(lodgings);
 		return "host/transactionhome";
 	}
 	/* 호스트 대금 Ajax (메뉴 > 대금수령내역) */
 	@GetMapping("/host/historyJson")
 	@ResponseBody
 	public List<TransactionHistoryDTO> historyJson(@LoginUser UserVO user,
-		@RequestParam("bankAccount") String bankAccount,
-		@RequestParam("lodgingNo") String lodgingName,
+		@RequestParam("lodging") int lodgingNo,
 		@DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate,
 		@DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate) throws Exception {
 		
-//		Map<String, Object>map = new HashedMap<String, Object>();
-//		map.put("bankAccount", bankAccount);
-//		map.put("lodgingNo", lodgingName);
-//		map.put("startMonth", startMonth);
-//		map.put("endMonth", endMonth);
+		Map<String, Object>map = new HashedMap<String, Object>();
+		map.put("userNo", user.getNo());
+		map.put("lodgingNo", lodgingNo);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		List<TransactionHistoryDTO> transHistory = transactionHistoryService.getAllTransactionHistoryByHashMap(map);
 		
-		List<TransactionHistoryDTO> transHistory = transactionHistoryService.getAllTransactionHistoryByUserNo(user.getNo());
+		System.out.println(transHistory);
 		
 		return transHistory;
 	}

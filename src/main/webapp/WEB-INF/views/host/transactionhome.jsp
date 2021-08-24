@@ -52,6 +52,7 @@ button {
 </head>
 <body>
 <div class="container p-0" >
+<input id="trNo" name="" class="d-hidden" value="${transHistory.no}">	
 	<div id="container-top" class="row">
 		<h1>대금 수령 내역</h1>
 		<div class="nav row col-md-7 border-bottom border-light gap-3">
@@ -61,15 +62,13 @@ button {
 		</div>
 		<div id="first-select-box" class="row gap-3">
 			<select id="bank-box" class="col rounded" name="bankAccount">
-				<option value="" selected disabled>모든 대금 수령 방법</option>
-					<c:forEach var="history" items="${transHistory}">
-						<option>${history.bankAccount}</option>
-					</c:forEach>				
+				<option value="" selected>모든 대금 수령 방법</option>
+					<option value="${transHistory.account}">${transHistory.account}</option>
 			</select>
 			<select id="lodging-box" class="col rounded" name="lodgingName">
-					<option>숙소를 선택해 주세요.</option>
+					<option>모든 숙소</option>
 					<c:forEach var="lodging" items="${lodgings}">
-						<option>${lodging.lodgingName}</option>
+						<option value="${lodging.no }">${lodging.name}</option>
 					</c:forEach>	
 			</select>
 			<select id="stt-box" class="col rounded searching-date" name="startDate"></select>
@@ -80,7 +79,7 @@ button {
 		<form id="list-div" action="/host/transactionhomeexcel" method="post" enctype="multipart/form-data">
 			<h3 class="d-inline fs-6"><strong>수령 완료 금액:</strong></h3>
 			<input type="submit" value="CSV 다운로드" class="d-inline fs-6"/>
-			<div class="border border-light shadow p-3 mb-5 bg-body rounded">
+			<div id="trans-box" class="border border-light shadow p-3 mb-5 bg-body rounded">
 				<div class="row mb-3">
 					<div class="col">
 						<div id="table-box"class="p-2">
@@ -112,144 +111,129 @@ button {
 $(function() {
 	var option = '';
 	 
-	option += '<option value="">날짜를 선택해 주세요</option>'
 	var twoMonthsAgoText = moment().subtract(2, 'months').format('YYYY년 M월')
-	var twoMonthsAgoValue = moment().subtract(2, 'months').format('YYYY-MM')
+	var twoMonthsAgoValue = moment().subtract(2, 'months').format('YYYY-MM')+'-01'
 	option += '<option value="'+twoMonthsAgoValue+'">'+twoMonthsAgoText+'</option>'
 	
 	var oneMonthAgoText = moment().subtract(1, 'months').format('YYYY년 M월')
-	var oneMonthAgoValue = moment().subtract(1, 'months').format('YYYY-MM')
+	var oneMonthAgoValue = moment().subtract(1, 'months').format('YYYY-MM')+'-01'
 	option += '<option value="'+oneMonthAgoValue+'">'+oneMonthAgoText+'</option>'
 	
 	var todayText = moment().format('YYYY년 M월')
-	var todayValue = moment().format('YYYY-MM')
+	var todayValue = moment().format('YYYY-MM')+'-01'
 	option += '<option value="'+todayValue+'">'+todayText+'</option>'
 
 	
 	var oneMonthLaterText = moment().add(1, 'months').format('YYYY년 M월')
-	var oneMonthLaterValue = moment().add(1, 'months').format('YYYY-MM')
+	var oneMonthLaterValue = moment().add(1, 'months').format('YYYY-MM')+'-01'
 	option += '<option value="'+oneMonthLaterValue+'">'+oneMonthLaterText+'</option>'
 
 	var twoMonthsLaterText = moment().add(2, 'months').format('YYYY년 M월')
-	var twoMonthsLaterValue = moment().add(2, 'months').format('YYYY-MM')
+	var twoMonthsLaterValue = moment().add(2, 'months').format('YYYY-MM')+'-01'
 	option += '<option value="'+twoMonthsLaterValue+'">'+twoMonthsLaterText+'</option>'
 
 	$('#stt-box, #end-box').html(option)
-		
-	var bank = $('#bank-box').val()
+	
+$('#lodging-box option').hide()
+/*
+$('[name=bankAccount]').change(function() {
+	var bankAccount = $('#bank-box').val()
+	dofiltering(bankAccount)
+})*/
+
+$('[name=lodgingName]').change(function() {
+	dofiltering()
+})
+$('[name=startDate]').change(function() {
+	dofiltering()
+})
+$('[name=endDate]').change(function() {
+	dofiltering()
+})
+
+$('[name=bankAccount]').change(function() {
+
+	if(!$(this).val()) {
+		$('#lodging-box').prop('selectedIndex', 0)
+		$('#lodging-box option:gt(0)').hide()
+		$('#table-box #empty').show()
+		$('.table').hide()
+	} else {
+		$('#lodging-box option').show()
+		//$('#lodging-box option:eq(0)').attr('selected', 'false')
+	}
+})
+function dofiltering() {
 	var no = $('#lodging-box').val()
-	var startMonth = $('#start-box').val()
+	var startMonth = $('#stt-box').val()
 	var endMonth = $('#end-box').val()
 	$.ajax({
-			
 			url:'/host/historyJson',
 			dataType: 'json',
-			data: {bankAccount: bank,
-				   lodging: no,
+			data: {lodging: no,
 				   startDate: startMonth,
 				   endDate: endMonth},
 			success: 
 				function(filtering) {
+					$('#table-box #table-body').empty()
+					$.each(filtering, function(index, history) {
+						$('#table-box #empty').hide()
+						$('#register-trans').hide()
+						$('table').show()
+						$('#container-body').css('width', '1200px')
+						$('#table-box #table-thead').html('<tr id="list-head"></tr>')
+						$('#list-head').append('<th>created date</th>')
+						$('#list-head').append('<th>user name</th>')
+						$('#list-head').append('<th>bank account</th>')
+						$('#list-head').append('<th>booking no</th>')
+						$('#list-head').append('<th>lodging name</th>')
+						$('#list-head').append('<th>booking date</th>')
+						$('#list-head').append('<th>check-in</th>')
+						$('#list-head').append('<th>check-out</th>')
+						$('#list-head').append('<th>lodging fee</th>')
+						$('#list-head').append('<th>cleaning fee</th>')
+						$('#list-head').append('<th>host fee</th>')
+						$('#list-head').append('<th>paid out</th>')
 
-					$.each(filtering.list, function(index, history) {
-						console.log(history)
-						var row = '<option>'+history.bankAccount+'</option>'
-						$('#bank-box').append(row)
-						$('#lodging-box option').hide()
-						
-						$('[name=bankAccount]').change(function() {
-							var bankAccount = history.bankAccount
-							var selectBA = $('#bank-box').val()
-							if(selectBA != bankAccount) {
-								$('#lodging-box').html('<option>현재 계좌에 등록된 숙소가 없습니다.</option>')
-								$('#lodging-box option').hide()
-							} else {
-								$('#lodging-box').html('<option>모든 숙소</option>')
-								var bookingStatus = list.bookingStatus
-								if(bookingStatus = 'BKG0104') {
-									$('#lodging-box option').show()
-								}
-								
-							}
-						})
+						var row = '<tr>'
+						row += '<td>'+history.createdDate+'</td>'
+						row += '<td>'+history.userName+'</td>'
+						row += '<td>'+history.bankAccount+'</td>'
+						row += '<td>'+history.bookingNo+'</td>'
+						row += '<td>'+history.lodgingName+'</td>'
+						row += '<td>'+history.bookingDate+'</td>'
+						row += '<td>'+history.checkIn+'</td>'
+						row += '<td>'+history.checkOut+'</td>'
+						row += '<td>'+history.lodgingFee+'</td>'
+						row += '<td>'+history.cleaningFee+'</td>'
+						row += '<td>'+history.hostFee+'</td>'
+						row += '<td>'+history.paidOut+'</td>'
+						row += '</tr>'
+						$('#table-box #table-body').append(row)
 							
-						function doFiltering() {
-							var selectBankAccount = $('#bank-box').val()
-							var selectLodgingName = $('#lodging-box').val()
-							var selectStartedDate = $('#stt-box').val()
-							var selectEndDate = $('#end-box').val()
-							var lodgingName = history.lodgingName
-							var createdDate = history.createdDate
-							var bankAccount = history.bankAccount
-							
-								if(bankAccount == selectBankAccount && lodgingName == selectLodgingName &&
-									selectStartedDate <= createdDate && createdDate <= selectEndDate) {
-									$.each(filtering.list, function(index, history) {
-										$('#table-box #empty').hide()
-										$('#register-trans').hide()
-										$('table').show()
-										$('#container-body').css('width', '1200px')
-										$('#table-box #table-thead').html('<tr id="list-head"></tr>')
-										$('#list-head').append('<th>created date</th>')
-										$('#list-head').append('<th>user name</th>')
-										$('#list-head').append('<th>bank account</th>')
-										$('#list-head').append('<th>booking no</th>')
-										$('#list-head').append('<th>lodging name</th>')
-										$('#list-head').append('<th>booking date</th>')
-										$('#list-head').append('<th>check-in</th>')
-										$('#list-head').append('<th>check-out</th>')
-										$('#list-head').append('<th>lodging fee</th>')
-										$('#list-head').append('<th>cleaning fee</th>')
-										$('#list-head').append('<th>host fee</th>')
-										$('#list-head').append('<th>paid out</th>')
-			
-										var row = '<tr>'
-										$('#table-box #table-body').html('<td></td>')
-										row += '<td>'+history.createdDate+'</td>'
-										row += '<td>'+history.userName+'</td>'
-										row += '<td>'+history.bankAccount+'</td>'
-										row += '<td>'+history.bookingNo+'</td>'
-										row += '<td>'+history.lodgingName+'</td>'
-										row += '<td>'+history.bookingDate+'</td>'
-										row += '<td>'+history.checkIn+'</td>'
-										row += '<td>'+history.checkOut+'</td>'
-										row += '<td>'+history.lodgingFee+'</td>'
-										row += '<td>'+history.cleaningFee+'</td>'
-										row += '<td>'+history.hostFee+'</td>'
-										row += '<td>'+history.paidOut+'</td>'
-										$('#table-box #table-body').append(row)
-									})
-								} else {
-										$('#table-box #empty').show()
-										$('table').hide()
-								}
-								
-					
-						}
-						$('[name=lodgingName]').change(function() {
-							doFiltering()
-						})
-						$('[name=startDate]').change(function() {
-							doFiltering()
-						})
-						$('[name=endDate]').change(function() {
-							doFiltering()
-						})
 					})
-					
 			}
 		})
-//	}	
+	}
 	
-	//$('#first-select-box select').change(function() {
-	//	var value = $(this).val()
-	//	doFiltering(value)
-	//})
 })
 
 				
 				
 /*	
+	//$('#first-select-box select').change(function() {
+	//	var value = $(this).val()
+	//	doFiltering(value)
+	//})
+	$('[name=lodgingName]').change(function() {
+		doFiltering()
+	})
+	$('[name=startDate]').change(function() {
+		doFiltering()
+	})
+	$('[name=endDate]').change(function() {
+		doFiltering()
+	})
 					//$('#table-thead tr').append('<th>'+transHistory.bankAccount+'</th>')
 					console.log(filtering)	
 					//transaction_created_date는 stt-box의 YYYY-MM보다  크고 end-box의 YYYY-MM보다 작아야 한다.
