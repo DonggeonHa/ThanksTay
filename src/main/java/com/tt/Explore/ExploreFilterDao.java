@@ -9,6 +9,6 @@ import com.tt.Lodging.LodgingVO;
 @Mapper
 public interface ExploreFilterDao {
 
-	List<LodgingVO> getLodgingListBySearchFilter(SearchFilterVO searchFilter);
-	List<LodgingVO> getLodgingListByGuests(int guests);
+	List<LodgingListVO> getLodgingListBySearchFilter(SearchFilterVO searchFilter);
+	List<LodgingListVO> getLodgingListByGuests(int guests);
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tt.Common.CommonCodeVO;
+import com.tt.Common.CommonDao;
 import com.tt.Lodging.LodgingVO;
 
 @Service
@@ -12,14 +14,31 @@ public class ExploreFilterServiceImpl implements ExploreFilterService {
 
 	@Autowired
 	ExploreFilterDao exploreFilterDao;
-
+	
+	//@Autowired
+	//CommonDao commonDao;
+	
 	@Override
-	public List<LodgingVO> getLodgingListBySearchFilter(SearchFilterVO searchFilter) {
+	public List<LodgingListVO> getLodgingListBySearchFilter(SearchFilterVO searchFilter) {
 		//getLodgingsByFirstFilter로 숙소리스트 가져오기
-		List<LodgingVO> lodgings = exploreFilterDao.getLodgingListBySearchFilter(searchFilter);
+		List<LodgingListVO> lodgings = exploreFilterDao.getLodgingListBySearchFilter(searchFilter);
 		//해당 리스트로 wishList여부 체크하기
 		//새로운 dto/map형성 -> return? 아니면 wishList 따로 보낼 수 있나?
+		
+		//List<CommonCodeVO> commonCodes = commonDao.getAllCommonCodeVos();
+		
+		if(!lodgings.isEmpty()) {
+			for(LodgingListVO lodging:lodgings) {
+				lodging.setTotalBed(lodging.getSinglebed()+lodging.getDoublebed());
+				lodging.setTotalFee(lodging.getLodgingFee()+lodging.getCleaningFee());
+				lodging.setPerDayFee((int)(lodging.getTotalFee()/lodging.getCount()));
+				String[] amenityList = lodging.getAmenity().split(",");	//list vs arrayList
+			}
+		}
+		//private List<String> amenityList;
+		//private List<String> imageList; 업그레이드 과제
 		System.out.println(lodgings);
+		
 		return lodgings;
 	}
 
@@ -29,7 +48,7 @@ public class ExploreFilterServiceImpl implements ExploreFilterService {
 	//}
 
 	@Override
-	public List<LodgingVO> getLodgingListByGuests(int guests) {
+	public List<LodgingListVO> getLodgingListByGuests(int guests) {
 		return exploreFilterDao.getLodgingListByGuests(guests);
 	}
 
