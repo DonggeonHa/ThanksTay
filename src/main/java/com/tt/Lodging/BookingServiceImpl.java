@@ -21,6 +21,13 @@ public class BookingServiceImpl implements BookingService {
 	}
 	
 	@Override
+	public LodgingDTO getLodgingHost(int lodgingNo) {
+		LodgingDTO lodgingHost = bookingDao.getLodgingHostByLodgingNo(lodgingNo);
+		
+		return lodgingHost;
+	}
+	
+	@Override
 	public List<PriceVO> getVacancy(int lodgingNo) {
 		List<PriceVO> priceList = bookingDao.getPricesByLodgingNo(lodgingNo);
 		

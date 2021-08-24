@@ -229,7 +229,7 @@
 							<div>	<!-- 확인 및 결제 -->
 								<div class="payment-button">
 									<form id="form-booking" action="booking" method="post" id="form-booking">
-										<input type="hidden" id="user-no" name="userNo" value="${user.no }"> <!-- 로그인이랑 연결되면 넣기${LOGINED_USER.no } -->
+										<input type="hidden" id="user-no" name="userNo" value="${booking.userNo }"> <!-- 로그인이랑 연결되면 넣기${LOGINED_USER.no } -->
 										<input type="hidden" id="lodging-no" name="lodgingNo" value="${booking.lodgingNo }">
 										<input type="hidden" id="check-in" name="checkIn" value='<fmt:formatDate value="${booking.checkIn }" pattern="yyy-MM-dd"/>'>
 										<input type="hidden" id="check-out" name="checkOut" value="<fmt:formatDate value="${booking.checkOut }" pattern="yyy-MM-dd"/>">
@@ -358,15 +358,19 @@
 		var amount = $("input[name=amount]").attr('value')
 		console.log(amount);
 		
+		var email = "${bookingUser.email }";
+		var name = "${bookingUser.name}";
+		var phone = "${bookingUser.phone }";
+		
 		IMP.request_pay({
 			pg: 'kakao',
 			merchant_uid: 'merchant_' + new Date().getTime(),
 			
 			name: lodgingName,
 			amount: amount,
-			buyer_email: 'julee9552@naver.com',	// 이부분은 로그인이 구현되면 가져다가 넣기
-			buyer_name: '이동규',					// 이부분도
-			buyer_tel: '010-1111-1111',			// 여기도
+			buyer_email: email,	// 이부분은 로그인이 구현되면 가져다가 넣기
+			buyer_name: name,					// 이부분도
+			buyer_tel: phone,			// 여기도
 			buyer_addr: '인천광역시 부평구',			// 여기도
 			buyer_postcode: '123-456'
 		}, function (rsp) {

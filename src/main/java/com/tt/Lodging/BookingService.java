@@ -13,6 +13,8 @@ public interface BookingService {
 	 */
 	LodgingVO getLodgingDetail(int lodgingNo);
 	
+	LodgingDTO getLodgingHost(int lodgingNo);
+	
 	/**
 	 * 지정된 숙소번호에 해당하는 숙소가 예약된 날짜 
 	 * @param lodgingNo 숙소번호
@@ -34,17 +36,50 @@ public interface BookingService {
 	 */
 	List<AmenityListDTO> getAmenitiesByLodgingNo(int lodgingNo);
 	
+	/**
+	 * 
+	 * @param booking
+	 */
 	void booking(BookingVO booking);
 	
+	/**
+	 * 
+	 * @param booking
+	 * @return
+	 */
 	BookingVO getBookingNoByBooking(BookingVO booking);
 	
+	/**
+	 * 
+	 * @param payment
+	 */
 	void insertPayment(PaymentVO payment);
 	
+	/**
+	 * 
+	 * @param lodgingNo
+	 * @return
+	 */
 	List<ReviewDTO> getReview(int lodgingNo);
 	
+	/**
+	 * 
+	 * @param booking
+	 * @return
+	 */
 	BookingVO getBookingNoByUserNo(BookingVO booking);
 	
+	/**
+	 * 
+	 * @param review
+	 */
 	void insertReview(ReviewVO review);
 	
+	/**
+	 * 
+	 * @param lodging
+	 */
 	void updateLodging(LodgingVO lodging);
+	
+	
 }
