@@ -89,6 +89,7 @@
 				UPDATEDDATE 				as updatedDate
 		FROM
 				thxtay_common_code
+		ORDER BY COMMONCODE ASC
 	</select>
 
 	<select id="getParentCode" resultType="com.tt.Common.CommonCodeVO">
