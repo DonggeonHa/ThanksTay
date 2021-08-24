@@ -28,8 +28,8 @@
 			B.booking_date bookingDate,       
 			B.booking_check_in checkIn, 
 			B.booking_check_out checkOut,
-			B.booking_total_lodging_fee lodgingFee, 
-			B.booking_total_cleaning_fee cleaningFee,
+			P.price_lodging_fee lodgingFee, 
+			P.price_cleaning_fee cleaningFee,
 			B.booking_amount amount,
 			trunc(B.booking_amount * 0.2) hostFee,
 			trunc(B.booking_amount - (B.booking_amount * 0.2)) paidOut
@@ -42,6 +42,7 @@
 			and L.lodging_no = B.lodging_no
 			and U.user_no = TR.user_no 
 			and L.lodging_no = P.lodging_no 
+			and TH.price_no = P.price_no
 			and th.payment_no = pm.payment_no
 			and pm.booking_no = b.booking_no
 			and TH.tr_no = TR.tr_no
@@ -50,34 +51,36 @@
 
 	<select id="getAllTransactionHistoryByHashMap" parameterType="map" resultType="com.tt.Host.TransactionHistoryDTO">
 		select th.transaction_no,
-   		th.tr_no trNo,
-         TH.transaction_created_date createdDate, 
-            U.user_name userName, 
-            TR.tr_account bankAccount, 
-            B.booking_no bookingNo, 
-            L.lodging_name lodgingName, 
-            B.booking_date bookingDate,       
-           B.booking_check_in checkIn, 
-           B.booking_check_out checkOut,
-           B.booking_total_lodging_fee lodgingFee, 
-           B.booking_total_cleaning_fee cleaningFee,
-           B.booking_amount amount,
-           trunc(B.booking_amount * 0.2) hostFee,
-           trunc(B.booking_amount - (B.booking_amount * 0.2)) paidOut
-   
+			th.tr_no trNo,
+			TH.transaction_created_date createdDate, 
+			U.user_name userName, 
+			TR.tr_account bankAccount, 
+			B.booking_no bookingNo, 
+			L.lodging_name lodgingName, 
+			B.booking_date bookingDate,       
+			B.booking_check_in checkIn, 
+			B.booking_check_out checkOut,
+			P.price_lodging_fee lodgingFee, 
+			P.price_cleaning_fee cleaningFee,
+			B.booking_amount amount,
+			trunc(B.booking_amount * 0.2) hostFee,
+			trunc(B.booking_amount - (B.booking_amount * 0.2)) paidOut
+  
          from thxtay_user U, thxtay_lodging L, thxtay_booking B,
-                 thxtay_transaction_register TR, thxtay_price P,
-                 thxtay_transaction_history TH, thxtay_payment PM
+            thxtay_transaction_register TR, thxtay_price P,
+            thxtay_transaction_history TH, thxtay_payment PM
          where U.user_no = #{userNo}
          and U.user_no = L.user_no
          and L.lodging_no = B.lodging_no
          and U.user_no = TR.user_no
          and L.lodging_no = P.lodging_no
+         and TH.price_no = P.price_no
          and L.lodging_no = #{lodgingNo}
          and TH.transaction_created_date >= #{startDate}
          and TH.transaction_created_date &lt; add_months(#{endDate},1)
          and th.payment_no = pm.payment_no
          and pm.booking_no = b.booking_no
+         and TH.tr_no = TR.tr_no
          and B.booking_check_out &lt; sysdate
 	</select>
 
