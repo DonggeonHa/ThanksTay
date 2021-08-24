@@ -181,36 +181,28 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<div id="ldg-step1"
 						style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-						<form id="form-register" style="width: 50%;" method="post"
-							novalidate="novalidate">
+						<form id="form-register" style="width: 50%;" method="post" novalidate="novalidate">
 							<c:if test="${lodgingRegistering.status ne null }">
 								<input type="hidden" name="no" value="${lodgingRegistering.no }">
-								<input type="hidden" name="userNo"
-									value="${lodgingRegistering.userNo }">
+								<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
 							</c:if>
-							<input type="hidden" name="status"
-								value="${lodgingRegistering.status }"> <input
-								type="hidden" name="lodgingTypeCode" value="${ldgType }">
+							<input type="hidden" name="status" value="${lodgingRegistering.status }"> 
+							<input type="hidden" name="lodgingTypeCode" value="${ldgType }">
 
 							<div class="mb-3" style="text-align: left">
-								<label class="form-label">숙소명</label> <input type="text"
-									class="form-control" style="width: 100%" id="lodging-name"
-									name="name" autocomplete="off"
-									value="${lodgingRegistering.name }" />
+								<label class="form-label">숙소명</label> 
+								<input type="text" class="form-control" style="width: 100%" id="lodging-name"
+									   name="name" autocomplete="off" value="${lodgingRegistering.name }" />
 							</div>
 							<div class="mb-3">
 								<label class="form-label">침실수</label>
 								<div class="input-group w-50" style="margin: 0 auto;">
-									<button class="btn btn-outline-secondary btn-sm" type="button"
-										id="minus-button">
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="minus-button">
 										<i class='fas fa-minus'></i>
 									</button>
-									<input type="number" class="form-control form-control-sm"
-										style="border: none; text-align: center" id="lodging-bedroom"
-										name="bedroom"
-										value="${lodgingRegistering eq null? 0 : lodgingRegistering.bedroom  }" />
-									<button class="btn btn-outline-secondary btn-sm" type="button"
-										id="plus-button">
+									<input type="number" class="form-control form-control-sm" style="border: none; text-align: center" id="lodging-bedroom"
+										   name="bedroom" value="${lodgingRegistering eq null? 0 : lodgingRegistering.bedroom  }" />
+									<button class="btn btn-outline-secondary btn-sm" type="button" id="plus-button">
 										<i class='fas fa-plus'></i>
 									</button>
 								</div>
@@ -267,6 +259,19 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								</div>
 							</div>
 							<div class="mb-3">
+								<label class="form-label">숙박비 설정</label>
+								<div style="display: flex">
+									<input type="date" class="form-control form-control-sm"	style="border: none; text-align: center"
+										   id="start-date" name="startDate" value="" />
+									<input type="date" class="form-control form-control-sm"	style="border: none; text-align: center"
+										   id="end-date" name="endDate" value="" />
+							  	</div>
+							  	<div style="margin: 0px auto; text-align:right">
+							  		<label>숙박료:<input type="number" name="lodgingFee" style="text-align:right; border:none; border-bottom:1px solid black"></label>
+							  		<label>청소비:<input type="number" name="cleaningFee" style="text-align:right; border:none; border-bottom:1px solid black"></label>
+							  	</div>
+							</div>
+							<div class="mb-3">
 								<label class="form-label">숙소 설명</label>
 								<textarea type="text" class="form-control"
 									style="height: 100px;" id="lodging-description"
@@ -308,7 +313,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				var cnt = $(element).val();
 				if(cnt>0){
 					$(element).val($(element).val()-1);
-					}
+				}
 			})
 			$(element).next("#plus-button").click(function(){
 				var cnt = $(element).val();	
