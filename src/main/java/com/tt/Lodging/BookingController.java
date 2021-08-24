@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tt.Host.PriceVO;
+import com.tt.User.UserService;
 import com.tt.User.UserVO;
 import com.tt.web.annotation.LoginUser;
 
@@ -32,6 +33,8 @@ public class BookingController {
 	
 	@Autowired
 	BookingService bookingService;
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/bookinglist")
 	public String bookinglist() {
@@ -53,6 +56,9 @@ public class BookingController {
 		// 리뷰리스트를 보낸다.
 		List<ReviewDTO> reviewList = bookingService.getReview(lodgingNo);
 		model.addAttribute("reviews", reviewList);
+		// 호스트 정보를 보낸다.
+		LodgingDTO lodgingHost = bookingService.getLodgingHost(lodgingNo);
+		model.addAttribute("host", lodgingHost);
 		
 		model.addAttribute("user", user);
 		
@@ -123,7 +129,9 @@ public class BookingController {
 		booking.setTotalCleaningFee(totalCleaningFee);
 		booking.setAmount(amount);
 		
-		model.addAttribute("user", user);
+		// model.addAttribute("user", user); 세션에서 받아오는 유저보다는 userNo로 조회해서 가져오자
+		UserVO bookingUser = userService.getUserByNo(userNo);
+		model.addAttribute("bookingUser", bookingUser);
 		
 		model.addAttribute("booking", booking);
 		model.addAttribute("indate", indate);
@@ -160,8 +168,8 @@ public class BookingController {
 		
 		BookingVO bookingNo = bookingService.getBookingNoByBooking(booking);
 		
-		model.addAttribute("booking", booking);
-		model.addAttribute("bookingNo", bookingNo);
+		//model.addAttribute("booking", booking);
+		//model.addAttribute("bookingNo", bookingNo);
 		
 		// 결제 값 넣기
 		PaymentVO payment = new PaymentVO();
@@ -170,6 +178,7 @@ public class BookingController {
 		
 		bookingService.insertPayment(payment);
 		
+		/*
 		// 페이지를 어디로 보낼지??? booking로 보내면 아래 정보들을 보내줘야 한다.
 		// 숙소정보를 보낸다.
 		LodgingVO lodging = bookingService.getLodgingDetail(lodgingNo);
@@ -221,6 +230,8 @@ public class BookingController {
 		
 		
 		return "lodging/booking";
+		*/
+		return "index";
 	}
 	
 	//@RequestMapping("/reviews/add")
@@ -266,19 +277,19 @@ public class BookingController {
 		// 체크인
 		double checkIn = (Math.round(lodging.getCheckIn() * lodging.getReviewCount())+review.getCheckIn()) / (double) reviewCount;
 		double checkInAvg = Math.round(checkIn*10)/10.0;
-		lodging.setCommunication(checkInAvg);
+		lodging.setCheckIn(checkInAvg);
 		// 정확성
 		double accuracy = (Math.round(lodging.getAccuracy() * lodging.getReviewCount())+review.getAccuracy()) / (double) reviewCount;
 		double accuracyAvg = Math.round(accuracy*10)/10.0;
-		lodging.setCommunication(accuracyAvg);
+		lodging.setAccuracy(accuracyAvg);
 		// 위치
 		double location = (Math.round(lodging.getLocation() * lodging.getReviewCount())+review.getLocation()) / (double) reviewCount;
 		double locationAvg = Math.round(location*10)/10.0;
-		lodging.setCommunication(locationAvg);
+		lodging.setLocation(locationAvg);
 		// 가격대비 만족도
 		double value = (Math.round(lodging.getValue() * lodging.getReviewCount())+review.getValue()) / (double) reviewCount;
 		double valueAvg = Math.round(value*10)/10.0;
-		lodging.setCommunication(valueAvg);
+		lodging.setValue(valueAvg);
 		
 		double avg = (Math.round(lodging.getReviewAverage() * (6 * lodging.getReviewCount()))+review.getStars()) / (double) reviewCountAvg;
 		double reveiewavg = Math.round(avg*10)/10.0;
