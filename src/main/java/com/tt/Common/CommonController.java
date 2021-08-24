@@ -24,6 +24,7 @@ import com.tt.exception.LoginException;
 import com.tt.exception.UserRegisterException;
 import com.tt.Explore.ExploreFilterDao;
 import com.tt.Explore.ExploreFilterService;
+import com.tt.Explore.LodgingListVO;
 import com.tt.Explore.SearchFilterVO;
 import com.tt.Host.HostMainController;
 import com.tt.Lodging.LodgingVO;
@@ -91,14 +92,14 @@ public class CommonController {
 
 	@GetMapping(path = {"/explore/list/json"})
 	@ResponseBody
-	public List<LodgingVO> SearchJson(
+	public List<LodgingListVO> SearchJson(
 			@RequestParam(value="location", required=false, defaultValue="") String location, 
 			@RequestParam(value="east", required=false, defaultValue="-1") double east, 
 			@RequestParam(value="west", required=false, defaultValue="-1") double west, 
 			@RequestParam(value="south", required=false, defaultValue="-1") double south, 
 			@RequestParam(value="north", required=false, defaultValue="-1") double north, 
-			@RequestParam(value="checkin", required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date checkIn, 
-			@RequestParam(value="checkout", required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOut,
+			@RequestParam(value="checkIn", required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date checkIn, 
+			@RequestParam(value="checkOut", required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOut,
 			@RequestParam(value="guests", required=false, defaultValue="2") int guests,
 			@RequestParam(value="status", required=false, defaultValue="LDG0303") String status,	
 			//defaultValue로 하드코딩...? 아니면 위에 상수 정의? property에서 특정 값만 미리 설정해놓는 방법도 있다.
@@ -108,13 +109,18 @@ public class CommonController {
 			@RequestParam(value="amenity", required=false, defaultValue="") List<String> amenity,
 			@LoginUser UserVO user
 			){
-
+		
+		System.out.println("checkout"+checkOut);
+		System.out.println("east"+east);
+		
 		int userNo = 0;
 		if(user != null) {
 			userNo = user.getNo();
 		}
+		
 		SearchFilterVO searchFilter = new SearchFilterVO(location, east, west, south, north, checkIn, checkOut, guests, status, type, immApproval, amenity, userNo);
-		List<LodgingVO> lodgings = exploreFilterService.getLodgingListBySearchFilter(searchFilter);
+		List<LodgingListVO> lodgings = exploreFilterService.getLodgingListBySearchFilter(searchFilter);
+		
 		return lodgings;
 	}
 	

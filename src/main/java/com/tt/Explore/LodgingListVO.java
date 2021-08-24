@@ -1,5 +1,7 @@
 package com.tt.Explore;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,10 +34,14 @@ public class LodgingListVO {
 	//추가함
 	private int lodgingFee;
 	private int cleaningFee;
-	private String amentityList;
-	private boolean isWishlisted;
+	private String amenity;
+	private String wishlist;
+	private int count;
 	//가격정보 추가해야
 	//어메니티
 	private int totalBed;
 	private int totalFee;
+	private int perDayFee;
+	private List<String> amenityList;
+	private List<String> imageList;
 }
