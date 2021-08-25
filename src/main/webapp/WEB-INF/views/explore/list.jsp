@@ -251,7 +251,7 @@ h5.modal-title{
 			<!-- 300개 이상의 숙소·8월 16일-8월 18일 -->
 			<div class="list-title">
 				<p class="search-summary">숙박 3건 · 8월 11일 - 8월 13일 · 게스트 ${param.guests }명</p>
-				<p class="search-region">"${location }에서 선택한 지역"의 숙소</p>
+				<p class="search-region"><span class="keyword">${param.location }</span>에서 선택한 지역"의 숙소</p>
 			</div>
 			<!-- dropbox와 pop-up이 섞여있음 -->
 			<div class="options-button-box">
@@ -312,7 +312,7 @@ h5.modal-title{
 				<div class="text-wrapper">
 					<div class="list-box-title" style="display:flex;">
 						<div id="list-box-title-text">
-							<div class="lodging-summary"><span class="location">{param.location}</span>의 <span>게스트용 별채 전체</span></div>
+							<div class="lodging-summary"><span class="location"></span>의 <span>게스트용 별채 전체</span></div>
 							<div class="lodging-name">{{name}}<br/></div>
 						</div>
 						<div class="list-box-title-zz" style="margin-left:auto;">
@@ -322,7 +322,7 @@ h5.modal-title{
 							<button class="zzim"><i" class="bi bi-suit-heart"></i></button>
 						</div>
 					</div>
-					<div class="spacer" style="width: 32px; height: 1px; background: black;">
+					<div class="list-box-spacer" style="width: 30px; height: 1px; background: black;">
 					</div>
 					<div class="list-box-detail" data="2줄 공간" style="margin-top:10px">
 						<div class="first-row">
@@ -482,16 +482,19 @@ h5.modal-title{
 <script src="https://unpkg.com/mustache@latest"></script>
 <script type="text/javascript">
 
-//전역변수
+//검색용 변수들
 var south;
 var north;
 var west;
 var east;
 var checkIn = '${param.checkin}';
-var checkOut = '${param.checkout}';
+var checkOut = '${param.checkout}'; 
 var guests;
-var locations;
+var locations = '${param.location}';
 var immApproval;
+
+//지도 중심좌표의 동 이름
+var keyword;
 
 var wishlistModal = new bootstrap.Modal(document.getElementById('wishlist'));
 
@@ -548,7 +551,8 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 		          $.each(lodgings, function(index, lodging) {
 		            var htmlContent = Mustache.render(template, lodging);
 		            $(htmlContent).appendTo("#left-box .notice-travel");
-		             
+		            $(".location").text(locations);
+		            
 		            //list-box에 링크부여
 		            $('.list-box').attr("data-lodging-no", lodging.no);
 		            $('.list-box').css({"cursor": "pointer"});
@@ -608,7 +612,7 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 		     } else {
 		    	 $('.alert').remove();
 		    	 $('.pagination .summary').empty();
-		    	 var htmlContent = '<div class="alert" style="margin: 0; padding: 10px 0 30px 0;">검색 결과가 없습니다.</div>';
+		    	 var htmlContent = '<div class="alert" style="margin: 0; padding: 10px 0 30px 0;"><b>검색 결과</b>가 없습니다.</div>';
 		    	 $(htmlContent).insertAfter($('.spacing'));
 		     }
 	    },
@@ -646,12 +650,27 @@ kakao.maps.event.addListener(map, 'bounds_changed', function() {
 	west = boundsStr[1];
 	east = boundsStr[3];
 	
+	getCenterInfo();
+	$('.keyword').text(keyword);
 	getList();
 });
 
+function getCenterInfo(){
+    var center = map.getCenter(); 
+    var geocoder = new kakao.maps.services.Geocoder();
+    
+    var callback = function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+			keyword = result[0].address_name;
+			keyword = keyword.slice(6, 9);
+        }
+    };
+    geocoder.coord2RegionCode(center.getLng(), center.getLat(), callback);
+}
+
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('${location}', function(result, status) {
+geocoder.addressSearch('${param.location}', function(result, status) {
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
 

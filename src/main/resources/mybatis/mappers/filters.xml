@@ -4,7 +4,7 @@
 <mapper namespace="com.tt.Explore.ExploreFilterDao">
 	<select id="getLodgingListBySearchFilter" parameterType="com.tt.Explore.SearchFilterVO" resultType="com.tt.Explore.LodgingListVO">
 		select ROWNUM, no, userNo, city, postNo, address, approval, maxGuest, image, name, 
-        bedroom, singleBed, doubleBed, viewCount, reviewCount, reviewAverage, status, typeCode, 
+        bedroom, singleBed, doubleBed, viewCount, reviewCount, reviewAverage, status, description, typeCode, 
         longitude, latitude, count, lodgingFee, cleaningFee, amenity, wishlist
 		from (select A.lodging_no no, 
 				A.user_no userNo,
@@ -22,6 +22,7 @@
 				A.lodging_review_count reviewCount,
 				A.lodging_review_average reviewAverage,
 				A.lodging_status status,
+				A.lodging_description description,
 				A.lodging_type_code typeCode,
 				A.lodging_lng longitude,
 				A.lodging_lat latitude,
@@ -53,6 +54,9 @@
                      and D.lodging_no=A.lodging_no) wishlist
 			  from thxtay_lodging A
 			  where A.lodging_max_guest &gt;= #{guests}
+			  <if test = '("Y").equalsIgnoreCase(immApproval)'>
+			  and A.lodging_imm_approval = #{immApproval}
+			  </if>
 			  <if test="west != -1 and east != -1 and south != -1 and north != -1">
               and A.lodging_lng &gt; #{west} and A.lodging_lng &lt; #{east}
               and A.lodging_lat &lt; #{north} and A.lodging_lat &gt; #{south}</if>)
