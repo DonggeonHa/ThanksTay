@@ -84,13 +84,13 @@ public class BookingController {
 		// List<Date> dates = new ArrayList<Date>();
 		
 		// utc랑 뭐랑 db에서 가져온 날짜값이 달라져서 +1을 해줬다.... 해결할 수 있는 방법 찾기!!!!
-		for(PriceVO price : priceList) {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(price.getOpenDate());
-			cal.add(Calendar.DATE, +1);
-			Date indate = new Date(cal.getTimeInMillis());
-			price.setOpenDate(indate);
-		}
+		//for(PriceVO price : priceList) {
+		//	Calendar cal = Calendar.getInstance();
+		//	cal.setTime(price.getOpenDate());
+		//	cal.add(Calendar.DATE, +1);
+		//	Date indate = new Date(cal.getTimeInMillis());
+		//	price.setOpenDate(indate);
+		//}
 		
 		ObjectMapper mapper = new ObjectMapper();
 		

@@ -904,7 +904,7 @@
 	.modal-review-flex2 {
 		position: relative;
 		width: 100%;
-		max-width: 800px;
+		max-width: 1032px;
 		border-radius: 12px;
 		background: rgb(255, 255, 255);
 		max-height: 100%;
@@ -926,6 +926,20 @@
 	.map-height {
 		height: 480px;
 		margin-bottom: 32px;
+	}
+	.modal-review-flex3 {
+		position: relative;
+		width: 100%;
+		max-height: 800px;
+		border-radius: 12px;
+		background: rgb(255, 255, 255);
+		max-height: 100%;
+	}
+	.modal-review2 {
+		padding: 150px 300px;
+		align-items: center;
+		display: flex;
+		justify-content: center;
 	}
 </style>
 
@@ -1914,89 +1928,91 @@
 	<!-- modal -->
 	<div class="modal fade" id="reviewFormModal" tabindex="-1" aria-labelledby="reviewFormModal" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-review-flex2">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<form id="form-review">
-							<input type="hidden" name="bookingNo" id="" value="${bookingNo2 }">	<!-- ${bookingNo2 } -->
-							<input type="hidden" name="userNo" id="" value="${user.no }">	<!-- 로그인 유저 번호 -->
-							<input type="hidden" name="lodgingNo" id="" value="${lodging.no }">
-							<div class="row px-2 mb-2" style="display: flex; flex-wrap: wrap;">
-								<div style="width: 33%;">
-									<label class="" for="cleanness">청결도</label>
-									<select id="select-box" name="cleanness">
-										<option value="5" selected>5점</option>
-										<option value="4">4점</option>
-										<option value="3">3점</option>
-										<option value="2">2점</option>
-										<option value="1">1점</option>
-									</select>
+			<div class="modal-review2">
+				<div class="modal-content">
+					<div class="modal-review-flex3">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form id="form-review">
+								<input type="hidden" name="bookingNo" id="" value="${bookingNo2 }">	<!-- ${bookingNo2 } -->
+								<input type="hidden" name="userNo" id="" value="${user.no }">	<!-- 로그인 유저 번호 -->
+								<input type="hidden" name="lodgingNo" id="" value="${lodging.no }">
+								<div class="row px-2 mb-2" style="display: flex; flex-wrap: wrap;">
+									<div style="width: 33%;">
+										<label class="" for="cleanness">청결도</label>
+										<select id="select-box" name="cleanness">
+											<option value="5" selected>5점</option>
+											<option value="4">4점</option>
+											<option value="3">3점</option>
+											<option value="2">2점</option>
+											<option value="1">1점</option>
+										</select>
+									</div>
+									<div style="width: 33%;">
+										<label class="" for="accuracy">정확성</label>
+										<select id="select-box" name="accuracy">
+											<option value="5" selected>5점</option>
+											<option value="4">4점</option>
+											<option value="3">3점</option>
+											<option value="2">2점</option>
+											<option value="1">1점</option>
+										</select>
+									</div>
+									<div style="width: 33%;">
+										<label class="" for="communication">의사소통</label>
+										<select id="select-box" name="communication">
+											<option value="5" selected>5점</option>
+											<option value="4">4점</option>
+											<option value="3">3점</option>
+											<option value="2">2점</option>
+											<option value="1">1점</option>
+										</select>
+									</div>
 								</div>
-								<div style="width: 33%;">
-									<label class="" for="accuracy">정확성</label>
-									<select id="select-box" name="accuracy">
-										<option value="5" selected>5점</option>
-										<option value="4">4점</option>
-										<option value="3">3점</option>
-										<option value="2">2점</option>
-										<option value="1">1점</option>
-									</select>
+								<div class="row px-2 mb-2" style="display: flex; flex-wrap: wrap;">
+									<div style="width: 33%;">
+										<label class="" for="location">위치</label>
+										<select id="select-box" name="location">
+											<option value="5" selected>5점</option>
+											<option value="4">4점</option>
+											<option value="3">3점</option>
+											<option value="2">2점</option>
+											<option value="1">1점</option>
+										</select>
+									</div>
+									<div style="width: 33%;">
+										<label class="" for="checkIn">체크인</label>
+										<select id="select-box" name="checkIn">
+											<option value="5" selected>5점</option>
+											<option value="4">4점</option>
+											<option value="3">3점</option>
+											<option value="2">2점</option>
+											<option value="1">1점</option>
+										</select>
+									</div>
+									<div style="width: 33%;">
+										<label class="" for="value">가격대비 만족도</label>
+										<select id="select-box" name="value">
+											<option value="5" selected>5점</option>
+											<option value="4">4점</option>
+											<option value="3">3점</option>
+											<option value="2">2점</option>
+											<option value="1">1점</option>
+										</select>
+									</div>
 								</div>
-								<div style="width: 33%;">
-									<label class="" for="communication">의사소통</label>
-									<select id="select-box" name="communication">
-										<option value="5" selected>5점</option>
-										<option value="4">4점</option>
-										<option value="3">3점</option>
-										<option value="2">2점</option>
-										<option value="1">1점</option>
-									</select>
+								<div class="row px-2">
+									<textarea rows="10" class="form-control" id="review-content" name="comment" placeholder="내용을 입력하세요"></textarea>
 								</div>
-							</div>
-							<div class="row px-2 mb-2" style="display: flex; flex-wrap: wrap;">
-								<div style="width: 33%;">
-									<label class="" for="location">위치</label>
-									<select id="select-box" name="location">
-										<option value="5" selected>5점</option>
-										<option value="4">4점</option>
-										<option value="3">3점</option>
-										<option value="2">2점</option>
-										<option value="1">1점</option>
-									</select>
-								</div>
-								<div style="width: 33%;">
-									<label class="" for="checkIn">체크인</label>
-									<select id="select-box" name="checkIn">
-										<option value="5" selected>5점</option>
-										<option value="4">4점</option>
-										<option value="3">3점</option>
-										<option value="2">2점</option>
-										<option value="1">1점</option>
-									</select>
-								</div>
-								<div style="width: 33%;">
-									<label class="" for="value">가격대비 만족도</label>
-									<select id="select-box" name="value">
-										<option value="5" selected>5점</option>
-										<option value="4">4점</option>
-										<option value="3">3점</option>
-										<option value="2">2점</option>
-										<option value="1">1점</option>
-									</select>
-								</div>
-							</div>
-							<div class="row px-2">
-								<textarea rows="10" class="form-control" id="review-content" name="comment" placeholder="내용을 입력하세요"></textarea>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary" id="btn-post-review">등록</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary" id="btn-post-review">등록</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -2070,15 +2086,19 @@
 					// 지금칸에 년,월,일을 담는다.
 					var iter_date = new Date(passed_year,passed_month,shownDate); 
 					var opendate;
-					for(var ldg=0; ldg<list.length; ldg++) {
-						opendate = parse(list[ldg].openDate);
-						
-						if (shownDate == opendate.getDate() && passed_month == opendate.getMonth() && passed_year == opendate.getFullYear()
-								&& !checkToday(iter_date)) {
-							var m = "<div>";
-							break;
-						} else {
-							var m = checkToday(iter_date)?'<div class="today">':'<div class="past-date">';
+					if (list.length == 0) {
+						var m = checkToday(iter_date)?'<div class="today">':'<div class="past-date">';
+					} else {
+						for(var ldg=0; ldg<list.length; ldg++) {
+							opendate = parse(list[ldg].openDate);
+							
+							if (shownDate == opendate.getDate() && passed_month == opendate.getMonth() && passed_year == opendate.getFullYear()
+									&& !checkToday(iter_date)) {
+								var m = "<div>";
+								break;
+							} else {
+								var m = checkToday(iter_date)?'<div class="today">':'<div class="past-date">';
+							}
 						}
 					}
 					calendar.datesBody.append(m + shownDate + "</div>");
@@ -2736,11 +2756,7 @@
 			// var priceAvg = totalPrice / bookingSecondDate.length;
 			return totalPrice;
 		}
-		
-		
-		
-		
-		
+
 		// 인원 선택하는 버튼을 클릭했을 때 이벤트
 		// 성인 추가를 눌렀을 경우(항상 1이상이고, 최대인원 보다는 작아야 한다.)
 		$(".button-plus").click(function() {
@@ -2906,39 +2922,41 @@
 					console.log("성공성공");
 					console.log(reviewList);
 					// 날짜 표시하기 위해 format
-					var date1 = reviewList[0].createdDate
-					var date2 = new Date(date1);
-					var date = date2.getFullYear()+'년'+(date2.getMonth()+1)+'월 ';
-					console.log(date);
-					var cnt = reviewList.length;
+					//var date1 = reviewList[0].createdDate
+					//var date2 = new Date(date1);
+					//var date = date2.getFullYear()+'년'+(date2.getMonth()+1)+'월 ';
+					//console.log(date);
+					//var cnt = reviewList.length;
 					// 평점 구하기
 					// 리뷰 작성하기 전 평균
-					var avg = "${lodging.reviewAverage }";
+					//var avg = "${lodging.reviewAverage }";
 					// 리뷰 작성하기 전 리뷰 갯수
-					var count = "${lodging.reviewCount }";
+					//var count = "${lodging.reviewCount }";
 					// 이번 리뷰 총점
-					var stars = reviewList[0].stars;
+					//var stars = reviewList[0].stars;
 					
-					var star = starAvg(avg, count, stars, cnt);
-					console.log(star);
+					//var star = starAvg(avg, count, stars, cnt);
+					//console.log(star);
 					// 모달창에 작성한 리뷰를 추가
-					$(".modal-review-right").prepend(makeRow(reviewList, date));
+					//$(".modal-review-right").prepend(makeRow(reviewList, date));
 					
 					
 					// 후기 숫자를 바꿔주기
-					$(".button-reviewcount").text("(후기 "+cnt+"개)");
-					$("#review-cnt").text("후기 "+cnt+"개");
-					$("#review-cnt2").text("후기 "+cnt+"개 모두 보기");
+					//$(".button-reviewcount").text("(후기 "+cnt+"개)");
+					//$("#review-cnt").text("후기 "+cnt+"개");
+					//$("#review-cnt2").text("후기 "+cnt+"개 모두 보기");
 					
-					$("#review-cnt3").text("평점 "+star+" · 후기 "+cnt+"개");
+					//$("#review-cnt3").text("평점 "+star+" · 후기 "+cnt+"개");
 					
 					// 화면에 작성한 리뷰를 추가하기
-					if (cnt > 5) {	// 하나를 삭제하고 넣어야한다.
-						$(".review-box-flex > .review-item-padding:last-child").remove();
-						$(".review-box-flex").prepend(makeRow2(reviewList, date));
-					} else {
-						$(".review-box-flex").prepend(makeRow2(reviewList, date));
-					}
+					//if (cnt > 5) {	// 하나를 삭제하고 넣어야한다.
+					//	$(".review-box-flex > .review-item-padding:last-child").remove();
+					//	$(".review-box-flex").prepend(makeRow2(reviewList, date));
+					//} else {
+					//	$(".review-box-flex").prepend(makeRow2(reviewList, date));
+					//}
+					// 그냥 새로고침하기
+					document.location.href = document.location.href;
 				},
 				complete: function() {
 					todoModal.hide();
