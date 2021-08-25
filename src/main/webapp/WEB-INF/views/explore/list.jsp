@@ -141,7 +141,16 @@
 	line-height: 1rem;
 	text-decoration: underline;
 }
-
+.pagination{
+	padding-top: 25px;
+}
+.pagination .summary{
+	font-size: 13px;
+	text-align:center;
+	margin: auto;
+	justify-content: center;
+	align-content: center;
+}
 h5.modal-title{
 	justify-content: center;
 }
@@ -184,7 +193,7 @@ h5.modal-title{
 	justify-content: center;
 }
 .recent .row .col-4 .card{
-	width: 16rem; justify-content: space-between;
+	width: 14.5rem; justify-content: space-between;
 }
 .card-body .lodge-review{
 	font-size: 1rem;
@@ -245,13 +254,28 @@ h5.modal-title{
 				<p class="search-region">"${location }에서 선택한 지역"의 숙소</p>
 			</div>
 			<!-- dropbox와 pop-up이 섞여있음 -->
-			<div class="option-button-box">
+			<div class="options-button-box">
 				<button class="option-button">취소가능</button><!-- 각각 기능이랑 설명 추가 -->
 				<button class="option-button">숙소유형</button>
 				<button class="option-button">요금</button>
-				<button class="option-button">즉시 예약</button>
+				<button class="option-button" id="option-immApproval">즉시 예약</button>
 				<button class="option-button" data-bs-toggle="modal" data-bs-target="#moreOptions">필터 추가하기</button>
 			</div>
+			<form id="pageFilters">
+				<div id="immApproval-window"class="shadow-lg p-3 mb-5 filter-box" style="display:none;">
+					<div class="p-4">
+						<div class="d-flex justify-content-between">
+							<div class="filter-title">즉시예약</div>
+							<div class="filter">호스트의 승인을 기다릴 필요 없이 예약할 수 있는 숙소</div>
+							<div class="form-check form-switch">
+			  					<input class="form-check-input" type="checkbox" id="immApproval">
+			  					<label class="form-check-label" for="immApproval">호스트의 승인을 기다릴 필요 없이 예약할 수 있는 숙소</label>
+							</div>
+							<button type="button" class="doFilter btn btn-dark">적용하기</button>
+						</div>
+					</div>	
+				</div>
+			</form>
 			<div class="notice-travel">
 				<p><span>예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요. </span><a href="#">자세히 알아보기</a></p>
 			</div>
@@ -332,16 +356,15 @@ h5.modal-title{
 			<div class="pagination">
 				<div class="page">
 				</div>
-				<div class="stat-info">
-					숙소 300개 이상 중 1 – 20
+				<div class="summary">
 				</div>
 			</div>
-			<div class="plus recent-visit">
+			<!-- <div class="plus recent-visit">
 				최근조회
 			</div>
 			<div class="plus reschedule">
 				날짜조정
-			</div>
+			</div>-->
 			<div class="recent">
 				<div class="row" style="">
 					<div class="recent-title">
@@ -458,6 +481,18 @@ h5.modal-title{
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45232a8f6f95ec00ae6343c8933658fb&libraries=services,clusterer,drawing"></script>
 <script src="https://unpkg.com/mustache@latest"></script>
 <script type="text/javascript">
+
+//전역변수
+var south;
+var north;
+var west;
+var east;
+var checkIn = '${param.checkin}';
+var checkOut = '${param.checkout}';
+var guests;
+var locations;
+var immApproval;
+
 var wishlistModal = new bootstrap.Modal(document.getElementById('wishlist'));
 
 $("#left-box").on('click', '.zzim', function(event){
@@ -478,22 +513,15 @@ var mapContainer = document.getElementById('map'),
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 var ps = new kakao.maps.services.Places();
 
-//전역변수
-	var south;
-	var north;
-	var west;
-	var east;
-	var checkIn = '${param.checkin}';
-	var checkOut = '${param.checkout}';
-	var guests;
-	var locations;
 
 //ajax로 검색결과 받아오기
 function getList(){	//나중에 parameter 정리해서 넣을 것
+	$('.alert').remove();
    	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 	var imageSize = new kakao.maps.Size(24, 35); 
   	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
@@ -510,6 +538,7 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 	    		,"checkOut": checkOut
 	     		,"guests": '${param.guests}'
 	     		,"location": '${param.location}'
+	     		, "immApproval" : immApproval
 	       		},
 	    dataType: "json",    		
 	    success: function (lodgings) {
@@ -524,6 +553,7 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 		            $('.list-box').attr("data-lodging-no", lodging.no);
 		            $('.list-box').css({"cursor": "pointer"});
 					
+		            $('.pagination .summary').text("총 숙소 "+lodgings.length+"개 중 1 - "+lodgings.length+"번째 숙소");
 		            //후기가 0개이면 후기 부분 안 보이게 하기
 		            
 		          	//Wishlist반영
@@ -576,8 +606,10 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 				    */
 		          });
 		     } else {
-		    	 var htmlContent = '<div class="alert">검색 결과가 없습니다.</div>';
-	             $(htmlContent).appendTo("#left-box");
+		    	 $('.alert').remove();
+		    	 $('.pagination .summary').empty();
+		    	 var htmlContent = '<div class="alert" style="margin: 0; padding: 10px 0 30px 0;">검색 결과가 없습니다.</div>';
+		    	 $(htmlContent).insertAfter($('.spacing'));
 		     }
 	    },
 	    error: function(request, status, error){
@@ -628,5 +660,26 @@ geocoder.addressSearch('${location}', function(result, status) {
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
     } 
+});
+
+$('.doFilter').click(function(event) {
+	//$("#left-box .list-box").remove();
+	//만약 immApproval이 체크된 상태라면 : immApproval 변수를 Y로 바꿈, option-button의 css 상태도 짙은 테두리로
+	if($('#immApproval').is(":checked") == true){
+	    immApproval = 'Y';
+		$('option-immApproval').css('border','2px black solid');
+	} else {
+		immApproval = 'N';
+		$('option-immApproval').css('border','none');
+	}
+
+	getList();		
+	event.preventDefault()
+	$('#immApproval-window').toggle();
+
+})	
+$('#option-immApproval').click(function(event) {
+	event.preventDefault()
+	$('#immApproval-window').toggle();
 });
 </script>
