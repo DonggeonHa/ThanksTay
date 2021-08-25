@@ -141,6 +141,6 @@
 			,lodging_lat           =#{latitude}
 			,lodging_lng           =#{longitude}
 		WHERE
-			lodging_no=#{no}   
+			lodging_no=#{no} 
     </update>
 </mapper>
