@@ -38,6 +38,20 @@
 			lodging_no=#{value}
 	</select>
 	
+	<select id="getLodgingHostByLodgingNo" parameterType="int" resultType="com.tt.Lodging.LodgingDTO">
+		SELECT
+			L.lodging_no						no,                
+			L.user_no					        userNo,
+			U.user_name							name,
+			U.user_phone						phone,
+			U.user_picture						picture
+		FROM
+			thxtay_lodging L, thxtay_user U
+		WHERE
+			L.lodging_no = #{value}
+			and L.user_no = U.user_no
+	</select>
+	
 	<select id="getPricesByLodgingNo" parameterType="int" resultType="com.tt.Host.PriceVO">
 		SELECT
 			price_no				no,
@@ -89,8 +103,7 @@
             (booking_no, user_no, lodging_no, booking_check_in, booking_check_out,
             booking_date, booking_guest, booking_total_lodging_fee, booking_total_cleaning_fee, booking_amount)
         VALUES
-            (#{no}, #{userNo}, #{lodgingNo}, #{checkIn}, #{checkOut}, #{date}, #{guest},
-            #{totalLodgingFee}, #{totalCleaningFee}, #{amount})
+            (#{no}, #{userNo}, #{lodgingNo}, #{checkIn}, #{checkOut}, #{date}, #{guest}, #{totalLodgingFee}, #{totalCleaningFee}, #{amount})
 	</insert>
 	
 	<update id="updatePrice" parameterType="com.tt.Lodging.BookingVO">
@@ -137,25 +150,28 @@
 			R.review_updated_date		updatedDate,
 			R.review_comment			comments,
 			R.review_isupdated			isUpdated,
+			R.review_stars				stars,
 			U.user_name					name
 		FROM
 			thxtay_review R, thxtay_user U
 		WHERE
 			R.lodging_no = #{value}
 			and R.user_no = U.user_no
-		order by R.review_created_date asc
+		order by R.review_created_date desc
 	</select>
 	
 	<select id="getBookingNoByUserNo" parameterType="com.tt.Lodging.BookingVO" resultType="com.tt.Lodging.BookingVO">
 		SELECT
 			booking_no				no
 		FROM
-			thxtay_booking
+			(SELECT a.*, rownum as rnum
+            FROM thxtay_booking a
+            order by a.booking_no desc)
 		WHERE
 			lodging_no = #{lodgingNo}
 			and user_no = #{userNo}
+            and rnum = 1
 	</select>
-	
 	
 	<insert id="insertReview" parameterType="com.tt.Lodging.ReviewVO">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">

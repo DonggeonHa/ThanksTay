@@ -16,11 +16,9 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-		<tiles:insertAttribute name="css" ignore="true" />
-		<tiles:insertAttribute name="js" ignore="true" />
 	</head>
 	<body>
-		<div style="display : flex; flex-direction:column; height: 100%;">
+		<div style="">
 			<header>
 				<tiles:insertAttribute name="header" ignore="true" />
 				<tiles:insertAttribute name="header2" ignore="true" />

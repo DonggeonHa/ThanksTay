@@ -48,12 +48,7 @@
 		GROUP BY Y.MONTHS
 		ORDER BY Y.MONTHS
 	</select>
-	<!--<resultMap type="com.tt.vo.bookingVO" id="bookingResultMap">
-		<id column="L.user_no" property="id"/>
-			<result column="L.user_no" property="userNo"/>
-			<result column="B.booking_check_in" property="checkIn"/>
-	</resultMap>  -->
-	
+
 	<select id="getAllBookingsByUserNo" parameterType="int" resultType="com.tt.Lodging.BookingVO">
 		select booking_check_out
 		from thxtay_booking B, thxtay_lodging L
@@ -65,15 +60,5 @@
 		select user_no
 		from thxtay_user
 	</select>
-	
-	<update id="updateEarnings" parameterType="com.tt.Lodging.BookingVO">
-		update
-			thxtay_booking
-		set
-			booking_check_out = #{checkOut}
-		where 
-			user_no = #{userNo}
-	</update>
-<!-- 사용자 번호로 수입을 list하고 update나 insert로 넣는다. -->
 
 </mapper>
