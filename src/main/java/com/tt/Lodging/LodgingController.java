@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.connector.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -103,9 +107,23 @@ public class LodgingController {
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 
 		model.addAttribute("loginUser", user);
-		model.addAttribute("lodgingRegistering", lodgingRegistering == null ? lrForm : lodgingRegistering);
 
-		System.out.println("등록중인 숙소는:" + lodgingRegistering);
+		if (lodgingRegistering == null) {
+			lodgingRegistering = new LodgingVO();
+			BeanUtils.copyProperties(lrForm, lodgingRegistering);
+		}
+		lodgingRegistering.setName(lrForm.getName());
+		lodgingRegistering.setBedroom(lrForm.getBedroom());
+		lodgingRegistering.setBathroom(lrForm.getBathroom());
+		lodgingRegistering.setSinglebed(lrForm.getSinglebed());
+		lodgingRegistering.setDoublebed(lrForm.getDoublebed());
+
+		System.out.println("등록중인 lodgingRegistering:" + lodgingRegistering);
+		System.out.println("등록중인 lrForm:" + lrForm);
+
+		model.addAttribute("lodgingRegistering", lodgingRegistering);// lodgingRegistering == null ? lrForm :
+																		// lodgingRegistering);
+
 		return "host/registerLodging/lodgingAddressAddForm";
 	}
 
@@ -124,20 +142,18 @@ public class LodgingController {
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		return "host/registerLodging/lodgingAmenityAddForm";
 	}
-	
+
 	@PostMapping("/lodgingAmenityAdd")
 	@ResponseBody
-	public List<CommonCodeVO> lodgingAmenityAddForm(@RequestParam(name="codeContent",required = false) String codeContent){
-		List<CommonCodeVO> retVal=new ArrayList<CommonCodeVO>();
-		
-		String cmCode=commonService.getCommonCodeByContent(codeContent);
+	public List<CommonCodeVO> lodgingAmenityAddForm(
+			@RequestParam(name = "codeContent", required = false) String codeContent) {
+		List<CommonCodeVO> retVal = new ArrayList<CommonCodeVO>();
+
+		String cmCode = commonService.getCommonCodeByContent(codeContent);
 		retVal = commonService.getCommonCodesByParentCode(cmCode);
 		for (CommonCodeVO val : retVal) {
-			System.out.println("조회된값:"+val);
+			System.out.println("조회된값:" + val);
 		}
-//		Gson gson =new Gson();
-//		String jsonText = gson.toJson(retVal);
-//		System.out.println(jsonText);
 		return retVal;
 
 	}
@@ -145,12 +161,12 @@ public class LodgingController {
 	@GetMapping("/lodgingImgAdd")
 	public String lodgingImgAddForm(@LoginUser UserVO user, Model model) {
 		logger.info("lodgingImgAddForm 실행");
-		
+
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		int lodgingNo = lodgingRegistering.getNo();
-		int getCnt=4;
-		
-		Map<String, Integer> condition= new HashMap<String, Integer>();
+		int getCnt = 4;
+
+		Map<String, Integer> condition = new HashMap<String, Integer>();
 		condition.put("lodgingNo", lodgingNo);
 		condition.put("getCnt", getCnt);
 		List<LodgingImgVO> imgList = lodgingImgService.getImgListByLdgNo(condition);
@@ -158,48 +174,42 @@ public class LodgingController {
 
 		System.out.println("등록중인 숙소는:" + lodgingRegistering);
 		System.out.println("숙소번호: " + lodgingNo);
-		System.out.println("이미지 정보: "+imgList);
+		System.out.println("이미지 정보: " + imgList);
 		return "host/registerLodging/lodgingImgAddForm";
 	}
 
 	@PostMapping("/lodgingImgAdd")
 	@ResponseBody
 	public Map<String, Object> lodgingImgAddForm(@RequestParam(name = "picture", required = false) MultipartFile upfile,
-			@LoginUser UserVO user,	MultipartHttpServletRequest req, Model model) throws IOException {
+			@LoginUser UserVO user, MultipartHttpServletRequest req, Model model) throws IOException {
 		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
 		int lodgingNo = lodgingRegistering.getNo();
 
 		// 파일 업로드
 		// 프로퍼티스 파일에 경로 설정해서 뿌리기
-		String uploadPath = req.getSession().getServletContext().getRealPath("/");	// Q. .metadata 안의 경로로 저장이됨
-		String filename= System.currentTimeMillis()	+ upfile.getOriginalFilename();
+		String uploadPath = req.getSession().getServletContext().getRealPath("/"); // Q. .metadata 안의 경로로 저장이됨
+		String filename = System.currentTimeMillis() + upfile.getOriginalFilename();
 		FileItem fileItem = new FileItem();
 		fileItem.setFilename(filename);
-		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(
-		/* 데스크톱 파일저장 주소 */
-		//"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thxtay/thxtay/src/main/webapp/resources/images/lodgings",
-		/* 노트북주소 파일저장 주소*/
-//		"C:/eGovFrameDev-3.10.0-64bit/workspace/workspace_project_thankstay/thankstay/src/main/webapp/resources/images/lodgings",
-		uploadPath+"resources/images/lodgings",
-		filename)));
+		FileCopyUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(uploadPath + "resources/images/lodgings", filename)));
 
 		File fileDir = new File(uploadPath + "resources/images/lodgings");
 		if (!fileDir.exists()) {
 			fileDir.mkdirs();
 		}
-		
+
 		// 등록중인 숙소의 번호로 숙소이미지리스트 vo 조회 후 insert
 		LodgingImgVO lodgingImg = new LodgingImgVO();
-		lodgingImg.setUri("/resources/images/lodgings/"+fileItem.getFilename());
+		lodgingImg.setUri("/resources/images/lodgings/" + fileItem.getFilename());
 		lodgingImg.setLodgingNo(lodgingNo);
 		lodgingImgService.addImg(lodgingImg);
-		
-		System.out.println("업로드 파일 주소:"+uploadPath);
+
+		System.out.println("업로드 파일 주소:" + uploadPath);
 
 		/* 숙소 이미지파일 조회&화면뿌리기 */
 		// 내려주는 파일
-		Map<String, Integer> condition= new HashMap<String, Integer>();
-		int getCnt=4;
+		Map<String, Integer> condition = new HashMap<String, Integer>();
+		int getCnt = 4;
 		condition.put("lodgingNo", lodgingNo);
 		condition.put("getCnt", getCnt);
 		List<LodgingImgVO> pictures = lodgingImgService.getImgListByLdgNo(condition);
@@ -209,121 +219,74 @@ public class LodgingController {
 		logger.info("보내는 파일 " + pictures);
 		logger.info("리턴밸류 " + retVal);
 
-		System.out.println("pictures="+pictures);
+		System.out.println("pictures=" + pictures);
 		return retVal;
 	}
 
-//	@PostMapping("/saveTemp")
-//	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm) {
-//		logger.info("saveTemp 실행");
-//		LodgingVO lodging = new LodgingVO();
-//		
-//		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
-//		if (!lrForm.getStatus().isEmpty()) {
-//			BeanUtils.copyProperties(lrForm, lodging);
-//			lodgingService.updateLodging(lodging);
-//			
-//			System.out.println("업데이트된 숙소의 정보" + lodging);
-//			System.out.println("업데이트 실행");
-//			return "redirect:hosting";
-//		}
-//		
-//		// 등록상태가 null일 경우 등록상태:등록중 으로 초기화 먼저 실행 후 숙소등록 작업 실행
-//		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
-//		System.out.println("lrForm:"+lrForm);
-//		BeanUtils.copyProperties(lrForm, lodging);
-//		lodging.setUserNo(user.getNo());
-//		lodgingService.registerLodging(lodging);
-//		
-//		System.out.println("저장된 숙소의 정보:" + lodging);
-//		return "redirect:hosting";
-//	}
-	@PostMapping("/saveTemp")
-	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm, PriceRegisterForm prForm
-			,@RequestParam("no") int lodgingNo
-			,@RequestParam("startDate") Date startDate
-			,@RequestParam("endDate") Date endDate) {
-		logger.info("saveTemp 실행");
-		
-		PriceDto ldgPrice=new PriceDto();
-		Calendar cal= Calendar.getInstance();
-		Calendar cal2= Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+	@GetMapping("/lodgingPriceAdd")
+	public String lodgingPriceAddForm(@LoginUser UserVO user, Model model) {
+		logger.info("lodgingPriceAddForm 실행");
 
-		cal.setTime(startDate);
-		cal2.setTime(endDate);
-		
-		int difference = Math.abs(cal2.get(Calendar.DATE)-cal.get(Calendar.DATE));
-		
-		for(int i=0;i<difference+1;i++) {
-			cal.add(Calendar.DATE, +1);
-			String dateStr= sdf.format(cal.getTime());
-			prForm.setOpenDate(dateStr);
-			prForm.setLodgingNo(lodgingNo);
-			BeanUtils.copyProperties(prForm, ldgPrice);
-			//하나씩 insert 해야함
-			System.out.println("prForm에 저장될 lodgingNo"+lodgingNo);
-			System.out.println("숙소의 요금등록정보"+ldgPrice);
-			System.out.println(sdf.format(cal.getTime()));
-			priceService.registerLdgPrice(ldgPrice);
-		}
-		
-		System.out.println("시작일"+startDate);
-		System.out.println("종료일"+endDate);
-		
+		LodgingVO lodgingRegistering = lodgingService.getLodgingRegistering(user.getNo());
+		model.addAttribute("lodgingRegistering", lodgingRegistering);
+		System.out.println("등록중 숙소" + lodgingRegistering);
+
+		return "host/registerLodging/lodgingPriceAddForm";
+	}
+
+	@PostMapping("/saveTemp")
+	public String saveTemp(@LoginUser UserVO user, LodgingRegisterForm lrForm) {
+		logger.info("saveTemp 실행");
 		LodgingVO lodging = new LodgingVO();
+
 		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
 		if (!lrForm.getStatus().isEmpty()) {
 			BeanUtils.copyProperties(lrForm, lodging);
 			lodgingService.updateLodging(lodging);
-			
-			
-			System.out.println("업데이트된 숙소의 정보" + lodging);
+
 			System.out.println("업데이트 실행");
-			return "redirect:hosting";
+			return "redirect:lodgingRegister";
 		}
 
 		// 등록상태가 null일 경우 등록상태:등록중 으로 초기화 먼저 실행 후 숙소등록 작업 실행
 		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
-		System.out.println("lrForm:"+lrForm);
 		BeanUtils.copyProperties(lrForm, lodging);
 		lodging.setUserNo(user.getNo());
 		lodgingService.registerLodging(lodging);
 
-		if(prForm!=null) {
-		PriceVO priceVo = new PriceVO();
-		System.out.println("생성");
-		}
-		System.out.println("숙소의 요금등록정보"+prForm);
 		System.out.println("저장된 숙소의 정보:" + lodging);
-		return "redirect:hosting";
+		return "redirect:lodgingRegister";
 	}
-	
+
 	@PostMapping("/saveTemp3")
-	public String saveTemp3(@LoginUser UserVO user, @RequestParam("selected-items") List<String> amenityList, @RequestParam("no") int ldgNo) {
-		System.out.println("유저번호:"+user.getNo());
-		System.out.println("등록중숙소번호:"+ldgNo);
+	public String saveTemp3(@LoginUser UserVO user, @RequestParam("selected-items") List<String> amenityList,
+			@RequestParam("no") int ldgNo) {
+		System.out.println("유저번호:" + user.getNo());
+		System.out.println("등록중숙소번호:" + ldgNo);
 		for (String amenity : amenityList) {
-			System.out.println("편의시설:"+amenity);
+			System.out.println("편의시설:" + amenity);
 		}
 		List<AmenityListVO> amenities = new ArrayList<AmenityListVO>();
 		AmenityListVO amenity = new AmenityListVO();
-		//Q2
-		//amenityList에 해당하는 code들 불러오기 => Q1. 파라미터로 배열을 전달하여 amtCodes를 먼저 뽑아놓고 사용하려 했으나 xml파일의 forEach 에러 ->질문
-//		List<String> amtCodes = lodgingAmtService.getAmtCodesByContents(amenityList);
-		
-		//for문 돌면서 ldgNo 추가, amtCode추가.
-		for(int i=0; i<amenityList.size();i++) {
+
+		// for문 돌면서 ldgNo 추가, amtCode추가.
+		for (int i = 0; i < amenityList.size(); i++) {
 //			for문 마다 db접속됨 -> Q1 해결 시 코드 수정 필요
-			String amtCode=commonService.getCommonCodeByContent(amenityList.get(i));
+			String amtCode = commonService.getCommonCodeByContent(amenityList.get(i));
 			amenity.setCode(amtCode);
 			amenity.setLodgingNo(ldgNo);
-			System.out.println("저장될편의시설:"+amenity);
-			lodgingAmtService.registerAmt(amenity);	// 편의시설테이블 제약조건 수정필요, amenity_no추가해야함
-		} 
-		//amenityList로
-		
-		return "redirect:hosting";
+			System.out.println("저장될편의시설:" + amenity);
+			lodgingAmtService.registerAmt(amenity); // 편의시설테이블 제약조건 수정필요, amenity_no추가해야함
+		}
+		return "redirect:lodgingRegister";
 	}
-	
+
+	@PostMapping("/saveTemp4")
+	public String lodgingPriceAddForm(@LoginUser UserVO user, PriceRegisterForm prForm,
+			@RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+		logger.info("lodgingPriceAddForm 실행");
+		System.out.println("prForm" + prForm);
+		priceService.RegisterPrice(prForm, startDate, endDate);
+		return "redirect:lodgingRegister";
+	}
 }

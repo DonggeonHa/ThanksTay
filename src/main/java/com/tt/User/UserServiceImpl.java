@@ -102,4 +102,9 @@ public class UserServiceImpl implements UserService {
 	public void insertDeletedUser(DeletedUserVO duser) {
 		userDao.insertDeletedUser(duser);
 	}
+
+	@Override
+	public void enrollHost(int userNo) {
+		userDao.updateUserIsHost(userNo);
+	}
 }

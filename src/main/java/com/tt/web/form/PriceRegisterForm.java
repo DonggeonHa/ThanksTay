@@ -10,8 +10,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PriceRegisterForm {
-    private int lodgingNo;   			// 숙소_번호
+    private int lodgingNo;   	// 숙소_번호
     private int lodgingFee;     // 숙박료
     private int cleaningFee;    // 청소비
-    private String openDate;      // 영업일
+    private String openDate;     // 영업일
 }
