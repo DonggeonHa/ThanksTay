@@ -60,7 +60,7 @@
 		VALUES
 			(lodging_seq.nextval
 			,#{userNo}
-			,#{city}
+			,'서울'
 			,#{postNo}
 			,#{address}
 			,#{addressRest}
@@ -141,6 +141,6 @@
 			,lodging_lat           =#{latitude}
 			,lodging_lng           =#{longitude}
 		WHERE
-			lodging_no=#{no}   
+			lodging_no=#{no}
     </update>
 </mapper>

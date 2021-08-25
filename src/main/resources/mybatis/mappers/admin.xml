@@ -93,10 +93,11 @@
 	</select>
 
 	<select id="getParentCode" resultType="com.tt.Common.CommonCodeVO">
-		SELECT
+		SELECT DISTINCT
 				PARENTCODE 					as parentCode
 		FROM
 				thxtay_common_code
+		ORDER BY parentcode asc
 	</select>
 
 	<insert id="insertCommonCode" parameterType="com.tt.Common.CommonCodeVO">
