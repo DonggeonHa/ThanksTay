@@ -110,9 +110,6 @@ public class CommonController {
 			@LoginUser UserVO user
 			){
 		
-		System.out.println("checkout"+checkOut);
-		System.out.println("east"+east);
-		
 		int userNo = 0;
 		if(user != null) {
 			userNo = user.getNo();
