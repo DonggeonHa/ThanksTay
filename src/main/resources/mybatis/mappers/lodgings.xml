@@ -60,7 +60,7 @@
 		VALUES
 			(lodging_seq.nextval
 			,#{userNo}
-			,#{city}
+			,'서울'
 			,#{postNo}
 			,#{address}
 			,#{addressRest}
@@ -121,7 +121,7 @@
 		SET
 			 lodging_no            =#{no}
 			,user_no               =#{userNo}
-			,lodging_city          =#{city}
+			,lodging_city          = '서울'
 			,lodging_post_no       =#{postNo}
 			,lodging_address       =#{address}
 			,lodging_address_rest  =#{addressRest}

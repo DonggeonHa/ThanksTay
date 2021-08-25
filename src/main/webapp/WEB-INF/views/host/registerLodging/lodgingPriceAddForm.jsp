@@ -223,7 +223,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	})
 
 	$("#next").click(function() {
-		$("#form-register").attr("action","lodgingAddressAdd")
+		$("#form-register").attr("action","saveTemp4")
 		$("#form-register").submit();
 	})
 </script>
