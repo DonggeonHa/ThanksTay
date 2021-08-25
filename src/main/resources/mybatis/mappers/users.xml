@@ -136,4 +136,13 @@
             (#{no}, #{password}, #{email}, TO_DATE(SUBSTR(#{birth}, 1, 10), 'YYYY-MM-DD'), #{phone}, #{picture}, #{emailCheck}, #{name}, #{info},
              #{isHost}, #{isAdmin}, #{deleted}, #{createdDate}, #{updatedDate})
     </insert>
+    
+    <update id="updateUserIsHost" parameterType="int">
+        UPDATE
+            thxtay_user
+        SET
+            user_isHost = 'Y'
+        WHERE
+            user_no = #{value}
+    </update>
 </mapper>

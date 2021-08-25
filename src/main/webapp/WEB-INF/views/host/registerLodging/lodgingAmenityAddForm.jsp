@@ -278,8 +278,17 @@ $("#prev").click(function() {
 })
 
 $("#next").click(function() {
-	$("#form-register").attr("action","lodgingImgAdd")
-	$("#form-register").submit();
+	/* #checked-category의 모든 input태그 중 checked를 선택해서 saveTemp3로 보내줄 것 */
+	amenityList = new Array();
+	$("#checked-category input").each(function(){
+		if($(this).prop('checked')==true){
+			amenityList.push($(this).parent().text())
+		}
+	})
+	for(i in amenityList){
+		$("#save-data").append("<input name='selected-items' type='hidden' value="+amenityList[i]+">")
+	}
+	$("#save-data").attr("action","saveTemp3").submit();
 })
 
 </script>

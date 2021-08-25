@@ -95,8 +95,7 @@ body {
 			<div class="todayInnerbox">
 				<div class="todayTitle">
 					<p>투데이</p>
-					<span><a href="lodgingRegister"><button
-								class="enrollButton">새 숙소 등록하기</button></a></span>
+					<span><a href="/lodgingRegister"><button class="enrollButton">새 숙소 등록하기</button></a></span>
 				</div>
 				<div class="todayNotice">${loginedUser.name }님 지금 바로 에어비앤비의 호스트가 되어 보세요!</div>
 			</div>
@@ -126,4 +125,24 @@ body {
 		menu.classList.toggle('active');
 		icons.classList.toggle('active');
 	});
+	
+	$(".enrollButton").click(function(){
+		/* 재로그인하기 전까지 조건안먹음 => maybe 세션에 올라가있는 아이디와 동기화 안된 것 같은데? */
+		if('${loginedUser.isHost}'=='N'){
+			var isHost='Y'
+			$.ajax({
+				url:"/hosting"
+				,type:"post"
+				,data:{"isHost":isHost}
+				,dataType:"json"
+				,success:function(){
+					alert("호스트가 되신걸 축하합니다!")
+				}
+				,error:function(){
+					alert("접속실패")
+				}
+			})
+		}
+	})
+		
 </script>

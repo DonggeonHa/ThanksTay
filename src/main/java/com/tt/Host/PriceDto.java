@@ -1,6 +1,5 @@
 package com.tt.Host;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

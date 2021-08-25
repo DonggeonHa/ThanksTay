@@ -25,6 +25,8 @@ public interface UserDao {
     UserVO getUserByNo(int userNo);
 
     UserVO getUserByName(String userName);
+    
+    void updateUserIsHost(int userNo);
 
     void updateProfile(UserVO user);
 
