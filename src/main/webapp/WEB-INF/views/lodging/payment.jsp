@@ -305,6 +305,7 @@
 												</div>
 											</div>
 										</c:if>
+										<!-- 
 										<div class="fee" style="margin-top: 16px;">
 											<div>
 												서비스 수수료
@@ -313,12 +314,13 @@
 												₩<fmt:formatNumber value="${booking.totalLodgingFee * 0.14 }" pattern="##,###"/>
 											</div>
 										</div>
+										 -->
 										<div class="fee" style="margin-top: 16px;">
 											<div>
 												숙박세와 수수료
 											</div>
 											<div>
-												₩<fmt:formatNumber value="${booking.totalLodgingFee * 0.14 * 0.1 }" pattern="##,###"/>
+												₩<fmt:formatNumber value="${booking.totalLodgingFee * 0.1 }" pattern="##,###"/>
 											</div>
 										</div>
 										<div class="fee" style="margin-top: 16px; font-weight: 800;">
