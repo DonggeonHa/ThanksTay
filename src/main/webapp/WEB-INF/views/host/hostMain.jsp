@@ -134,8 +134,7 @@ body {
 				url:"/hosting"
 				,type:"post"
 				,data:{"isHost":isHost}
-				,dataType:"json"
-				,success:function(){
+				,success:function(){	//전달받은 값이 true 등 json형태가 아닐경우 data: json 쓰지 말것(절대 안됨)
 					alert("호스트가 되신걸 축하합니다!")
 				}
 				,error:function(){

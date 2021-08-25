@@ -43,10 +43,14 @@ public class HostMainController {
 		
 		return "host/hostMain";
 	}
+	
 	@PostMapping(path= {"/hosting"})
 	@ResponseBody
 	public boolean hosting(@LoginUser UserVO user, @RequestParam("isHost") String isHost) {
 		userService.enrollHost(user.getNo());
+		
+		user.setIsHost(isHost); 		// 세션의 id정보 업데이트
+		
 		System.out.println(user.getIsHost());
 		return true;
 	}
