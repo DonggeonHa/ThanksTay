@@ -6,16 +6,19 @@
 	padding: 3px 2px;
 }
 
+h1 {
+	margin: 0;
+}
+
 .row>* {
 	padding: 0;
 }
 
-button {
-	color: #008489;
+button, button:focus{
 	background-color: white;
-	border: none;
+	border: 0;
+	outline: none;
 }
-
 
 #container-top, #container-body {
 	width: 800px;
@@ -25,7 +28,7 @@ button {
 
 .container h1 {
 	font-size: 30px;
-	margin-top: 30px;
+	margin-top: 50px;
 	font-weight: bolder;
 	color: #484848;
 }
@@ -42,15 +45,37 @@ button {
 	display: block;
 }
 
+#trans-nav button{
+	margin-top: 20px;
+	padding: 10px 0;
+}
+
+#cnt-button {
+	border-bottom: 2px solid #008489;
+}
+
+#cnt-button, #btn-link, #csvDownload {
+	color: #008489;
+}
+
+#csvDownload {
+	border: none;
+	background: none;
+	float: right;
+}
+
+#trans-box {
+	margin-top: 20px;
+}
 </style>
 
 <div class="container p-0" >
 	<div id="container-top" class="row">
 		<h1>대금 수령 내역</h1>
-		<div class="nav row col-md-7 border-bottom border-light gap-3">
-			<button type="button" class="col btn btn-none">대금수령 완료</button>
-			<button type="button" class="col btn btn-none">수령예정 내역</button>
-			<button type="button" class="col btn btn-none">총 수입</button>
+		<div id="trans-nav" class="nav row col-md-7 border-bottom border-light gap-3">
+			<button id="cnt-button" type="button" class="col">대금수령 완료</button>
+			<button type="button" class="col">수령예정 내역</button>
+			<button type="button" class="col">총 수입</button>
 		</div>
 		<div id="first-select-box" class="row gap-3">
 			<select id="bank-box" class="col rounded" name="bankAccount">
@@ -69,8 +94,8 @@ button {
 	</div>
 	<div id="container-body" class="mt-3 mb-3 row">
 		<form id="list-div" action="/host/transactionhomeexcel" method="post" enctype="multipart/form-data">
-			<h3 class="d-inline fs-6"><strong>수령 완료 금액:</strong></h3>
-			<input type="submit" value="CSV 다운로드" class="d-inline fs-6"/>
+			<h3 class="d-inline fs-6"><strong>수령 내역</strong></h3>
+			<input id="csvDownload" type="submit" value="CSV 다운로드" class="d-inline"/>
 			<div id="trans-box" class="border border-light shadow p-3 mb-5 bg-body rounded">
 				<div class="row mb-3">
 					<div class="col">
