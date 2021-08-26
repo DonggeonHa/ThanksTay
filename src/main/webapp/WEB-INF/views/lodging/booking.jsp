@@ -1062,15 +1062,30 @@
 										</a>
 									</div>
 								</div>
-								<div class="image5">
-									<div class="image5setup">
-										<a href="#" class="image5link" data-bs-toggle="modal" data-bs-target="#imageModal">
-											<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
-												<img class="img5" src="${images[4].uri }" style="object-fit: cover; vertical-align: bottom;">
+								<c:choose>
+									<c:when test="${images[4].uri == null }">
+										<div class="image5">
+											<div class="image5setup">
+												<a href="#" class="image5link" data-bs-toggle="modal" data-bs-target="#imageModal">
+													<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
+														<img class="img5" src="/resources/images/lodgings/lalalalala.jpg" style="object-fit: cover; vertical-align: bottom;">
+													</div>
+												</a>
 											</div>
-										</a>
-									</div>
-								</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="image5">
+											<div class="image5setup">
+												<a href="#" class="image5link" data-bs-toggle="modal" data-bs-target="#imageModal">
+													<div class="xxxxx" style="display: inline-block;vertical-align: bottom;height: 100%;width: 100%;min-height: 1px;">
+														<img class="img5" src="${images[4].uri }" style="object-fit: cover; vertical-align: bottom;">
+													</div>
+												</a>
+											</div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 						<div class="view-all">	<!-- 사진 모두 보기 도전하기!!!(_ekor09)  -->
@@ -1374,7 +1389,7 @@
 									</div>
 									<div>	<!-- 예약 버튼(옵션을 선택할 때마다 값을 넣어주기 -->
 										<form id="form-booking" action="payment" method="post">
-											<input type="hidden" id="user-no" name="userNo" value="${user.no }"> <!-- 로그인이랑 연결되면 넣기${LOGINED_USER.no } -->
+											<input type="hidden" id="user-no" name="userNo" value="${LOGINED_USER.no }"> <!-- 로그인이랑 연결되면 넣기${LOGINED_USER.no } -->
 											<input type="hidden" id="lodging-no" name="lodgingNo" value="${lodging.no }">
 											<input type="hidden" id="check-in" name="checkIn" value="">
 											<input type="hidden" id="check-out" name="checkOut" value="">
@@ -1573,7 +1588,7 @@
 											</c:if>
 										</div>
 										<div>
-											<c:if test="${bookingNo2 != 0 }">	<!-- ${bookingNo2 != null } -->
+											<c:if test="${bookingNo2 != 0 && lodging.userNo != LOGINED_USER.no }">	<!-- ${bookingNo2 != null } -->
 												<a herf="#" class="review-all" style="margin-right: 78px;" id="btn-open-review-modal" data-bs-toggle="modal" data-bs-target="#reviewFormModal">후기 작성하기</a>
 											</c:if>
 										</div>
@@ -1750,19 +1765,21 @@
 																</div>
 															</div>
 														</div>
-														<div style="display: grid; grid-area: 4 / 1 / auto / auto;">
-															<div class="modal-image-grid" style="grid-area: 1 / 1 / auto / auto;">
-																<div class="modal-image-relative">
-																	<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
-																		<div class="modal-image-size">
-																			<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
-																				<img class="img1" src="${images[4].uri }" style="object-fit: cover;">
+														<c:if test="${images[4].uri != null }">
+															<div style="display: grid; grid-area: 4 / 1 / auto / auto;">
+																<div class="modal-image-grid" style="grid-area: 1 / 1 / auto / auto;">
+																	<div class="modal-image-relative">
+																		<div class="modal-image-relative2" style="overflow: hidden; padding-top: 67%;">
+																			<div class="modal-image-size">
+																				<div style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;">
+																					<img class="img1" src="${images[4].uri }" style="object-fit: cover;">
+																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
-														</div>
+														</c:if>
 														<div>
 														
 														</div>
@@ -2035,16 +2052,20 @@
 		// 호스트 정보가 들어오는지
 		var host = "${host.name}";
 		console.log(host);
-		
-		var userName = "${user.name}";
-		console.log(userName);
-		
-		var avg = "${lodging.reviewAverage }";
-		var cnt = "${lodging.reviewCount }";
-		var totalcnt = 6 * cnt;
-		var total = Math.round(totalcnt * avg);
-		console.log(total);
-		console.log(avg);
+		// 로그인 되어있는 유저 이름
+		var userName555 = "${user.name}";
+		console.log(userName555);
+		// 예약번호가 있는지 
+		var bookingNo555 = "${bookingNo2}";
+		console.log("이번호가 0이 아니면 리뷰작성이 나온다.");
+		console.log(bookingNo555);
+		// 세션 유저 번호
+		var sessionLogin = "${LOGINED_USER.no }";
+		console.log("세션 로그인 유저 번호");
+		console.log(sessionLogin);
+		// 세션 유저 번호가 form에 잘 들어갔는지
+		var inputuserNo = $("input[name=userNo]").attr('value');
+		console.log(inputuserNo);
 		
 		//var value = $("input[name=number_of_guests]").attr('value');
 		//console.log(value);
@@ -2877,6 +2898,13 @@
 			var userNo = $("#user-no").val();
 			if (!userNo) {
 				alert("로그인이 필요한 서비스입니다.");
+				return false;
+			}
+			
+			var userNo2 = "${user.no }";
+			var hostNo = "${lodging.userNo}";
+			if (userNo2 == hostNo) {
+				alert("호스트가 등록한 숙소입니다.");
 				return false;
 			}
 			
