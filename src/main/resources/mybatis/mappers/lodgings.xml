@@ -43,7 +43,6 @@
 			,lodging_address
 			,lodging_address_rest
 			,lodging_description
-			,lodging_imm_approval
 			,lodging_max_guest
 			,lodging_name
 			,lodging_bedroom
@@ -65,7 +64,6 @@
 			,#{address}
 			,#{addressRest}
 			,#{description}
-			,#{immApproval}
 			,#{maxGuest}
 			,#{name}
 			,#{bedroom}
@@ -126,7 +124,6 @@
 			,lodging_address       =#{address}
 			,lodging_address_rest  =#{addressRest}
 			,lodging_description   =#{description}
-			,lodging_imm_approval  =#{immApproval}
 			,lodging_max_guest     =#{maxGuest}
 			,lodging_name          =#{name}
 			,lodging_bedroom       =#{bedroom}
