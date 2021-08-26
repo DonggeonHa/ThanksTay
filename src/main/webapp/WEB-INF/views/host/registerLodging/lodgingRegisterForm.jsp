@@ -169,15 +169,13 @@ body {
 				<h2 style="font-weight: bold">숙소 등록 시작하기</h2>
 				<div class="chooseStatus">
 					<a href="/lodgingTypeAdd"> <!-- 등록중인 숙소가 있을 때 새로운 숙소 등록하기 누를 시 => 등록중인 숙소 지우고 새로 시작 -->
-						<button class="chooseStatusBtn" type="button" role="radio"
-							aria-checked="false">
+						<button class="chooseStatusBtn" type="button" role="radio" aria-checked="false">
 							<p>새로운 숙소 등록하기</p>
 						</button>
 					</a>
 				</div>
 				<div class="chooseStatus">
-					<button class="chooseStatusBtn" type="button" role="radio"
-						aria-checked="false">
+					<button class="chooseStatusBtn" type="button" role="radio" aria-checked="false">
 						<p>기존 숙소 수정하기</p>
 					</button>
 				</div>

@@ -167,6 +167,10 @@ body {
 	margin: 5px;
 	text-align: center;
 }
+.save-info-items.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 </style>
 
 
@@ -187,19 +191,15 @@ body {
 							<button class="save-info-items">도움말</button>
 						</div>
 						<div>
-							<button class="save-info-items">저장 및 나가기</button>
+							<button class="save-info-items disabled">저장 및 나가기</button>
 						</div>
 					</div>
 				</div>
-				<!-- 야매: <div style="padding-top:50%; transform: translate(0, -25%);"> -->
-				<div id="ldg-step1"
-					style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
-					<form class="register-form" method="post"
-						action="/lodgingDetailAdd">
+				<div id="ldg-step1" style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
+					<form class="register-form" method="post" action="/lodgingDetailAdd">
 						<c:forEach var="lodgingType" items="${lodgingTypes }">
 							<div class="type-choose-btn-wrapper">
-								<button class="type-choose-btn" type="button"
-									role="radio" aria-checked="false">
+								<button class="type-choose-btn" type="button" role="radio" aria-checked="false">
 									<input type="hidden" class="" name="ldgType" value="">
 									<div class="type-font-pos">
 										<div class="type-font">${lodgingType.codeContent }</div>
@@ -223,7 +223,7 @@ body {
 					<div class="progress" style="height: 3px;">
 						<div class="progress-bar" role="progressbar" aria-valuenow="40"
 							aria-valuemin="0" aria-valuemax="10"
-							style="width: 25%; background-color: black; height: 2px;">
+							style="width: 16%; background-color: black; height: 2px;">
 						</div>
 					</div>
 					<div class="nextback-box">
@@ -243,7 +243,12 @@ body {
 	</div>
 </div>
 <script>
-
+	/* $(".type-choose-btn-wrapper button").each(function(){
+		alert($(this)."${lodgingRegistering.lodgingTypeCode})
+	    if($(this).text()=="${lodgingRegistering.lodgingTypeCode}")
+	        $(this).addClass("active");
+	}) */
+	
 	$(".type-choose-btn-wrapper button").click(
 			function() {
 				$(".type-choose-btn-wrapper *").removeClass("active");

@@ -210,7 +210,7 @@ body {
 					<div class="progress" style="height: 3px;">
 						<div class="progress-bar" role="progressbar" aria-valuenow="40"
 							aria-valuemin="0" aria-valuemax="10"
-							style="width: 50%; background-color: black; height: 2px;">
+							style="width: 64%; background-color: black; height: 2px;">
 						</div>
 					</div>
 					<div class="nextback-box">
@@ -278,7 +278,7 @@ $("#prev").click(function() {
 })
 
 $("#next").click(function() {
-	/* #checked-category의 모든 input태그 중 checked를 선택해서 saveTemp3로 보내줄 것 */
+	/* #checked-categorㅁy의 모든 input태그 중 checked를 선택해서 saveTemp3로 보내줄 것 */
 	amenityList = new Array();
 	$("#checked-category input").each(function(){
 		if($(this).prop('checked')==true){

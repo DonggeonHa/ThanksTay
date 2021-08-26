@@ -160,17 +160,17 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 #photo-zone .boxdesign {
-	transform: translate(0px, -20px);
+	/* transform: translate(0px, -20px); */
 	/* width: 450px;
 	height: 350px; */
 	/* 노트북 */
-	width: 250px;
-	height: 200px;
-	/* width:40%;
-	height:50%; */
+	/* width: 250px;
+	height: 200px; */
+	width:30vh;
+	height:30vh;
 	margin: 10px;
 	text-align: center;
-	border: blue dotted 1px;
+ 	border: gray solid 1px; 
 }
 
 #photo-zone .boxdesign img {
@@ -188,7 +188,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		<div class="left-area">
 			<a href="home" class="go-main"><i class="fab fa-airbnb"
 				style="color: white; padding: 10px;"></i></a>
-			<p>숙소 정보를 입력해주세요!</p>
+			<p>숙소의 사진을 등록해주세요</p>
 		</div>
 		<div class="right-area">
 			<div class="form-wrapper">
@@ -211,7 +211,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<div class="boxdesign"><img src="${imgList[3].uri }" alt="사진을 등록해주세요!"></div>
 					</div>
 					<!-- 파일 업로드  단수-->
-					<form id="form-upfile" style="margin-top:20%; " method="post" action="lodgingImgAdd" enctype="multipart/form-data">
+					<form id="form-upfile" style="margin-top:20px; " method="post" action="lodgingImgAdd" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-12 mb-1 d-flex justify-content-between">
 								<span>숙소사진을 첨부하세요 </span>
@@ -265,7 +265,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<div class="progress" style="height: 3px;">
 						<div class="progress-bar" role="progressbar" aria-valuenow="40"
 							aria-valuemin="0" aria-valuemax="10"
-							style="width: 50%; background-color: black; height: 2px;">
+							style="width: 80%; background-color: black; height: 2px;">
 						</div>
 					</div>
 					<div class="nextback-box">

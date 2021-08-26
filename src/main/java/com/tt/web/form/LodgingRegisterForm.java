@@ -15,8 +15,8 @@ public class LodgingRegisterForm {
 	private int bedroom; // 침실 수
 	private int bathroom; // 욕실 수
 	private int doublebed; // 2인용 침대
-	private int maxGuest; // 최대 인원수
 	private int singlebed; // 1인용 침대
+	private int maxGuest; // 최대 인원수
 	private String name; // 숙소이름
 	private String status; // 숙소상태
 	private String description; // 숙소설명

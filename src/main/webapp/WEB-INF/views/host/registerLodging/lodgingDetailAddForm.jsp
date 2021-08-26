@@ -148,16 +148,21 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</div>
 					</div>
 				</div>
-				<div id="ldg-step1"
-					style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
+				<div id="ldg-step1" style="height: 80%; display: flex; align-items: center; flex-direction: row; justify-content: center">
 					<form id="form-register" style="width: 50%;" method="post" novalidate="novalidate">
 						<c:if test="${lodgingRegistering.status ne null }">
 							<input type="hidden" name="no" value="${lodgingRegistering.no }">
 							<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
 						</c:if>
-						<input type="hidden" name="status" value="${lodgingRegistering.status }">
+						<input type="hidden" name="status" 			value="${lodgingRegistering.status }">
 						<input type="hidden" name="lodgingTypeCode" value="${ldgType }">
-
+						<input type="hidden" name="postNo" 			value="${lodgingRegistering.postNo }">
+						<input type="hidden" name="address" 		value="${lodgingRegistering.address }">
+						<input type="hidden" name="addressRest" 	value="${lodgingRegistering.addressRest }">
+						<input type="hidden" name="latitude" 		value="${lodgingRegistering.latitude }">
+						<input type="hidden" name="longitude" 		value="${lodgingRegistering.longitude }">
+						
+							
 						<div class="mb-3" style="text-align: left">
 							<label class="form-label">숙소명</label>
 							<input type="text" class="form-control" style="width: 100%" id="lodging-name"
@@ -220,7 +225,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								<input type="number" class="form-control form-control-sm"
 									style="border: none; text-align: center"
 									id="lodging-doublebed" name="doublebed"
-									value="${lodgingRegistering eq null? 0 : lodgingRegistering.bathroom  }" />
+									value="${lodgingRegistering eq null? 0 : lodgingRegistering.doublebed  }" />
 								<button class="btn btn-outline-secondary btn-sm" type="button"
 									id="plus-button">
 									<i class='fas fa-plus'></i>
@@ -240,7 +245,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<div class="progress" style="height: 3px;">
 						<div class="progress-bar" role="progressbar" aria-valuenow="40"
 							aria-valuemin="0" aria-valuemax="10"
-							style="width: 50%; background-color: black; height: 2px;">
+							style="width: 32%; background-color: black; height: 2px;">
 						</div>
 					</div>
 					<div class="nextback-box">
@@ -249,8 +254,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								style="color: white; background-color: black">다음</button>
 						</div>
 						<div>
-							<button class="nextback-items" id="prev"
-								style="text-decoration: underline;">뒤로</button>
+							<button class="nextback-items" id="prev" style="text-decoration: underline">뒤로</button>
 						</div>
 					</div>
 

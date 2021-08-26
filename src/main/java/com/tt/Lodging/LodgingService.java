@@ -13,4 +13,6 @@ public interface LodgingService {
 		void registerLodging(LodgingVO lodging);
 		
 		void updateLodging(LodgingVO lodging);
+		
+		void updateLodgingStatus(int lodgingNo);
 }
