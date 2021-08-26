@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<div class="modal-body container mt-3">
-				<h3 class="pb-3"><strong>Thxty에 오신 것을 환영합니다.</strong></h3>
+				<h3 class="pb-3"><strong>Thxthy에 오신 것을 환영합니다.</strong></h3>
 				<div class="form-floating my-3">
 					<input type="email" class="form-control" id="loginEmail" name="email">
 					<label for="loginEmail">이메일</label>
