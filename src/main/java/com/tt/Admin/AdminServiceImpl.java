@@ -31,6 +31,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public int deleteCommonCode(CommonCodeVO vo) {
+        int res = adminDao.deleteCommonCode(vo);
+        return res;
+    }
+
+    @Override
     public List<DeletedUserVO> getDeletedUsers() {
         return adminDao.getDeletedUsers();
     }

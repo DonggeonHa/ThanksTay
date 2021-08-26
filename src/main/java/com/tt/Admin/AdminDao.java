@@ -19,4 +19,5 @@ public interface AdminDao {
     List<LodgingVO> getLodging();
     UserVO getUserByNo(int userNo);
     void insertCommonCode(CommonCodeVO commonCodeVO);
+    int deleteCommonCode(CommonCodeVO vo);
 }

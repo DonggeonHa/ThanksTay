@@ -16,4 +16,5 @@ public interface AdminService {
     List<LodgingVO> getLodging();
     UserVO detailUser(int userNo);
     void insertCommonCode(CommonCodeVO commonCodeVO);
+    int deleteCommonCode(CommonCodeVO vo);
 }

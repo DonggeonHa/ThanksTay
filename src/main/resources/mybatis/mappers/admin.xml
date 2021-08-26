@@ -140,4 +140,8 @@
 		VALUES
 			(#{parentCode}, #{commonCode}, #{codeContent}, #{importance})
 	</insert>
+
+	<delete id="deleteCommonCode" parameterType="com.tt.Common.CommonCodeVO">
+		delete from thxtay_common_code where COMMONCODE = #{commonCode}
+	</delete>
 </mapper>

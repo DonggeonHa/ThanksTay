@@ -23,7 +23,7 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping(value = "/admin/index")
-    public String Menu() { return "admin/Aindex"; }
+    public String Menu() { return "admin/UserList"; }
 
     @RequestMapping(value = "/admin/userList")
     public String UserList1() {
@@ -152,4 +152,22 @@ public class AdminController {
 
         return "redirect:/admin/commonCodeList";
     }
+
+    @RequestMapping(value = "/admin/deleteCommonCode", produces="application/json; charset=UTF-8", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public Map<String, Object> deleteCommonCode(CommonCodeVO vo) {
+        Map<String, Object> retVal = new HashMap<String, Object>();
+
+        try {
+            int res = adminService.deleteCommonCode(vo);
+
+            retVal.put("res", "OK");
+        } catch(Exception e) {
+            retVal.put("res", "FAIL");
+            retVal.put("message", "삭제가 되지 않았습니다.");
+        }
+
+        return retVal;
+    }
+
 }

@@ -68,8 +68,9 @@
 				title += '<th style="width: 20%;">공통코드</th>';
 				title += '<th style="width: 20%;">코드명</th>';
 				title += '<th style="width: 10%;">우선순위</th>';
-				title += '<th style="width: 15%;">생성일</th>';
-				title += '<th style="width: 15%;">수정일</th>';
+				title += '<th style="width: 10%;">생성일</th>';
+				title += '<th style="width: 10%;">수정일</th>';
+				title += '<th style="width: 10%;">관리</th>';
 				title += '</tr>';
 				title += '</thead>';
 				$('#user-table').append(title);
@@ -92,6 +93,9 @@
 					} else {
 						output += '<td>' + item.updatedDate + '</td>';
 					}
+
+					output += '<td><a href="/admin/deleteCommonCode" class="delData" ';
+					output += 'commonCode=' + item.commonCode + '><i class="fas fa-trash-alt" ></i></a></td>';
 					output += '</tr>';
 					output += '</tbody>'
 					$('#user-table').append(output);
@@ -103,6 +107,32 @@
 				alert("code:"+request.status+"\n"+"error:"+error);
 			}
 		});
+	});
+
+	$(document).on('click', '.delData', function(event) {
+		$('#remo').remove();
+		jQuery.ajax({
+			url : $(this).attr("href"), //$(this) : //항목을 눌렀을때 그 걸 가르킴 .attr("href") 속성된 이름값중에 "href"을 통해서? 읽어온다??
+			type : 'GET',
+			data : {'commonCode' : $(this).attr("commonCode")},
+			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+			dataType : 'json',
+			success : function (retVal) {
+				if (retVal.res == "OK") {
+					// 데이터 성공할 때 이벤트 작성
+					window.location.reload();
+				} else {
+					alert("delete Fail !!");
+				}
+				page();
+			},
+			error : function() {
+				alert("ajax 삭제 통신 실패!");
+			}
+		});
+
+		// 기본 이벤트 제거
+		event.preventDefault();
 	});
 
 	// 만들어진 테이블에 페이지 처리
