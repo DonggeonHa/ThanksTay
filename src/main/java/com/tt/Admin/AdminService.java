@@ -1,6 +1,7 @@
 package com.tt.Admin;
 
 import com.tt.Common.CommonCodeVO;
+import com.tt.Lodging.LodgingVO;
 import com.tt.User.DeletedUserVO;
 import com.tt.User.UserVO;
 
@@ -12,6 +13,7 @@ public interface AdminService {
     List<DeletedUserVO> getDeletedUsers();
     List<CommonCodeVO> getCommonCode();
     List<CommonCodeVO> getParentCode();
+    List<LodgingVO> getLodging();
     UserVO detailUser(int userNo);
     void insertCommonCode(CommonCodeVO commonCodeVO);
 }

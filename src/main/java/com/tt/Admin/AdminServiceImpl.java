@@ -1,6 +1,7 @@
 package com.tt.Admin;
 
 import com.tt.Common.CommonCodeVO;
+import com.tt.Lodging.LodgingVO;
 import com.tt.User.DeletedUserVO;
 import com.tt.User.UserDao;
 import com.tt.User.UserVO;
@@ -42,5 +43,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<CommonCodeVO> getParentCode() {
         return adminDao.getParentCode();
+    }
+
+    @Override
+    public List<LodgingVO> getLodging() {
+        return adminDao.getLodging();
     }
 }

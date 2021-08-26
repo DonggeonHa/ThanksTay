@@ -2,6 +2,7 @@ package com.tt.Admin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tt.Common.CommonCodeVO;
+import com.tt.Lodging.LodgingVO;
 import com.tt.User.DeletedUserVO;
 import com.tt.User.UserVO;
 import com.tt.web.utils.SessionUtils;
@@ -43,6 +44,11 @@ public class AdminController {
         return "admin/CommonCodeList";
     }
 
+    @RequestMapping(value = "/admin/lodgingList")
+    public String LodgingList1() {
+        return "admin/LodgingList";
+    }
+
     //produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다
     @RequestMapping(value = "/admin/getUsers", produces="application/json;charset=UTF-8")
     @ResponseBody
@@ -53,6 +59,23 @@ public class AdminController {
         ObjectMapper mapper = new ObjectMapper();
         try {
             str = mapper.writeValueAsString(userList);
+        } catch (Exception e) {
+            System.out.println("first() mapper : " + e.getMessage());
+        }
+
+        return str;
+    }
+
+    //produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다
+    @RequestMapping(value = "/admin/getLodging", produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String LodgingList2() {
+        List<LodgingVO> lodgingList = adminService.getLodging();
+        String str = "";
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(lodgingList);
         } catch (Exception e) {
             System.out.println("first() mapper : " + e.getMessage());
         }
