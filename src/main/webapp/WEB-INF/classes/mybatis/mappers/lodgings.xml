@@ -121,7 +121,7 @@
 		SET
 			 lodging_no            =#{no}
 			,user_no               =#{userNo}
-			,lodging_city          = '서울'
+			,lodging_city          ='서울'
 			,lodging_post_no       =#{postNo}
 			,lodging_address       =#{address}
 			,lodging_address_rest  =#{addressRest}
@@ -142,5 +142,13 @@
 			,lodging_lng           =#{longitude}
 		WHERE
 			lodging_no=#{no}
+    </update>
+    <update id="updateLodgingStatus" parameterType="int">
+		UPDATE
+			thxtay_lodging
+		SET
+			lodging_status        = 'LDG0303'
+		WHERE
+			lodging_no=#{value}
     </update>
 </mapper>
