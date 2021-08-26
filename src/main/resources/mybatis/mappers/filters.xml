@@ -3,64 +3,97 @@
 
 <mapper namespace="com.tt.Explore.ExploreFilterDao">
 	<select id="getLodgingListBySearchFilter" parameterType="com.tt.Explore.SearchFilterVO" resultType="com.tt.Explore.LodgingListVO">
-		select ROWNUM, no, userNo, city, postNo, address, approval, maxGuest, image, name, 
-        bedroom, singleBed, doubleBed, viewCount, reviewCount, reviewAverage, status, description, typeCode, 
-        longitude, latitude, count, lodgingFee, cleaningFee, amenity, wishlist
-		from (select A.lodging_no no, 
-				A.user_no userNo,
-				A.lodging_city city,
-				A.lodging_post_no postNo,
-				A.lodging_address address,
-				A.lodging_imm_approval approval,
-				A.lodging_max_guest maxGuest,
-				A.lodging_image image,
-				A.lodging_name name,
-				A.lodging_bedroom bedroom,
-				A.lodging_singlebed singleBed,
-				A.lodging_doublebed doubleBed,
-				A.lodging_view_count viewCount,
-				A.lodging_review_count reviewCount,
-				A.lodging_review_average reviewAverage,
-				A.lodging_status status,
-				A.lodging_description description,
-				A.lodging_type_code typeCode,
-				A.lodging_lng longitude,
-				A.lodging_lat latitude,
-					(select sum(decode(B.price_isbooked, 'N', 1))
-					 from thxtay_price B
-					 where B.price_open_date &gt;= #{checkInDate} 
-					 and B.price_open_date &lt; #{checkOutDate}
-					 and B.lodging_no = A.lodging_no) count,
-                     (select sum(b.price_lodging_fee)
-					 from thxtay_price B
-					 where B.price_open_date &gt;= #{checkInDate} 
-					 and B.price_open_date &lt; #{checkOutDate}
-					 and B.lodging_no = A.lodging_no) lodgingFee,
-                     (select sum(b.price_cleaning_fee)
-					 from thxtay_price B
-					 where B.price_open_date &gt;= #{checkInDate} 
-					 and B.price_open_date &lt; #{checkOutDate}
-					 and B.lodging_no = A.lodging_no) cleaningFee,
-                     (select listagg(amenity_code, ',') within group (order by amenity_code)
-					 from thxtay_amenitylist C
-                     where a.lodging_no=c.lodging_no
-					 group by c.lodging_no) amenity,
-                     (select count(*)
-					 from thxtay_wish_zzim D, thxtay_wishlist E
-                     where D.wishlist_no=E.wishlist_no
-                     <if test="userNo != null">
-                     and E.user_no = #{userNo}
-                     </if>
-                     and D.lodging_no=A.lodging_no) wishlist
-			  from thxtay_lodging A
-			  where A.lodging_max_guest &gt;= #{guests}
-			  <if test = '("Y").equalsIgnoreCase(immApproval)'>
-			  and A.lodging_imm_approval = #{immApproval}
-			  </if>
-			  <if test="west != -1 and east != -1 and south != -1 and north != -1">
-              and A.lodging_lng &gt; #{west} and A.lodging_lng &lt; #{east}
-              and A.lodging_lat &lt; #{north} and A.lodging_lat &gt; #{south}</if>)
-		where count = round(to_date(to_char(#{checkOutDate},'YYYY-MM-DD'),'YYYY-MM-DD')-to_date(to_char(#{checkInDate},'YYYY-MM-DD'),'YYYY-MM-DD'))
+		select
+		       	ROWNUM, no, userNo, city, postNo, address, approval, maxGuest, image, name,
+        		bedroom, singleBed, doubleBed, viewCount, reviewCount, reviewAverage, status, description, typeCode,
+        		longitude, latitude, count, lodgingFee, cleaningFee, amenity, wishlist
+		from
+				(select
+						A.lodging_no no,
+						A.user_no userNo,
+						A.lodging_city city,
+						A.lodging_post_no postNo,
+						A.lodging_address address,
+						A.lodging_imm_approval approval,
+						A.lodging_max_guest maxGuest,
+						A.lodging_image image,
+						A.lodging_name name,
+						A.lodging_bedroom bedroom,
+						A.lodging_singlebed singleBed,
+						A.lodging_doublebed doubleBed,
+						A.lodging_view_count viewCount,
+						A.lodging_review_count reviewCount,
+						A.lodging_review_average reviewAverage,
+						A.lodging_status status,
+						A.lodging_description description,
+						A.lodging_type_code typeCode,
+						A.lodging_lng longitude,
+						A.lodging_lat latitude,
+						(select
+								sum(decode(B.price_isbooked, 'N', 1))
+					 	 from
+					 	 		thxtay_price B
+					 	 where
+					 	 		B.price_open_date &gt;= #{checkInDate}
+					 	 and
+					 	 		B.price_open_date &lt; #{checkOutDate}
+					 	 and
+					 	 		B.lodging_no = A.lodging_no) count,
+						(select
+								sum(b.price_lodging_fee)
+						 from
+								thxtay_price B
+						 where
+								B.price_open_date &gt;= #{checkInDate}
+						 and
+								B.price_open_date &lt; #{checkOutDate}
+						 and
+								B.lodging_no = A.lodging_no) lodgingFee,
+						(select
+								sum(b.price_cleaning_fee)
+						 from
+								thxtay_price B
+						 where
+								B.price_open_date &gt;= #{checkInDate}
+						 and
+								B.price_open_date &lt; #{checkOutDate}
+						 and
+								B.lodging_no = A.lodging_no) cleaningFee,
+						(select
+								listagg(amenity_code, ',') within group (order by amenity_code)
+						 from
+								thxtay_amenitylist C
+						 where
+								a.lodging_no=c.lodging_no
+						 group by c.lodging_no) amenity,
+						(select count(*)
+						 from
+								thxtay_wish_zzim D, thxtay_wishlist E
+						 where
+								D.wishlist_no=E.wishlist_no
+						<if test="userNo != null">
+						and
+							E.user_no = #{userNo}
+						</if>
+						and
+							D.lodging_no=A.lodging_no) wishlist
+			    from
+			    		thxtay_lodging A
+			  	where
+			  			A.lodging_max_guest &gt;= #{guests}
+				and
+						A.lodging_status = #{status}
+			  	<if test = '("Y").equalsIgnoreCase(immApproval)'>
+			  	and
+			  			A.lodging_imm_approval = #{immApproval}
+			  	</if>
+			  	<if test="west != -1 and east != -1 and south != -1 and north != -1">
+              	and
+              			A.lodging_lng &gt; #{west} and A.lodging_lng &lt; #{east}
+              	and
+              			A.lodging_lat &lt; #{north} and A.lodging_lat &gt; #{south}</if>)
+		where
+				count = round(to_date(to_char(#{checkOutDate},'YYYY-MM-DD'),'YYYY-MM-DD')-to_date(to_char(#{checkInDate},'YYYY-MM-DD'),'YYYY-MM-DD'))
 	</select>
 	
 	<select id="getImagesByLodgingNo" parameterType="int" resultType="string">

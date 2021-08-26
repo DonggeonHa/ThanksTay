@@ -43,6 +43,16 @@
         <put-attribute name="HostBody" value="/WEB-INF/views/host/{1}.jsp" />
     </definition>
 
+    <!-- HostMain2 쪽 -->
+    <definition name="Host2" template="/WEB-INF/tiles/noFooter.jsp">
+        <put-attribute name="HostHeader2" value="/WEB-INF/views/common/hostHeader.jsp" />
+        <put-attribute name="HostBody2" value="" />
+    </definition>
+
+    <definition name="host2/*" extends="Host2">
+        <put-attribute name="HostBody2" value="/WEB-INF/views/host/noFooter/{1}.jsp" />
+    </definition>
+
     <!-- Main 쪽 -->
     <definition name="Main" template="/WEB-INF/tiles/layouts.jsp">
         <put-attribute name="header" value="/WEB-INF/views/common/nav.jsp" />

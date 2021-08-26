@@ -50,7 +50,7 @@ public class HostController {
 
 		model.addAttribute("lodgings",lodgings);
 		System.out.println(model);
-		return "host/listings";
+		return "host/noFooter/listings";
 	}
 
 	/*transaction*/
@@ -74,7 +74,7 @@ public class HostController {
 		registerBank.setUserNo(user.getNo());
 		transactionRegisterService.insertBank(registerBank);
 		
-		return "host/transactionhome";
+		return "host/noFooter/transactionhome";
 	}
 	/* 호스트 대금 HOME (메뉴 > 대금수령내역) */
 	@GetMapping("/host/transactionhome")
@@ -90,7 +90,7 @@ public class HostController {
 		
 		System.out.println("-----------------------------------");
 		System.out.println(lodgings);
-		return "host/transactionhome";
+		return "host/noFooter/transactionhome";
 	}
 	/* 호스트 대금 Ajax (메뉴 > 대금수령내역) */
 	@GetMapping("/host/historyJson")
