@@ -10,18 +10,26 @@
 	-accent-color: #d49466;
 }
 
-a {
+a, a:hover{
 	margin: 0 auto;
 	text-decoration: none;
-	color: var(- -text-color);
+	color: #222222;
+	font-weight: bolder;
+}
+
+#navbar_ul li:hover {
+	border-radious : 50%;
+	background-color: #0000000f;
+	color: #222222;
 }
 
 .navbar {
+	border-bottom: 1px solid #e4e4e4 !important;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	background-color: #ffffff;
-	padding: 8px 12px;
+	padding: 14px 12px;
 }
 
 .navbar_logo {
@@ -31,10 +39,9 @@ a {
 	color: white;
 }
 
-.navbar_logo i, a {
-	color: #222222 !important;
-	font-weight: bolder;
-	text-decoration-line: none !important;
+.navbar_logo i {
+	color: #FF385C;
+	font-size: 35px;
 }
 
 .navbar_menu {
@@ -45,6 +52,7 @@ a {
 
 .navbar_menu li {
 	padding: 8px 12px;
+	border-radius: 100px;
 }
 
 
@@ -70,10 +78,12 @@ a {
 /* 미디어 쿼리  */
 @media screen and (max-width: 768px) {
 	.navbar {
+		border-bottom: 1px solid #e4e4e4 !important;
 		flex-direction: column;
 		align-items: flex-start;
 		padding: 8px 24px;
 		position: relative;
+		
 	}
 	.navbar_logo {
 		display: flex;
@@ -118,7 +128,7 @@ a {
 		<div class="navbar_logo">
 			<a href="/home"><i class="fab fa-airbnb"></i></a>
 		</div>
-		<ul class="navbar_menu">
+		<ul id="navbar_ul" class="navbar_menu">
 			<li><a href="">투데이</a></li>
 			<li><a href="">메시지</a></li>
 			<li><a href="">달력</a></li>

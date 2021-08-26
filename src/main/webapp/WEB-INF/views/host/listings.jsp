@@ -3,7 +3,6 @@
 <!-- 여기를 먼저? -->
 <style type="text/css">
 .container {
-	padding:0;
 }
 
 h1 {
@@ -24,24 +23,21 @@ h1 {
 .input-group {
 	width: unset;
 }
+
+#lists th, #lists td{
+	padding: 20px 0;
+}
+
+#lodgingImg {
+	width: 30px;
+}
 </style>
 
 <div class="container">
 	<main class="pt-5">
 		<div class="mb-5">
 			<div class="d-flex justify-content-between mb-4">
-				<h1>숙소 N개</h1>
-				<button>숙소 새로 등록하기</button>
-			</div>	
-			<div class="d-flex flex-row bd-highlight">
-				<div class="input-group">
-				 	<span class="filter-input input-group-text">ㅇ</span>
-					<input type="text" class="filter-input me-5" placeholder="숙소검색" aria-label="Username" aria-describedby="basic-addon1">
-				</div>
-				<button id="menu-filter-bed"class="filter-header me-4">침실 및 침대</button>
-				<button id="menu-filter-amenity" class="filter-header me-4">편의시설</button>
-				<button id="menu-filter-status" class="filter-header me-4">숙소 상태</button>
-				<button class="filter-header me-4">필터 더 보기</button>
+				<h1>숙소</h1>
 			</div>
 		</div>
 		<div>
@@ -77,7 +73,7 @@ h1 {
 									<input type="checkbox">
 									<span data-checkbox="true"></span>
 								</th>
-								<td><img src="resources/images/banners/item.png">${lodging.name }</td>
+								<td><img id="lodgingImg" src="resources/images/banners/item.png">${lodging.name }</td>
 								<td>${lodging.status}</td>
 								<td>${lodging.address }</td>
 								<td>${lodging.immApproval }</td>
@@ -95,119 +91,6 @@ h1 {
 		</div>
 	</main>
 </div>
-<form id="form-filtering">
-	<div id="filter-space"class="shadow-lg p-3 mb-5 filter-box" style="display:none;">
-		<div class="p-4">
-			<div class="d-flex justify-content-between">
-				<span>침실</span>
-				<div class="d-inline-flex">
-					<input type="button" id="btn-bR-minus" class="filter-buttons filter-button-minus" value="-" />
-					<input type="text" id="input-bR" name="bedroom" class="filter-buttons filter-button-value" value="0">
-					<input type="button" id="btn-bR-plus" class="filter-buttons" value="+" />
-				</div>
-			</div>
-			<div class="d-flex justify-content-between mt-4">
-				<span>싱글베드</span>
-				<div class="d-inline-flex">
-					<input type="button" id="btn-kChen-minus" class="filter-buttons filter-button-minus" value="-" />
-					<input type="text" id="input-kChen" name="kitchen" class="filter-buttons" value="0">
-					<input type="button" id="btn-kChen-plus" class="filter-buttons" value="+" />
-				</div>
-			</div>
-			<div class="d-flex justify-content-between mt-4">
-				<span>욕실</span>
-				<div class="d-inline-flex">
-					<input type="button" id="btn-bTR-minus" class="filter-buttons filter-button-minus" value="-" />
-					<input type="text" id="input-bTR" name="bathroom" class="filter-buttons" value="0">
-					<input type="button" id="btn-bTR-plus" class="filter-buttons" value="+" />			
-				</div>
-			</div>
-		</div>	
-		<div class="d-flex justify-content-between p-4 border-top">
-			<button type="button" id="doDeleteSpace">삭제</button>
-			<button type="button" class="doFiltering">적용하기</button>
-		</div>
-	</div>
-	<div id="filter-status" class="shadow-lg p-3 mb-5 filter-box" style="display:none;">
-		<div class="p-4">
-			<div class="d-flex">
-				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-ing" name="isRegistering">등록중</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-standby" name="standby">승인대기</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-approved" name="isApproved">승인</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3" id="filter-status-stopped" name="isStopped">휴업</span>
-			</div>	
-			<div class="d-flex justify-content-between p-4 border-top">
-				<button type="button" id="doDeleteStatus">삭제</button>
-				<button type="button" class="doFiltering">적용하기</button>
-			</div>
-		</div>
-	</div>
-	<div id="filter-amenity" class="shadow-lg p-3 mb-5 filter-box" style="display:none;">
-		<div class="p-4">
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">침실수</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">욕실수</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">싱글베드</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">더블베드</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">부엌</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">에어컨</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">난방</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">세탁기</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">건조기</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">와이파이</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">주차장</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">헬스장</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">수영장</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">테라스</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">공원</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">호수와 가까움</span>
-			</div>	
-			<div class="d-flex justify-content-between">
-				<span class="m-2"><input type="checkbox" class="me-3">해변과 가까움</span>
-			</div>	
-			<div class="d-flex justify-content-between p-4 border-top">
-				<button type="button" id="doDeleteAmenity">삭제</button>
-				<button type="button" class="doFiltering">적용하기</button>
-			</div>
-		</div>
-	</div>
-</form>
 <script type="text/javascript">
 //스크립트 맨 마지막꺼 보고 강사님한테 질문하기
 // sample-09-dom.html처럼 tbody없애고 할 수 있는지 꼭 배열이 필요한지?
