@@ -21,7 +21,6 @@
 		<div style="">
 			<header>
 				<tiles:insertAttribute name="header" ignore="true" />
-				<tiles:insertAttribute name="header2" ignore="true" />
 			</header>
 			<div style="flex: 1;">
 				<tiles:insertAttribute name="body" ignore="true" />
