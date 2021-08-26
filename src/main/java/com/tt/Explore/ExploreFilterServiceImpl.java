@@ -33,6 +33,10 @@ public class ExploreFilterServiceImpl implements ExploreFilterService {
 				lodging.setTotalFee(lodging.getLodgingFee()+lodging.getCleaningFee());
 				lodging.setPerDayFee((int)(lodging.getTotalFee()/lodging.getCount()));
 				String[] amenityList = lodging.getAmenity().split(",");	//list vs arrayList
+				lodging.setAmenityList(amenityList);
+				lodging.setImageList1(exploreFilterDao.getImagesByLodgingNo(lodging.getNo())[0]);
+				lodging.setImageList2(exploreFilterDao.getImagesByLodgingNo(lodging.getNo())[1]);
+				lodging.setImageList3(exploreFilterDao.getImagesByLodgingNo(lodging.getNo())[2]);
 			}
 		}
 		//private List<String> amenityList;

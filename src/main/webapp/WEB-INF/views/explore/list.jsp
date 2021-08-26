@@ -250,7 +250,7 @@ h5.modal-title{
 		<div id="left-box">
 			<!-- 300개 이상의 숙소·8월 16일-8월 18일 -->
 			<div class="list-title">
-				<p class="search-summary">숙박 3건 · 8월 11일 - 8월 13일 · 게스트 ${param.guests }명</p>
+				<p class="search-summary">숙박 <span class="totalResult"></span>건 · <span class="searchDate"></span> · 게스트 ${param.guests }명</p>
 				<p class="search-region"><span class="keyword">${param.location }</span>에서 선택한 지역"의 숙소</p>
 			</div>
 			<!-- dropbox와 pop-up이 섞여있음 -->
@@ -284,16 +284,16 @@ h5.modal-title{
 			<script id="template" type="x-tmpl-mustache">
 			<div class="list-box">
 				<div class="image-wrapper">
-					<div id="carouselControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+					<div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="../resources/images/lodgings/10001_1.jpg" class="d-block w-100" alt="">
+							<div class="carousel-item active" data-bs-interval="1000">
+								<img src="{{imageList1}}" class="d-block w-100" alt="">
 							</div>
-							<div class="carousel-item active">
-								<img src="../resources/images/lodgings/10001_2.jpg" class="d-block w-100" alt="">
+							<div class="carousel-item" data-bs-interval="1000">
+								<img src="{{imageList2}}" class="d-block w-100" alt="">
 							</div>
-							<div class="carousel-item">
-								<img src="../resources/images/lodgings/10001_3.jpg" class="d-block w-100" alt="">
+							<div class="carousel-item" data-bs-interval="1000">
+								<img src="{{imageList3}}" class="d-block w-100" alt="">
 							</div>
 						</div>
 						<button class="carousel-control-prev" type="button"
@@ -309,7 +309,7 @@ h5.modal-title{
 					</div>
 				</div>
 				<div class="text-wrapper">
-					<div class="list-box-title" style="display:flex;">
+					<div class="list-box-title" style="display:flex; padding-top: 3px;">
 						<div id="list-box-title-text">
 							<div class="lodging-summary"><span class="location"></span>의 <span>게스트용 별채 전체</span></div>
 							<div class="lodging-name">{{name}}<br/></div>
@@ -321,23 +321,26 @@ h5.modal-title{
 							<button class="zzim"><i" class="bi bi-suit-heart"></i></button>
 						</div>
 					</div>
-					<div class="list-box-spacer" style="width: 30px; height: 1px; background: black;">
+					<div class="list-box-spacer" style="width: 20px; height: 1px; background: #aaaaaa; margin: 0px; padding:0px; display: inline-block;">
 					</div>
 					<div class="list-box-detail" data="2줄 공간" style="margin-top:10px">
 						<div class="first-row">
 							<span>{{maxGuest}}</span><span>명</span><span> · </span>
 							<span>침실</span><span>{{bedroom}}개</span><span> · </span>
-							<span>침대</span><span>{{bed}}개</span><span> · </span>
-							<span>욕실</span><span>{{bathroom}}개</span>
+							<span>침대</span><span>{{totalBed}}개</span><span> · </span>
+							<span>욕실</span>1<span>{{bathroom}}개</span>
 						</div>
 						<div class="second-row">
+							{{#lodging}}
+							<span>{{amenityList}}</span><span> · </span>
+							{{/lodging}}
 							<span>주방</span><span> · </span>
 							<span>에어컨</span><span> · </span>
 							<span>무선인터넷</span><span> · </span>
 							<span>세탁기</span>
 						</div>
 					</div>
-					<div class="dynamic-info" style="display:flex; margin-top:30px">
+					<div class="dynamic-info" style="display:flex; margin-top:15px">
 						<div class="review-info">
 							<i class="bi bi-star-fill"></i>
 							<span>{{reviewAverage}}</span>
@@ -369,7 +372,7 @@ h5.modal-title{
 					<div class="recent-title">
 						최근 조회한 목록
 						<div class="arrow">
-							<i class="bi bi-chevron-left"></i><i class="bi bi-chevron-right"></i>
+							<!-- <i class="bi bi-chevron-left"></i><i class="bi bi-chevron-right"></i> -->
 						</div>
 					</div>
 					<div class="col-4">
@@ -469,20 +472,16 @@ h5.modal-title{
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       	<div class="wishlist">
-       		 <a href="#addWishlistModal" data-bs-target="#addWishlistModal" data-bs-toggle="modal" data-bs-dismiss="modal">
-	       		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-lg thumbnail" style="padding: 15px;" viewBox="0 0 16 16">
-  <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
-</svg>
-	       		<span>새로운 위시리스트 만들기</span>
-        	</a>
-        </div>
-       	<div class="wishlist">
-       		 <a href="#">
-	       		<img class="thumbnail" src="/resources/images/mains/seoul.webp">
-	       		<span>머물고 싶은 장소</span>
-        	</a>
-        </div>
+       	<div class="wishlist-wrapper">
+	       	<div class="wishlist">
+	       		 <a href="#addWishlistModal" data-bs-target="#addWishlistModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+		       		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-lg thumbnail" style="padding: 15px;" viewBox="0 0 16 16">
+	  <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+	</svg>
+		       		<span>새로운 위시리스트 만들기</span>
+	        	</a>
+	        </div>
+       	</div>
       </div>
     </div>
   </div>
@@ -504,7 +503,8 @@ h5.modal-title{
 			  </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button class="btn btn-dark" id="addWishlist" data-bs-target="#wishlist" data-bs-toggle="modal" data-bs-dismiss="modal">새로 만들기</button>
+	      	<!-- data-bs-target="#wishlist" 모달에 바로 업데이트 하고 싶었는데 또륵-->
+	        <button class="btn btn-dark" id="submitName" data-bs-toggle="modal" data-bs-dismiss="modal">새로 만들기</button>
 	      </div>
       </form>
     </div>
@@ -530,14 +530,21 @@ var immApproval;
 var keyword;
 
 var wishlistModal = new bootstrap.Modal(document.getElementById('wishlist'));
+var emailModal = new bootstrap.Modal(document.getElementById("loginRegisterModal"));
 
 $("#left-box").on('click', '.zzim', function(event){
 	var isLogined = "${not empty LOGINED_USER ? 'true' : 'false'}" //el을 여기서 쓸 수 있다? 자바스크립트에서 el이나 jstl을 쓸 수는 없음. 다 실행되고 난 html컨텐츠가 내려
-	if(isLogined){			
+	if(isLogined=='true'){			
+		$('#wishlist').removeAttr("data-lodging-no");	//왜 지워줬는데도 계속 남아있는거지 -- 질문
+		var lodgeNo = $(this).parents(".list-box").data("lodging-no");
+		$('#wishlist').attr("data-lodging-no", lodgeNo); //새로 들어가면 자동으로 update?
+		var wishlodgeNo = $('#wishlist').data('lodging-no');
+		console.log(wishlodgeNo);
+		
 		wishlistModal.show();
+		getWishlist();
 	} else {
-		alert('로그인이 필요한 기능입니다.');
-		//emailModal.show();	//navbar에 있는 모달 띄울 수 없는지... 또르륵
+		emailModal.show();
 	}
 	return false;
 });
@@ -593,6 +600,17 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 		            var htmlContent = Mustache.render(template, lodging);
 		            $(htmlContent).appendTo("#left-box .notice-travel");
 		            $(".location").text(locations);
+
+		            //summary
+		            $(".totalResult").text(lodgings.length);
+		            //임시 포맷
+		            var strCheckIn = checkIn.split('-');
+		            var strCheckOut = checkOut.split('-');
+		            var A = strCheckIn[1];
+		            var B = strCheckIn[2];
+		            var C = strCheckOut[1];
+		            var D = strCheckOut[2];
+		            $(".searchDate").text(A+"월 "+B+"일 - "+C+"월 "+D+"일");
 		            
 		            //list-box에 링크부여
 		            $('.list-box').attr("data-lodging-no", lodging.no);
@@ -725,7 +743,6 @@ geocoder.addressSearch('${param.location}', function(result, status) {
 });
 
 $('.doFilter').click(function(event) {
-	//$("#left-box .list-box").remove();
 	//만약 immApproval이 체크된 상태라면 : immApproval 변수를 Y로 바꿈, option-button의 css 상태도 짙은 테두리로
 	if($('#immApproval').is(":checked") == true){
 	    immApproval = 'Y';
@@ -747,26 +764,75 @@ $('#option-immApproval').click(function(event) {
 
 //위시리스트
 //새 위시리스트 추가
-$('#addWishlist').click(function(event) {
+$('#submitName').click(function(event) {
+	//입력하자마자 뜨는 값은 별로인걸...
 	var newWishName = $('#wishlistNameInput').val();
-	
+	console.log(newWishName);//온다
 	$.ajax({
 		//이 url문제도 처리해야됨
 	    url: '/wishlist/add/json',
 	    type: 'get',
-	    data: {
-	 	  		"wishName" : newWishName
-	       		},
-	    dataType: "json",    		
+	    data: { "wishName" : newWishName },
 	    success: function (lodgings) {
-	    	
+			console.log('성공이당');
+			//이전 모달 어떻게 업데이트? --성공!
+			getWishlist();
+			wishlistModal.show();
 	    },
 	    error: function(request, status, error){
 	    	console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 	    }
-	});    
+	});
+	//여기서 한 번 getWishlist해줘야하는지
 	return false;
 });
 //위시리스트 불러오기
+function getWishlist(){
+	//첫째를 제외하고 리프레시
+	$('.wishlist:not(:first-child)').remove();
+	//유저번호로 검색, ajax로 모든 위시리스트의 사진+이름+위시리스트 번호 불러오기
+	$.ajax({
+		//이 url문제도 처리해야됨
+	    url: '/wishlist/get/json',
+	    type: 'get',
+	    dataType: "json",    		
+	    success: function (wishlists) {
+	    	if(wishlists.length != 0){
+		    	$.each(wishlists, function(index, wishlist) {
+			    	var wishlistContent = '<div class="wishlist" data-wishlist-no="'+wishlist.no+'">'
+			    		wishlistContent += 		'<a href="#" class="wishlist-click" data-wishlist-no="'+wishlist.no+'">'
+			    		wishlistContent +=			'<img class="thumbnail" src="/resources/images/mains/seoul.webp">'
+			    		wishlistContent +=			'<span class="wishlist-name">'+wishlist.name+'</span>'
+			    		wishlistContent +=		'</a>'
+			    		wishlistContent += '</div>'
+				//하나씩 화면에 등록
+					$('.wishlist-wrapper').append(wishlistContent);
+		    	});
+	    	}
+	    },
+	    error: function(request, status, error){
+	    	console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+	    }
+	});
+};
+
+
+//$('.wishlist-click').click(function(event) {
+//	console.log('여기 오나요');
+//	var lodgeNo = $('#wishlist').data(lodging-no);
+//	console.log(lodgeNo);
+//});
+//function saveLodgeToWishlist(){
+	//유저번호, 위시리스트 번호, 해당 숙소 번호를 모두 보낸다.
+	
+	//버튼의 모양을 예쁘게 바꿔준다
+//}
+
+//function deleteLodgeFromWishlist(){
+	//숙소 번호로 위시리스트 번호를 획득한다.
+	//위시리스트 번호로 조회해서 로그인한 유저의 정보와 맞는지 확인한다.
+	//모든 조건이 맞으면 삭제
+	//버튼의 모양을 슬프게 바꿔준다
+//}
 //위시리스트에 찜 추가
 </script>

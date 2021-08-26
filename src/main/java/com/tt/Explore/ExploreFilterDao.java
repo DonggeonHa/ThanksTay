@@ -11,4 +11,5 @@ public interface ExploreFilterDao {
 
 	List<LodgingListVO> getLodgingListBySearchFilter(SearchFilterVO searchFilter);
 	List<LodgingListVO> getLodgingListByGuests(int guests);
+	String[] getImagesByLodgingNo(int no);
 }

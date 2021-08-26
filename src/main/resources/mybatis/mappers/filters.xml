@@ -62,7 +62,16 @@
               and A.lodging_lat &lt; #{north} and A.lodging_lat &gt; #{south}</if>)
 		where count = round(to_date(to_char(#{checkOutDate},'YYYY-MM-DD'),'YYYY-MM-DD')-to_date(to_char(#{checkInDate},'YYYY-MM-DD'),'YYYY-MM-DD'))
 	</select>
-
+	
+	<select id="getImagesByLodgingNo" parameterType="int" resultType="string">
+		SELECT
+			lodgingimg_uri
+		FROM
+			thxtay_lodging_img
+		WHERE
+			lodging_no = #{value}
+		order by lodgingimg_no asc
+	</select>
 
 	<select id="getLodgingListByGuests" parameterType="int" resultType="com.tt.Explore.LodgingListVO">
 		select	lodging_no no, 
