@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tt.Lodging.LodgingImgService;
+import com.tt.Lodging.LodgingImgVO;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,12 +45,14 @@ public class HostController {
 	@Autowired TransactionRegisterService transactionRegisterService;
 	@Autowired TransactionHistoryService transactionHistoryService;
 	@Autowired EarningsService earningsService;
+	@Autowired LodgingImgService lodgingImgService;
 	
 	/*listings*/
 	/* 호스트가 숙소 리스트출력 (메뉴 > 숙소) */
 	@GetMapping(path = {"/host/listings"})
 	public String listings(@LoginUser UserVO user, Model model) {
 		List<LodgingVO> lodgings = listingsService.getMyLodgings(user.getNo());
+
 		model.addAttribute("lodgings",lodgings);
 		System.out.println(model);
 		return "host/listings";

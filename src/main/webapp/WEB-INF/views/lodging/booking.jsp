@@ -2984,7 +2984,7 @@
 					//	$(".review-box-flex").prepend(makeRow2(reviewList, date));
 					//}
 					// 그냥 새로고침하기
-					document.location.href = document.location.href;
+					window.location.reload();
 				},
 				complete: function() {
 					todoModal.hide();

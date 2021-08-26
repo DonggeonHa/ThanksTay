@@ -236,7 +236,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<label class="form-label">숙소 설명</label>
 							<textarea type="text" class="form-control"
 								style="height: 100px;" id="lodging-description"
-								name="description"></textarea>
+								name="description">${lodgingRegistering.description }</textarea>
 						</div>
 					</form>
 				</div>

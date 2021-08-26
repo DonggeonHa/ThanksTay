@@ -162,15 +162,18 @@
 	
 	<select id="getBookingNoByUserNo" parameterType="com.tt.Lodging.BookingVO" resultType="com.tt.Lodging.BookingVO">
 		SELECT
-			booking_no				no
+			booking_no as no
 		FROM
-			(SELECT a.*, rownum as rnum
-            FROM thxtay_booking a
-            order by a.booking_no desc)
-		WHERE
-			lodging_no = #{lodgingNo}
-			and user_no = #{userNo}
-            and rnum = 1
+			(
+				select
+					booking_no, rank() over(order by booking_no desc) rk
+				from
+					thxtay_booking
+				where
+					lodging_no=#{lodgingNo}
+				  and user_no =#{userNo})
+		where
+			rk = 1
 	</select>
 	
 	<insert id="insertReview" parameterType="com.tt.Lodging.ReviewVO">

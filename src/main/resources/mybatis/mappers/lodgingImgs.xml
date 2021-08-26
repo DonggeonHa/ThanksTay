@@ -31,4 +31,20 @@
 		rk<![CDATA[<=]]>#{getCnt}
 	</if>
 	</select>
+
+	<select id="getImgByLdgNo" parameterType="int" resultType="com.tt.Lodging.LodgingImgVO">
+		SELECT rk, no, lodgingNo, uri
+		FROM(
+				SELECT
+				rank() over (order by lodgingimg_no desc) rk
+					,lodgingimg_no no
+					,lodging_no lodgingNo
+					,lodgingimg_uri uri
+				FROM
+				thxtay_lodging_img
+				WHERE
+				lodging_no=#{lodgingNo}
+			)
+		WHERE rk = 1;
+	</select>
 </mapper>

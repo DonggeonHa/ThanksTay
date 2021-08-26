@@ -11,4 +11,6 @@ public interface LodgingImgDao {
 	void insertImage(LodgingImgVO lodgingImg);
 	
 	List<LodgingImgVO> getImgListByLdgNo(Map<String, Integer> condition);
+
+	LodgingImgVO getImgByLdgNo(int lodgingNo);
 }

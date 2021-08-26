@@ -19,6 +19,11 @@ public class LodgingImgServiceImpl implements LodgingImgService{
 	}
 
 	@Override
+	public LodgingImgVO getImgByLdgNo(int lodgingNo) {
+		return lodgingImgDao.getImgByLdgNo(lodgingNo);
+	}
+
+	@Override
 	public void addImg(LodgingImgVO lodgingImg) {
 		lodgingImgDao.insertImage(lodgingImg);
 	}

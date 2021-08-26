@@ -113,6 +113,7 @@ public class LodgingController {
 		lodgingRegistering.setBathroom(lrForm.getBathroom());
 		lodgingRegistering.setSinglebed(lrForm.getSinglebed());
 		lodgingRegistering.setDoublebed(lrForm.getDoublebed());
+		lodgingRegistering.setDescription(lrForm.getDescription());
 
 		System.out.println("등록중인 lodgingRegistering:" + lodgingRegistering);
 		System.out.println("등록중인 lrForm:" + lrForm);
