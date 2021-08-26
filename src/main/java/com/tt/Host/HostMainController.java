@@ -2,8 +2,6 @@ package com.tt.Host;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import com.tt.Lodging.LodgingVO;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
 import com.tt.web.annotation.LoginUser;
-import com.tt.web.utils.SessionUtils;
 
 //어찌짤까? Controller(URL 주소연결)->HostDao->sql->Service->ServiceImpl-> Controller 완성 
 @Controller
