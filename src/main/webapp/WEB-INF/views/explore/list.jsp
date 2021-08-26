@@ -498,7 +498,7 @@ h5.modal-title{
       <form id="newWishName">
 	      <div class="modal-body">
 	        <div class="mb-3">
-			    <label for="wishlist-name" class="form-label">이름</label>
+			    <label for="wishlistNameInput" class="form-label">이름</label>
 			    <input type="text" class="form-control" id="wishlistNameInput" value="" aria-describedby="wishlist-name"/>
 			    <div id="wishlist-condition" class="form-text">최대 30자</div>
 			  </div>
