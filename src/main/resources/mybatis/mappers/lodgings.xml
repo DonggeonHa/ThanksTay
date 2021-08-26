@@ -82,9 +82,9 @@
 	</insert>
     <select id="getLodgingsByUserNo" parameterType="int" resultType="com.tt.Lodging.LodgingVO">
         SELECT
-             lodging_no                            no                
+             lodging_no                         no                
             ,user_no                            userNo            
-            ,lodging_city                        city          
+            ,lodging_city                       city          
             ,lodging_post_no                    postNo
             ,lodging_address                    address        
             ,lodging_address_rest               addressRest    

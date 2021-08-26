@@ -25,24 +25,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tt.Common.CommonConstant;
-import com.tt.Common.CommonDao;
 import com.tt.Common.CommonService;
 import com.tt.Host.HostMainController;
 import com.tt.Host.HostService;
-import com.tt.Host.PriceDto;
 import com.tt.Host.PriceService;
-import com.tt.Host.PriceVO;
 import com.tt.User.UserService;
 import com.tt.User.UserVO;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.tt.Common.CommonCodeVO;
 import com.tt.web.annotation.LoginUser;
 import com.tt.web.form.LodgingRegisterForm;
 import com.tt.web.form.PriceRegisterForm;
-
-import freemarker.template.SimpleDate;
 
 @Controller
 public class LodgingController {
@@ -269,7 +261,6 @@ public class LodgingController {
 		for (String amenity : amenityList) {
 			System.out.println("편의시설:" + amenity);
 		}
-		List<AmenityListVO> amenities = new ArrayList<AmenityListVO>();
 		AmenityListVO amenity = new AmenityListVO();
 
 		// for문 돌면서 ldgNo 추가, amtCode추가.

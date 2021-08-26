@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tt.Lodging.BookingVO;
 import com.tt.Lodging.LodgingVO;
 import com.tt.User.UserVO;
 import com.tt.web.annotation.LoginUser;
