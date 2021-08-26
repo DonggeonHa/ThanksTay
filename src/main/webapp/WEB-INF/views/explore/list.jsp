@@ -530,14 +530,15 @@ var immApproval;
 var keyword;
 
 var wishlistModal = new bootstrap.Modal(document.getElementById('wishlist'));
+var emailModal = new bootstrap.Modal(document.getElementById("loginRegisterModal"));
 
 $("#left-box").on('click', '.zzim', function(event){
 	var isLogined = "${not empty LOGINED_USER ? 'true' : 'false'}" //el을 여기서 쓸 수 있다? 자바스크립트에서 el이나 jstl을 쓸 수는 없음. 다 실행되고 난 html컨텐츠가 내려
-	if(isLogined){			
+	if(isLogined == 'true'){
 		wishlistModal.show();
 	} else {
 		alert('로그인이 필요한 기능입니다.');
-		//emailModal.show();	//navbar에 있는 모달 띄울 수 없는지... 또르륵
+		emailModal.show();	//navbar에 있는 모달 띄울 수 없는지... 또르륵
 	}
 	return false;
 });
