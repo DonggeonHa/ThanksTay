@@ -58,12 +58,7 @@ public class HostController {
 		return "host/listings";
 	}
 	/* 호스트가 숙소 필터링 (메뉴 > 숙소) */
-	@GetMapping(path = {"/host/filtering"})
-	public @ResponseBody ResponseEntity<List<LodgingVO>> doFilteringLodgings(FilteringVO filtering){
-		logger.info("filter실행");
-		List<LodgingVO> lodgings = listingsService.getLodgingsByFiltering(filtering);
-		return new ResponseEntity<List<LodgingVO>>(lodgings, HttpStatus.OK);
-	}
+
 
 	/*transaction*/
 	/* 호스트 대금 등록(GET) (메뉴 > 대금수령내역) */

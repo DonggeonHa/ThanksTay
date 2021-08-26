@@ -16,10 +16,5 @@ public class ListingsServiceImpl implements ListingsService{
 	public List<LodgingVO> getMyLodgings(int userNo) {
 		return listingsDao.getMyLodgingsByUserNo(userNo);
 	}
-	
-	@Override
-	public List<LodgingVO> getLodgingsByFiltering(FilteringVO filtering) {
-		return listingsDao.getLodgingsByFiltering(filtering);
-	}
-	
+
 }
