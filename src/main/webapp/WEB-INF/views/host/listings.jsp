@@ -10,20 +10,6 @@ h1 {
 	font-weight: bolder;
 }
 
-.filter-box {
-	width: 330px;
-	border-radius: 20px;
-}
-
-.filter-header, .filter-input {
-	padding: 6px 12px 8px 12px;
-	border-radius: 20px;
-}
-
-.input-group {
-	width: unset;
-}
-
 #lists th, #lists td{
 	padding: 20px 0;
 }
@@ -42,7 +28,7 @@ h1 {
 		</div>
 		<div>
 			<table class="table lodging-table">
-				<thead>
+				<thead class="text-center">
 					<tr>
 						<th scope="col">
 							<input type="checkbox">
@@ -59,7 +45,7 @@ h1 {
 						<th scope="col">리뷰 평점</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="text-center">
 					<c:choose>
 						<c:when test="${empty lodgings}">
 							<tr class="align-middle">
@@ -73,8 +59,15 @@ h1 {
 									<input type="checkbox">
 									<span data-checkbox="true"></span>
 								</th>
-								<td><img id="lodgingImg" src="resources/images/banners/item.png">${lodging.name }</td>
-								<td>${lodging.status}</td>
+								<td><img id="lodgingImg" src="${pageContext.request.contextPath}/resources/images/upload/defaultProfile.jpg">  ${lodging.name }</td>
+
+								<c:if test="${lodging.status eq 'LDG0303'}">
+									<td>승인</td>
+								</c:if>
+								<c:if test="${lodging.status eq 'LDG0301'}">
+									<td>등록중</td>
+								</c:if>
+
 								<td>${lodging.address }</td>
 								<td>${lodging.immApproval }</td>
 								<td>${lodging.bedroom }</td>
@@ -91,5 +84,3 @@ h1 {
 		</div>
 	</main>
 </div>
-<script type="text/javascript">
-</script>

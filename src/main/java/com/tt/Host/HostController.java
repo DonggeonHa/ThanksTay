@@ -57,8 +57,6 @@ public class HostController {
 		System.out.println(model);
 		return "host/listings";
 	}
-	/* 호스트가 숙소 필터링 (메뉴 > 숙소) */
-
 
 	/*transaction*/
 	/* 호스트 대금 등록(GET) (메뉴 > 대금수령내역) */
