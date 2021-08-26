@@ -2044,6 +2044,13 @@
 		var list = JSON.parse('${json}');
 		console.log(list);
 		
+		var dgsg = list[0].lodgingFee;
+		console.log(dgsg);
+		
+		console.log("청소비");
+		var price = list[0].cleaningFee;
+		console.log(price);
+		
 		// 로그인 정보가 들어오는지 확인하기
 		var ksksksks = "${user.no }";
 		console.log(ksksksks);

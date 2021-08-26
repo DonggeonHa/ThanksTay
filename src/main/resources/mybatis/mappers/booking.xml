@@ -57,7 +57,7 @@
 			price_no				no,
 			lodging_no			    lodgingNo,
 			price_lodging_fee		lodgingFee,
-			price_cleaning_fee		cleaninFee,
+			price_cleaning_fee		cleaningFee,
 			price_open_date			openDate,
 			price_isbooked			isBooked,
 			price_updated_date		updateDate,
