@@ -26,7 +26,6 @@ public interface WishlistDao {
 	//등록된 숙소를 위시리스트에서 제거하기(유저번호 조회도 필수)
 	void removeLodgingFromWishList(int userNo, int lodgingNo);
 	
-	//
-	List<LodgingListVO> getLodgingsByWishListNo(int wishlistNo);
-
+	//위시리스트 번호로 저장된 숙소 목록 조회하기
+	List<LodgingListVO> getZzimedLodgingsByWishListNo(int wishlistNo);
 }

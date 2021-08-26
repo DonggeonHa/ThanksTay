@@ -38,11 +38,12 @@ public class LodgingListVO {
 	private String description;
 	private String wishlist;
 	private int count;
-	//가격정보 추가해야
-	//어메니티
 	private int totalBed;
 	private int totalFee;
 	private int perDayFee;
-	private List<String> amenityList;
-	private List<String> imageList;
+	private String[] amenityList;
+	//private String[] imageList;
+	private String imageList1;
+	private String imageList2;
+	private String imageList3;
 }

@@ -14,11 +14,13 @@
 		where wishlist_no = #{value}
 	</delete>
 	<select id="getWishListByUserNo" parameterType="int" resultType="com.tt.Wishlist.WishlistVO">
-		select wishlist_no, user_no, wishlist_name
+		select 	wishlist_no			no
+				, user_no			userNo
+				, wishlist_name		name
 		from thxtay_wishlist
 		where user_no = #{value}
 	</select>
-	<select id="getZzimByWishListNo" parameterType="int" resultType="com.tt.Explore.LodgingListVO">
+	<select id="getZzimedLodgingsByWishListNo" parameterType="int" resultType="com.tt.Explore.LodgingListVO">
 		select lodging_no no, 
 				user_no userNo,
 				lodging_city city,

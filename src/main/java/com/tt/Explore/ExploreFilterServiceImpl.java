@@ -30,9 +30,13 @@ public class ExploreFilterServiceImpl implements ExploreFilterService {
 		if(!lodgings.isEmpty()) {
 			for(LodgingListVO lodging:lodgings) {
 				lodging.setTotalBed(lodging.getSinglebed()+lodging.getDoublebed());
-				lodging.setTotalFee(lodging.getLodgingFee()+lodging.getCleaningFee());
-				lodging.setPerDayFee((int)(lodging.getTotalFee()/lodging.getCount()));
+				lodging.setTotalFee((int)(lodging.getLodgingFee()+lodging.getCleaningFee()*1.1));
+				lodging.setPerDayFee((int)(lodging.getTotalFee()/lodging.getCount()*1.1));
 				String[] amenityList = lodging.getAmenity().split(",");	//list vs arrayList
+				lodging.setAmenityList(amenityList);
+				lodging.setImageList1(exploreFilterDao.getImagesByLodgingNo(lodging.getNo())[0]);
+				lodging.setImageList2(exploreFilterDao.getImagesByLodgingNo(lodging.getNo())[1]);
+				lodging.setImageList3(exploreFilterDao.getImagesByLodgingNo(lodging.getNo())[2]);
 			}
 		}
 		//private List<String> amenityList;

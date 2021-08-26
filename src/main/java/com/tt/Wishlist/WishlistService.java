@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.tt.Explore.LodgingListVO;
+
 @Service
 public interface WishlistService {
 
@@ -21,4 +23,6 @@ public interface WishlistService {
 
 	//등록된 숙소를 위시리스트에서 제거하기(유저번호 조회도 필수)
 	void deleteLodgingFromWishList(int userNo, int lodgingNo);
+	
+	List<LodgingListVO> getZzimedLodgingsByWishListNo(int wishlistNo);
 }
