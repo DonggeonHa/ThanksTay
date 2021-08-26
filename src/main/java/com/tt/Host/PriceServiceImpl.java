@@ -38,7 +38,7 @@ public class PriceServiceImpl implements PriceService{
 		int difference = Math.abs(cal2.get(Calendar.DATE)-cal.get(Calendar.DATE));
 		
 		for(int i=0;i<difference+1;i++) {
-			cal.add(Calendar.DATE, +1);
+			cal.add(Calendar.DATE,+1);
 			String dateStr= sdf.format(cal.getTime());
 			ldgPrice.setLodgingNo(lodgingNo);
 			ldgPrice.setLodgingFee(lodgingFee);
@@ -52,32 +52,36 @@ public class PriceServiceImpl implements PriceService{
 	@Override
 	public void RegisterPrice(PriceRegisterForm prForm, Date startDate, Date endDate) {
 		// 숙소 가격입력
-		System.out.println("check1");
-				PriceDto ldgPrice=new PriceDto();
-				Calendar cal= Calendar.getInstance();
-				Calendar cal2= Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+		PriceDto ldgPrice=new PriceDto();
+		Calendar cal= Calendar.getInstance();
+		Calendar cal2= Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 
-				System.out.println("check2");
+		cal.setTime(startDate);
+		cal2.setTime(endDate);
 
-				cal.setTime(startDate);
-				cal2.setTime(endDate);
-
-				System.out.println("check3");
-				
-				int difference = Math.abs(cal2.get(Calendar.DATE)-cal.get(Calendar.DATE));
-				
-				for(int i=0;i<difference+1;i++) {
-					cal.add(Calendar.DATE, +1);
-					String dateStr= sdf.format(cal.getTime());
-					ldgPrice.setLodgingNo(prForm.getLodgingNo());
-					ldgPrice.setLodgingFee(prForm.getLodgingFee());
-					ldgPrice.setCleaningFee(prForm.getCleaningFee());
-					ldgPrice.setOpenDate(dateStr);
-					
-					System.out.println("check4"+ldgPrice);
-					priceDao.insertLodgingPrice(ldgPrice);
-				}
+		int difference = Math.abs(cal2.get(Calendar.DATE)-cal.get(Calendar.DATE));
+		
+		//시작날짜 데이트 삽입
+		String dateStr= sdf.format(cal.getTime());
+		ldgPrice.setLodgingNo(prForm.getLodgingNo());
+		ldgPrice.setLodgingFee(prForm.getLodgingFee());
+		ldgPrice.setCleaningFee(prForm.getCleaningFee());
+		ldgPrice.setOpenDate(dateStr);
+		priceDao.insertLodgingPrice(ldgPrice);
+		System.out.println("price check:"+ldgPrice);
+		//
+		for(int i=0;i<difference;i++) {
+			cal.add(Calendar.DATE, +1);
+			dateStr= sdf.format(cal.getTime());
+			ldgPrice.setLodgingNo(prForm.getLodgingNo());
+			ldgPrice.setLodgingFee(prForm.getLodgingFee());
+			ldgPrice.setCleaningFee(prForm.getCleaningFee());
+			ldgPrice.setOpenDate(dateStr);
+			
+			System.out.println("price check:"+ldgPrice);
+			priceDao.insertLodgingPrice(ldgPrice);
+		}
 	}
 	
 }

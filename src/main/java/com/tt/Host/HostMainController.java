@@ -37,9 +37,13 @@ public class HostMainController {
 	@GetMapping(path = { "/hosting" })
 	public String hosting(@LoginUser UserVO user, Model model) {
 		logger.info(user);
+		LodgingVO lodgingRegistering= new LodgingVO();
+		lodgingRegistering=lodgingService.getLodgingRegistering(user.getNo());
 		
-		if(user!=null)
-		model.addAttribute("loginedUser",user);
+		if(user!=null) {
+			model.addAttribute("loginedUser",user);
+		}
+		model.addAttribute("lodgingRegistering",lodgingRegistering);
 		
 		return "host/hostMain";
 	}

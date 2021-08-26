@@ -175,11 +175,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<input id="lng" type="hidden" name="longitude" value="${lodgingRegistering.longitude }">
 
 
+
 						<div class="mb-3" style="text-align: left">
 							<label class="form-label">우편번호</label>
-							<input type="text" class="form-control" style="width: 100%"
-							id="member_post" name="postNo" autocomplete="off" value="${lodgingRegistering.postNo }"
-							onclick="findAddr()" />
+							<input type="text" class="form-control" style="width: 100%"	id="member_post" 
+								   name="postNo" autocomplete="off" value="${lodgingRegistering.postNo }"	onclick="findAddr()" />
 						</div>
 						<div class="mb-3" style="text-align: left">
 							<label class="form-label">주소</label>
@@ -199,7 +199,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<div class="progress" style="height: 3px;">
 						<div class="progress-bar" role="progressbar" aria-valuenow="40"
 							aria-valuemin="0" aria-valuemax="10"
-							style="width: 50%; background-color: black; height: 2px;">
+							style="width: 48%; background-color: black; height: 2px;">
 						</div>
 					</div>
 					<div class="nextback-box">

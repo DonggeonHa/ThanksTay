@@ -70,7 +70,10 @@ public class LodgingController {
 
 		String commonCode = commonService.getCommonCodeByContent("숙소타입");
 		List<CommonCodeVO> lodgingTypeCodes = commonService.getCommonCodesByParentCode(commonCode);
-
+		LodgingVO lodgingRegistering=lodgingService.getLodgingRegistering(user.getNo());
+		
+		
+		model.addAttribute("lodgingRegistering",lodgingRegistering);
 		model.addAttribute("lodgingTypes", lodgingTypeCodes);
 
 		return "host/registerLodging/lodgingTypeAddForm";
@@ -235,7 +238,10 @@ public class LodgingController {
 		// 이미 상태가 등록중인 숙소는 lodgingService의 update작업 실행
 		if (!lrForm.getStatus().isEmpty()) {
 			BeanUtils.copyProperties(lrForm, lodging);
+			int maxGuest=lrForm.getSinglebed()+lrForm.getDoublebed()*2;
+			lodging.setMaxGuest(maxGuest);
 			lodgingService.updateLodging(lodging);
+			System.out.println("업데이트된 lodging:"+lodging);
 
 			System.out.println("업데이트 실행");
 			return "redirect:lodgingRegister";
@@ -244,7 +250,10 @@ public class LodgingController {
 		// 등록상태가 null일 경우 등록상태:등록중 으로 초기화 먼저 실행 후 숙소등록 작업 실행
 		lrForm.setStatus(commonService.getCommonCodeByContent(CommonConstant.LDG_REGISTERING));
 		BeanUtils.copyProperties(lrForm, lodging);
+		int maxGuest=lrForm.getSinglebed()+lrForm.getDoublebed()*2;
+		lodging.setMaxGuest(maxGuest);
 		lodging.setUserNo(user.getNo());
+		
 		lodgingService.registerLodging(lodging);
 
 		System.out.println("저장된 숙소의 정보:" + lodging);
@@ -264,7 +273,7 @@ public class LodgingController {
 
 		// for문 돌면서 ldgNo 추가, amtCode추가.
 		for (int i = 0; i < amenityList.size(); i++) {
-//			for문 마다 db접속됨 -> Q1 해결 시 코드 수정 필요
+		// for문 마다 db접속됨 -> Q1 해결 시 코드 수정 필요
 			String amtCode = commonService.getCommonCodeByContent(amenityList.get(i));
 			amenity.setCode(amtCode);
 			amenity.setLodgingNo(ldgNo);
@@ -280,6 +289,7 @@ public class LodgingController {
 		logger.info("lodgingPriceAddForm 실행");
 		System.out.println("prForm" + prForm);
 		priceService.RegisterPrice(prForm, startDate, endDate);
-		return "redirect:lodgingRegister";
+		lodgingService.updateLodgingStatus(prForm.getLodgingNo());
+		return "redirect:hosting";
 	}
 }

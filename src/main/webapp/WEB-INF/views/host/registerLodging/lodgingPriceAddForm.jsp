@@ -156,17 +156,19 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="hidden" name="userNo" value="${lodgingRegistering.userNo }">
 						</c:if>
 						
-						<div class="mb-3">
+						<div class="">
 							<label class="form-label">숙박비 설정</label>
 							<div style="display: flex">
 								<input type="date" class="form-control form-control-sm"	style="border: none; text-align: center"
 									   id="start-date" name="startDate" value="" />
 								<input type="date" class="form-control form-control-sm"	style="border: none; text-align: center"
-									   id="end-date" name="endDate" value="" />
+									   id="end-date" name="endDate" value="2021-8-5" />
 							</div>
-							<div style="margin: 0px auto; text-align:right">
-								<label>숙박료:<input type="number" name="lodgingFee" style="text-align:right; border:none; border-bottom:1px solid black"></label>
-								<label>청소비:<input type="number" name="cleaningFee" style="text-align:right; border:none; border-bottom:1px solid black"></label>
+							<div>
+								<div style="padding-top:25px;margin: 0px auto; text-align:right">
+									<label>숙박료:<input type="number" name="lodgingFee" style="text-align:right; border:none; border-bottom:1px solid black" value=0></label>
+									<label>청소비:<input type="number" name="cleaningFee" style="text-align:right; border:none; border-bottom:1px solid black"value=0></label>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -176,13 +178,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<div class="progress" style="height: 3px;">
 						<div class="progress-bar" role="progressbar" aria-valuenow="40"
 							aria-valuemin="0" aria-valuemax="10"
-							style="width: 50%; background-color: black; height: 2px;">
+							style="width: 100%; background-color: black; height: 2px;">
 						</div>
 					</div>
 					<div class="nextback-box">
 						<div>
 							<button class="nextback-items" id="next"
-								style="color: white; background-color: black">다음</button>
+								style="color: white; background-color: black">등록완료</button>
 						</div>
 						<div>
 							<button class="nextback-items" id="prev"
@@ -196,6 +198,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	</div>
 </div>
 <script>
+	//달력에 오늘날짜 기본값 넣기
+	var today=new Date();
+	var year=today.getFullYear();
+	var month=('0'+(today.getMonth()+1)).slice(-2);
+	var day=('0'+today.getDate()).slice(-2);
+	today=year+'-'+month+'-'+day
+	$("#start-date").val(today);
+	$("#end-date").val(today);
 
 	// 증감 적용 위한 아이디 배열	=> 강사님 코드로 변경해보기
 	var selectorArray = ["#lodging-bedroom","#lodging-bathroom","#lodging-singlebed","#lodging-doublebed"];

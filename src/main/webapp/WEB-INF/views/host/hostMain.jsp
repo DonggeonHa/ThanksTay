@@ -88,6 +88,32 @@ body {
 	padding-top: 20px;
 	padding-left: 10%;
 }
+
+.helpBox {
+	height: 500px;
+	width: 100%;
+	background-color:black;
+	background-size: cover;
+}
+
+.helpInnerBox {
+	width: 1440px;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+}
+.helpInnerBox .helpItem {
+    display: flex;
+	font-size: 32px;
+	color: white;
+	/* align-items: center; */
+	justify-content: space-around;
+	padding: 0% 10%;
+}
+.helpInnerBox .helpItem a{
+    text-decoration: none;
+    color:white
+}
 </style>
 <div class="container-fluid">
 	<section>
@@ -95,11 +121,20 @@ body {
 			<div class="todayInnerbox">
 				<div class="todayTitle">
 					<p>투데이</p>
-					<span><a href="/lodgingRegister"><button class="enrollButton">새 숙소 등록하기</button></a></span>
+					<c:choose>
+						<c:when test="${lodgingRegistering ne null }">
+							<span><a href="/lodgingRegister"><button class="enrollButton">숙소 등록완료하기</button></a></span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="/lodgingRegister"><button class="enrollButton">새 숙소 등록하기</button></a></span>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 				<div class="todayNotice">${loginedUser.name }님 지금 바로 에어비앤비의 호스트가 되어 보세요!</div>
 			</div>
 		</div>
+
 		<div class="reservationWrapperBox">
 			<div class="reservationAlarmBox"></div>
 			<div class="reservationAlarmText">
@@ -107,8 +142,39 @@ body {
 				<p>게스트가 숙소를 예약하면 여기에 표시됩니다.</p>
 			</div>
 		</div>
-		<div class="todayBox">
-			<div class="todayInnerbox">
+		<div class="helpBox">
+			<div class="helpInnerBox">
+                <div style="padding-top:30px;">
+                    <div class="helpItem" style="justify-content:left">
+                        <p>호스팅 관련 팁과 업데이트</p>
+                    </div>
+                    <div class="helpItem">
+                        <a href="https://www.airbnb.co.kr/resources/hosting-homes/a/how-you-get-paid-for-hosting-20">
+                            <div style="padding-right:20px;">
+                                <img class="_1cb9q3xq" style="object-fit:cover;width:300px;" aria-hidden="true" alt="thumbnail card" src="https://a0.muscache.com/im/pictures/fff5a5e8-3ab3-4970-a5fc-c51e301a9acb.jpg?im_w=720" data-original-uri="https://a0.muscache.com/pictures/fff5a5e8-3ab3-4970-a5fc-c51e301a9acb.jpg">
+                                <div style="font-size:20px; padding-top:20px; background-color:#212120;padding-bottom:20px; color:white">호스팅 대금을 수령하는 방법</div>
+                            </div>
+                        </a>
+                        <a href="https://www.airbnb.co.kr/resources/hosting-homes/a/sprucing-up-your-listing-description-13">
+                        <div style="padding-right:20px;">
+                            <img class="_1cb9q3xq" style="object-fit:cover;width:300px;" aria-hidden="true" alt="thumbnail card" src="https://a0.muscache.com/im/pictures/451f156e-cc93-41be-ad1f-569c3bb350ca.jpg?im_w=720" data-original-uri="https://a0.muscache.com/pictures/451f156e-cc93-41be-ad1f-569c3bb350ca.jpg">
+                            <div style="font-size:20px; padding-top:20px; background-color:#212120;padding-bottom:20px; color:white">멋진 숙소 설명 작성하기</div>
+                        </div>
+                        </a>
+                            <a href="https://www.airbnb.co.kr/resources/hosting-homes/a/understanding-calendar-and-booking-settings-16">
+                            <div style="padding-right:20px;">	
+                                <img class="_1cb9q3xq" style="object-fit:cover;width:300px;" aria-hidden="true" alt="thumbnail card" src="https://a0.muscache.com/im/pictures/57d04174-24ab-4a42-a1d7-989d5b1dda47.jpg?im_w=720" data-original-uri="https://a0.muscache.com/pictures/57d04174-24ab-4a42-a1d7-989d5b1dda47.jpg">
+                                <div style="font-size:20px; padding-top:20px; background-color:#212120;padding-bottom:20px; color:white">달력 및 예약 설정 알아보기</div>
+                            </div>
+                        </a>
+                            <a href="https://www.airbnb.co.kr/resources/hosting-homes/a/create-a-guidebook-to-share-your-local-tips-23">
+                            <div style="padding-right:20px;">	
+                                <img class="_1cb9q3xq" style="object-fit:cover;width:300px;"  aria-hidden="true" alt="thumbnail card" src="https://a0.muscache.com/im/pictures/c8c24577-9079-4af8-b64b-200feb855d33.jpg?im_w=720" data-original-uri="https://a0.muscache.com/pictures/c8c24577-9079-4af8-b64b-200feb855d33.jpg">
+                                <div style="font-size:20px; padding-top:20px; background-color:#212120;padding-bottom:20px; color:white">요약 책장전략수립</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>    
 			</div>
 		</div>
 	</section>
@@ -145,3 +211,4 @@ body {
 	})
 		
 </script>
+
