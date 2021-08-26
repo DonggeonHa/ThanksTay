@@ -122,11 +122,6 @@ public class UserController {
 		return retVal;
 	}
 
-	@GetMapping("/login")
-	public String loginform() {
-		return "loginForm";
-	}
-
 	@PostMapping("/login2")
 	@ResponseBody
 	public Map<String, Object> login(@RequestParam("email") String userEmail, @RequestParam("password") String userPassword) {

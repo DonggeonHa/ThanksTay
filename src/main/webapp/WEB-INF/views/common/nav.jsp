@@ -22,28 +22,28 @@
 		</div>
 		<div>
 			<ul class="nav justify-content-end">
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="hosting">호스트 모드로 전환</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">국제화</a></li>
 				<c:if test="${not empty LOGINED_USER }">
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-bs-toggle="dropdown">회원 님 환영합니다.</a>
-					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-						<li><a class="dropdown-item" href="#">메시지(채팅)</a></li>
-						<li><a class="dropdown-item" href="#">여행(?)</a></li>
-						<li><a class="dropdown-item" href="#">위시리스트</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">숙소관리</a></li>
-						<li><a class="dropdown-item" href="#">계정(?)</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">도움말</a></li>
-						<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
-						<li><a class="dropdown-item" href="#" id="withdrawal">회원탈퇴</a></li>
-					</ul>
-				</li>
+					<li class="nav-item"><a class="nav-link active"	aria-current="page" href="hosting">호스트 모드로 전환</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">국제화</a></li>
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown">${LOGINED_USER.name} 님 환영합니다.</a>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="#">메시지(채팅)</a></li>
+							<li><a class="dropdown-item" href="#">여행(?)</a></li>
+							<li><a class="dropdown-item" href="#">위시리스트</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">숙소관리</a></li>
+							<li><a class="dropdown-item" href="#">계정(?)</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">도움말</a></li>
+							<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
+							<li><a class="dropdown-item" href="#" id="withdrawal">회원탈퇴</a></li>
+						</ul>
+					</li>
 				</c:if>
 				<!--
 				<c:if test="${empty LOGINED_USER }"> 로그아웃 상태 (?) 부분은 시간 상 구현가능여부 미정 -->
+				<li class="nav-item"><a class="nav-link" href="#">국제화</a></li>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
 					role="button" data-bs-toggle="dropdown">로그인</a>
 					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown2">

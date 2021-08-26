@@ -1,6 +1,5 @@
 package com.tt.User;
 
-import com.tt.exception.LoginException;
 import com.tt.web.utils.SessionUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
