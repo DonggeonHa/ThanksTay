@@ -35,6 +35,7 @@ public class LodgingListVO {
 	private int lodgingFee;
 	private int cleaningFee;
 	private String amenity;
+	private String description;
 	private String wishlist;
 	private int count;
 	//가격정보 추가해야

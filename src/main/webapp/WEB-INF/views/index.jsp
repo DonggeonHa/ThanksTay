@@ -76,6 +76,10 @@
 	margin-bottom: 15px;
 	font-size: 18px;
 }
+
+label {
+	color: white;
+}
 /*
 .banner-wrapper{
 	border: 1px outset black;
@@ -101,54 +105,50 @@
 <!-- 이미지 전체화면+nav바 cover하게 조정해야 -->
 <div class="container-fluid">
 	<div class="container">
-	<form action="explore/list">
-		<div class="row">
-			<div class="col-3">
-				<div class="input-box-1">
-					<label class="form-label">위치</label> <input type="text"
-						class="form-control" value="${location }" name="location"
-						placeholder="어디로 여행가세요" />
-					<!-- 현재 이 부분 작동 안함ㄸㄹㄹ -->
-					<!--<div class="dropdown-menu">
-									<li><a class="dropdown-item" href="#">Action</a></li>
-								</div>-->
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="row">
-					<div class="col-6">
-						<div class="input-box-2">
-							<label class="form-label">체크인</label> <input type="text"
-								class="form-control" value="${checkin}" name="checkin"
-								placeholder="날짜입력" />
-						</div>
+		<form action="explore/list">
+			<div class="row" style="justify-content: center; padding:15px">
+				<div class="col-3">
+					<div class="input-box-1">
+						<label class="form-label">위치</label> <input type="text"
+							class="form-control" value="${location }" name="location"
+							placeholder="어디로 여행가세요" />
 					</div>
-					<div class="col-6">
-						<div class="input-box-3">
-							<label class="form-label">체크아웃</label> <input type="text"
-								class="form-control" value="${checkout}" name="checkout"
-								placeholder="날짜입력" />
+				</div>
+				<div class="col-4">
+					<div class="row">
+						<div class="col-6">
+							<div class="input-box-2">
+								<label class="form-label">체크인</label> <input type="text"
+									class="form-control" value="${checkin}" name="checkin"
+									placeholder="날짜입력" />
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="input-box-3">
+								<label class="form-label">체크아웃</label> <input type="text"
+									class="form-control" value="${checkout}" name="checkout"
+									placeholder="날짜입력" />
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-3">
-				<div class="input-box-4">
-					<label class="form-label">인원</label> <input type="text"
-						class="form-control" name="guests" placeholder="게스트 추가" />
-					<ul class="dropdown-menu">
-						<li class="dropdown-item"></li>
-					</ul>
+				<div class="col-3">
+					<div class="input-box-4">
+						<label class="form-label">인원</label> <input type="text"
+							class="form-control" name="guests" placeholder="게스트 추가" />
+						<ul class="dropdown-menu">
+							<li class="dropdown-item"></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-1">
+					<button type="submit" style="margin-top: 32px;"
+						class="btn btn-primary">검색</button>
 				</div>
 			</div>
-			<div class="col-1">
-				<button type="submit" class="btn btn-primary mb-3">검색</button>
-			</div>
-		</div>
-	</form>
-<br />
-	
-		<div class="content text-left" style="margin-top: 310px; text-shadow: 1px 1px 5px black;">
+		</form>
+		<div class="content text-left"
+			style="margin-top: 310px; text-shadow: 1px 1px 5px black;">
 			<h1 class="text-white mb-3" style="">올림픽/패럴림픽 출전 선수와 함께하는 온라인 체험</h1>
 			<button class="btn btn-light">지금 둘러보기</button>
 		</div>
@@ -235,11 +235,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div class="sec sec-3">
-		<span class=semi-title>어디든 상관없이 떠나고 싶을 때 에어비앤비가 도와드립니다!</span>
-		<button class="btn btn-dark">유연한 검색</button>
-	</div> -->
-	<!-- 정렬방법 생각하기... 이미지 사이즈 맞추는 방법도 -->
 	<div class="sec sec-4">
 		<div class=semi-title>어디에서나, 여행은 살아보는거야!</div>
 		<div class="row">
