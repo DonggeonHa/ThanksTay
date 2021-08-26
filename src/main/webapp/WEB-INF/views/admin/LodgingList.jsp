@@ -43,11 +43,10 @@
 				title += '<thead class="text-center">';
 				title += '<tr>';
 				title += '<th style="width: 10%;">번호</th>';
-				title += '<th style="width: 5%;">유저번호</th>';
 				title += '<th style="width: 25%;">숙소이름</th>';
 				title += '<th style="width: 10%;">도시</th>';
 				title += '<th style="width: 25%;">주소</th>';
-				title += '<th style="width: 5%;">최대인원수</th>';
+				title += '<th style="width: 10%;">최대인원수</th>';
 				title += '<th style="width: 10%;">숙소상태</th>';
 				title += '<th style="width: 10%;">숙소타입</th>';
 				title += '</tr>';
@@ -58,7 +57,6 @@
 					output += '<tbody class="text-center">'
 					output += '<tr>';
 					output += '<td>' + item.no + '</td>';
-					output += '<td>' + item.userNo + '</td>';
 					output += '<td>' + item.name + '</td>';
 					output += '<td>' + item.city + '</td>';
 					output += '<td>' + item.address + '</td>';
