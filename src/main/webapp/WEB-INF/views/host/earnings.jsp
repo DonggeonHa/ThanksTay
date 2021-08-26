@@ -5,77 +5,124 @@
 	--bs-gutter-x: 0;
 }
 
-button {
-	color: #008489;
-	background-color: white;
-	border: none;
+#second-section, #third-section {
+	width: 800px;
 }
 
-.container-in {
-	width: 700px;
-	margin: 0 auto;
+#first-section {
+	margin-top: 50px;
 }
 
 h1 {
-	font-size: 30px;
-	margin-top: 30px;
+	margin: 0;
 	font-weight: bolder;
 	color: #484848;
 }
 
-.container .nav button {
-	font-size: 15px;
-	font-weight: bolder;
+h2 {
+	font-weight: 600;
+	padding: 20px 0;
 }
 
-#select-box select {
+#date-box {
 	border-color: #ebebeb;
 	height: 45px;
-	margin-top: 13px;
 	display: block;
-	
 }
 
 #details-box .section-style{
 	border-top: 1px solid #EBEBEB;
 	padding: 24px 0;
 }
+
+#menu  {
+	border-bottom: 1px solid #EBEBEB;
+}
+
+#menu a {
+	margin: 0 18px 0 0;
+	padding: 20px 0;
+	display: inline-block;
+}
+
+#menu a:eq(2){
+	border-bottom: 1px solid black;
+}
+
+#select-box label {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 40px 0 15px 0;
+}
+
+#earnings-box {
+	margin: 35px 0 30px 0;
+}
+
+#eptIncome-section {
+	margin-left: 25px;
+}
+
+.earnings-fee {
+	font-weight: 800;
+}
+
+#earnings-bar {
+	border-bottom: 1px solid black;
+}
+
+#third-section {
+	margin: 50px 0;
+}
 </style>
 
 
 <div class="container p-0" >
-	<div class="container-in row">
+	<section id="first-section">
 		<h1>수입</h1>
+		<div id="menu">
+			<a href=#>발전 기회</a>
+			<a href=#>후기</a>
+			<a id="earnings-bar" href=#>수입</a>
+			<a href=#>조회수</a>
+			<a href=#>슈퍼호스트</a>
+			<a href=#>청소</a>
+		</div>
+	</section>
+	<section id="second-section">
 		<div id="select-box" class="row">
 			<label>월선택</label>
 			<select id="date-box" name="startDate" class="col rounded">
 			</select>
 		</div>		
-		<div class="nav row col-md-7 border-bottom border-light gap-3">
+		<div id="earnings-box" class="nav row col-md-7 border-bottom border-light gap-3">
 			<div>
-				<div id="totalIncome"><span class="fs-1"></span></div>
+				<div id="totalIncome"><span class="fs-1 earnings-fee"></span></div>
 				<span><strong id="selected-month" class="text-danger fs-3"></strong>월 총 예약수입</span>
 			</div>
 			<div class="d-flex">
 				<section>
-					<div id="cfdIncome"><span class="d-block fs-2"></span></div>
+					<div id="cfdIncome"><span class="d-block fs-2 earnings-fee"></span></div>
 					<span>수입확정</span>
 				</section>
-				<section>
-					<div id="eptIncome"><span class="d-block fs-2"></span></div>
+				<section id="eptIncome-section">
+					<div id="eptIncome"><span class="d-block fs-2 earnings-fee"></span></div>
 					<span>수입예정</span>
 				</section>
 			</div>
 		</div>
 		<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+	</section>
+	<section id="third-section">
 		<div id="details-box">
 			<h2 id="cntYear"></h2>
 			<section class="section-style"><span class="d-table-cell w-100">청소비</span><span id="fee-cleaning" class="d-table-cell"></span></section>
 			<section class="section-style"><span class="d-table-cell w-100">취소 수수료</span><span id="fee-cancel" class="d-table-cell">￦0</span></section>
 			<section class="section-style"><span>대금 수령내역 보기<br></span></section>
 			<section class="section-style"><span>세금정보 보기</span></section>
+			<section class="section-style"><a href="#">피드백 보내기</a></section>
 		</div>
-	</div>
+	</section>
 </div>
 
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
@@ -139,7 +186,7 @@ $(function() {
 	
 	//전달 받은 데이터로 차트를 갱신
 	function refreshChart(earningsList) {
-		var array = [['months', 'confirmedIncome', 'expectingIncome']]
+		var array = [['months', '확정금액', '예정금액']]
 		$.each(earningsList, function(index, earnings) {
 			var item = [earnings.months, earnings.confirmedIncome, earnings.expectingIncome]
 			array.push(item)
