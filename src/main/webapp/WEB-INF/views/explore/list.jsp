@@ -264,9 +264,8 @@ h5.modal-title{
 			<form id="pageFilters">
 				<div id="immApproval-window"class="shadow-lg p-3 mb-5 filter-box" style="display:none;">
 					<div class="p-4">
-						<div class="d-flex justify-content-between">
+						<div class="justify-content-between">
 							<div class="filter-title">즉시예약</div>
-							<div class="filter">호스트의 승인을 기다릴 필요 없이 예약할 수 있는 숙소</div>
 							<div class="form-check form-switch">
 			  					<input class="form-check-input" type="checkbox" id="immApproval">
 			  					<label class="form-check-label" for="immApproval">호스트의 승인을 기다릴 필요 없이 예약할 수 있는 숙소</label>
@@ -290,7 +289,7 @@ h5.modal-title{
 							<div class="carousel-item active">
 								<img src="../resources/images/lodgings/10001_1.jpg" class="d-block w-100" alt="">
 							</div>
-							<div class="carousel-item">
+							<div class="carousel-item active">
 								<img src="../resources/images/lodgings/10001_2.jpg" class="d-block w-100" alt="">
 							</div>
 							<div class="carousel-item">
@@ -410,8 +409,19 @@ h5.modal-title{
 			</div>
 		</div>
 		<!-- 이 부분 화면 스크롤 마다 어떻게...? -->
-		<div id="right-box" style="">
-			<div id="map" style="width:100%; height:1000px;">
+		<div id="right-box" style="position: relative;">
+			<div id="map" style="width:100%; height:1000px;"></div>
+			<div id="lodging-popUp" style="position: absolute; top: 10px; left: 30px; z-index: -1; width: 400px; heigth: 200px;">
+				<div class="card card-primary">
+					<div class="card-body">
+						<div class="lodging-review"></div>
+						<span id="lodging-name"></span>
+						<small id="store-description"></small></div>
+					</div>
+					<div class="card-footer text-end">
+						<button id="btn-close-modal" class="btn btn-outline-dark btn-sm py-0">닫기</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -460,7 +470,7 @@ h5.modal-title{
       </div>
       <div class="modal-body">
        	<div class="wishlist">
-       		 <a href="#">
+       		 <a href="#addWishlistModal" data-bs-target="#addWishlistModal" data-bs-toggle="modal" data-bs-dismiss="modal">
 	       		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-lg thumbnail" style="padding: 15px;" viewBox="0 0 16 16">
   <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
 </svg>
@@ -474,6 +484,29 @@ h5.modal-title{
         	</a>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<!------------------새 위시리스트 추가하기---------------------- -->
+<div class="modal fade" id="addWishlistModal" aria-hidden="true" aria-labelledby="addWishlistModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">위시리스트 이름</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="newWishName">
+	      <div class="modal-body">
+	        <div class="mb-3">
+			    <label for="wishlist-name" class="form-label">이름</label>
+			    <input type="text" class="form-control" id="wishlistNameInput" value="" aria-describedby="wishlist-name"/>
+			    <div id="wishlist-condition" class="form-text">최대 30자</div>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-dark" id="addWishlist" data-bs-target="#wishlist" data-bs-toggle="modal" data-bs-dismiss="modal">새로 만들기</button>
+	      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -499,7 +532,13 @@ var keyword;
 var wishlistModal = new bootstrap.Modal(document.getElementById('wishlist'));
 
 $("#left-box").on('click', '.zzim', function(event){
-	wishlistModal.show();
+	var isLogined = "${not empty LOGINED_USER ? 'true' : 'false'}" //el을 여기서 쓸 수 있다? 자바스크립트에서 el이나 jstl을 쓸 수는 없음. 다 실행되고 난 html컨텐츠가 내려
+	if(isLogined){			
+		wishlistModal.show();
+	} else {
+		alert('로그인이 필요한 기능입니다.');
+		//emailModal.show();	//navbar에 있는 모달 띄울 수 없는지... 또르륵
+	}
 	return false;
 });
 
@@ -524,6 +563,7 @@ var ps = new kakao.maps.services.Places();
 
 //ajax로 검색결과 받아오기
 function getList(){	//나중에 parameter 정리해서 넣을 것
+	eraseMark();
 	$('.alert').remove();
    	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 	var imageSize = new kakao.maps.Size(24, 35); 
@@ -546,6 +586,7 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 	    dataType: "json",    		
 	    success: function (lodgings) {
 	          $("#left-box .list-box").remove();
+
 	          var template = $("#template").html();
 	          if(lodgings.length != 0){
 		          $.each(lodgings, function(index, lodging) {
@@ -625,7 +666,9 @@ function getList(){	//나중에 parameter 정리해서 넣을 것
 	});	
 	
 }
-
+function eraseMark(){
+	$('.marker').remove();
+}
 function setMark(lodging){
     var content = document.createElement('div');
     content.className = 'marker';
@@ -701,4 +744,29 @@ $('#option-immApproval').click(function(event) {
 	event.preventDefault()
 	$('#immApproval-window').toggle();
 });
+
+//위시리스트
+//새 위시리스트 추가
+$('#addWishlist').click(function(event) {
+	var newWishName = $('#wishlistNameInput').val();
+	
+	$.ajax({
+		//이 url문제도 처리해야됨
+	    url: '/wishlist/add/json',
+	    type: 'get',
+	    data: {
+	 	  		"wishName" : newWishName
+	       		},
+	    dataType: "json",    		
+	    success: function (lodgings) {
+	    	
+	    },
+	    error: function(request, status, error){
+	    	console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+	    }
+	});    
+	return false;
+});
+//위시리스트 불러오기
+//위시리스트에 찜 추가
 </script>
