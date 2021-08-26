@@ -91,6 +91,40 @@
 				thxtay_common_code
 		ORDER BY COMMONCODE ASC
 	</select>
+	<select id="getLodging" resultType="com.tt.Lodging.LodgingVO">
+		SELECT
+				lodging_no                            no
+				,user_no                            userNo
+				,lodging_city                        city
+				,lodging_post_no                    postNo
+				,lodging_address                    address
+				,lodging_address_rest               addressRest
+				,lodging_description                description
+				,lodging_imm_approval               immApproval
+				,lodging_max_guest                  maxGuest
+				,lodging_image                      image
+				,lodging_name                       name
+				,lodging_bedroom                    bedroom
+				,lodging_bathroom                   bathroom
+				,lodging_singlebed                  singlebed
+				,lodging_doublebed                  doublebed
+				,lodging_view_count                 viewCount
+				,lodging_review_count               reviewCount
+				,lodging_review_average             reviewAverage
+				,lodging_cleanness                  cleanness
+				,lodging_communication              communication
+				,lodging_check_in                   checkIn
+				,lodging_accuracy                   accuracy
+				,lodging_location                   location
+				,lodging_value                      value
+				,lodging_status                     status
+				,lodging_type_code                  lodgingTypeCode
+				,lodging_lat                        latitude
+				,lodging_lng                        longitude
+		FROM
+			thxtay_lodging
+	</select>
+
 
 	<select id="getParentCode" resultType="com.tt.Common.CommonCodeVO">
 		SELECT DISTINCT

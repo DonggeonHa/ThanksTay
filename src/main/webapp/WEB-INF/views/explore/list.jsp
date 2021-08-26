@@ -497,7 +497,7 @@ h5.modal-title{
       <form id="newWishName">
 	      <div class="modal-body">
 	        <div class="mb-3">
-			    <label for="wishlist-name" class="form-label">이름</label>
+			    <label for="wishlistNameInput" class="form-label">이름</label>
 			    <input type="text" class="form-control" id="wishlistNameInput" value="" aria-describedby="wishlist-name"/>
 			    <div id="wishlist-condition" class="form-text">최대 30자</div>
 			  </div>
@@ -534,13 +534,13 @@ var emailModal = new bootstrap.Modal(document.getElementById("loginRegisterModal
 
 $("#left-box").on('click', '.zzim', function(event){
 	var isLogined = "${not empty LOGINED_USER ? 'true' : 'false'}" //el을 여기서 쓸 수 있다? 자바스크립트에서 el이나 jstl을 쓸 수는 없음. 다 실행되고 난 html컨텐츠가 내려
+
 	if(isLogined=='true'){			
 		$('#wishlist').removeAttr("data-lodging-no");	//왜 지워줬는데도 계속 남아있는거지 -- 질문
 		var lodgeNo = $(this).parents(".list-box").data("lodging-no");
 		$('#wishlist').attr("data-lodging-no", lodgeNo); //새로 들어가면 자동으로 update?
 		var wishlodgeNo = $('#wishlist').data('lodging-no');
 		console.log(wishlodgeNo);
-		
 		wishlistModal.show();
 		getWishlist();
 	} else {

@@ -77,8 +77,8 @@
 	font-size: 18px;
 }
 
-label {
-	color: white;
+.form-label {
+	color: white !important;
 }
 /*
 .banner-wrapper{
@@ -106,7 +106,7 @@ label {
 <div class="container-fluid">
 	<div class="container">
 		<form action="explore/list">
-			<div class="row" style="justify-content: center; padding:15px">
+			<div class="row label-color" style="justify-content: center; padding:15px">
 				<div class="col-3">
 					<div class="input-box-1">
 						<label class="form-label">위치</label> <input type="text"

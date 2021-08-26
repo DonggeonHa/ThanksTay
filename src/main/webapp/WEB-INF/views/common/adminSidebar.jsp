@@ -137,7 +137,7 @@
 			<li class="main text-white">
 				숙소관리
 				<ul>
-					<li><a href="#">숙소관리</a></li>
+					<li><a href="/admin/lodgingList">숙소관리</a></li>
 					<li><a href="#">숙소 취소처리 관리</a></li>
 				</ul>
 			</li>
