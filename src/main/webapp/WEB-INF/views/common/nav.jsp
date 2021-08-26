@@ -29,11 +29,11 @@
 						role="button" data-bs-toggle="dropdown">${LOGINED_USER.name} 님 환영합니다.</a>
 						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">메시지(채팅)</a></li>
-							<li><a class="dropdown-item" href="#">여행(?)</a></li>
+							<li><a class="dropdown-item" href="#">여행</a></li>
 							<li><a class="dropdown-item" href="#">위시리스트</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">숙소관리</a></li>
-							<li><a class="dropdown-item" href="#">계정(?)</a></li>
+							<li><a class="dropdown-item" href="#">계정</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">도움말</a></li>
 							<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
